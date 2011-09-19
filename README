@@ -1,28 +1,28 @@
-Játék:
-	- helyi játék, max 2 billentyûzeti játékos egymás-, és/vagy gépi játékos(ok) ellen
-	- csatlakozás hálózati játékhoz, egy vagy két billentyûzeti játékossal
-	- hálózati játék helyi gépen, helyben egy vagy két billentyûzeti játékos, és gépi játékosok
+ï»¿JÃ¡tÃ©k:
+	- helyi jÃ¡tÃ©k, max 2 billentyÅ±zeti jÃ¡tÃ©kos egymÃ¡s-, Ã©s/vagy gÃ©pi jÃ¡tÃ©kos(ok) ellen
+	- csatlakozÃ¡s hÃ¡lÃ³zati jÃ¡tÃ©khoz, egy vagy kÃ©t billentyÅ±zeti jÃ¡tÃ©kossal
+	- hÃ¡lÃ³zati jÃ¡tÃ©k helyi gÃ©pen, helyben egy vagy kÃ©t billentyÅ±zeti jÃ¡tÃ©kos, Ã©s gÃ©pi jÃ¡tÃ©kosok
 	
-Játékosok:
-	- mindenki mindenki ellen, az gyõz, aki életben marad
-	- játékosok csapatokban (piros, kék, zöld, sárga) az a csapat nyer, amelyiknek nem fogytak el a játékosai
+JÃ¡tÃ©kosok:
+	- mindenki mindenki ellen, az gyÅ‘z, aki Ã©letben marad
+	- jÃ¡tÃ©kosok csapatokban (piros, kÃ©k, zÃ¶ld, sÃ¡rga) az a csapat nyer, amelyiknek nem fogytak el a jÃ¡tÃ©kosai
 	
-Játék körök:
-	- Egy pályás: Egy kiválasztott pályán el kell érni (játékosnak, v. csapatnak) N (1-10) gyõzelmet
-	- Liga: Az összes olyan pályát végig kell játszani, amit a játékosszám megenged, és egy komplexebb tabella adja a végeredményt*
+JÃ¡tÃ©k kÃ¶rÃ¶k:
+	- Egy pÃ¡lyÃ¡s: Egy kivÃ¡lasztott pÃ¡lyÃ¡n el kell Ã©rni (jÃ¡tÃ©kosnak, v. csapatnak) N (1-10) gyÅ‘zelmet
+	- Liga: Az Ã¶sszes olyan pÃ¡lyÃ¡t vÃ©gig kell jÃ¡tszani, amit a jÃ¡tÃ©kosszÃ¡m megenged, Ã©s egy komplexebb tabella adja a vÃ©geredmÃ©nyt*
 	
-	- Elõre definiálható játékidõ (60-600s) és kiválasztható a játékvége is ()
+	- ElÅ‘re definiÃ¡lhatÃ³ jÃ¡tÃ©kidÅ‘ (60-600s) Ã©s kivÃ¡laszthatÃ³ a jÃ¡tÃ©kvÃ©ge is ()
 	
-Pálya:
-	- Tudja a nevét, méretét, játékosok indulási helyét
-	- Nem tudja, hogy hová kerülnek ajándékok
+PÃ¡lya:
+	- Tudja a nevÃ©t, mÃ©retÃ©t, jÃ¡tÃ©kosok indulÃ¡si helyÃ©t
+	- Nem tudja, hogy hovÃ¡ kerÃ¼lnek ajÃ¡ndÃ©kok
 
-Mezõk:
-	- Fû
-	- Kõfal
-	- Doboz (ajándékot rejthet)
-	- Vákuum
-	- Nyilacskás
+MezÅ‘k:
+	- FÅ±
+	- KÅ‘fal
+	- Doboz (ajÃ¡ndÃ©kot rejthet)
+	- VÃ¡kuum
+	- NyilacskÃ¡s
 	- Lyuk
 	- Jeges
 	
