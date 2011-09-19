@@ -1,0 +1,27 @@
+Játék:
+        - helyi játék, max 2 billentyűzeti játékos egymás-, és/vagy gépi játékos(ok) ellen
+        - csatlakozás hálózati játékhoz, egy vagy két billentyűzeti játékossal
+        - hálózati játék helyi gépen, helyben egy vagy két billentyűzeti játékos, és gépi játékosok
+
+Játékosok:
+        - mindenki mindenki ellen, az győz, aki életben marad
+        - játékosok csapatokban (piros, kék, zöld, sárga) az a csapat nyer, amelyiknek nem fogytak el a játékosai
+
+Játék körök:
+        - Egy pályás: Egy kiválasztott pályán el kell érni (játékosnak, v. csapatnak) N (1-10) győzelmet
+        - Liga: Az összes olyan pályát végig kell játszani, amit a játékosszám megenged, és egy komplexebb tabella adja a végeredményt*
+
+        - Előre definiálható játékidő (60-600s) és kiválasztható a játékvége is ()
+
+Pálya:
+        - Tudja a nevét, méretét, játékosok indulási helyét
+        - Nem tudja, hogy hová kerülnek ajándékok
+
+Mezők:
+        - Fű
+        - Kőfal
+        - Doboz (ajándékot rejthet)
+        - Vákuum
+        - Nyilacskás
+        - Lyuk
+        - Jeges
