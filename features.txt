@@ -1,4 +1,4 @@
-﻿Játék:
+﻿Játék: 
         - helyi játék, max 2 billentyűzeti játékos egymás-, és/vagy gépi játékos(ok) ellen
         - csatlakozás hálózati játékhoz, egy vagy két billentyűzeti játékossal
         - hálózati játék helyi gépen, helyben egy vagy két billentyűzeti játékos, és gépi játékosok
