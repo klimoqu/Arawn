@@ -21,8 +21,8 @@ HEADERS  += arawnwindow.hpp \
 
 FORMS    += arawnwindow.ui
 
-OTHER_FILES += \
-    features.txt
+OTHER_FILES +=
+
 
 
 
