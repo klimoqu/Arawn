@@ -13,6 +13,8 @@ public:
 protected:
     /// Játékos neve, amely megjelenik a listában is.
     QString *pName;
+
+
     /// Játékos X koordinátája
     float pXcoord;
     /// Játékos Y koordinátája
