@@ -5,3 +5,7 @@ PlayerBonus::PlayerBonus(QObject *parent, Player *player) :
 {
     this->player = player;
 }
+void PlayerBonus::execute()
+{
+
+}

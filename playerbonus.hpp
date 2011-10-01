@@ -9,7 +9,7 @@ class PlayerBonus : public QObject
 {
     Q_OBJECT
 public:
-    explicit PlayerBonus(QObject *parent = 0, Player *player);
+    explicit PlayerBonus(QObject *parent, Player *player);
     virtual void execute();
 
 protected:

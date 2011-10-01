@@ -13,15 +13,23 @@ TEMPLATE = app
 SOURCES += main.cpp\
         arawnwindow.cpp \
     player.cpp \
-    playerbonus.cpp
+    playerbonus.cpp \
+    map.cpp \
+    field.cpp
 
 HEADERS  += arawnwindow.hpp \
     player.hpp \
-    playerbonus.hpp
+    playerbonus.hpp \
+    map.h \
+    field.h
 
 FORMS    += arawnwindow.ui
 
 OTHER_FILES +=
+
+
+
+
 
 
 
