@@ -1,29 +1,27 @@
-#ifndef MAP_H
-#define MAP_H
+#pragma once
 
-#include "field.h"
+#include "field.hpp"
 
 #include <QObject>
 #include <fstream>
 #include <vector>
+#include <string>
 
-class map : public QObject
+class Map : public QObject
 {
 protected:
+    std::string name;
     int id;
     int size_x;
     int size_y;
     int playersnumber;
     std::ifstream input;
-
-    std::vector<std::vector<field*> > fields;
+    std::vector<std::vector<Field*> > Fields;
 public:
-    map(int id);
+    Map(int id);
     int GetX(){return size_x;}
     int GetY(){return size_y;}
     int GetPlayersNumber(){return playersnumber;}
-    void Save();
-    void Load();
+    void Save(std::ostream &o);
+    void Load(std::istream &i);
 };
-
-#endif // MAP_H

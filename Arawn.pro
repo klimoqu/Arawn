@@ -14,18 +14,23 @@ SOURCES += main.cpp\
         arawnwindow.cpp \
     player.cpp \
     playerbonus.cpp \
-    map.cpp \
-    field.cpp
+    map.cpp
 
 HEADERS  += arawnwindow.hpp \
     player.hpp \
     playerbonus.hpp \
-    map.h \
-    field.h
+    field.hpp \
+    map.hpp
 
 FORMS    += arawnwindow.ui
 
 OTHER_FILES +=
+
+
+
+
+
+
 
 
 
