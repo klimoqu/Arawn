@@ -1,10 +1,10 @@
-#ifndef DYNAMICFIELD_HPP
-#define DYNAMICFIELD_HPP
+#pragma once
+
+#include "field.hpp"
 
 class DynamicField : public Field
 {
+    bool blastable;
 public:
     DynamicField();
 };
-
-#endif // DYNAMICFIELD_HPP

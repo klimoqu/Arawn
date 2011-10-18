@@ -6,11 +6,13 @@
 
 class Field : public QObject
 {
-    bool blastable;
+protected:
     bool permeable;
     Field *top,*right,*left,*bottom;
     int id,x,y;
+
 public:
+    Field(){}
     Field(int id, int x,int y)
     {
         this->x=x;

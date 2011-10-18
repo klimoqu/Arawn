@@ -1,7 +1,9 @@
 #pragma once
 
+#include "field.hpp"
+
 class StaticField : public Field
 {
 public:
-    StaticField();
+    StaticField(int id, int x,int y);
 };

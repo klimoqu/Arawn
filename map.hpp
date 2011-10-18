@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QObject>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -17,6 +16,7 @@ protected:
     int playersnumber;
     std::ifstream input;
     std::vector<std::vector<Field*> > Fields;
+
 public:
     Map(int id);
     int GetX(){return size_x;}

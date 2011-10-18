@@ -1,5 +1,5 @@
 #include "staticfield.hpp"
 
-StaticField::StaticField()
+StaticField::StaticField(int id, int x,int y)
 {
 }

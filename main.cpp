@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     Map *test=new Map(1);
     std::ofstream outputfile;
     outputfile.open("test");
-    test->Save(outputfile);
+    test->Save(std::cout);
     outputfile.close();
     w.show();
     return a.exec();
