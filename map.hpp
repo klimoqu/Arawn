@@ -1,11 +1,11 @@
 #pragma once
 
-#include "field.hpp"
-
 #include <QObject>
 #include <fstream>
 #include <vector>
 #include <string>
+
+#include "field.hpp"
 
 class Map : public QObject
 {

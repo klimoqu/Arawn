@@ -1,7 +1,9 @@
 #include <QtGui/QApplication>
+
+#include <fstream>
+
 #include "arawnwindow.hpp"
 #include "map.hpp"
-#include <fstream>
 
 int main(int argc, char *argv[])
 {

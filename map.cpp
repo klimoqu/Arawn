@@ -1,4 +1,5 @@
 #include "map.hpp"
+
 Map::Map(int id)
 {
     this->id=id;
