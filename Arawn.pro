@@ -11,24 +11,46 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        arawnwindow.cpp \
     player.cpp \
     playerbonus.cpp \
     map.cpp \
     staticfield.cpp \
-    dynamicfield.cpp
+    dynamicfield.cpp \
+    arawnwindow.cpp
 
-HEADERS  += arawnwindow.hpp \
+HEADERS  += \
     player.hpp \
     playerbonus.hpp \
     field.hpp \
     map.hpp \
     staticfield.hpp \
-    dynamicfield.hpp
+    dynamicfield.hpp \
+    arawnwindow.hpp
 
-FORMS    += arawnwindow.ui
+FORMS    += \
+    arawnwindow.ui
 
 OTHER_FILES +=
+
+RESOURCES +=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

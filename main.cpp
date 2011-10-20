@@ -9,11 +9,14 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     ArawnWindow w;
+
     Map *test=new Map(1);
     std::ofstream outputfile;
     outputfile.open("test");
     test->Save(std::cout);
     outputfile.close();
+
     w.show();
+    //w.showFullScreen();
     return a.exec();
 }
