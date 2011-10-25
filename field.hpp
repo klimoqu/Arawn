@@ -3,6 +3,7 @@
 #include <QObject>
 #include <iostream>
 #include <sstream>
+#include "player.hpp"
 
 class Field : public QObject
 {
@@ -35,4 +36,6 @@ public:
         o<<x<<" "<<y<<" "<<id<<std::endl;
     }
     void Load();
+    void Enter(Player *player);
+    void Exit(Player *player);
 };
