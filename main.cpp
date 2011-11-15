@@ -2,21 +2,30 @@
 
 #include <fstream>
 
-#include "arawnwindow.hpp"
+#include "GUI/qarawnwindow.hpp"
 #include "map.hpp"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ArawnWindow w;
+    QArawnWindow w;
 
-    Map *test=new Map(1);
-    std::ofstream outputfile;
-    outputfile.open("test");
-    test->Save(std::cout);
-    outputfile.close();
+            Map *test=new Map(1);
+            std::ofstream outputfile;
+            outputfile.open("test");
+            test->Save(std::cout);
+            outputfile.close();
 
-    w.show();
-    //w.showFullScreen();
+
+    w.showFullScreen();
+    /*
+      TODO:
+      w.initializeWelcome();
+      w.showWelcome();
+      w.initializeArawnScreen();
+      w.showArawnScreen();
+      w.initializeMenus();
+      w.showMainMenu();
+    */
     return a.exec();
 }
