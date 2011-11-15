@@ -16,7 +16,11 @@ SOURCES += main.cpp\
     map.cpp \
     staticfield.cpp \
     dynamicfield.cpp \
-    arawnwindow.cpp
+    arawnwindow.cpp \
+    GUI/qgraphicsplayeritem.cpp \
+    GUI/qgraphicsfielditem.cpp \
+    GUI/qgraphicsmenuitem.cpp \
+    GUI/qgraphicsoptionitem.cpp
 
 HEADERS  += \
     player.hpp \
@@ -25,14 +29,40 @@ HEADERS  += \
     map.hpp \
     staticfield.hpp \
     dynamicfield.hpp \
-    arawnwindow.hpp
+    arawnwindow.hpp \
+    GUI/qgraphicsplayeritem.hpp \
+    GUI/qgraphicsfielditem.hpp \
+    GUI/qgraphicsmenuitem.hpp \
+    GUI/qgraphicsoptionitem.hpp
 
-FORMS    += \
-    arawnwindow.ui
+FORMS    +=
 
 OTHER_FILES +=
 
 RESOURCES +=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

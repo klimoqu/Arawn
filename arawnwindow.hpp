@@ -1,22 +1,25 @@
 #ifndef ARAWNWINDOW_HPP
 #define ARAWNWINDOW_HPP
 
-#include <QMainWindow>
+#include <QtGui/QtGui>
 
-namespace Ui {
-    class ArawnWindow;
-}
 
 class ArawnWindow : public QMainWindow
 {
     Q_OBJECT
+    Q_PROPERTY(uchar volume READ Volume WRITE SetVolume)
 
 public:
-    explicit ArawnWindow(QWidget *parent = 0);
-    ~ArawnWindow();
+    ArawnWindow(QWidget *parent = 0);
 
-private:
-    Ui::ArawnWindow *ui;
+//    void InitializeWindow();
+//    void InitializeSettings();
+//    void InitializeEssentialResources();
+
+protected:
+    void closeEvent(QCloseEvent *);
+
+
 };
 
 #endif // ARAWNWINDOW_HPP
