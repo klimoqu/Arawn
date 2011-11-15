@@ -15,7 +15,6 @@ SOURCES += main.cpp\
     map.cpp \
     staticfield.cpp \
     dynamicfield.cpp \
-    arawnwindow.cpp \
     GUI/qgraphicsplayeritem.cpp \
     GUI/qgraphicsfielditem.cpp \
     GUI/qgraphicsmenuitem.cpp \
@@ -26,7 +25,8 @@ SOURCES += main.cpp\
     GUI/qgraphicsheaderitem.cpp \
     GUI/qgraphicsmenuheaderitem.cpp \
     GUI/qgraphicsbonusitem.cpp \
-    GUI/qgraphicscorpsepartitem.cpp
+    GUI/qgraphicscorpsepartitem.cpp \
+    GUI/qarawnwindow.cpp
 
 HEADERS  += \
     player.hpp \
@@ -34,7 +34,6 @@ HEADERS  += \
     map.hpp \
     staticfield.hpp \
     dynamicfield.hpp \
-    arawnwindow.hpp \
     GUI/qgraphicsplayeritem.hpp \
     GUI/qgraphicsfielditem.hpp \
     GUI/qgraphicsmenuitem.hpp \
@@ -45,7 +44,8 @@ HEADERS  += \
     GUI/qgraphicsheaderitem.hpp \
     GUI/qgraphicsmenuheaderitem.hpp \
     GUI/qgraphicsbonusitem.hpp \
-    GUI/qgraphicscorpsepartitem.hpp
+    GUI/qgraphicscorpsepartitem.hpp \
+    GUI/qarawnwindow.hpp
 
 FORMS    +=
 
@@ -55,6 +55,10 @@ OTHER_FILES += \
     GUI/res/Arawn.ico
 
 RESOURCES +=
+
+
+
+
 
 
 
