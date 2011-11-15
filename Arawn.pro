@@ -20,7 +20,12 @@ SOURCES += main.cpp\
     GUI/qgraphicsplayeritem.cpp \
     GUI/qgraphicsfielditem.cpp \
     GUI/qgraphicsmenuitem.cpp \
-    GUI/qgraphicsoptionitem.cpp
+    GUI/qgraphicsoptionitem.cpp \
+    GUI/qgraphicsbombitem.cpp \
+    GUI/qgraphicsfireitem.cpp \
+    GUI/qgraphicstimeritem.cpp \
+    GUI/qgraphicsheaderitem.cpp \
+    GUI/qgraphicsmenuheaderitem.cpp
 
 HEADERS  += \
     player.hpp \
@@ -33,13 +38,28 @@ HEADERS  += \
     GUI/qgraphicsplayeritem.hpp \
     GUI/qgraphicsfielditem.hpp \
     GUI/qgraphicsmenuitem.hpp \
-    GUI/qgraphicsoptionitem.hpp
+    GUI/qgraphicsoptionitem.hpp \
+    GUI/qgraphicsbombitem.hpp \
+    GUI/qgraphicsfireitem.hpp \
+    GUI/qgraphicstimeritem.hpp \
+    GUI/qgraphicsheaderitem.hpp \
+    GUI/qgraphicsmenuheaderitem.hpp
 
 FORMS    +=
 
 OTHER_FILES +=
 
 RESOURCES +=
+
+
+
+
+
+
+
+
+
+
 
 
 
