@@ -49,9 +49,14 @@ HEADERS  += \
 
 FORMS    +=
 
-OTHER_FILES +=
+OTHER_FILES += \
+    GUI/res/screenge.ttf \
+    GUI/res/Arawn.png \
+    GUI/res/Arawn.ico
 
 RESOURCES +=
+
+
 
 
 
