@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
       w.showWelcome();
       w.initializeArawnScreen();
       w.showArawnScreen();
-      w.initializeMenus();
-      w.showMainMenu();
+      w.initializeMenus(); // Utolsó init
+      w.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
     */
     return a.exec();
 }
