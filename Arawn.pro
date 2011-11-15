@@ -12,7 +12,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     player.cpp \
-    playerbonus.cpp \
     map.cpp \
     staticfield.cpp \
     dynamicfield.cpp \
@@ -31,7 +30,6 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     player.hpp \
-    playerbonus.hpp \
     field.hpp \
     map.hpp \
     staticfield.hpp \
@@ -57,6 +55,8 @@ OTHER_FILES += \
     GUI/res/Arawn.ico
 
 RESOURCES +=
+
+
 
 
 
