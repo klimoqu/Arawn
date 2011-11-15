@@ -1,13 +1,13 @@
 #ifndef QARAWNWINDOW_HPP
 #define QARAWNWINDOW_HPP
 
-#include <QWidget>
+#include <QtGui>
 
-class QArawnWindow : public QWidget
+class QArawnWindow : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit QArawnWindow(QWidget *parent = 0);
+    QArawnWindow();
 
 signals:
 
