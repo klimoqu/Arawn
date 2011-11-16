@@ -35,33 +35,41 @@ public:
     // Settings to save and read with ~/.arawn/gamesettings
     struct ArawnSettings
     {
-        Language language = English;
-        Resolution resolution = R800x600;
-        bool showCorpseParts = true;
-        bool shakyExplosion = true;
-        ushort roundTimeDefault = 60;
-        uchar pointsToPlayOff = 10;
+        Language language;
+        Resolution resolution;
+        bool showCorpseParts;
+        bool shakyExplosion;
+        ushort roundTimeDefault;
+        uchar pointsToPlayOff;
 
         // Start/Max Extras
-        uchar startBombs = 1;
-        uchar maxMoreBombs = 8;
-        uchar startFire = 1;
-        uchar maxMoreFire = 8;
-        uchar startSpeed = 1;
-        uchar maxMoreSpeed = 5;
-        bool startPushBombs = false;
-        bool enablePushBombs = true;
-        bool startDropBombs = false;
-        bool enableDropBombs = true;
+        uchar startBombs;
+        uchar maxMoreBombs;
+        uchar startFire;
+        uchar maxMoreFire;
+        uchar startSpeed;
+        uchar maxMoreSpeed;
+        bool startPushBombs;
+        bool enablePushBombs;
+        bool startDropBombs;
+        bool enableDropBombs;
 
         // Enable/Disable Diseases
-        bool enableFailingBombs = true;
-        bool enableOppositeControls = true;
-        bool enableInvisibility = true;
+        bool enableFailingBombs;
+        bool enableOppositeControls;
+        bool enableInvisibility;
 
         // Bomb Timing and Speed
-        uchar bombSpeed = 40; // n/10 fields/seconds
-        uchar bombTimer = 30; // 1/10 s
+        uchar bombSpeed; // n/10 fields/seconds
+        uchar bombTimer; // 1/10 s
+
+        // Default constructor
+        ArawnSettings() : language(English), resolution(R800x600), showCorpseParts(true),
+            shakyExplosion(true), roundTimeDefault(60), pointsToPlayOff(10), startBombs(1),
+            maxMoreBombs(8), startFire(1), maxMoreFire(8), startSpeed(1), maxMoreSpeed(5),
+            startPushBombs(false), enablePushBombs(true), startDropBombs(false), enableDropBombs(true),
+            enableFailingBombs(true), enableOppositeControls(true), enableInvisibility(true),
+            bombSpeed(40), bombTimer(30){}
     };
 
     ArawnSettings aSettings;
