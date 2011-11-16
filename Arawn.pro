@@ -54,9 +54,11 @@ FORMS    +=
 OTHER_FILES += \
     GUI/res/screenge.ttf \
     GUI/res/Arawn.png \
-    GUI/res/Arawn.ico
+    GUI/res/Arawn.ico \
+    README.md
 
 RESOURCES +=
+
 
 
 
