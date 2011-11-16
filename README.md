@@ -17,6 +17,8 @@ Részletesebb kifejtéshez:
 Változtatásaim áttekintése -morta
 ---------------------------------
 
+### QArawnApplication
+
 Minden beállítás globális, azaz a `QApplication` leszármazott
 `QArawnApplication` része. Ezt bárhonnan a programból a pl.
 `qApp()->aSettings.resolution` hívással elérhetjük. További előnye, hogy
@@ -30,3 +32,13 @@ Továbbá ebben az osztályban PLATFORMÉRZÉKENYEN létrejön a program könyvt
     if(!dir.exists())
         QDir::home().mkdir("/AppData/Arawn");
 
+### QArawnWindow
+
+Nevével ellentétben semmi köze a `QMainWindow`-hoz, de mivel minden QWidget
+önállóan is meg tud jelenni, így a windows szintjén itt megjelenik egy
+ablakhívás. A `QGraphicsView` képes egy `QGraphicsScene`-t megjeleníteni, így
+a program ezen a szinten csak a Scene-ek váltogatásából fog állni. (Menü, Opciók, Játék, Eredmény).
+
+### QGraphicsXxxItem
+
+Yo.
