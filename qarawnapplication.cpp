@@ -61,21 +61,25 @@ QDataStream &operator <<(QDataStream &stream, const QArawnApplication::ArawnSett
 QArawnApplication::QArawnApplication(int argc, char *argv[]) : QApplication(argc, argv)
 {
 #ifdef Q_OS_WIN
-    QDir dir(QDir::homePath() + "/AppData/Arawn");
-    if(!dir.exists())
-        QDir::home().mkdir("/AppData/Arawn");
-    path = QString(QDir::homePath() + "/AppData/Arawn/");
+    QDir dir(QDir::homePath() + "/AppData");
+    if(!dir.exists("Arawn"))
+        dir.mkdir("Arawn");
+    path = QDir::homePath() + "/AppData/Arawn/";
 #else
-    QDir dir(QDir::homePath() + "/.config/Arawn");
-    if(!dir.exists())
-        QDir::home().mkdir("/.config/Arawn");
-    path = QString(QDir::homePath() + "/.config/Arawn/");
+    QDir dir(QDir::homePath() + "/.config");
+    if(!dir.exists("Arawn"))
+        dir.mkdir("Arawn");
+    path = QDir::homePath() + "/.config/Arawn/";
 #endif
     if(QFile::exists(path+"gamesettings")){
         QFile sFile(path+"gamesettings");
         sFile.open(QFile::ReadOnly);
         QDataStream sReader(&sFile);
         sReader >> aSettings;
+        sFile.close();
+    }else{
+        QFile sFile(path+"gamesettings");
+        sFile.open(QFile::WriteOnly);
         sFile.close();
     }
 
