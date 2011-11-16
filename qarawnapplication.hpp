@@ -7,6 +7,9 @@ class QArawnApplication : public QApplication
 {
 public:
     QArawnApplication(int argc, char *argv[]);
+    bool writeSettings();
+
+
 
     enum Language
     {
@@ -71,6 +74,8 @@ public:
             enableFailingBombs(true), enableOppositeControls(true), enableInvisibility(true),
             bombSpeed(40), bombTimer(30){}
     };
+
+
 
     ArawnSettings aSettings;
     QString path;
