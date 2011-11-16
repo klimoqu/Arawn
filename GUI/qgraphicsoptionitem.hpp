@@ -5,13 +5,8 @@
 
 class QGraphicsOptionItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsOptionItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsOptionItem();
 
 };
 

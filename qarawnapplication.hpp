@@ -38,8 +38,8 @@ public:
     // Settings to save and read with ~/.arawn/gamesettings
     struct ArawnSettings
     {
-        Language language;
-        Resolution resolution;
+        uchar language;
+        uchar resolution;
         bool showCorpseParts;
         bool shakyExplosion;
         ushort roundTimeDefault;

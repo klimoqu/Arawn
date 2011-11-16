@@ -1,17 +1,13 @@
 #ifndef QGRAPHICSBOMBITEM_HPP
 #define QGRAPHICSBOMBITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsBombItem : public QGraphicsPixmapItem
+class QGraphicsBombItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsBombItem(QObject *parent = 0);
+     QGraphicsBombItem();
 
-signals:
-
-public slots:
 
 };
 

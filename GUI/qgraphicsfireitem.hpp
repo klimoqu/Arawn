@@ -1,17 +1,12 @@
 #ifndef QGRAPHICSFIREITEM_HPP
 #define QGRAPHICSFIREITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsFireItem : public QGraphicsPixmapItem
+class QGraphicsFireItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsFireItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsFireItem();
 
 };
 

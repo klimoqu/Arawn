@@ -1,17 +1,12 @@
 #ifndef QGRAPHICSPLAYERITEM_HPP
 #define QGRAPHICSPLAYERITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsPlayerItem : public QGraphicsPixmapItem
+class QGraphicsPlayerItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsPlayerItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsPlayerItem();
 
 };
 

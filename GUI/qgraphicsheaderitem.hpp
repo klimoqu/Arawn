@@ -5,13 +5,8 @@
 
 class QGraphicsHeaderItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsHeaderItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsHeaderItem();
 
 };
 

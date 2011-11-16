@@ -1,17 +1,12 @@
 #ifndef QGRAPHICSFIELDITEM_HPP
 #define QGRAPHICSFIELDITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsFieldItem : public QGraphicsPixmapItem
+class QGraphicsFieldItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsFieldItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsFieldItem();
 
 };
 

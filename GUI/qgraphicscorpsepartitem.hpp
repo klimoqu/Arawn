@@ -1,17 +1,12 @@
 #ifndef QGRAPHICSCORPSEPARTITEM_HPP
 #define QGRAPHICSCORPSEPARTITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsCorpsePartItem : public QGraphicsPixmapItem
+class QGraphicsCorpsePartItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsCorpsePartItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsCorpsePartItem();
 
 };
 

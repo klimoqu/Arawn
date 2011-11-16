@@ -1,17 +1,13 @@
 #ifndef QGRAPHICSBONUSITEM_HPP
 #define QGRAPHICSBONUSITEM_HPP
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class QGraphicsBonusItem : public QGraphicsPixmapItem
+class QGraphicsBonusItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsBonusItem(QObject *parent = 0);
+    QGraphicsBonusItem();
 
-signals:
-
-public slots:
 
 };
 

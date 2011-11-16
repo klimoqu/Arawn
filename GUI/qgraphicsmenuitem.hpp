@@ -5,13 +5,8 @@
 
 class QGraphicsMenuItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsMenuItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsMenuItem();
 
 };
 

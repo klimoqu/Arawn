@@ -5,13 +5,8 @@
 
 class QGraphicsTimerItem : public QGraphicsItem
 {
-    Q_OBJECT
 public:
-    explicit QGraphicsTimerItem(QObject *parent = 0);
-
-signals:
-
-public slots:
+    QGraphicsTimerItem();
 
 };
 
