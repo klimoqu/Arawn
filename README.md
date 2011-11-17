@@ -28,9 +28,9 @@ platformfüggetlenül szerializálhatjuk a beállítást, így a
 Továbbá ebben az osztályban PLATFORMÉRZÉKENYEN létrejön a program könyvtára,
 (nincs bajmolódás a registryvel), ahová a többi mentés is kerülhet.
 
-    QDir dir(QDir::homePath() + "/AppData/Arawn");
-    if(!dir.exists())
-        QDir::home().mkdir("/AppData/Arawn");
+    QDir dir(QDir::homePath() + "/AppData");
+    if(!dir.exists("Arawn"))
+        dir.mkdir("Arawn");
 
 ### QArawnWindow
 
@@ -39,6 +39,4 @@ Nevével ellentétben semmi köze a `QMainWindow`-hoz, de mivel minden QWidget
 ablakhívás. A `QGraphicsView` képes egy `QGraphicsScene`-t megjeleníteni, így
 a program ezen a szinten csak a Scene-ek váltogatásából fog állni. (Menü, Opciók, Játék, Eredmény).
 
-### QGraphicsXxxItem
 
-Yo.
