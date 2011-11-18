@@ -3,9 +3,10 @@
 
 #include <QtGui>
 
-class QArawnWindow : public QGraphicsView
+class QArawnWindow : public QMainWindow
 {
     Q_OBJECT
+
 public:
     QArawnWindow();
 

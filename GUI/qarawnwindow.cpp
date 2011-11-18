@@ -2,4 +2,6 @@
 
 QArawnWindow::QArawnWindow()
 {
+
+
 }

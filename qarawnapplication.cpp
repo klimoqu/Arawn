@@ -80,6 +80,8 @@ QArawnApplication::QArawnApplication(int argc, char *argv[]) : QApplication(argc
     }else{
         QFile sFile(path+"gamesettings");
         sFile.open(QFile::WriteOnly);
+        QDataStream sWriter(&sFile);
+        sWriter << aSettings;
         sFile.close();
     }
 
