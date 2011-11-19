@@ -74,7 +74,7 @@ QArawnWindow::QArawnWindow()
         QDataStream sReader(&sFile);
         sReader >> aSettings;
         sFile.close();
-    }else{
+    }else{ // TODO törölni
         QFile sFile(path+"gamesettings");
         sFile.open(QFile::WriteOnly);
         QDataStream sWriter(&sFile);
