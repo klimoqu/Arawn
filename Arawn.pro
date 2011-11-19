@@ -26,8 +26,7 @@ SOURCES += main.cpp\
     GUI/qgraphicsmenuheaderitem.cpp \
     GUI/qgraphicsbonusitem.cpp \
     GUI/qgraphicscorpsepartitem.cpp \
-    GUI/qarawnwindow.cpp \
-    qarawnapplication.cpp
+    GUI/qarawnwindow.cpp
 
 HEADERS  += \
     player.hpp \
@@ -46,8 +45,7 @@ HEADERS  += \
     GUI/qgraphicsmenuheaderitem.hpp \
     GUI/qgraphicsbonusitem.hpp \
     GUI/qgraphicscorpsepartitem.hpp \
-    GUI/qarawnwindow.hpp \
-    qarawnapplication.hpp
+    GUI/qarawnwindow.hpp
 
 FORMS    +=
 
@@ -58,6 +56,8 @@ OTHER_FILES += \
     README.md
 
 RESOURCES +=
+
+
 
 
 

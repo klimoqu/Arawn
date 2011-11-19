@@ -23,17 +23,17 @@
  *
  ***************************************************************************/
 
+#include <QtGui/QApplication>
 
-#include "qarawnapplication.hpp"
 #include "GUI/qarawnwindow.hpp"
 #include "map.hpp"
 
 int main(int argc, char *argv[])
 {
-    QArawnApplication a(argc, argv);
+    QApplication a(argc, argv);
     QArawnWindow w;
 
-            /*
+            /**
             Map *test=new Map(1);
             std::ofstream outputfile;
             outputfile.open("test");
