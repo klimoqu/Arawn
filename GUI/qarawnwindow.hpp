@@ -5,6 +5,11 @@
 
 struct ArawnSettings
 {
+    enum ArawnSettingsVersion
+    {
+        Current = 1
+    };
+
     enum Language
     {
         English,
@@ -31,6 +36,7 @@ struct ArawnSettings
 
     uchar language;
     uchar resolution;
+    bool openGlRendering;
     bool showCorpseParts;
     bool shakyExplosion;
     ushort roundTimeDefault;
@@ -57,7 +63,7 @@ struct ArawnSettings
     uchar bombSpeed; // n/10 fields/seconds
     uchar bombTimer; // 1/10 s
 
-    ArawnSettings() : language(English), resolution(R800x600), showCorpseParts(true),
+    ArawnSettings() : language(English), resolution(R800x600), openGlRendering(false), showCorpseParts(true),
         shakyExplosion(true), roundTimeDefault(60), pointsToPlayOff(10), startBombs(1),
         maxMoreBombs(8), startFire(1), maxMoreFire(8), startSpeed(1), maxMoreSpeed(5),
         startPushBombs(false), enablePushBombs(true), startDropBombs(false), enableDropBombs(true),
@@ -86,7 +92,21 @@ signals:
 public slots:
 
 private:
+    void setRenderingSystem();
+
     QString path;
+    QGraphicsScene *welcomeScene;
+    QGraphicsPixmapItem *welcomePixmap;
 };
 
 #endif // QARAWNWINDOW_HPP
+
+
+
+
+
+
+
+
+
+

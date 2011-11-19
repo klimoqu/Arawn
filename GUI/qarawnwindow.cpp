@@ -3,6 +3,8 @@
 
 QDataStream &operator >>(QDataStream &stream, ArawnSettings &settings)
 {
+    int v;
+    stream >> v;
     stream >> settings.bombSpeed;
     stream >> settings.bombTimer;
     stream >> settings.enableDropBombs;
@@ -24,11 +26,14 @@ QDataStream &operator >>(QDataStream &stream, ArawnSettings &settings)
     stream >> settings.startFire;
     stream >> settings.startPushBombs;
     stream >> settings.startSpeed;
+    stream >> settings.openGlRendering;
+//    if(v > 1){    }
     return stream;
 }
 
 QDataStream &operator <<(QDataStream &stream, const ArawnSettings &settings)
 {
+    stream << ArawnSettings::Current;
     stream << settings.bombSpeed;
     stream << settings.bombTimer;
     stream << settings.enableDropBombs;
@@ -50,6 +55,7 @@ QDataStream &operator <<(QDataStream &stream, const ArawnSettings &settings)
     stream << settings.startFire;
     stream << settings.startPushBombs;
     stream << settings.startSpeed;
+    stream << settings.openGlRendering;
     return stream;
 }
 
@@ -74,13 +80,28 @@ QArawnWindow::QArawnWindow()
         QDataStream sReader(&sFile);
         sReader >> aSettings;
         sFile.close();
-    }else{ // TODO törölni
+    }else{ // TODO törölni a fájlbaírást
         QFile sFile(path+"gamesettings");
         sFile.open(QFile::WriteOnly);
         QDataStream sWriter(&sFile);
         sWriter << aSettings;
         sFile.close();
+
+        // Képernyőfelbontás ellenőrzése
+        QRect sr = QApplication::desktop()->screenGeometry(QApplication::desktop()->primaryScreen());
+        // QApplication::desktop()->setGeometry(); Nem itt kell, és lehet, hogy egyáltalán nem.
+        if( ((float)sr.width()) / ((float)sr.height()) > 1.7F ){
+            // 16:9
+            aSettings.resolution = ArawnSettings::R1280x720;
+        }else if ( ((float)sr.width()) / ((float)sr.height()) > 1.55F ) {
+            // 16:10
+            aSettings.resolution = ArawnSettings::R1280x800;
+        }else{
+            // 4:3
+            aSettings.resolution = ArawnSettings::R1024x768;
+        }
     }
+
     wideLayout = true;
     ushort winWidt, winHeight;
 
@@ -117,12 +138,73 @@ QArawnWindow::QArawnWindow()
         winHeight = 720;
         break;
     case ArawnSettings::R1366x768:
+    default:
         winWidt = 1366;
         winHeight = 768;
         break;
     }
 
 
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setCursor(Qt::BlankCursor);
     setGeometry(0, 0, winWidt, winHeight);
+    setMinimumSize(winWidt, winHeight);
+    setMaximumSize(winWidt, winHeight);
+    setFrameStyle(QFrame::NoFrame);
+    //setRenderingSystem();
+    setRenderHint(QPainter::Antialiasing);
 
+
+    welcomeScene = new QGraphicsScene(-260, -190, 520, 380, this);
+    welcomeScene->setItemIndexMethod(QGraphicsScene::NoIndex);
+
+    welcomePixmap = new QGraphicsPixmapItem(QPixmap("res/KliMoQu.png"));
+    welcomePixmap->setPos(-260, -190);
+    welcomeScene->addItem(welcomePixmap);
+
+    setBackgroundBrush(QBrush(Qt::black));
+    setCacheMode(QGraphicsView::CacheBackground);
+    setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+
+    setScene(welcomeScene);
+    welcomeScene->advance();
 }
+
+
+void QArawnWindow::setRenderingSystem()
+{
+    QWidget *viewport = 0;
+#define QT_NO_OPENGL // TODO következő verzió
+#ifndef QT_NO_OPENGL
+    if (aSettings.openGlRendering) {
+        QGLWidget *glw = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+        glw->setAutoFillBackground(false);
+        viewport = glw;
+        setCacheMode(QGraphicsView::CacheNone);
+    } else // software rendering
+#endif
+    {
+        // software rendering
+        viewport = new QWidget;
+        setCacheMode(QGraphicsView::CacheBackground);
+    }
+
+    setViewport(viewport);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

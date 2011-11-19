@@ -53,9 +53,11 @@ OTHER_FILES += \
     GUI/res/screenge.ttf \
     GUI/res/Arawn.png \
     GUI/res/Arawn.ico \
-    README.md
+    README.md \
+    GUI/res/KliMoQu.png
 
 RESOURCES +=
+
 
 
 
