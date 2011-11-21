@@ -175,15 +175,15 @@ QArawnWindow::QArawnWindow()
 void QArawnWindow::setRenderingSystem()
 {
     QWidget *viewport = 0;
-#define QT_NO_OPENGL // TODO következő verzió
-#ifndef QT_NO_OPENGL
+    #define QT_NO_OPENGL // TODO következő verzió
+    #ifndef QT_NO_OPENGL
     if (aSettings.openGlRendering) {
         QGLWidget *glw = new QGLWidget(QGLFormat(QGL::SampleBuffers));
         glw->setAutoFillBackground(false);
         viewport = glw;
         setCacheMode(QGraphicsView::CacheNone);
     } else // software rendering
-#endif
+    #endif
     {
         // software rendering
         viewport = new QWidget;
@@ -194,6 +194,12 @@ void QArawnWindow::setRenderingSystem()
 }
 
 
+void QArawnWindow::initializeArawnScreen()
+{
+    QFontDatabase::addApplicationFont("res/screenge.ttf");
+    QFontDatabase fdb;
+    font = fdb.font("Screengem", "Normal", 36);
+}
 
 
 

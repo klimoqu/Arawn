@@ -93,10 +93,18 @@ public slots:
 
 private:
     void setRenderingSystem();
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
     QString path;
     QGraphicsScene *welcomeScene;
     QGraphicsPixmapItem *welcomePixmap;
+    QSound *welcomeSound;
+
+    QFont *font;
+    QSound *sounds[];
+
+
 };
 
 #endif // QARAWNWINDOW_HPP
