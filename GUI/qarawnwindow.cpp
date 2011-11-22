@@ -102,45 +102,44 @@ QArawnWindow::QArawnWindow()
         }
     }
 
-    wideLayout = true;
-    ushort winWidt, winHeight;
+    aSettings.wideLayout = true;
 
     switch(aSettings.resolution){
     case ArawnSettings::R800x600:
-        winWidt = 800;
-        winHeight = 600;
-        wideLayout = false;
+        aSettings.screenX = 800;
+        aSettings.screenY = 600;
+        aSettings.wideLayout = false;
         break;
     case ArawnSettings::R1024x768:
-        winWidt = 1024;
-        winHeight = 768;
-        wideLayout = false;
+        aSettings.screenX = 1024;
+        aSettings.screenY = 768;
+        aSettings.wideLayout = false;
         break;
     case ArawnSettings::R1280x1024:
-        winWidt = 1280;
-        winHeight = 1024;
-        wideLayout = false;
+        aSettings.screenX = 1280;
+        aSettings.screenY = 1024;
+        aSettings.wideLayout = false;
         break;
     case ArawnSettings::R1280x800:
-        winWidt = 1280;
-        winHeight = 800;
+        aSettings.screenX = 1280;
+        aSettings.screenY = 800;
         break;
     case ArawnSettings::R1440x900:
-        winWidt = 1440;
-        winHeight = 900;
+        aSettings.screenX = 1440;
+        aSettings.screenY = 900;
         break;
     case ArawnSettings::R1680x1050:
-        winWidt = 1680;
-        winHeight = 1050;
+        aSettings.screenX = 1680;
+        aSettings.screenY = 1050;
         break;
     case ArawnSettings::R1280x720:
-        winWidt = 1280;
-        winHeight = 720;
+        aSettings.screenX = 1280;
+        aSettings.screenY = 720;
         break;
     case ArawnSettings::R1366x768:
     default:
-        winWidt = 1366;
-        winHeight = 768;
+        aSettings.screenX = 1366;
+        aSettings.screenY = 768;
         break;
     }
 
@@ -148,9 +147,9 @@ QArawnWindow::QArawnWindow()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCursor(Qt::BlankCursor);
-    setGeometry(0, 0, winWidt, winHeight);
-    setMinimumSize(winWidt, winHeight);
-    setMaximumSize(winWidt, winHeight);
+    setGeometry(0, 0, aSettings.screenX, aSettings.screenY);
+    setMinimumSize(aSettings.screenX, aSettings.screenY);
+    setMaximumSize(aSettings.screenX, aSettings.screenY);
     setFrameStyle(QFrame::NoFrame);
     //setRenderingSystem();
     setRenderHint(QPainter::Antialiasing);
@@ -168,7 +167,6 @@ QArawnWindow::QArawnWindow()
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     setScene(welcomeScene);
-    welcomeScene->advance();
 }
 
 
@@ -199,6 +197,9 @@ void QArawnWindow::initializeArawnScreen()
     QFontDatabase::addApplicationFont("res/screenge.ttf");
     QFontDatabase fdb;
     font = fdb.font("Screengem", "Normal", 36);
+    arawnScene = new QGraphicsScene(this);
+    arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
+
 }
 
 

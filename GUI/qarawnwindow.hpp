@@ -63,13 +63,24 @@ struct ArawnSettings
     uchar bombSpeed; // n/10 fields/seconds
     uchar bombTimer; // 1/10 s
 
+    bool wideLayout;
+    ushort screenX;
+    ushort screenY;
+
     ArawnSettings() : language(English), resolution(R800x600), openGlRendering(false), showCorpseParts(true),
         shakyExplosion(true), roundTimeDefault(60), pointsToPlayOff(10), startBombs(1),
         maxMoreBombs(8), startFire(1), maxMoreFire(8), startSpeed(1), maxMoreSpeed(5),
         startPushBombs(false), enablePushBombs(true), startDropBombs(false), enableDropBombs(true),
         enableFailingBombs(true), enableOppositeControls(true), enableInvisibility(true),
-        bombSpeed(40), bombTimer(30){}
+        bombSpeed(40), bombTimer(30)
+    {
+        wideLayout = false;
+        screenX = 800;
+        screenY = 600;
+    }
 };
+
+static ArawnSettings aSettings;
 
 
 class QArawnWindow : public QGraphicsView
@@ -84,8 +95,6 @@ public:
     void showArawnScreen();
     void showMainMenu();
 
-    ArawnSettings aSettings;
-    bool wideLayout;
 
 signals:
 
@@ -93,15 +102,17 @@ public slots:
 
 private:
     void setRenderingSystem();
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
+    //void keyPressEvent(QKeyEvent *event);
+    //void keyReleaseEvent(QKeyEvent *event);
 
     QString path;
     QGraphicsScene *welcomeScene;
+    QGraphicsScene *arawnScene;
     QGraphicsPixmapItem *welcomePixmap;
     QSound *welcomeSound;
 
-    QFont *font;
+
+    QFont font;
     QSound *sounds[];
 
 

@@ -42,9 +42,10 @@ int main(int argc, char *argv[])
             */
 
     w.showFullScreen();
-    /*
-      TODO:
+
       w.initializeArawnScreen();
+  /*
+    TODO:
       w.showArawnScreen();
       w.initializeMenus(); // Utolsó init
       w.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
