@@ -197,9 +197,11 @@ void QArawnWindow::initializeArawnScreen()
     QFontDatabase::addApplicationFont("res/screenge.ttf");
     QFontDatabase fdb;
     font = fdb.font("Screengem", "Normal", 36);
+    welcomeSound = new QSound("res/arawn.wav");
     arawnScene = new QGraphicsScene(this);
     arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
 
+    // Soundok inicializálása (mert lassú)
 }
 
 

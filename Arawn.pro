@@ -57,9 +57,11 @@ OTHER_FILES += \
     GUI/res/Arawn.ico \
     README.md \
     GUI/res/KliMoQu.png \
-    GUI/res/hiryrvdydd.png
+    GUI/res/hiryrvdydd.png \
+    GUI/res/arawn.wav
 
 RESOURCES +=
+
 
 
 
