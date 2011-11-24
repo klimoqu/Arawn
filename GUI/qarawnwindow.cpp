@@ -202,6 +202,21 @@ void QArawnWindow::initializeArawnScreen()
     arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
 
     // Soundok inicializálása (mert lassú)
+    //sounds = new QSound[14];
+    sounds[0] = new QSound("res/0_tofrommenu.wav");
+    sounds[1] = new QSound("res/1_changemenu.wav");
+    sounds[2] = new QSound("res/2_step.vaw");
+    sounds[3] = new QSound("res/3_putbomb.wav");
+    sounds[4] = new QSound("res/4_explode.wav");
+    sounds[5] = new QSound("res/5_getextra.wav");
+    sounds[6] = new QSound("res/6_die.wav");
+    sounds[7] = new QSound("res/7_splash1a.wav");
+    sounds[8] = new QSound("res/8_splash2a.wav");
+    sounds[9] = new QSound("res/9_corpse_explode.wav");
+    sounds[10] = new QSound("res/10_deepfall.wav");
+    sounds[11] = new QSound("res/11_hurry_up.wav");
+    sounds[12] = new QSound("res/12_time_over.wav");
+    sounds[13] = new QSound("res/13_klatsch.wav");
 }
 
 

@@ -58,9 +58,24 @@ OTHER_FILES += \
     README.md \
     GUI/res/KliMoQu.png \
     GUI/res/hiryrvdydd.png \
-    GUI/res/arawn.wav
+    GUI/res/arawn.wav \
+    GUI/res/13_klatsch.wav \
+    GUI/res/12_time_over.wav \
+    GUI/res/11_hurry_up.wav \
+    GUI/res/10_deepfall.wav \
+    GUI/res/9_corpse_explode.wav \
+    GUI/res/8_splash2a.wav \
+    GUI/res/7_splash1a.wav \
+    GUI/res/6_die.wav \
+    GUI/res/5_getextra.wav \
+    GUI/res/4_explode.wav \
+    GUI/res/3_putbomb.wav \
+    GUI/res/2_step.wav \
+    GUI/res/1_changemenu.wav \
+    GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
 
 
 

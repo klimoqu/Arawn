@@ -111,9 +111,9 @@ private:
     QGraphicsPixmapItem *welcomePixmap;
     QSound *welcomeSound;
 
-
+    QTimer timer;
     QFont font;
-    QSound *sounds[];
+    QSound* sounds[];
 
 
 };
