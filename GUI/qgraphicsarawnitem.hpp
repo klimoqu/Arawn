@@ -2,13 +2,15 @@
 #define QGRAPHICSARAWNITEM_HPP
 
 #include <QGraphicsItem>
+#include <QPainter>
+#include <QGraphicsScene>
 
 class QGraphicsArawnItem : public QGraphicsItem
 {
 public:
     QGraphicsArawnItem();
 
-    QRectF boundingRect();
+    QRectF boundingRect() const;
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option, QWidget *widget);
     void advance(int phase);
@@ -17,6 +19,7 @@ private:
     QImage hiryrvdydd;
     QImage arawn;
     uchar opacity;
+
 };
 
 #endif // QGRAPHICSARAWNITEM_HPP

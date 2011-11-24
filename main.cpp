@@ -32,6 +32,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QArawnWindow w;
+    w.initializeArawnScreen();
+
+    w.timer.setSingleShot(true);
+    QObject::connect(&(w.timer), SIGNAL(timeout()), &w, SLOT(showArawnScreen()));
+    w.timer.start(2500);
 
             /**
             Map *test=new Map(1);
@@ -41,12 +46,8 @@ int main(int argc, char *argv[])
             outputfile.close();
             */
 
-    w.showFullScreen();
-
-      w.initializeArawnScreen();
   /*
     TODO:
-      w.showArawnScreen();
       w.initializeMenus(); // Utolsó init
       w.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
     */

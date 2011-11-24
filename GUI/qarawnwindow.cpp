@@ -167,6 +167,7 @@ QArawnWindow::QArawnWindow()
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     setScene(welcomeScene);
+    showFullScreen();
 }
 
 
@@ -198,8 +199,12 @@ void QArawnWindow::initializeArawnScreen()
     QFontDatabase fdb;
     font = fdb.font("Screengem", "Normal", 36);
     welcomeSound = new QSound("res/arawn.wav");
-    arawnScene = new QGraphicsScene(this);
+    arawnScene = new QGraphicsScene(
+                -(aSettings.screenX/2), -(aSettings.screenY/2),
+                aSettings.screenX, aSettings.screenY, this);
     arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    arawnItem = new QGraphicsArawnItem;
+    arawnScene->addItem(arawnItem);
 
     // Soundok inicializálása (mert lassú)
     //sounds = new QSound[14];
@@ -219,6 +224,18 @@ void QArawnWindow::initializeArawnScreen()
     sounds[13] = new QSound("res/13_klatsch.wav");
 }
 
+
+void QArawnWindow::showArawnScreen()
+{
+    welcomeSound->play();
+    setScene(arawnScene);
+    disconnect(this, SLOT(showArawnScreen()));
+
+
+
+//    connect(arawnItem, SIGNAL(animationFinished()), timer, )
+//    MIVAN?
+}
 
 
 

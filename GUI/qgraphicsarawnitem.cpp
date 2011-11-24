@@ -1,5 +1,3 @@
-#include <QPainter>
-#include <QGraphicsScene>
 #include "qgraphicsarawnitem.hpp"
 
 QGraphicsArawnItem::QGraphicsArawnItem()
@@ -8,6 +6,13 @@ QGraphicsArawnItem::QGraphicsArawnItem()
     arawn = QImage("res/Arawn.png");
     opacity = 255;
 }
+
+
+QRectF QGraphicsArawnItem::boundingRect() const
+{
+    return QRectF(-(scene()->width()/2), -(scene()->height()/2), scene()->width(), scene()->height());
+}
+
 
 void QGraphicsArawnItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
@@ -25,13 +30,11 @@ void QGraphicsArawnItem::advance(int phase)
     if(!phase)
         return;
 
-    if(opacity < 50)
+    if(opacity > 50)
+        opacity--;
+
+    if(opacity == 0)
         return;
 
-    opacity--;
 }
 
-QRectF QGraphicsArawnItem::boundingRect()
-{
-    return QRectF(-(scene()->width()/2), -(scene()->height()/2), scene()->width(), scene()->height());
-}

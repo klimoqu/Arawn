@@ -2,6 +2,7 @@
 #define QARAWNWINDOW_HPP
 
 #include <QtGui>
+#include "qgraphicsarawnitem.hpp"
 
 struct ArawnSettings
 {
@@ -90,15 +91,15 @@ class QArawnWindow : public QGraphicsView
 public:
     QArawnWindow();
 
-    void initializeArawnScreen();
-    void initializeMenus();
-    void showArawnScreen();
-    void showMainMenu();
-
+    QTimer timer;
 
 signals:
 
 public slots:
+    void initializeArawnScreen();
+    void showArawnScreen();
+//    void initializeMenus();
+//    void showMainMenu();
 
 private:
     void setRenderingSystem();
@@ -109,11 +110,11 @@ private:
     QGraphicsScene *welcomeScene;
     QGraphicsScene *arawnScene;
     QGraphicsPixmapItem *welcomePixmap;
+    QGraphicsArawnItem *arawnItem;
     QSound *welcomeSound;
 
-    QTimer timer;
     QFont font;
-    QSound* sounds[];
+    QSound* sounds[14];
 
 
 };
