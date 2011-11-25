@@ -1,4 +1,4 @@
-#include "qgraphicstimeritem.hpp"
+#include "arawnheader.h"
 
 QGraphicsTimerItem::QGraphicsTimerItem()
 {

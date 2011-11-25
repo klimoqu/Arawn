@@ -23,10 +23,7 @@
  *
  ***************************************************************************/
 
-#include <QtGui/QApplication>
-
-#include "GUI/qarawnwindow.hpp"
-#include "map.hpp"
+#include "arawnheader.h"
 
 int main(int argc, char *argv[])
 {

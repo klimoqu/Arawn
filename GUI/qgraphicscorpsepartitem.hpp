@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSCORPSEPARTITEM_HPP
 #define QGRAPHICSCORPSEPARTITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsCorpsePartItem : public QGraphicsItem
 {

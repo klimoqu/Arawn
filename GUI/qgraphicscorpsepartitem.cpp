@@ -1,4 +1,4 @@
-#include "qgraphicscorpsepartitem.hpp"
+#include "arawnheader.h"
 
 QGraphicsCorpsePartItem::QGraphicsCorpsePartItem()
 {

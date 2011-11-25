@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSPLAYERITEM_HPP
 #define QGRAPHICSPLAYERITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsPlayerItem : public QGraphicsItem
 {

@@ -1,4 +1,4 @@
-#include "qarawnwindow.hpp"
+#include "arawnheader.h"
 
 
 QDataStream &operator >>(QDataStream &stream, ArawnSettings &settings)
@@ -227,10 +227,11 @@ void QArawnWindow::initializeArawnScreen()
 
 void QArawnWindow::showArawnScreen()
 {
-    welcomeSound->play();
+
     setScene(arawnScene);
     disconnect(this, SLOT(showArawnScreen()));
 
+    welcomeSound->play();
 
 
 //    connect(arawnItem, SIGNAL(animationFinished()), timer, )

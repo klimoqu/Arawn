@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSTIMERITEM_HPP
 #define QGRAPHICSTIMERITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsTimerItem : public QGraphicsItem
 {

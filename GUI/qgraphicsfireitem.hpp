@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSFIREITEM_HPP
 #define QGRAPHICSFIREITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsFireItem : public QGraphicsItem
 {

@@ -1,8 +1,7 @@
 #ifndef QARAWNWINDOW_HPP
 #define QARAWNWINDOW_HPP
 
-#include <QtGui>
-#include "qgraphicsarawnitem.hpp"
+#include "arawnheader.h"
 
 struct ArawnSettings
 {

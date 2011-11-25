@@ -1,4 +1,4 @@
-#include "qgraphicsheaderitem.hpp"
+#include "arawnheader.h"
 
 QGraphicsHeaderItem::QGraphicsHeaderItem()
 {

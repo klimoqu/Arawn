@@ -1,9 +1,7 @@
 #ifndef QGRAPHICSARAWNITEM_HPP
 #define QGRAPHICSARAWNITEM_HPP
 
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QGraphicsScene>
+#include "arawnheader.h"
 
 class QGraphicsArawnItem : public QGraphicsItem
 {

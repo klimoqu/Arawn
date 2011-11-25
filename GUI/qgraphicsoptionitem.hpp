@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSOPTIONITEM_HPP
 #define QGRAPHICSOPTIONITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsOptionItem : public QGraphicsItem
 {

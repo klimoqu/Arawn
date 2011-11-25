@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSFIELDITEM_HPP
 #define QGRAPHICSFIELDITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsFieldItem : public QGraphicsItem
 {

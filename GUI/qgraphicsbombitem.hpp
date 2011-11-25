@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSBOMBITEM_HPP
 #define QGRAPHICSBOMBITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsBombItem : public QGraphicsItem
 {

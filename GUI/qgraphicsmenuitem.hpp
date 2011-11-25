@@ -1,7 +1,7 @@
 #ifndef QGRAPHICSMENUITEM_HPP
 #define QGRAPHICSMENUITEM_HPP
 
-#include <QGraphicsItem>
+#include "arawnheader.h"
 
 class QGraphicsMenuItem : public QGraphicsItem
 {

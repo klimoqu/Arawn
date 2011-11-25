@@ -47,7 +47,8 @@ HEADERS  += \
     GUI/qgraphicsbonusitem.hpp \
     GUI/qgraphicscorpsepartitem.hpp \
     GUI/qarawnwindow.hpp \
-    GUI/qgraphicsarawnitem.hpp
+    GUI/qgraphicsarawnitem.hpp \
+    arawnheader.h
 
 FORMS    +=
 
@@ -75,6 +76,7 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
 
 
 
