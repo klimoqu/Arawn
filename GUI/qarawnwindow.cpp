@@ -62,6 +62,10 @@ QDataStream &operator <<(QDataStream &stream, const ArawnSettings &settings)
 
 QArawnWindow::QArawnWindow()
 {
+}
+
+void QArawnWindow::initWindow()
+{
     // LOAD SAVED DATA
 #ifdef Q_OS_WIN
     QDir dir(QDir::homePath() + "/AppData");
@@ -167,9 +171,7 @@ QArawnWindow::QArawnWindow()
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     setScene(welcomeScene);
-    showFullScreen();
 }
-
 
 void QArawnWindow::setRenderingSystem()
 {
@@ -198,16 +200,17 @@ void QArawnWindow::initializeArawnScreen()
     QFontDatabase::addApplicationFont("res/screenge.ttf");
     QFontDatabase fdb;
     font = fdb.font("Screengem", "Normal", 36);
-    welcomeSound = new QSound("res/arawn.wav");
+//    arawnScene = new QGraphicsScene(
+//                -(aSettings.screenX/2), -(aSettings.screenY/2),
+//                aSettings.screenX, aSettings.screenY, this);
     arawnScene = new QGraphicsScene(
-                -(aSettings.screenX/2), -(aSettings.screenY/2),
-                aSettings.screenX, aSettings.screenY, this);
+                -(1680/2), -(1050/2),
+                1680, 1050, this);
     arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
     arawnItem = new QGraphicsArawnItem;
     arawnScene->addItem(arawnItem);
 
-    // Soundok inicializálása (mert lassú)
-    //sounds = new QSound[14];
+
     sounds[0] = new QSound("res/0_tofrommenu.wav");
     sounds[1] = new QSound("res/1_changemenu.wav");
     sounds[2] = new QSound("res/2_step.vaw");
@@ -222,24 +225,27 @@ void QArawnWindow::initializeArawnScreen()
     sounds[11] = new QSound("res/11_hurry_up.wav");
     sounds[12] = new QSound("res/12_time_over.wav");
     sounds[13] = new QSound("res/13_klatsch.wav");
+    sounds[14] = new QSound("res/arawn.wav");
 }
 
 
 void QArawnWindow::showArawnScreen()
 {
-
+    disconnect(&timer1, SIGNAL(timeout()),this, SLOT(showArawnScreen()));
     setScene(arawnScene);
-    disconnect(this, SLOT(showArawnScreen()));
 
-    welcomeSound->play();
+    connect(&timer2, SIGNAL(timeout()), arawnScene, SLOT(advance()));
+    timer2.start(40);
 
+    playSound(14);
 
-//    connect(arawnItem, SIGNAL(animationFinished()), timer, )
-//    MIVAN?
 }
 
 
-
+void QArawnWindow::playSound(uchar n)
+{
+    sounds[n]->play();
+}
 
 
 

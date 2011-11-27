@@ -90,13 +90,17 @@ class QArawnWindow : public QGraphicsView
 public:
     QArawnWindow();
 
-    QTimer timer;
+    void initWindow();
+
+    QTimer timer1;
+    QTimer timer2;
 
 signals:
 
 public slots:
     void initializeArawnScreen();
     void showArawnScreen();
+    void playSound(uchar n);
 //    void initializeMenus();
 //    void showMainMenu();
 
@@ -110,10 +114,9 @@ private:
     QGraphicsScene *arawnScene;
     QGraphicsPixmapItem *welcomePixmap;
     QGraphicsArawnItem *arawnItem;
-    QSound *welcomeSound;
 
     QFont font;
-    QSound* sounds[14];
+    QSound* sounds[15];
 
 
 };

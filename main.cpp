@@ -28,25 +28,23 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QArawnWindow w;
-    w.initializeArawnScreen();
 
-    w.timer.setSingleShot(true);
-    QObject::connect(&(w.timer), SIGNAL(timeout()), &w, SLOT(showArawnScreen()));
-    w.timer.start(2500);
+    QArawnWindow aWindow;
+    aWindow.initWindow();
+    aWindow.showFullScreen();
+    aWindow.initializeArawnScreen();
 
-            /**
-            Map *test=new Map(1);
-            std::ofstream outputfile;
-            outputfile.open("test");
-            test->Save(std::cout);
-            outputfile.close();
-            */
+    aWindow.timer1.setSingleShot(true);
+    QObject::connect(&(aWindow.timer1), SIGNAL(timeout()),
+                     &aWindow, SLOT(showArawnScreen()));
+    aWindow.timer1.start(2500);
+
+
 
   /*
     TODO:
-      w.initializeMenus(); // Utolsó init
-      w.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
+      aWindow.initializeMenus(); // Utolsó init
+      aWindow.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
     */
     return a.exec();
 }
