@@ -159,18 +159,19 @@ void QArawnWindow::initWindow()
     setRenderHint(QPainter::Antialiasing);
 
 
-    welcomeScene = new QGraphicsScene(-260, -190, 520, 380, this);
-    welcomeScene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    scene = new QGraphicsScene(-(aSettings.screenX/2), -(aSettings.screenY/2),
+                    aSettings.screenX, aSettings.screenY, this);
+    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
 
     welcomePixmap = new QGraphicsPixmapItem(QPixmap("res/KliMoQu.png"));
     welcomePixmap->setPos(-260, -190);
-    welcomeScene->addItem(welcomePixmap);
+    scene->addItem(welcomePixmap);
 
     setBackgroundBrush(QBrush(Qt::black));
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
-    setScene(welcomeScene);
+    setScene(scene);
 }
 
 void QArawnWindow::setRenderingSystem()
@@ -200,13 +201,7 @@ void QArawnWindow::initializeArawnScreen()
     QFontDatabase::addApplicationFont("res/screenge.ttf");
     QFontDatabase fdb;
     font = fdb.font("Screengem", "Normal", 36);
-//    arawnScene = new QGraphicsScene(
-//                -(aSettings.screenX/2), -(aSettings.screenY/2),
-//                aSettings.screenX, aSettings.screenY, this);
-    arawnScene = new QGraphicsScene(
-                -(1680/2), -(1050/2),
-                1680, 1050, this);
-    arawnScene->setItemIndexMethod(QGraphicsScene::NoIndex);
+
     arawnItem = new QGraphicsArawnItem;
     arawnScene->addItem(arawnItem);
 
@@ -245,6 +240,14 @@ void QArawnWindow::showArawnScreen()
 void QArawnWindow::playSound(uchar n)
 {
     sounds[n]->play();
+}
+
+void QArawnWindow::initializeMenus()
+{
+}
+
+void QArawnWindow::showMainMenu()
+{
 }
 
 

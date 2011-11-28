@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     GUI/qgraphicsbonusitem.cpp \
     GUI/qgraphicscorpsepartitem.cpp \
     GUI/qarawnwindow.cpp \
-    GUI/qgraphicsarawnitem.cpp
+    GUI/qgraphicsarawnitem.cpp \
+    GUI/qgraphicstransitionitem.cpp
 
 HEADERS  += \
     player.hpp \
@@ -48,7 +49,8 @@ HEADERS  += \
     GUI/qgraphicscorpsepartitem.hpp \
     GUI/qarawnwindow.hpp \
     GUI/qgraphicsarawnitem.hpp \
-    arawnheader.h
+    arawnheader.h \
+    GUI/qgraphicstransitionitem.hpp
 
 FORMS    +=
 
@@ -76,6 +78,12 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
+
+
+
+
 
 
 

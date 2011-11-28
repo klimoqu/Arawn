@@ -12,3 +12,4 @@
 #include "GUI/qgraphicsoptionitem.hpp"
 #include "GUI/qgraphicsplayeritem.hpp"
 #include "GUI/qgraphicstimeritem.hpp"
+#include "GUI/qgraphicstransitionitem.hpp"
