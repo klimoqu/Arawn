@@ -127,7 +127,8 @@ void QArawnWindow::initializeOthers()
 {
     QFontDatabase::addApplicationFont("res/screenge.ttf");
     QFontDatabase fdb;
-    font = fdb.font("Screengem", "Normal", 36);
+    //font = fdb.font("Screengem", "Normal", 36);
+    qApp->setFont(fdb.font("Screengem", "Normal", 36));
 
     sounds[0] = new QSound("res/0_tofrommenu.wav", this);
     sounds[1] = new QSound("res/1_changemenu.wav", this);
@@ -144,6 +145,9 @@ void QArawnWindow::initializeOthers()
     sounds[12] = new QSound("res/12_time_over.wav", this);
     sounds[13] = new QSound("res/13_klatsch.wav", this);
     sounds[14] = new QSound("res/arawn.wav", this);
+
+    QPixmap fire("res/fire.jpg");
+    menuBgnd = (fire.scaled(aSettings.screenX,aSettings.screenY,Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 }
 
 
@@ -184,6 +188,12 @@ void QArawnWindow::showArawnScreen()
 
     playSound(14);
 
+//    QGraphicsTextItem *t = new QGraphicsTextItem(0, scene);
+//    t->setFont(qApp->font());
+//    t->setPos(-100, 200);
+//    t->setHtml("<font color='red'>Hello Arawn</font>");
+//    scene->addItem(t);
+
 }
 
 
@@ -198,6 +208,8 @@ void QArawnWindow::initializeMenus()
 
 void QArawnWindow::showMainMenu()
 {
+    setBackgroundBrush(QBrush(menuBgnd));
+
 }
 
 

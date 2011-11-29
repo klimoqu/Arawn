@@ -92,9 +92,9 @@ private:
     QString path;
     QGraphicsScene *scene;
     QGraphicsPixmapItem *welcomePixmap;
-
-    QFont font;
     QSound* sounds[15];
+    QPixmap menuBgnd;
+    QGraphicsTextItem *mainMenuHeader;
 
 
 };

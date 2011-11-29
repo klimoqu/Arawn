@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     GUI/qgraphicsfireitem.cpp \
     GUI/qgraphicstimeritem.cpp \
     GUI/qgraphicsheaderitem.cpp \
-    GUI/qgraphicsmenuheaderitem.cpp \
     GUI/qgraphicsbonusitem.cpp \
     GUI/qgraphicscorpsepartitem.cpp \
     GUI/qarawnwindow.cpp
@@ -42,7 +41,6 @@ HEADERS  += \
     GUI/qgraphicsfireitem.hpp \
     GUI/qgraphicstimeritem.hpp \
     GUI/qgraphicsheaderitem.hpp \
-    GUI/qgraphicsmenuheaderitem.hpp \
     GUI/qgraphicsbonusitem.hpp \
     GUI/qgraphicscorpsepartitem.hpp \
     GUI/qarawnwindow.hpp \
@@ -74,6 +72,8 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
 
 
 
