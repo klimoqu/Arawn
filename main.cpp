@@ -32,12 +32,13 @@ int main(int argc, char *argv[])
     QArawnWindow aWindow;
     aWindow.initWindow();
     aWindow.showFullScreen();
-    aWindow.initializeArawnScreen();
+    aWindow.initializeOthers();
 
-    aWindow.timer1.setSingleShot(true);
-    QObject::connect(&(aWindow.timer1), SIGNAL(timeout()),
+    QTimer timer;
+    timer.setSingleShot(true);
+    QObject::connect(&timer, SIGNAL(timeout()),
                      &aWindow, SLOT(showArawnScreen()));
-    aWindow.timer1.start(2500);
+    timer.start(2500);
 
 
 

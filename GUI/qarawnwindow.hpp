@@ -17,25 +17,8 @@ struct ArawnSettings
         German
     };
 
-    enum Resolution
-    {
-        // 4:3
-        R800x600,
-        R1024x768,
-        R1280x1024,
-
-        // 16:10
-        R1280x800,
-        R1440x900,
-        R1680x1050,
-
-        // 16:9
-        R1280x720,
-        R1366x768
-    };
 
     uchar language;
-    uchar resolution;
     bool openGlRendering;
     bool showCorpseParts;
     bool shakyExplosion;
@@ -67,7 +50,7 @@ struct ArawnSettings
     ushort screenX;
     ushort screenY;
 
-    ArawnSettings() : language(English), resolution(R800x600), openGlRendering(false), showCorpseParts(true),
+    ArawnSettings() : language(English), openGlRendering(false), showCorpseParts(true),
         shakyExplosion(true), roundTimeDefault(60), pointsToPlayOff(10), startBombs(1),
         maxMoreBombs(8), startFire(1), maxMoreFire(8), startSpeed(1), maxMoreSpeed(5),
         startPushBombs(false), enablePushBombs(true), startDropBombs(false), enableDropBombs(true),
@@ -88,21 +71,18 @@ class QArawnWindow : public QGraphicsView
     Q_OBJECT
 
 public:
-    QArawnWindow();
+    QArawnWindow() {}
 
     void initWindow();
-
-    QTimer timer1;
-    QTimer timer2;
 
 signals:
 
 public slots:
-    void initializeArawnScreen();
+    void initializeOthers();
     void showArawnScreen();
     void playSound(uchar n);
-//    void initializeMenus();
-//    void showMainMenu();
+    void initializeMenus();
+    void showMainMenu();
 
 private:
     void setRenderingSystem();
@@ -110,10 +90,8 @@ private:
     //void keyReleaseEvent(QKeyEvent *event);
 
     QString path;
-    QGraphicsScene *welcomeScene;
-    QGraphicsScene *arawnScene;
+    QGraphicsScene *scene;
     QGraphicsPixmapItem *welcomePixmap;
-    QGraphicsArawnItem *arawnItem;
 
     QFont font;
     QSound* sounds[15];
