@@ -183,6 +183,7 @@ void QArawnWindow::showArawnScreen()
     hanim->start(QAbstractAnimation::DeleteWhenStopped);
 
     playSound(14);
+
 }
 
 

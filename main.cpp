@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
                      &aWindow, SLOT(showArawnScreen()));
     timer.start(2500);
     aWindow.initializeOthers();
+    aWindow.initializeMenus();
 
 
   /*

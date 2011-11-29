@@ -22,7 +22,7 @@ Változtatásaim áttekintése -morta
 Tartalmazza az összes beállítást, ami a program működését befolyásolja.
 Mostantól tetszőleges képernyőfelbontással működik, de a layout tulajdonság
 nem menthető, az MINDIG a képernyőfelbontás arányából számítódik ki.
-Szerializálva íródik fájlba, egy verszióvflaggel ellátva, így később is
+Szerializálva íródik fájlba, egy verzió flaggel ellátva, így később is
 betölthetőek lesznek az elavult `gamesettings` fájlok.
 
 ### QArawnWindow
@@ -42,7 +42,7 @@ paramétert, így nem kell destruktort írni, rekurzívan törlődik minden.
 A `showArawnScreen` példaértékű eljárás. Helyben jön létre minden, ami
 a logók megjelenéséhez és az animációhoz kell, de még a jelenet befejezése előtt
 elhagyjuk a blokkot. A szülő paraméterek miatt ezt megtehetjük, minden
-törlődni fok, miután már nincs rá szükség.
+törlődni fog, miután már nincs rá szükség.
 
 
 
