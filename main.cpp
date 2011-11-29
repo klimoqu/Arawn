@@ -32,14 +32,13 @@ int main(int argc, char *argv[])
     QArawnWindow aWindow;
     aWindow.initWindow();
     aWindow.showFullScreen();
-    aWindow.initializeOthers();
 
     QTimer timer;
     timer.setSingleShot(true);
     QObject::connect(&timer, SIGNAL(timeout()),
                      &aWindow, SLOT(showArawnScreen()));
     timer.start(2500);
-
+    aWindow.initializeOthers();
 
 
   /*
@@ -49,3 +48,13 @@ int main(int argc, char *argv[])
     */
     return a.exec();
 }
+
+
+
+
+
+
+
+
+
+
