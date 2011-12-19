@@ -1,125 +1,43 @@
 #include "arawnheader.h"
 
 
-QDataStream &operator >>(QDataStream &stream, ArawnSettings &settings)
-{
-    int v;
-    stream >> v;
-    stream >> settings.bombSpeed;
-    stream >> settings.bombTimer;
-    stream >> settings.enableDropBombs;
-    stream >> settings.enableFailingBombs;
-    stream >> settings.enableInvisibility;
-    stream >> settings.enableOppositeControls;
-    stream >> settings.enablePushBombs;
-    stream >> settings.language;
-    stream >> settings.maxMoreBombs;
-    stream >> settings.maxMoreFire;
-    stream >> settings.maxMoreSpeed;
-    stream >> settings.pointsToPlayOff;
-    stream >> settings.roundTimeDefault;
-    stream >> settings.shakyExplosion;
-    stream >> settings.showCorpseParts;
-    stream >> settings.startBombs;
-    stream >> settings.startDropBombs;
-    stream >> settings.startFire;
-    stream >> settings.startPushBombs;
-    stream >> settings.startSpeed;
-    stream >> settings.openGlRendering;
-    stream >> settings.screenX;
-    stream >> settings.screenY;
-    return stream;
-}
-
-QDataStream &operator <<(QDataStream &stream, const ArawnSettings &settings)
-{
-    stream << ArawnSettings::Current;
-    stream << settings.bombSpeed;
-    stream << settings.bombTimer;
-    stream << settings.enableDropBombs;
-    stream << settings.enableFailingBombs;
-    stream << settings.enableInvisibility;
-    stream << settings.enableOppositeControls;
-    stream << settings.enablePushBombs;
-    stream << settings.language;
-    stream << settings.maxMoreBombs;
-    stream << settings.maxMoreFire;
-    stream << settings.maxMoreSpeed;
-    stream << settings.pointsToPlayOff;
-    stream << settings.roundTimeDefault;
-    stream << settings.shakyExplosion;
-    stream << settings.showCorpseParts;
-    stream << settings.startBombs;
-    stream << settings.startDropBombs;
-    stream << settings.startFire;
-    stream << settings.startPushBombs;
-    stream << settings.startSpeed;
-    stream << settings.openGlRendering;
-    stream << settings.screenX;
-    stream << settings.screenY;
-    return stream;
-}
-
-
-
 void QArawnWindow::initWindow()
 {
-    // LOAD SAVED DATA
-#ifdef Q_OS_WIN
-    QDir dir(QDir::homePath() + "/AppData");
-    if(!dir.exists("Arawn"))
-        dir.mkdir("Arawn");
-    path = QDir::homePath() + "/AppData/Arawn/";
-#else
-    QDir dir(QDir::homePath() + "/.config");
-    if(!dir.exists("Arawn"))
-        dir.mkdir("Arawn");
-    path = QDir::homePath() + "/.config/Arawn/";
-#endif
-    QRect sr = QApplication::desktop()->screenGeometry();
-    if(QFile::exists(path+"gamesettings")){
-        QFile sFile(path+"gamesettings");
-        sFile.open(QFile::ReadOnly);
-        QDataStream sReader(&sFile);
-        sReader >> aSettings;
-        sFile.close();
-    }else{ // TODO törölni a fájlbaírást
-//        QFile sFile(path+"gamesettings");
-//        sFile.open(QFile::WriteOnly);
-//        sFile.close();
 
-        // Képernyőfelbontás ellenőrzése
-        aSettings.screenX = sr.width();
-        aSettings.screenY = sr.height();
-    }
-    if ( ((float)aSettings.screenX) / ((float)aSettings.screenY) > 1.5F ) {
-        aSettings.wideLayout = true;
-    }else{
-        aSettings.wideLayout = false;
-    }
+    QRect sr = QApplication::desktop()->screenGeometry();
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCursor(Qt::BlankCursor);
-    setGeometry(0, 0, aSettings.screenX, aSettings.screenY);
+//    setGeometry(0, 0, ArawnSettings::instance().screenX, ArawnSettings::instance().screenY);
     setFrameStyle(QFrame::NoFrame);
-    setRenderHint(QPainter::Antialiasing);
-    scale(((qreal)sr.width()) / (qreal)aSettings.screenX,
-          ((qreal)sr.height()) / (qreal)aSettings.screenY);
+    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    scale(((qreal)sr.width()) / (qreal)ArawnSettings::instance()->resolution.toPoint().x(),
+          ((qreal)sr.height()) / (qreal)ArawnSettings::instance()->resolution.toPoint().y());
 
 
-    scene = new QGraphicsScene(-(aSettings.screenX/2), -(aSettings.screenY/2),
-                    aSettings.screenX, aSettings.screenY, this);
-    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    welcomePixmap = new QGraphicsPixmapItem(QPixmap("res/KliMoQu.png"), 0, scene);
-    welcomePixmap->setPos(-260, -190);
-    scene->addItem(welcomePixmap);
+    scene = new QGraphicsScene(-(ArawnSettings::instance()->resolution.toPoint().x()/2),
+                               -(ArawnSettings::instance()->resolution.toPoint().y()/2),
+                               ArawnSettings::instance()->resolution.toPoint().x(),
+                               ArawnSettings::instance()->resolution.toPoint().y(), this);
+    scene->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
+    pixWelcomeItem = new QGraphicsPixmapItem(QPixmap("res/KliMoQu.png"), 0, scene);
+    pixWelcomeItem->setPos(-260, -190);
+    scene->addItem(pixWelcomeItem);
 
     setBackgroundBrush(QBrush(Qt::black));
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 
     setScene(scene);
+
+    machine = new QStateMachine(this);
+    stateLogo = new QState();
+    connect(stateLogo, SIGNAL(entered()), this, SLOT(initializeOthers()));
+
+    machine->addState(stateLogo);
+    machine->setInitialState(stateLogo);
+    machine->start();
 }
 
 
@@ -146,46 +64,80 @@ void QArawnWindow::initializeOthers()
     sounds[13] = new QSound("res/13_klatsch.wav", this);
     sounds[14] = new QSound("res/arawn.wav", this);
 
-    QPixmap fire("res/fire.jpg");
-    menuBgnd = (fire.scaled(aSettings.screenX,aSettings.screenY,Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+
+//! [Arawnscreen részletei]
+    pixFireItem = new QGraphicsPixmapItem(
+                QPixmap("res/fire.jpg").scaled(scene->width(),scene->height(),Qt::IgnoreAspectRatio, Qt::SmoothTransformation), 0, scene);
+    pixArawnItem = new QGraphicsPixmapItem(
+                QPixmap("res/Arawn.png").scaledToHeight(scene->height(), Qt::SmoothTransformation), 0, scene);
+    pixHirItem = new QGraphicsPixmapItem(
+                QPixmap("res/hiryrvdydd.png").scaledToWidth((3*scene->width())/4, Qt::SmoothTransformation), 0, scene);
+
+    QGraphicsOpacityEffect *opEffectA = new QGraphicsOpacityEffect(this);
+        opEffectA->setOpacity(0.0);
+    QGraphicsOpacityEffect *opEffectH = new QGraphicsOpacityEffect(this);
+        opEffectH->setOpacity(0.0);
+    QGraphicsOpacityEffect *opEffectF = new QGraphicsOpacityEffect(this);
+        opEffectF->setOpacity(0.0);
+
+        pixArawnItem->setPos(scene->width()/2 - (pixArawnItem->boundingRect().width()) , -(pixArawnItem->boundingRect().height()/2));
+        pixHirItem->setPos(- (pixHirItem->boundingRect().width()/2), - (pixHirItem->boundingRect().height()/2));
+        //pixFireItem->setPos(-( pixFireItem->boundingRect()/2), 0);
+
+    pixArawnItem->setGraphicsEffect(opEffectA);
+    pixHirItem->setGraphicsEffect(opEffectH);
+    pixFireItem->setGraphicsEffect(opEffectF);
+
+    QPropertyAnimation *aanim = new QPropertyAnimation(opEffectA, "opacity", this);
+        aanim->setStartValue(0.0);
+        aanim->setEndValue(0.6);
+        aanim->setDuration(1000);
+    QPropertyAnimation *hanim = new QPropertyAnimation(opEffectH, "opacity", this);
+        hanim->setStartValue(0.0);
+        hanim->setEndValue(0.9);
+        hanim->setDuration(700);
+    QPropertyAnimation *fanim = new QPropertyAnimation(opEffectH, "opacity", this);
+        fanim->setStartValue(0.0);
+        fanim->setEndValue(0.5);
+        fanim->setDuration(1000);
+
+
+    QPropertyAnimation *amov = new QPropertyAnimation(pixArawnItem, "pos", this);
+        amov->setDuration(500);
+//!
+
+//! [QStates]
+    stateArawn = new QState();
+        QTimer timerToStAr;
+        timerToStAr.setSingleShot(true);
+        QSignalTransition *trA = stateLogo->addTransition(&timerToStAr, SIGNAL(timeout()), stateArawn);
+        trA->addAnimation(anims);
+        trA->addAnimation(hanim);
+        trA->addAnimation(fanim);
+        machine->addState(stateArawn);
+        connect(stateArawn, SIGNAL(entered()), this, SLOT(showArawnScreen()));
+        //
+        //stateArawn->assignProperty(opEffectA, "opacity", 0.6);
+        //stateArawn->assignProperty(opEffectH, "opacity", 0.9);
+        //stateArawn->assignProperty(opEffectF, "opacity", 0.5);
+        //
+
+    stateMainMenu = new QState();
+    stateMainMenu->assignProperty(pixArawnItem, "pos", QPointF(scene->width()/2, -pixArawnItem->boundingRect().height()/2));
+    ///...
+
+
+    //Végén
+    timerToStAr.start(500);
 }
 
 
 void QArawnWindow::showArawnScreen()
 {
-    scene->removeItem(welcomePixmap);
-
-    QGraphicsPixmapItem *arawnItem = new QGraphicsPixmapItem(
-                QPixmap("res/Arawn.png").scaledToHeight(aSettings.screenY, Qt::SmoothTransformation), 0, scene);
-    QGraphicsPixmapItem *hiryrv = new QGraphicsPixmapItem(
-                QPixmap("res/hiryrvdydd.png").scaledToWidth((3*aSettings.screenX)/4, Qt::SmoothTransformation), 0, scene);
-
-    QGraphicsOpacityEffect *opEffect = new QGraphicsOpacityEffect(this);
-    opEffect->setOpacity(0.0);
-    QGraphicsOpacityEffect *ohEffect = new QGraphicsOpacityEffect(this);
-    ohEffect->setOpacity(0.0);
-
-    arawnItem->setPos(aSettings.screenX/2 - arawnItem->boundingRect().width() , -arawnItem->boundingRect().height()/2);
-    hiryrv->setPos(-hiryrv->boundingRect().width()/2, -hiryrv->boundingRect().height()/2);
-
-    arawnItem->setGraphicsEffect(opEffect);
-    hiryrv->setGraphicsEffect(ohEffect);
-
-    QPropertyAnimation *aanim = new QPropertyAnimation(opEffect, "opacity", this);
-    aanim->setStartValue(0.0);
-    aanim->setEndValue(0.6);
-    aanim->setDuration(1000);
-    QPropertyAnimation *hanim = new QPropertyAnimation(ohEffect, "opacity", this);
-    hanim->setStartValue(0.0);
-    hanim->setEndValue(0.9);
-    hanim->setDuration(700);
-
-    scene->addItem(arawnItem);
-    scene->addItem(hiryrv);
-
-    aanim->start(QAbstractAnimation::DeleteWhenStopped);
-    hanim->start(QAbstractAnimation::DeleteWhenStopped);
-
+    scene->removeItem(pixWelcomeItem);
+    scene->addItem(pixArawnItem);
+    scene->addItem(pixHirItem);
+    scene->addItem(pixFireItem);
     playSound(14);
 
 //    QGraphicsTextItem *t = new QGraphicsTextItem(0, scene);
@@ -204,11 +156,12 @@ void QArawnWindow::playSound(uchar n)
 
 void QArawnWindow::initializeMenus()
 {
+
 }
 
 void QArawnWindow::showMainMenu()
 {
-    setBackgroundBrush(QBrush(menuBgnd));
+    setBackgroundBrush(QBrush(pixFire));
 
 }
 

@@ -29,23 +29,17 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    ArawnSettings::create(); // TODO delete
     QArawnWindow aWindow;
     aWindow.initWindow();
     aWindow.showFullScreen();
-
-    QTimer timer;
-    timer.setSingleShot(true);
-    QObject::connect(&timer, SIGNAL(timeout()),
-                     &aWindow, SLOT(showArawnScreen()));
-    timer.start(2500);
-    aWindow.initializeOthers();
-    aWindow.initializeMenus();
 
 
   /*
     TODO:
       aWindow.initializeMenus(); // Utolsó init
-      aWindow.showMainMenu(); //-> innentől már szükség lesz az event loop-ra (a.exec();)
+      aWindow.showMainMenu(); //
+    -> innentől már szükség lesz az event loop-ra (a.exec();)
     */
     return a.exec();
 }
