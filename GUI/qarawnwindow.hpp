@@ -8,7 +8,7 @@ class QArawnWindow : public QGraphicsView
     Q_OBJECT
 
 public:
-    QArawnWindow();
+    QArawnWindow() {}
 
     void initWindow();
 

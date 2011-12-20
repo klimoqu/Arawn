@@ -15,17 +15,10 @@ SOURCES += main.cpp\
     map.cpp \
     staticfield.cpp \
     dynamicfield.cpp \
-    GUI/qgraphicsplayeritem.cpp \
-    GUI/qgraphicsfielditem.cpp \
-    GUI/qgraphicsbombitem.cpp \
-    GUI/qgraphicsfireitem.cpp \
-    GUI/qgraphicstimeritem.cpp \
-    GUI/qgraphicsheaderitem.cpp \
-    GUI/qgraphicsbonusitem.cpp \
-    GUI/qgraphicscorpsepartitem.cpp \
     GUI/qarawnwindow.cpp \
     GUI/qgraphicsmenu.cpp \
-    arawnsettings.cpp
+    arawnsettings.cpp \
+    GUI/pixmapobjectitem.cpp
 
 HEADERS  += \
     player.hpp \
@@ -33,18 +26,11 @@ HEADERS  += \
     map.hpp \
     staticfield.hpp \
     dynamicfield.hpp \
-    GUI/qgraphicsplayeritem.hpp \
-    GUI/qgraphicsfielditem.hpp \
-    GUI/qgraphicsbombitem.hpp \
-    GUI/qgraphicsfireitem.hpp \
-    GUI/qgraphicstimeritem.hpp \
-    GUI/qgraphicsheaderitem.hpp \
-    GUI/qgraphicsbonusitem.hpp \
-    GUI/qgraphicscorpsepartitem.hpp \
     GUI/qarawnwindow.hpp \
     arawnheader.h \
     GUI/qgraphicsmenu.hpp \
-    arawnsettings.hpp
+    arawnsettings.hpp \
+    GUI/pixmapobjectitem.hpp
 
 FORMS    +=
 
@@ -72,6 +58,24 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

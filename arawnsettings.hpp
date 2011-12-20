@@ -7,11 +7,22 @@ class ArawnSettings
 {
 private:
     ArawnSettings();
-    ArawnSettings *aSettings;
+
+    inline void load(QDataStream &stream);
+    inline void save(QDataStream &stream);
+    static ArawnSettings *aSettings;
+    QString path;
 
 public:
-    static void create();
-    static ArawnSettings* instance();
+    static void create()
+    {
+        aSettings = new ArawnSettings;
+    }
+
+    static ArawnSettings* instance()
+    {
+        return aSettings;
+    }
 
     QList<QPair<QString, QVariant> > languageValues;
     QVariant language;
@@ -87,9 +98,6 @@ public:
     QVariant defaultPlayer3Name;
     QVariant defaultPlayer4Name;
 
-    QString path;
-    QDataStream &operator >>(QDataStream &stream);
-    QDataStream &operator <<(QDataStream &stream);
 };
 
 #endif // ARAWNSETTINGS_HPP

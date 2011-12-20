@@ -66,6 +66,7 @@ void QArawnWindow::initializeOthers()
 
 
 //! [Arawnscreen részletei]
+
     pixFireItem = new QGraphicsPixmapItem(
                 QPixmap("res/fire.jpg").scaled(scene->width(),scene->height(),Qt::IgnoreAspectRatio, Qt::SmoothTransformation), 0, scene);
     pixArawnItem = new QGraphicsPixmapItem(
@@ -101,9 +102,6 @@ void QArawnWindow::initializeOthers()
         fanim->setEndValue(0.5);
         fanim->setDuration(1000);
 
-
-    QPropertyAnimation *amov = new QPropertyAnimation(pixArawnItem, "pos", this);
-        amov->setDuration(500);
 //!
 
 //! [QStates]
@@ -111,7 +109,7 @@ void QArawnWindow::initializeOthers()
         QTimer timerToStAr;
         timerToStAr.setSingleShot(true);
         QSignalTransition *trA = stateLogo->addTransition(&timerToStAr, SIGNAL(timeout()), stateArawn);
-        trA->addAnimation(anims);
+        trA->addAnimation(aanim);
         trA->addAnimation(hanim);
         trA->addAnimation(fanim);
         machine->addState(stateArawn);
@@ -123,8 +121,7 @@ void QArawnWindow::initializeOthers()
         //
 
     stateMainMenu = new QState();
-    stateMainMenu->assignProperty(pixArawnItem, "pos", QPointF(scene->width()/2, -pixArawnItem->boundingRect().height()/2));
-    ///...
+
 
 
     //Végén
@@ -161,7 +158,6 @@ void QArawnWindow::initializeMenus()
 
 void QArawnWindow::showMainMenu()
 {
-    setBackgroundBrush(QBrush(pixFire));
 
 }
 

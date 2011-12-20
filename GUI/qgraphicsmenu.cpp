@@ -1,60 +1,60 @@
 #include "qgraphicsmenu.hpp"
 
-QGraphicsMenu::QGraphicsMenu(QString &title, QObject *parent)
-    : QObject(parent), title(title)
-{
-}
+//GraphicsMenu::GraphicsMenu(QString &title, QGraphicsObject *parent)
+//    : QGraphicsObject(parent), title(title)
+//{
+//}
 
-void QGraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-}
+//void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+//{
+//}
 
-QPainterPath QGraphicsMenu::shape() const
-{
-}
+//QPainterPath GraphicsMenu::shape() const
+//{
+//}
 
-QRectF QGraphicsMenu::boundingRect() const
-{
-}
+//QRectF GraphicsMenu::boundingRect() const
+//{
+//}
 
-void QGraphicsMenu::addMenuItem(MenuItem *item)
-{
-}
+//void GraphicsMenu::addMenuItem(MenuItem *item)
+//{
+//}
 
-void QGraphicsMenu::addOptionItem(OptionItem *item)
-{
-}
+//void GraphicsMenu::addOptionItem(OptionItem *item)
+//{
+//}
 
-void QGraphicsMenu::keyPressEvent(QKeyEvent *event)
-{
-    if(event->key() == Qt::Key_Escape){
-        emit escapePushed();
-        return;
-    }
-    if(event->key() == Qt::Key_Down){
+//void GraphicsMenu::keyPressEvent(QKeyEvent *event)
+//{
+//    if(event->key() == Qt::Key_Escape){
+//        emit escapePushed();
+//        return;
+//    }
+//    if(event->key() == Qt::Key_Down){
 
-    }
-    if(event->key() == Qt::Key_Up){
+//    }
+//    if(event->key() == Qt::Key_Up){
 
-    }
-    if(event->key() == Qt::Key_Left){
+//    }
+//    if(event->key() == Qt::Key_Left){
 
-    }
-    if(event->key() == Qt::Key_Right){
+//    }
+//    if(event->key() == Qt::Key_Right){
 
-    }
-    if(event->key() == Qt::Key_Enter ||
-       event->key() == Qt::Key_Return){
+//    }
+//    if(event->key() == Qt::Key_Enter ||
+//       event->key() == Qt::Key_Return){
 
-    }
-}
+//    }
+//}
 
 
-MenuItem::MenuItem(QString &name, QState *sourceState, QState *destinationState)
-{
-    this->itemName = name;
-    this->sourceState = sourceState;
-    this->destinationState = destinationState;
-}
+//MenuItem::MenuItem(QString &name, QState *sourceState, QState *destinationState)
+//{
+//    this->itemName = name;
+//    this->sourceState = sourceState;
+//    this->destinationState = destinationState;
+//}
 
 
