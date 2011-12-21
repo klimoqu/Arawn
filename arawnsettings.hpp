@@ -24,70 +24,70 @@ public:
         return aSettings;
     }
 
-    QList<QPair<QString, QVariant> > languageValues;
+    QVariantMap languageValues;
     QVariant language;
 
-    QList<QPair<QString, QVariant> > openGlRenderingValues;
+    QVariantMap openGlRenderingValues;
     QVariant openGlRendering;
 
-    QList<QPair<QString, QVariant> > showCorpsePartsValues;
+    QVariantMap showCorpsePartsValues;
     QVariant showCorpseParts;
 
-    QList<QPair<QString, QVariant> > shakyExplosionValues;
+    QVariantMap shakyExplosionValues;
     QVariant shakyExplosion;
 
-    QList<QPair<QString, QVariant> > roundTimeDefaultValues;
+    QVariantMap roundTimeDefaultValues;
     QVariant roundTimeDefault;
 
 // Start/Max Extras
-    QList<QPair<QString, QVariant> > startBombsValues;
+    QVariantMap startBombsValues;
     QVariant startBombs;
 
-    QList<QPair<QString, QVariant> > maxBombsValues;
+    QVariantMap maxBombsValues;
     QVariant maxBombs;
 
-    QList<QPair<QString, QVariant> > startFireValues;
+    QVariantMap startFireValues;
     QVariant startFire;
 
-    QList<QPair<QString, QVariant> > maxFireValues;
+    QVariantMap maxFireValues;
     QVariant maxFire;
 
-    QList<QPair<QString, QVariant> > startSpeedValues;
+    QVariantMap startSpeedValues;
     QVariant startSpeed;
 
-    QList<QPair<QString, QVariant> > maxSpeedValues;
+    QVariantMap maxSpeedValues;
     QVariant maxSpeed;
 
-    QList<QPair<QString, QVariant> > startPushBombsValues;
+    QVariantMap startPushBombsValues;
     QVariant startPushBombs;
 
-    QList<QPair<QString, QVariant> > enablePushBombsValues;
+    QVariantMap enablePushBombsValues;
     QVariant enablePushBombs;
 
-    QList<QPair<QString, QVariant> > startDropBombsValues;
+    QVariantMap startDropBombsValues;
     QVariant startDropBombs;
 
-    QList<QPair<QString, QVariant> > enableDropBombsValues;
+    QVariantMap enableDropBombsValues;
     QVariant enableDropBombs;
 
 // Enable/Disable Diseases
-    QList<QPair<QString, QVariant> > enableFailingBombsValues;
+    QVariantMap enableFailingBombsValues;
     QVariant enableFailingBombs;
 
-    QList<QPair<QString, QVariant> > enableOppositeControlsValues;
+    QVariantMap enableOppositeControlsValues;
     QVariant enableOppositeControls;
 
-    QList<QPair<QString, QVariant> > enableInvisibilityValues;
+    QVariantMap enableInvisibilityValues;
     QVariant enableInvisibility;
 
 // Bomb Timing and Speed
-    QList<QPair<QString, QVariant> > bombSpeedValues;
+    QVariantMap bombSpeedValues;
     QVariant bombSpeed; // n/10 fields/seconds
 
-    QList<QPair<QString, QVariant> > bombTimerValues;
+    QVariantMap bombTimerValues;
     QVariant bombTimer; // 1/10 s
 
-    QList<QPair<QString, QVariant> > resolutionValues;
+    QVariantMap resolutionValues;
     QVariant resolution;
 
     bool wideLayout;

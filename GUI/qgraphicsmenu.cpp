@@ -1,5 +1,12 @@
 #include "qgraphicsmenu.hpp"
 
+OptionItem::OptionItem(QVariant &variant, QList<QPair<QString, QVariant> > &valuesList):
+    target(variant), values(valuesList)
+{
+    selected = values.indexOf(QPair<QString, QVariant>());
+
+}
+
 //GraphicsMenu::GraphicsMenu(QString &title, QGraphicsObject *parent)
 //    : QGraphicsObject(parent), title(title)
 //{
