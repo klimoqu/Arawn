@@ -1,9 +1,17 @@
 #include "qgraphicsmenu.hpp"
 
-OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList):
-    target(variant), values(valuesList)
+
+MenuItem::MenuItem(QString &name) : itemName(name) {}
+
+QString MenuItem::name() const
 {
-    itemName = name;
+    return itemName;
+}
+
+
+OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList):
+    MenuItem(name), target(variant), values(valuesList)
+{
     keys = values.keys();
     sel = 0;
     foreach (QString k, keys) {
@@ -37,6 +45,7 @@ QString OptionItem::selected() const
 {
     return keys[sel];
 }
+
 
 
 

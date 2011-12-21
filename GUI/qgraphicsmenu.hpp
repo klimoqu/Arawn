@@ -4,21 +4,16 @@
 #include "arawnheader.h"
 
 
-class AbstractItem
+class MenuItem
 {
+public:
+    MenuItem(QString &name);
+    inline QString name() const;
 protected:
     QString itemName;
 };
 
-class MenuItem : public AbstractItem
-{
-public:
-    MenuItem(QString &name);
-
-private:
-};
-
-class OptionItem : public AbstractItem
+class OptionItem : public MenuItem
 {
 public:
     explicit OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList);
@@ -70,7 +65,7 @@ private:
 
     QString title;
     uchar selected;
-    QList<AbstractItem *> itemlist;
+    QList<MenuItem *> itemlist;
 };
 
 #endif // QGRAPHICSMENU_HPP
