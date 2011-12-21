@@ -13,22 +13,25 @@ protected:
 class MenuItem : public AbstractItem
 {
 public:
-    MenuItem(QString &name, QState *sourceState, QState *destinationState);
+    MenuItem(QString &name);
 
 private:
-    QState *destinationState;
-    QState *sourceState;
 };
 
 class OptionItem : public AbstractItem
 {
 public:
-    OptionItem(QVariant &variant, QList<QPair<QString, QVariant> > &valuesList);
+    explicit OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList);
+
+    bool next();
+    bool prev();
+    inline QString selected() const;
 
 private:
-    uchar selected;
     QVariant target;
-    QList<QPair<QString, QVariant> > values;
+    QVariantMap values;
+    uchar sel;
+    QStringList keys;
 };
 
 

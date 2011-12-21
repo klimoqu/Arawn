@@ -1,11 +1,43 @@
 #include "qgraphicsmenu.hpp"
 
-OptionItem::OptionItem(QVariant &variant, QList<QPair<QString, QVariant> > &valuesList):
-    target(variant), values(valuesList)
+OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList):
+    target(variant), values(valuesList), itemName(name)
 {
-    selected = values.indexOf(QPair<QString, QVariant>());
-
+    keys = values.keys();
+    sel = 0;
+    foreach (k, keys) {
+        if(values[k] == target)
+            break;
+        sel++;
+    }
 }
+
+bool OptionItem::next()
+{
+    if(sel < (keys.size()-1)){
+        sel++;
+        target = values[keys[sel]];
+        return true;
+    }
+    return false;
+}
+
+bool OptionItem::prev()
+{
+    if(sel > 0){
+        sel--;
+        target = values[keys[sel]];
+        return true;
+    }
+    return false;
+}
+
+QString OptionItem::selected() const
+{
+    return keys[sel];
+}
+
+
 
 //GraphicsMenu::GraphicsMenu(QString &title, QGraphicsObject *parent)
 //    : QGraphicsObject(parent), title(title)
