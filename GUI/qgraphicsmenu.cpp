@@ -1,11 +1,12 @@
 #include "qgraphicsmenu.hpp"
 
 OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList):
-    target(variant), values(valuesList), itemName(name)
+    target(variant), values(valuesList)
 {
+    itemName = name;
     keys = values.keys();
     sel = 0;
-    foreach (k, keys) {
+    foreach (QString k, keys) {
         if(values[k] == target)
             break;
         sel++;
