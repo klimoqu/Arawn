@@ -3,6 +3,11 @@
 
 #include "arawnheader.h"
 
+class GraphicsMenu
+{
+    GraphicsMenu() {}
+};
+
 //class AbstractItem
 //{
 //protected:

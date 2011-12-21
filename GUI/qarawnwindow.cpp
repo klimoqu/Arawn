@@ -21,7 +21,7 @@ void QArawnWindow::initWindow()
                                ArawnSettings::instance()->resolution.toPoint().x(),
                                ArawnSettings::instance()->resolution.toPoint().y(), this);
     scene->setItemIndexMethod(QGraphicsScene::BspTreeIndex);
-    pixWelcomeItem = new QGraphicsPixmapItem(QPixmap("res/KliMoQu.png"), 0, scene);
+    pixWelcomeItem = new PixmapObjectItem(QPixmap("res/KliMoQu.png"));
     pixWelcomeItem->setPos(-260, -190);
     scene->addItem(pixWelcomeItem);
 
@@ -67,37 +67,29 @@ void QArawnWindow::initializeOthers()
 
 //! [Arawnscreen részletei]
 
-    pixFireItem = new QGraphicsPixmapItem(
-                QPixmap("res/fire.jpg").scaled(scene->width(),scene->height(),Qt::IgnoreAspectRatio, Qt::SmoothTransformation), 0, scene);
-    pixArawnItem = new QGraphicsPixmapItem(
-                QPixmap("res/Arawn.png").scaledToHeight(scene->height(), Qt::SmoothTransformation), 0, scene);
-    pixHirItem = new QGraphicsPixmapItem(
-                QPixmap("res/hiryrvdydd.png").scaledToWidth((3*scene->width())/4, Qt::SmoothTransformation), 0, scene);
+    pixFireItem = new PixmapObjectItem(QPixmap("res/fire.jpg")
+        .scaled(scene->width(),scene->height(),Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    pixFireItem->setOpacity(0.0);
+    pixArawnItem = new PixmapObjectItem(QPixmap("res/Arawn.png")
+        .scaledToHeight(scene->height(), Qt::SmoothTransformation));
+    pixArawnItem->setOpacity(0.0);
+    pixHirItem = new PixmapObjectItem( QPixmap("res/hiryrvdydd.png")
+        .scaledToWidth((3*scene->width())/4, Qt::SmoothTransformation));
+    pixHirItem->setOpacity(0.0);
 
-    QGraphicsOpacityEffect *opEffectA = new QGraphicsOpacityEffect(this);
-        opEffectA->setOpacity(0.0);
-    QGraphicsOpacityEffect *opEffectH = new QGraphicsOpacityEffect(this);
-        opEffectH->setOpacity(0.0);
-    QGraphicsOpacityEffect *opEffectF = new QGraphicsOpacityEffect(this);
-        opEffectF->setOpacity(0.0);
+    pixArawnItem->setPos(scene->width()/2 - (pixArawnItem->boundingRect().width()) , -(pixArawnItem->boundingRect().height()/2));
+    pixHirItem->setPos(- (pixHirItem->boundingRect().width()/2), - (pixHirItem->boundingRect().height()/2));
+    //pixFireItem->setPos(-( pixFireItem->boundingRect()/2), 0);
 
-        pixArawnItem->setPos(scene->width()/2 - (pixArawnItem->boundingRect().width()) , -(pixArawnItem->boundingRect().height()/2));
-        pixHirItem->setPos(- (pixHirItem->boundingRect().width()/2), - (pixHirItem->boundingRect().height()/2));
-        //pixFireItem->setPos(-( pixFireItem->boundingRect()/2), 0);
-
-    pixArawnItem->setGraphicsEffect(opEffectA);
-    pixHirItem->setGraphicsEffect(opEffectH);
-    pixFireItem->setGraphicsEffect(opEffectF);
-
-    QPropertyAnimation *aanim = new QPropertyAnimation(opEffectA, "opacity", this);
+    QPropertyAnimation *aanim = new QPropertyAnimation(pixArawnItem, "opacity", this);
         aanim->setStartValue(0.0);
         aanim->setEndValue(0.6);
         aanim->setDuration(1000);
-    QPropertyAnimation *hanim = new QPropertyAnimation(opEffectH, "opacity", this);
+    QPropertyAnimation *hanim = new QPropertyAnimation(pixHirItem, "opacity", this);
         hanim->setStartValue(0.0);
         hanim->setEndValue(0.9);
         hanim->setDuration(700);
-    QPropertyAnimation *fanim = new QPropertyAnimation(opEffectH, "opacity", this);
+    QPropertyAnimation *fanim = new QPropertyAnimation(pixFireItem, "opacity", this);
         fanim->setStartValue(0.0);
         fanim->setEndValue(0.5);
         fanim->setDuration(1000);

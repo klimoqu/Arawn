@@ -3,6 +3,7 @@
 
 #include "arawnheader.h"
 
+class PixmapObjectItem;
 class QArawnWindow : public QGraphicsView
 {
     Q_OBJECT
@@ -31,10 +32,10 @@ private:
     QStateMachine *machine;
     QSound* sounds[15];
 
-    QGraphicsPixmapItem *pixWelcomeItem;
-    QGraphicsPixmapItem *pixFireItem;
-    QGraphicsPixmapItem *pixArawnItem;
-    QGraphicsPixmapItem *pixHirItem;
+    PixmapObjectItem *pixWelcomeItem;
+    PixmapObjectItem *pixFireItem;
+    PixmapObjectItem *pixArawnItem;
+    PixmapObjectItem *pixHirItem;
 
 
     QState *stateLogo;

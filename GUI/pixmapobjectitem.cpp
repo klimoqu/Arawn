@@ -1,6 +1,6 @@
 #include "arawnheader.h"
 
-PixmapObjectItem::PixmapObjectItem(QPixmap *pixmap, QGraphicsItem *parent, QGraphicsScene *scene)
+PixmapObjectItem::PixmapObjectItem(const QPixmap &pixmap, QObject *parent) :
+    QObject(parent), QGraphicsPixmapItem(pixmap)
 {
-
 }
