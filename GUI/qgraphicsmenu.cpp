@@ -54,10 +54,10 @@ QString OptionItem::name() const
 
 
 
-GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par)
+GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par):
+    QGraphicsObject(par)
 {
-    setParentItem(par);
-    this->tit = title;
+    tit = title;
     selected = 0;
     sum = 0;
 }

@@ -1,6 +1,6 @@
 #ifndef QGRAPHICSMENU_HPP
 #define QGRAPHICSMENU_HPP
-#include <QGraphicsObject>
+
 #include "arawnheader.h"
 
 class MenuItem
@@ -37,7 +37,7 @@ class GraphicsMenu : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsMenu(QString &title, QGraphicsItem *parent);
+    explicit GraphicsMenu(QString &title, QGraphicsItem *parent = 0);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

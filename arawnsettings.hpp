@@ -5,6 +5,7 @@
 
 class ArawnSettings
 {
+    Q_DECLARE_TR_FUNCTIONS(ArawnSettings)
 private:
     ArawnSettings();
 
