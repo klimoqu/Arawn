@@ -1,8 +1,7 @@
 #ifndef QGRAPHICSMENU_HPP
 #define QGRAPHICSMENU_HPP
-
+#include <QGraphicsObject>
 #include "arawnheader.h"
-
 
 class MenuItem
 {
@@ -13,7 +12,7 @@ protected:
     QString itemName;
 };
 
-class OptionItem : public MenuItem
+class OptionItem
 {
 public:
     explicit OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList);
@@ -21,8 +20,9 @@ public:
     bool next();
     bool prev();
     inline QString selected() const;
-
+    inline QString name() const;
 private:
+    QString itemName;
     QVariant target;
     QVariantMap values;
     uchar sel;
@@ -30,23 +30,22 @@ private:
 };
 
 
+typedef QList<MenuItem> MenuList;
+typedef QList<OptionItem> OptionList;
 
 class GraphicsMenu : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsMenu(QString &title, QGraphicsObject *parent = 0);
+    explicit GraphicsMenu(QString &title, QGraphicsItem *parent);
 
     QRectF boundingRect() const;
-    QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 
-    void addMenuItem(QString &name, QState *destination);
-    //void addOptionItem(QString &name, );
+    void addMenuItem(QString &name);
+    void addOptionItem(QString &name, QVariant &variant, QVariantMap &vmap);
 
-    void addMenuItem(MenuItem *item);
-    void addOptionItem(OptionItem *item);
 
 signals:
     void menu1Selected();
@@ -58,14 +57,15 @@ signals:
     void menu7Selected();
     void escapePushed();
 
-public slots:
-
 private:
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
-    QString title;
-    uchar selected;
-    QList<MenuItem *> itemlist;
+    QString tit;
+    char selected;
+    uchar sum;
+    MenuList menus;
+    OptionList options;
 };
 
 #endif // QGRAPHICSMENU_HPP

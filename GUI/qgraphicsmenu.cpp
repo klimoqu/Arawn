@@ -1,7 +1,7 @@
 #include "qgraphicsmenu.hpp"
 
 
-MenuItem::MenuItem(QString &name) : itemName(name) {}
+MenuItem::MenuItem(QString &name) : itemName(name){}
 
 QString MenuItem::name() const
 {
@@ -9,8 +9,9 @@ QString MenuItem::name() const
 }
 
 
-OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList):
-    MenuItem(name), target(variant), values(valuesList)
+
+OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesMap):
+    itemName(name), target(variant), values(valuesMap)
 {
     keys = values.keys();
     sel = 0;
@@ -46,64 +47,68 @@ QString OptionItem::selected() const
     return keys[sel];
 }
 
+QString OptionItem::name() const
+{
+    return itemName;
+}
 
 
 
-//GraphicsMenu::GraphicsMenu(QString &title, QGraphicsObject *parent)
-//    : QGraphicsObject(parent), title(title)
-//{
-//}
+GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par)
+{
+    setParentItem(par);
+    this->tit = title;
+    selected = 0;
+    sum = 0;
+}
 
-//void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-//{
-//}
+void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+}
 
-//QPainterPath GraphicsMenu::shape() const
-//{
-//}
+QRectF GraphicsMenu::boundingRect() const
+{
+    return QRectF(0,0,0,0);
+}
 
-//QRectF GraphicsMenu::boundingRect() const
-//{
-//}
+void GraphicsMenu::addMenuItem(QString &name)
+{
+    menus.push_back(MenuItem(name));
+    sum++;
+}
 
-//void GraphicsMenu::addMenuItem(MenuItem *item)
-//{
-//}
+void GraphicsMenu::addOptionItem(QString &name, QVariant &variant, QVariantMap &vmap)
+{
+    options.push_back(OptionItem(name, variant, vmap));
+    sum++;
+}
 
-//void GraphicsMenu::addOptionItem(OptionItem *item)
-//{
-//}
+void GraphicsMenu::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Escape){
+        emit escapePushed();
+        return;
+    }
+    if(event->key() == Qt::Key_Down){
 
-//void GraphicsMenu::keyPressEvent(QKeyEvent *event)
-//{
-//    if(event->key() == Qt::Key_Escape){
-//        emit escapePushed();
-//        return;
-//    }
-//    if(event->key() == Qt::Key_Down){
+    }
+    if(event->key() == Qt::Key_Up){
 
-//    }
-//    if(event->key() == Qt::Key_Up){
+    }
+    if(event->key() == Qt::Key_Left){
 
-//    }
-//    if(event->key() == Qt::Key_Left){
+    }
+    if(event->key() == Qt::Key_Right){
 
-//    }
-//    if(event->key() == Qt::Key_Right){
+    }
+    if(event->key() == Qt::Key_Enter ||
+       event->key() == Qt::Key_Return){
 
-//    }
-//    if(event->key() == Qt::Key_Enter ||
-//       event->key() == Qt::Key_Return){
+    }
+}
 
-//    }
-//}
-
-
-//MenuItem::MenuItem(QString &name, QState *sourceState, QState *destinationState)
-//{
-//    this->itemName = name;
-//    this->sourceState = sourceState;
-//    this->destinationState = destinationState;
-//}
+void GraphicsMenu::keyReleaseEvent(QKeyEvent *event)
+{
+}
 
 
