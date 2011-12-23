@@ -126,25 +126,57 @@ void GraphicsMenu::keyPressEvent(QKeyEvent *event)
         return;
     }
     if(event->key() == Qt::Key_Down){
-
+        if(selected >= sum) return;
+        selected++;
+        update(-150, (selected-1)*50-(sum*25), 300, 100);
+        return;
     }
     if(event->key() == Qt::Key_Up){
-
+        if(selected == 0) return;
+        selected--;
+        update(-150, selected*50-(sum*25), 300, 100);
+        return;
     }
     if(event->key() == Qt::Key_Left){
-
+        if(selected < menus.size()) return;
+        options[selected-menus.size()].prev();
+        update(-150, selected*50-(sum*25), 300, 50);
+        return;
     }
     if(event->key() == Qt::Key_Right){
-
+        if(selected < menus.size()) return;
+        options[selected-menus.size()].next();
+        update(-150, selected*50-(sum*25), 300, 50);
+        return;
     }
     if(event->key() == Qt::Key_Enter ||
        event->key() == Qt::Key_Return){
-
+        if(selected >= menus.size()) return;
+        switch(selected){
+        case 0:
+            emit menu1Selected();
+            break;
+        case 1:
+            emit menu2Selected();
+            break;
+        case 2:
+            emit menu3Selected();
+            break;
+        case 3:
+            emit menu4Selected();
+            break;
+        case 4:
+            emit menu5Selected();
+            break;
+        case 5:
+            emit menu6Selected();
+            break;
+        case 6:
+            emit menu7Selected();
+            break;
+        }
     }
 }
 
-void GraphicsMenu::keyReleaseEvent(QKeyEvent *event)
-{
-}
 
 

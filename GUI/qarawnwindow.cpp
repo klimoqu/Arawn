@@ -1,4 +1,5 @@
 #include "arawnheader.h"
+//#include <QtOpenGL/QtOpenGL>
 
 
 void QArawnWindow::initWindow()
@@ -9,8 +10,10 @@ void QArawnWindow::initWindow()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setCursor(Qt::BlankCursor);
-//    setGeometry(0, 0, ArawnSettings::instance().screenX, ArawnSettings::instance().screenY);
     setFrameStyle(QFrame::NoFrame);
+//    if(ArawnSettings::instance()->openGlRendering.toBool()){
+//        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
+//    }
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     scale(((qreal)sr.width()) / (qreal)ArawnSettings::instance()->resolution.toPoint().x(),
           ((qreal)sr.height()) / (qreal)ArawnSettings::instance()->resolution.toPoint().y());

@@ -6,7 +6,7 @@
 class MenuItem
 {
 public:
-    MenuItem(QString &name);
+    inline MenuItem(QString &name);
     inline QString name() const;
 protected:
     QString itemName;
@@ -59,7 +59,6 @@ signals:
 
 private:
     void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
 
     QString tit;
     char selected;
