@@ -10,6 +10,7 @@ QString MenuItem::name() const
 
 
 
+
 OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesMap):
     itemName(name), target(variant), values(valuesMap)
 {
@@ -54,6 +55,7 @@ QString OptionItem::name() const
 
 
 
+
 GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par):
     QGraphicsObject(par)
 {
@@ -64,11 +66,45 @@ GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par):
 
 void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    painter->save();
+
+    //Kistéglalap a kijelöléshez
+    painter->setBrush(QColor(150,100,150,50));
+    painter->setPen(Qt::NoPen);
+    painter->drawRect(-150, selected*50-(sum*25), 300, 50);
+
+
+    //Cím
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->drawText(QRectF(-150,-(sum*25 + 113), 300, 75).translated(4,4), tit, QTextOption(Qt::AlignCenter));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(-150,-(sum*25 + 113), 300, 75), tit, QTextOption(Qt::AlignCenter));
+
+    //Elemek
+    short i = 0;
+    foreach (MenuItem m, menus) {
+        painter->setPen(QColor(100, 10, 10, 200));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50).translated(4,4), m.name(), QTextOption(Qt::AlignCenter));
+        painter->setPen(QColor(50, 150, 200));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50), m.name(), QTextOption(Qt::AlignCenter));
+        i++;
+    }
+    foreach (OptionItem o, options){
+        painter->setPen(QColor(100, 10, 10, 200));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50).translated(4,4), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50).translated(4,4), o.selected(), QTextOption(Qt::AlignRight));
+        painter->setPen(QColor(50, 150, 200));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(-150, i*50-(sum*25), 300, 50), o.selected(), QTextOption(Qt::AlignRight));
+        i++;
+    }
+
+    painter->restore();
 }
 
 QRectF GraphicsMenu::boundingRect() const
 {
-    return QRectF(0,0,0,0);
+    return QRectF(-150,-(sum*25 + 113),300,88+sum*50);
 }
 
 void GraphicsMenu::addMenuItem(QString &name)
