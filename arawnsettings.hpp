@@ -37,8 +37,17 @@ public:
     QVariantMap shakyExplosionValues;
     QVariant shakyExplosion;
 
+    QVariantMap resolutionValues;
+    QVariant resolution;
+
+    bool wideLayout;
+
+// Game settings
     QVariantMap roundTimeDefaultValues;
     QVariant roundTimeDefault;
+
+    QVariantMap pointsToWinValues;
+    QVariant pointsToWin;
 
 // Start/Max Extras
     QVariantMap startBombsValues;
@@ -87,11 +96,6 @@ public:
 
     QVariantMap bombTimerValues;
     QVariant bombTimer; // 1/10 s
-
-    QVariantMap resolutionValues;
-    QVariant resolution;
-
-    bool wideLayout;
 
 // Player Names
     QVariant defaultPlayer1Name;

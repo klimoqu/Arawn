@@ -178,5 +178,3 @@ void GraphicsMenu::keyPressEvent(QKeyEvent *event)
     }
 }
 
-
-

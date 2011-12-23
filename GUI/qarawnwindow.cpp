@@ -148,7 +148,48 @@ void QArawnWindow::playSound(uchar n)
 
 void QArawnWindow::initializeMenus()
 {
+    menuMain = new GraphicsMenu(tr("Main Menu"));
+    menuMain->addMenuItem(tr("Local Game"));
+    menuMain->addMenuItem(tr("Network Game"));
+    menuMain->addMenuItem(tr("Options"));
+    menuMain->addMenuItem(tr("Map editor"));
+    menuMain->addMenuItem(tr("About"));
+    menuMain->addMenuItem(tr("Quit"));
 
+
+    menuLocalGame = new GraphicsMenu(tr("Local Game"));
+    menuLocalGame->addMenuItem(tr("Player setup"));
+    menuLocalGame->addMenuItem(tr("Map selection"));
+    menuLocalGame->addMenuItem(tr("Game settings"));
+    menuLocalGame->addMenuItem(tr("Start survival cup"));
+    menuLocalGame->addMenuItem(tr("Start murder cup"));
+    menuLocalGame->addMenuItem(tr("Load saved cup"));
+
+
+    menuGameSettings = new GraphicsMenu(tr("Game Settings"));
+    menuGameSettings->addMenuItem(tr("Start/max extras"));
+    menuGameSettings->addMenuItem(tr("Enable/disable extras"));
+    menuGameSettings->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
+    menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
+    menuGameSettings->addOptionItem(tr("Bomb timer n/10s"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
+    menuGameSettings->addOptionItem(tr("Bomb speed 1/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+
+
+    menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
+    menuSMExtras->addOptionItem(tr("Start bombs"), ArawnSettings::instance()->startBombs, ArawnSettings::instance()->startBombsValues);
+    menuSMExtras->addOptionItem(tr("Max bombs"), ArawnSettings::instance()->maxBombs, ArawnSettings::instance()->maxBombsValues);
+    menuSMExtras->addOptionItem(tr("Start power"), ArawnSettings::instance()->startFire, ArawnSettings::instance()->startFireValues);
+    menuSMExtras->addOptionItem(tr("Max power"), ArawnSettings::instance()->maxFire, ArawnSettings::instance()->maxFireValues);
+    menuSMExtras->addOptionItem(tr("Start speed"), ArawnSettings::instance()->startSpeed, ArawnSettings::instance()->startSpeedValues);
+    menuSMExtras->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
+/*...*/
+
+    menuNetworkGame = new GraphicsMenu(tr("Network Game"));
+    menuNetworkGame->addMenuItem(tr("Create"));
+    menuNetworkGame->addMenuItem(tr("Connect"));
+    /*...*/
+
+    menuOptions = new GraphicsMenu(tr("Options"));
 }
 
 void QArawnWindow::showMainMenu()

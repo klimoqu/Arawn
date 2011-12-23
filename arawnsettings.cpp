@@ -19,6 +19,21 @@ ArawnSettings::ArawnSettings()
     roundTimeDefaultValues.insert(tr("120"), 120);
     roundTimeDefaultValues.insert(tr("180"), 180);
     roundTimeDefaultValues.insert(tr("240"), 240);
+    pointsToWinValues.insert(tr("1"), 1);
+    pointsToWinValues.insert(tr("2"), 2);
+    pointsToWinValues.insert(tr("3"), 3);
+    pointsToWinValues.insert(tr("4"), 4);
+    pointsToWinValues.insert(tr("5"), 5);
+    pointsToWinValues.insert(tr("6"), 6);
+    pointsToWinValues.insert(tr("7"), 7);
+    pointsToWinValues.insert(tr("8"), 8);
+    pointsToWinValues.insert(tr("9"), 9);
+    pointsToWinValues.insert(tr("10"), 10);
+    pointsToWinValues.insert(tr("11"), 11);
+    pointsToWinValues.insert(tr("12"), 12);
+    pointsToWinValues.insert(tr("13"), 13);
+    pointsToWinValues.insert(tr("14"), 14);
+    pointsToWinValues.insert(tr("15"), 15);
     startBombsValues.insert(tr("1"), 1);
     startBombsValues.insert(tr("2"), 2);
     startBombsValues.insert(tr("3"), 3);
@@ -185,6 +200,7 @@ ArawnSettings::ArawnSettings()
     showCorpseParts = true;
     shakyExplosion = true;
     roundTimeDefault = 60;
+    pointsToWin = 5;
     startBombs = 1;
     maxBombs = 8;
     startFire = 1;
@@ -237,6 +253,7 @@ void ArawnSettings::load(QDataStream &stream)
     stream >> showCorpseParts;
     stream >> shakyExplosion;
     stream >> roundTimeDefault;
+    stream >> pointsToWin;
     stream >> startBombs;
     stream >> maxBombs;
     stream >> startFire;
@@ -268,6 +285,7 @@ void ArawnSettings::save(QDataStream &stream)
     stream << showCorpseParts.toBool();
     stream << shakyExplosion.toBool();
     stream << roundTimeDefault.toInt();
+    stream << pointsToWin.toInt();
     stream << startBombs.toInt();
     stream << maxBombs.toInt();
     stream << startFire.toInt();

@@ -19,11 +19,10 @@ public slots:
     void initializeOthers();
     void showArawnScreen();
     void playSound(uchar n);
-    void initializeMenus();
     void showMainMenu();
 
 private:
-    void setRenderingSystem();
+    inline void initializeMenus();
     //void keyPressEvent(QKeyEvent *event);
     //void keyReleaseEvent(QKeyEvent *event);
 
@@ -37,6 +36,13 @@ private:
     PixmapObjectItem *pixArawnItem;
     PixmapObjectItem *pixHirItem;
 
+    GraphicsMenu *menuMain;
+        GraphicsMenu *menuLocalGame;
+            GraphicsMenu *menuGameSettings;
+            GraphicsMenu *menuSMExtras;
+            GraphicsMenu *menuEDExtras;
+        GraphicsMenu *menuNetworkGame;
+        GraphicsMenu *menuOptions;
 
     QState *stateLogo;
     QState *stateArawn;
