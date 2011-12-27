@@ -14,7 +14,8 @@ void QArawnWindow::initWindow()
 //    if(ArawnSettings::instance()->openGlRendering.toBool()){
 //        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
 //    }
-    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    //setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+    setRenderHint(QPainter::SmoothPixmapTransform);
     scale(((qreal)sr.width()) / (qreal)ArawnSettings::instance()->resolution.toPoint().x(),
           ((qreal)sr.height()) / (qreal)ArawnSettings::instance()->resolution.toPoint().y());
 
@@ -82,7 +83,7 @@ void QArawnWindow::initializeOthers()
 
     pixArawnItem->setPos(scene->width()/2 - (pixArawnItem->boundingRect().width()) , -(pixArawnItem->boundingRect().height()/2));
     pixHirItem->setPos(- (pixHirItem->boundingRect().width()/2), - (pixHirItem->boundingRect().height()/2));
-    //pixFireItem->setPos(-( pixFireItem->boundingRect()/2), 0);
+    pixFireItem->setPos(-(scene->width()/2), -((pixFireItem->boundingRect().height())-(scene->height()/2)) );
 
     QPropertyAnimation *aanim = new QPropertyAnimation(pixArawnItem, "opacity", this);
         aanim->setStartValue(0.0);
@@ -95,56 +96,65 @@ void QArawnWindow::initializeOthers()
     QPropertyAnimation *fanim = new QPropertyAnimation(pixFireItem, "opacity", this);
         fanim->setStartValue(0.0);
         fanim->setEndValue(0.5);
-        fanim->setDuration(1000);
+        fanim->setDuration(1200);
 
 //!
 
 //! [QStates]
-    stateArawn = new QState();
-        QTimer timerToStAr;
-        timerToStAr.setSingleShot(true);
-        QSignalTransition *trA = stateLogo->addTransition(&timerToStAr, SIGNAL(timeout()), stateArawn);
-        trA->addAnimation(aanim);
-        trA->addAnimation(hanim);
-        trA->addAnimation(fanim);
-        machine->addState(stateArawn);
-        connect(stateArawn, SIGNAL(entered()), this, SLOT(showArawnScreen()));
-        //
-        //stateArawn->assignProperty(opEffectA, "opacity", 0.6);
-        //stateArawn->assignProperty(opEffectH, "opacity", 0.9);
-        //stateArawn->assignProperty(opEffectF, "opacity", 0.5);
-        //
+    stateArawn = new QState;
+    machine->addState(stateArawn);
+    stateMainMenu = new QState;
+    machine->addState(stateMainMenu);
+    stateLocalGameMenu = new QState;
+    machine->addState(stateLocalGameMenu);
+    statePlayerSetup = new QState;
+    machine->addState(statePlayerSetup);
+    stateMapSelection = new QState;
+    machine->addState(stateMapSelection);
+    stateGameSettings = new QState;
+    machine->addState(stateGameSettings);
+    stateSMExtras = new QState;
+    machine->addState(stateSMExtras);
+    stateEDDiseases = new QState;
+    machine->addState(stateEDDiseases);
+    stateLoad = new QState;
+    machine->addState(stateLoad);
+    stateNetworkGameMenu = new QState;
+    machine->addState(stateNetworkGameMenu);
+    stateOptionsMenu = new QState;
+    machine->addState(stateOptionsMenu);
+    stateMapEditor = new QState;
+    machine->addState(stateMapEditor);
+    stateAbout = new QState;
+    machine->addState(stateAbout);
+    finalState = new QFinalState;
+    machine->addState(finalState);
+    initializeMenus();
 
-    stateMainMenu = new QState();
+    QTimer *timerStLogoToStArawn = new QTimer(this);
+    timerStLogoToStArawn->setSingleShot(true);
+    QTimer *timerStArawnToStMM = new QTimer(this);
+    timerStArawnToStMM->setSingleShot(true);
+    timerStArawnToStMM->setInterval(3500);
 
+    QSignalTransition *trA = stateLogo->addTransition(timerStLogoToStArawn, SIGNAL(timeout()), stateArawn);
+    trA->addAnimation(aanim);
+    trA->addAnimation(hanim);
+    trA->addAnimation(fanim);
+    connect(stateArawn, SIGNAL(entered()), this, SLOT(showArawnScreen()));
+    connect(stateArawn, SIGNAL(entered()), timerStArawnToStMM, SLOT(start()));
+    connect(stateArawn, SIGNAL(exited()), this, SLOT(enterMenus()));
 
+    QSignalTransition *trM = stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMainMenu);
+    trM->addAnimation(new QPropertyAnimation(menuMain, "pos", this));
 
     //Végén
-    timerToStAr.start(500);
+    timerStLogoToStArawn->start(100);
+    connect(machine, SIGNAL(finished()), this, SLOT(close()));
 }
 
 
-void QArawnWindow::showArawnScreen()
-{
-    scene->removeItem(pixWelcomeItem);
-    scene->addItem(pixArawnItem);
-    scene->addItem(pixHirItem);
-    scene->addItem(pixFireItem);
-    playSound(14);
 
-//    QGraphicsTextItem *t = new QGraphicsTextItem(0, scene);
-//    t->setFont(qApp->font());
-//    t->setPos(-100, 200);
-//    t->setHtml("<font color='red'>Hello Arawn</font>");
-//    scene->addItem(t);
-
-}
-
-
-void QArawnWindow::playSound(uchar n)
-{
-    sounds[n]->play();
-}
 
 void QArawnWindow::initializeMenus()
 {
@@ -155,6 +165,13 @@ void QArawnWindow::initializeMenus()
     menuMain->addMenuItem(tr("Map editor"));
     menuMain->addMenuItem(tr("About"));
     menuMain->addMenuItem(tr("Quit"));
+    scene->addItem(menuMain);
+    menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
+    //machine->assignProperty(menuMain, "enabled", false);
+    stateMainMenu->assignProperty(menuMain, "enabled", true);
+    stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
+    stateMainMenu->addTransition(menuMain, SIGNAL(escapePushed()), finalState);
+
 
 
     menuLocalGame = new GraphicsMenu(tr("Local Game"));
@@ -164,6 +181,10 @@ void QArawnWindow::initializeMenus()
     menuLocalGame->addMenuItem(tr("Start survival cup"));
     menuLocalGame->addMenuItem(tr("Start murder cup"));
     menuLocalGame->addMenuItem(tr("Load saved cup"));
+    scene->addItem(menuLocalGame);
+    menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
+    machine->assignProperty(menuLocalGame, "enabled", false);
+    stateLocalGameMenu->assignProperty(menuLocalGame, "enabled", true);
 
 
     menuGameSettings = new GraphicsMenu(tr("Game Settings"));
@@ -173,6 +194,10 @@ void QArawnWindow::initializeMenus()
     menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
     menuGameSettings->addOptionItem(tr("Bomb timer n/10s"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
     menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+    scene->addItem(menuGameSettings);
+    menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
+    machine->assignProperty(menuGameSettings, "enabled", false);
+    stateGameSettings->assignProperty(menuGameSettings, "enabled", true);
 
 
     menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
@@ -184,18 +209,31 @@ void QArawnWindow::initializeMenus()
     menuSMExtras->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
     menuSMExtras->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
     menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
+    scene->addItem(menuSMExtras);
+    menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
+    machine->assignProperty(menuSMExtras, "enabled", false);
+    stateSMExtras->assignProperty(menuSMExtras, "enabled", true);
 
 
-    menuEDExtras = new GraphicsMenu(tr("Enable/disable diseases"));
-    menuEDExtras->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
-    menuEDExtras->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
-    menuEDExtras->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+    menuEDDiseases = new GraphicsMenu(tr("Enable/disable diseases"));
+    menuEDDiseases->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
+    menuEDDiseases->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
+    menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+    scene->addItem(menuEDDiseases);
+    menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
+    machine->assignProperty(menuEDDiseases, "enabled", false);
+    stateEDDiseases->assignProperty(menuEDDiseases, "enabled", true);
 
 
     menuNetworkGame = new GraphicsMenu(tr("Network Game"));
     menuNetworkGame->addMenuItem(tr("Create"));
     menuNetworkGame->addMenuItem(tr("Connect"));
-    /*...*/
+    scene->addItem(menuNetworkGame);
+    /** TODO Itt még át kell gondolni */
+    menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
+    machine->assignProperty(menuNetworkGame, "enabled", false);
+    stateNetworkGameMenu->assignProperty(menuNetworkGame, "enabled", true);
+
 
     menuOptions = new GraphicsMenu(tr("Options"));
     menuOptions->addOptionItem(tr("Show corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
@@ -203,16 +241,52 @@ void QArawnWindow::initializeMenus()
     menuOptions->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
     menuOptions->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
     menuOptions->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
+    scene->addItem(menuOptions);
+    menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
+    machine->assignProperty(menuOptions, "enabled", false);
+    stateOptionsMenu->assignProperty(menuOptions, "enabled", true);
 }
 
-void QArawnWindow::showMainMenu()
+
+void QArawnWindow::showArawnScreen()
 {
+    scene->removeItem(pixWelcomeItem);
+    scene->addItem(pixFireItem);
+    scene->addItem(pixArawnItem);
+    scene->addItem(pixHirItem);
+    playSound(14);
 
 }
 
+void QArawnWindow::playSound(uchar n)
+{
+    sounds[n]->play();
+}
 
+void QArawnWindow::close()
+{
+    ArawnSettings::instance()->save();
+    QGraphicsView::close();
+}
 
+void QArawnWindow::enterMenus()
+{
+    scene->removeItem(pixArawnItem);
+    scene->removeItem(pixHirItem);
+    pixFireItem->setZValue(-2);
 
+    copyright = new QGraphicsTextItem("Arawn 0.9b Copyright KliMoQu @ PPKE ITK");
+    QFont fnt = qApp->font();
+    fnt.setPixelSize(20);
+    copyright->setFont(fnt);
+    copyright->setOpacity(0.7);
+    copyright->setPos(-(scene->width()/2)+5,(scene->height()/2)-25);
+    QGraphicsDropShadowEffect *dse = new QGraphicsDropShadowEffect(copyright);
+    dse->setColor(Qt::red);
+    dse->setOffset(1.5);
+    copyright->setGraphicsEffect(dse);
+    scene->addItem(copyright);
+}
 
 
 

@@ -69,7 +69,7 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->save();
 
     //Kistéglalap a kijelöléshez
-    painter->setBrush(QColor(150,100,150,50));
+    painter->setBrush(QColor(150,100,150,100));
     painter->setPen(Qt::NoPen);
     painter->drawRect(-150, selected*50-(sum*25), 300, 50);
 
@@ -128,13 +128,15 @@ void GraphicsMenu::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Down){
         if(selected >= sum) return;
         selected++;
-        update(-150, (selected-1)*50-(sum*25), 300, 100);
+        //update(-150, (selected-1)*50-(sum*25), 300, 100);
+        updateMicroFocus();
         return;
     }
     if(event->key() == Qt::Key_Up){
         if(selected == 0) return;
         selected--;
-        update(-150, selected*50-(sum*25), 300, 100);
+        //update(-150, selected*50-(sum*25), 300, 100);
+        updateMicroFocus();
         return;
     }
     if(event->key() == Qt::Key_Left){

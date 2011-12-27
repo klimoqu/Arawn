@@ -9,12 +9,13 @@ class ArawnSettings
 private:
     ArawnSettings();
 
-    inline void load(QDataStream &stream);
-    inline void save(QDataStream &stream);
+    bool load();
     static ArawnSettings *aSettings;
     QString path;
 
 public:
+    void save();
+
     static void create()
     {
         aSettings = new ArawnSettings;

@@ -20,15 +20,15 @@ signals:
 public slots:
     void initializeOthers();
     void showArawnScreen();
+    void enterMenus();
     void playSound(uchar n);
-    void showMainMenu();
+    void close();
 
 private:
     inline void initializeMenus();
     //void keyPressEvent(QKeyEvent *event);
     //void keyReleaseEvent(QKeyEvent *event);
 
-    QString path;
     QGraphicsScene *scene;
     QStateMachine *machine;
     QSound* sounds[15];
@@ -38,18 +38,32 @@ private:
     PixmapObjectItem *pixArawnItem;
     PixmapObjectItem *pixHirItem;
 
+    QGraphicsTextItem *copyright;
+
     GraphicsMenu *menuMain;
         GraphicsMenu *menuLocalGame;
             GraphicsMenu *menuGameSettings;
             GraphicsMenu *menuSMExtras;
-            GraphicsMenu *menuEDExtras;
+            GraphicsMenu *menuEDDiseases;
         GraphicsMenu *menuNetworkGame;
         GraphicsMenu *menuOptions;
 
     QState *stateLogo;
     QState *stateArawn;
     QState *stateMainMenu;
-    QState *stateOptionsMenu;
+        QState *stateLocalGameMenu;
+            QState *statePlayerSetup;
+            QState *stateMapSelection;
+            QState *stateGameSettings;
+            QState *stateSMExtras;
+            QState *stateEDDiseases;
+            QState *stateLoad; /** TODO Itt még át kell gondolni */
+        QState *stateNetworkGameMenu;
+            /** TODO Szintén */
+        QState *stateOptionsMenu;
+        QState *stateMapEditor;
+        QState *stateAbout;
+        QFinalState *finalState;
 };
 
 #endif // QARAWNWINDOW_HPP
