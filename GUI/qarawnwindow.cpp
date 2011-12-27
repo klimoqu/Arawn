@@ -168,11 +168,11 @@ void QArawnWindow::initializeMenus()
 
     menuGameSettings = new GraphicsMenu(tr("Game Settings"));
     menuGameSettings->addMenuItem(tr("Start/max extras"));
-    menuGameSettings->addMenuItem(tr("Enable/disable extras"));
+    menuGameSettings->addMenuItem(tr("Enable/disable diseases"));
     menuGameSettings->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
     menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
     menuGameSettings->addOptionItem(tr("Bomb timer n/10s"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
-    menuGameSettings->addOptionItem(tr("Bomb speed 1/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+    menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
 
 
     menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
@@ -182,7 +182,15 @@ void QArawnWindow::initializeMenus()
     menuSMExtras->addOptionItem(tr("Max power"), ArawnSettings::instance()->maxFire, ArawnSettings::instance()->maxFireValues);
     menuSMExtras->addOptionItem(tr("Start speed"), ArawnSettings::instance()->startSpeed, ArawnSettings::instance()->startSpeedValues);
     menuSMExtras->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
-/*...*/
+    menuSMExtras->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
+    menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
+
+
+    menuEDExtras = new GraphicsMenu(tr("Enable/disable diseases"));
+    menuEDExtras->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
+    menuEDExtras->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
+    menuEDExtras->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+
 
     menuNetworkGame = new GraphicsMenu(tr("Network Game"));
     menuNetworkGame->addMenuItem(tr("Create"));
@@ -190,6 +198,11 @@ void QArawnWindow::initializeMenus()
     /*...*/
 
     menuOptions = new GraphicsMenu(tr("Options"));
+    menuOptions->addOptionItem(tr("Show corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
+    menuOptions->addOptionItem(tr("Shaky explosion"), ArawnSettings::instance()->shakyExplosion, ArawnSettings::instance()->shakyExplosionValues);
+    menuOptions->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
+    menuOptions->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
+    menuOptions->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
 }
 
 void QArawnWindow::showMainMenu()

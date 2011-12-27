@@ -4,6 +4,8 @@
 #include "arawnheader.h"
 
 class PixmapObjectItem;
+class GraphicsMenu;
+
 class QArawnWindow : public QGraphicsView
 {
     Q_OBJECT

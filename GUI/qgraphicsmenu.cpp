@@ -1,7 +1,7 @@
-#include "qgraphicsmenu.hpp"
+#include "arawnheader.h"
 
 
-MenuItem::MenuItem(QString &name) : itemName(name){}
+MenuItem::MenuItem(const QString &name) : itemName(name){}
 
 QString MenuItem::name() const
 {
@@ -11,7 +11,7 @@ QString MenuItem::name() const
 
 
 
-OptionItem::OptionItem(QString &name, QVariant &variant, QVariantMap &valuesMap):
+OptionItem::OptionItem(const QString &name, QVariant &variant, QVariantMap &valuesMap):
     itemName(name), target(variant), values(valuesMap)
 {
     keys = values.keys();
@@ -56,7 +56,7 @@ QString OptionItem::name() const
 
 
 
-GraphicsMenu::GraphicsMenu(QString &title, QGraphicsItem *par):
+GraphicsMenu::GraphicsMenu(const QString &title, QGraphicsItem *par):
     QGraphicsObject(par)
 {
     tit = title;
@@ -107,13 +107,13 @@ QRectF GraphicsMenu::boundingRect() const
     return QRectF(-150,-(sum*25 + 113),300,88+sum*50);
 }
 
-void GraphicsMenu::addMenuItem(QString &name)
+void GraphicsMenu::addMenuItem(const QString &name)
 {
     menus.push_back(MenuItem(name));
     sum++;
 }
 
-void GraphicsMenu::addOptionItem(QString &name, QVariant &variant, QVariantMap &vmap)
+void GraphicsMenu::addOptionItem(const QString &name, QVariant &variant, QVariantMap &vmap)
 {
     options.push_back(OptionItem(name, variant, vmap));
     sum++;

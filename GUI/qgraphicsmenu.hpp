@@ -6,7 +6,7 @@
 class MenuItem
 {
 public:
-    inline MenuItem(QString &name);
+    inline MenuItem(const QString &name);
     inline QString name() const;
 protected:
     QString itemName;
@@ -15,7 +15,7 @@ protected:
 class OptionItem
 {
 public:
-    explicit OptionItem(QString &name, QVariant &variant, QVariantMap &valuesList);
+    explicit OptionItem(const QString &name, QVariant &variant, QVariantMap &valuesList);
 
     bool next();
     bool prev();
@@ -37,14 +37,14 @@ class GraphicsMenu : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsMenu(QString &title, QGraphicsItem *parent = 0);
+    GraphicsMenu(const QString &title, QGraphicsItem *parent = 0);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 
-    void addMenuItem(QString &name);
-    void addOptionItem(QString &name, QVariant &variant, QVariantMap &vmap);
+    void addMenuItem(const QString &name);
+    void addOptionItem(const QString &name, QVariant &variant, QVariantMap &vmap);
 
 
 signals:
