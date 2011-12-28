@@ -30,7 +30,6 @@ HEADERS  += \
     CORE/map.hpp \
     CORE/field.hpp \
     CORE/game.hpp \
-    CORE/command.hpp \
     CORE/bomb.hpp
 
 FORMS    +=
@@ -59,6 +58,7 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
 
 
 
