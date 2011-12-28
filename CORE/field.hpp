@@ -11,7 +11,6 @@ protected:
     bool permeable;
     Field *top,*right,*left,*bottom;
     int id,x,y;
-    bool use[];
 
 public:
     Field(){}
@@ -40,5 +39,4 @@ public:
     void Load();
     void Enter(Player *player);
     void Exit(Player *player);
-    bool InUse(int id){return use[id];}
 };
