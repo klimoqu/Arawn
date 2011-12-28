@@ -5,11 +5,11 @@ class Command
 {
     int id,msgtype,msg;
 public:
-    Command(int id, int msgtype,int msg)
+    Command(int _id, int _msgtype,int _msg)
     {
-        self.id=id;
-        self.msgtype=msgtype;
-        self.msg=msg;
+        id=_id;
+        msgtype=_msgtype;
+        msg=_msg;
     }
     int GetPlayerId(){return id;}
     int GetMessageType(){return msgtype;}

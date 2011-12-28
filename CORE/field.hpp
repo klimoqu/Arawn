@@ -10,11 +10,11 @@ class Field : public QObject
 protected:
     bool permeable;
     Field *top,*right,*left,*bottom;
-    int id,x,y;
+    unsigned int id,x,y;
 
 public:
     Field(){}
-    Field(int id, int x,int y,int playersnumber)
+    Field(unsigned int id, unsigned int x,unsigned int y)
     {
         this->x=x;
         this->y=y;
@@ -23,7 +23,6 @@ public:
         ss<<id;
         std::string stringid;
         ss>>stringid;
-        use=new bool[playersnumber];
     }
     void SetNeighbours(Field *top, Field *left, Field *right, Field *bottom)
     {

@@ -1,4 +1,7 @@
 #pragma once
+#include "arawnheader.h"
+#include "CORE/map.hpp"
+#include "CORE/command.hpp"
 
 class game : public QObject
 {
@@ -6,10 +9,8 @@ class game : public QObject
     Map* map;
     int time;
     bool server;
-    QTcpSocket server;
-    QTcpSocket clients[];
 public:
-    game(QTcpSocket socket);
+    game();
 
     void newGame(int id);
     void validate(Command c);
@@ -21,6 +22,6 @@ signals:
     void KlientValidate(Command c);
 
 public slots:
-    void ServerExecute(Command c);
-    void KlientExecute(Command c);
+    void ServerExecute(Command c){}
+    void KlientExecute(Command c){}
 };

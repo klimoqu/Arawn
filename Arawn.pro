@@ -19,8 +19,7 @@ SOURCES += main.cpp\
     CORE/player.cpp \
     CORE/map.cpp \
     CORE/dynamicfield.cpp \
-    CORE/game.cpp \
-    CORE/command.cpp
+    CORE/game.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -62,6 +61,7 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
 
 
 
