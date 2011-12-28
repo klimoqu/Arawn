@@ -57,6 +57,9 @@ signals:
     void menu7Selected();
     void escapePushed();
 
+public slots:
+    void keyPress(QKeyEvent *event);
+
 private:
     void keyPressEvent(QKeyEvent *event);
 

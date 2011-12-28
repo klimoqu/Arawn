@@ -288,6 +288,16 @@ void QArawnWindow::enterMenus()
     scene->addItem(copyright);
 }
 
+void QArawnWindow::keyPressEvent(QKeyEvent *event)
+{
+    machine->postEvent(event);
+}
+
+void QArawnWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    machine->postEvent(event);
+}
+
 
 
 
