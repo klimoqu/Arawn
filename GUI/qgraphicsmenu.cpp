@@ -119,7 +119,7 @@ void GraphicsMenu::addOptionItem(const QString &name, QVariant &variant, QVarian
     sum++;
 }
 
-void GraphicsMenu::keyPressEvent(QKeyEvent *event)
+void GraphicsMenu::keyPress(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape){
         emit escapePushed();
