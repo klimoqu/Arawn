@@ -3,25 +3,32 @@
 #include "CORE/map.hpp"
 #include "CORE/command.hpp"
 
-class game : public QObject
+class Game : public QObject
 {
     Q_OBJECT
     Map* map;
-    int time;
+    int time,playersnumber,timeout;
     bool server;
-public:
-    game();
 
-    void newGame(int id);
     void validate(Command c);
     void execute(Command c);
 
+
+public:
+    Game(int playersnumber,int timeout)
+    {
+        this->playersnumber=playersnumber;
+        this->timeout=timeout;
+    }
+    void NewGame(int id);
+
+
 signals:
 
-    void ServerValidate(Command c);
-    void KlientValidate(Command c);
+    void ServerValidate(Command c);//ellenörzött cumó
+    void KlientValidate(Command c);//elleőrizendő cumó
 
 public slots:
-    void ServerExecute(Command c){}
-    void KlientExecute(Command c){}
+    void ServerExecute(Command c){execute(c);}//ellenörzött parancs
+    void KlientExecute(Command c){validate(c);}//ellenőrzés
 };

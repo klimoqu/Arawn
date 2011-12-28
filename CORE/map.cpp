@@ -1,6 +1,6 @@
 #include "map.hpp"
 
-Map::Map(int id)
+void Map::Upload(int id)
 {
     this->id=id;
     std::stringstream ss;
@@ -27,6 +27,31 @@ Map::Map(int id)
     }
     input.close();
 }
+Map::Map(int id,Player* player_0,Player* player_1)
+{
+    Upload(id);
+    playersnumber=2;
+    players[0]=player_0;
+    players[1]=player_1;
+}
+Map::Map(int id,Player* player_0,Player* player_1,Player* player_2)
+{
+    Upload(id);
+    playersnumber=3;
+    players[0]=player_0;
+    players[1]=player_1;
+    players[2]=player_2;
+}
+Map::Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3)
+{
+    Upload(id);
+    playersnumber=4;
+    players[0]=player_0;
+    players[1]=player_1;
+    players[2]=player_2;
+    players[3]=player_3;
+}
+
 void Map::Save(std::ostream &o)
 {
     o<<size_x<<" "<<size_y<<std::endl;
@@ -41,4 +66,5 @@ void Map::Save(std::ostream &o)
 }
 void Map::Load(std::istream &i)
 {
+
 }

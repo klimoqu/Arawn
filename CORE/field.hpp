@@ -7,13 +7,14 @@
 
 class Field : public QObject
 {
-protected:
-    bool permeable;
+    Q_OBJECT
     Field *top,*right,*left,*bottom;
     unsigned int id,x,y;
+    bool permeable;
 
 public:
     Field(){}
+
     Field(unsigned int id, unsigned int x,unsigned int y)
     {
         this->x=x;
@@ -24,12 +25,32 @@ public:
         std::string stringid;
         ss>>stringid;
     }
-    void SetNeighbours(Field *top, Field *left, Field *right, Field *bottom)
+    bool IsPermeable()
+    {
+        return permeable;
+    }
+    void SetNeighbours(Field *left, Field *top, Field *right, Field *bottom)
     {
         this->top=top;
         this->left=left;
         this->right=right;
         this->bottom=bottom;
+    }
+    Field* GetTopNeighbour()
+    {
+        return top;
+    }
+    Field* GetLeftNeighbour()
+    {
+        return left;
+    }
+    Field* GetRightNeighbour()
+    {
+        return right;
+    }
+    Field* GetBottomNeighbour()
+    {
+        return bottom;
     }
     void Save(std::ostream &o)
     {
@@ -38,4 +59,7 @@ public:
     void Load();
     void Enter(Player *player);
     void Exit(Player *player);
+
+public slots:
+    void Boom(uchar x,uchar y,int size, uchar diretion);
 };

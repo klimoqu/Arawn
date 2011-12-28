@@ -1,5 +1,4 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
 #include <QObject>
 
@@ -8,7 +7,10 @@ class Player : public QObject
 {
     Q_OBJECT
 public:
-    Player();
+    Player(int id);
+    void SetStartPosition(float x, float y);
+    void Move(int direction);
+    bool IsAlive(){return live;}
 
 protected:
     /// Játékos neve, amely megjelenik a listában is.
@@ -29,7 +31,11 @@ protected:
     bool pCanDrop;
     /// A játékos tudja-e a lerakott bombákat ellökni? (kezdetben false)
     bool pCanPush;
+    /// A játékos él-e
+    bool live;
 
+public:
+    float GetX(){return pXcoord;}
+    float GetY(){return pYcoord;}
+    uchar GetBombSize(){return pBombPower;}
 };
-
-#endif // PLAYER_HPP
