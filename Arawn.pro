@@ -18,11 +18,15 @@ SOURCES += main.cpp\
     GUI/qarawnwindow.cpp \
     GUI/qgraphicsmenu.cpp \
     arawnsettings.cpp \
-    GUI/pixmapobjectitem.cpp
+    GUI/pixmapobjectitem.cpp \
+    CORE/staticfield.cpp \
+    CORE/player.cpp \
+    CORE/map.cpp \
+    CORE/dynamicfield.cpp \
+    CORE/game.cpp
 
 HEADERS  += \
     player.hpp \
-    field.hpp \
     map.hpp \
     staticfield.hpp \
     dynamicfield.hpp \
@@ -30,7 +34,13 @@ HEADERS  += \
     arawnheader.h \
     GUI/qgraphicsmenu.hpp \
     arawnsettings.hpp \
-    GUI/pixmapobjectitem.hpp
+    GUI/pixmapobjectitem.hpp \
+    CORE/staticfield.hpp \
+    CORE/player.hpp \
+    CORE/map.hpp \
+    CORE/field.hpp \
+    CORE/dynamicfield.hpp \
+    CORE/game.hpp
 
 FORMS    +=
 
@@ -58,6 +68,11 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
+
+
+
 
 
 
