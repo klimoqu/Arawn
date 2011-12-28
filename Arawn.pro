@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     CORE/player.cpp \
     CORE/map.cpp \
     CORE/dynamicfield.cpp \
-    CORE/game.cpp
+    CORE/game.cpp \
+    CORE/command.cpp
 
 HEADERS  += \
     player.hpp \
@@ -40,7 +41,8 @@ HEADERS  += \
     CORE/map.hpp \
     CORE/field.hpp \
     CORE/dynamicfield.hpp \
-    CORE/game.hpp
+    CORE/game.hpp \
+    CORE/command.hpp
 
 FORMS    +=
 
@@ -68,6 +70,12 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
+
+
+
+
 
 
 
