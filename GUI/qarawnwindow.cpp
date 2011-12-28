@@ -145,8 +145,7 @@ void QArawnWindow::initializeOthers()
     connect(stateArawn, SIGNAL(entered()), timerStArawnToStMM, SLOT(start()));
     connect(stateArawn, SIGNAL(exited()), this, SLOT(enterMenus()));
 
-    QSignalTransition *trM = stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMainMenu);
-    trM->addAnimation(new QPropertyAnimation(menuMain, "pos", this));
+    stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMainMenu);
 
     //Végén
     timerStLogoToStArawn->start(100);
@@ -167,10 +166,8 @@ void QArawnWindow::initializeMenus()
     menuMain->addMenuItem(tr("Quit"));
     scene->addItem(menuMain);
     menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
-    //machine->assignProperty(menuMain, "enabled", false);
-    stateMainMenu->assignProperty(menuMain, "enabled", true);
     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
-    stateMainMenu->addTransition(menuMain, SIGNAL(escapePushed()), finalState);
+    machine->addDefaultAnimation(new QPropertyAnimation(menuMain, "pos"));
 
 
 
@@ -183,8 +180,8 @@ void QArawnWindow::initializeMenus()
     menuLocalGame->addMenuItem(tr("Load saved cup"));
     scene->addItem(menuLocalGame);
     menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
-    machine->assignProperty(menuLocalGame, "enabled", false);
-    stateLocalGameMenu->assignProperty(menuLocalGame, "enabled", true);
+    stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuLocalGame, "pos"));
 
 
     menuGameSettings = new GraphicsMenu(tr("Game Settings"));
@@ -196,8 +193,8 @@ void QArawnWindow::initializeMenus()
     menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
     scene->addItem(menuGameSettings);
     menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
-    machine->assignProperty(menuGameSettings, "enabled", false);
-    stateGameSettings->assignProperty(menuGameSettings, "enabled", true);
+    stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuGameSettings, "pos"));
 
 
     menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
@@ -211,8 +208,8 @@ void QArawnWindow::initializeMenus()
     menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
     scene->addItem(menuSMExtras);
     menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
-    machine->assignProperty(menuSMExtras, "enabled", false);
-    stateSMExtras->assignProperty(menuSMExtras, "enabled", true);
+    stateSMExtras->assignProperty(menuSMExtras, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuSMExtras, "pos"));
 
 
     menuEDDiseases = new GraphicsMenu(tr("Enable/disable diseases"));
@@ -221,8 +218,8 @@ void QArawnWindow::initializeMenus()
     menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
     scene->addItem(menuEDDiseases);
     menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
-    machine->assignProperty(menuEDDiseases, "enabled", false);
-    stateEDDiseases->assignProperty(menuEDDiseases, "enabled", true);
+    stateEDDiseases->assignProperty(menuEDDiseases, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuEDDiseases, "pos"));
 
 
     menuNetworkGame = new GraphicsMenu(tr("Network Game"));
@@ -231,8 +228,8 @@ void QArawnWindow::initializeMenus()
     scene->addItem(menuNetworkGame);
     /** TODO Itt még át kell gondolni */
     menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
-    machine->assignProperty(menuNetworkGame, "enabled", false);
-    stateNetworkGameMenu->assignProperty(menuNetworkGame, "enabled", true);
+    stateNetworkGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuNetworkGame, "pos"));
 
 
     menuOptions = new GraphicsMenu(tr("Options"));
@@ -243,8 +240,8 @@ void QArawnWindow::initializeMenus()
     menuOptions->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
     scene->addItem(menuOptions);
     menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
-    machine->assignProperty(menuOptions, "enabled", false);
-    stateOptionsMenu->assignProperty(menuOptions, "enabled", true);
+    stateOptionsMenu->assignProperty(menuOptions, "pos", QPointF(0,0));
+    machine->addDefaultAnimation(new QPropertyAnimation(menuOptions, "pos"));
 }
 
 
