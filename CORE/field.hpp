@@ -11,10 +11,11 @@ protected:
     bool permeable;
     Field *top,*right,*left,*bottom;
     int id,x,y;
+    bool use[];
 
 public:
     Field(){}
-    Field(int id, int x,int y)
+    Field(int id, int x,int y,int playersnumber)
     {
         this->x=x;
         this->y=y;
@@ -23,6 +24,7 @@ public:
         ss<<id;
         std::string stringid;
         ss>>stringid;
+        use=new bool[playersnumber];
     }
     void SetNeighbours(Field *top, Field *left, Field *right, Field *bottom)
     {
@@ -38,4 +40,5 @@ public:
     void Load();
     void Enter(Player *player);
     void Exit(Player *player);
+    bool InUse(int id){return use[id];}
 };
