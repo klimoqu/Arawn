@@ -167,10 +167,7 @@ void QArawnWindow::initializeMenus()
     menuMain->addMenuItem(tr("Quit"));
     scene->addItem(menuMain);
     menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
-    //machine->assignProperty(menuMain, "enabled", false);
-    stateMainMenu->assignProperty(menuMain, "enabled", true);
     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
-    stateMainMenu->addTransition(menuMain, SIGNAL(escapePushed()), finalState);
 
 
 
@@ -183,8 +180,6 @@ void QArawnWindow::initializeMenus()
     menuLocalGame->addMenuItem(tr("Load saved cup"));
     scene->addItem(menuLocalGame);
     menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
-    machine->assignProperty(menuLocalGame, "enabled", false);
-    stateLocalGameMenu->assignProperty(menuLocalGame, "enabled", true);
 
 
     menuGameSettings = new GraphicsMenu(tr("Game Settings"));
@@ -196,8 +191,6 @@ void QArawnWindow::initializeMenus()
     menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
     scene->addItem(menuGameSettings);
     menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
-    machine->assignProperty(menuGameSettings, "enabled", false);
-    stateGameSettings->assignProperty(menuGameSettings, "enabled", true);
 
 
     menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
@@ -211,8 +204,6 @@ void QArawnWindow::initializeMenus()
     menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
     scene->addItem(menuSMExtras);
     menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
-    machine->assignProperty(menuSMExtras, "enabled", false);
-    stateSMExtras->assignProperty(menuSMExtras, "enabled", true);
 
 
     menuEDDiseases = new GraphicsMenu(tr("Enable/disable diseases"));
@@ -221,8 +212,6 @@ void QArawnWindow::initializeMenus()
     menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
     scene->addItem(menuEDDiseases);
     menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
-    machine->assignProperty(menuEDDiseases, "enabled", false);
-    stateEDDiseases->assignProperty(menuEDDiseases, "enabled", true);
 
 
     menuNetworkGame = new GraphicsMenu(tr("Network Game"));

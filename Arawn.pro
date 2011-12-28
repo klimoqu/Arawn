@@ -11,10 +11,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    player.cpp \
-    map.cpp \
-    staticfield.cpp \
-    dynamicfield.cpp \
     GUI/qarawnwindow.cpp \
     GUI/qgraphicsmenu.cpp \
     arawnsettings.cpp \
@@ -27,10 +23,6 @@ SOURCES += main.cpp\
     CORE/command.cpp
 
 HEADERS  += \
-    player.hpp \
-    map.hpp \
-    staticfield.hpp \
-    dynamicfield.hpp \
     GUI/qarawnwindow.hpp \
     arawnheader.h \
     GUI/qgraphicsmenu.hpp \
@@ -70,6 +62,14 @@ OTHER_FILES += \
     GUI/res/0_tofrommenu.wav
 
 RESOURCES +=
+
+
+
+
+
+
+
+
 
 
 
