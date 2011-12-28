@@ -61,7 +61,6 @@ public slots:
     void keyPress(QKeyEvent *event);
 
 private:
-    void keyPressEvent(QKeyEvent *event);
 
     QString tit;
     char selected;

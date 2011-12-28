@@ -168,6 +168,7 @@ void QArawnWindow::initializeMenus()
     menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
     machine->addDefaultAnimation(new QPropertyAnimation(menuMain, "pos"));
+    QKeyEventTransition *k0 = new QKeyEventTransition()
 
 
 
