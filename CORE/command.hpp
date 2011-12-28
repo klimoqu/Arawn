@@ -5,7 +5,7 @@ class Command
 {
     int id,msgtype,msg;
 public:
-    Command(nt id, int msgtype,int msg)
+    Command(int id, int msgtype,int msg)
     {
         self.id=id;
         self.msgtype=msgtype;
