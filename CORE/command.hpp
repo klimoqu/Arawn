@@ -9,7 +9,7 @@ public:
     Command();
     int GetPlayerId(){return id;}
     int GetMessageType(){return msgtype;}
-    int GetMessage();
+    int GetMessage() {return msg;}
 
     friend QDataStream & operator<<(QDataStream & stream, Command & what);
     friend QDataStream & operator>>(QDataStream & stream, Command & what);

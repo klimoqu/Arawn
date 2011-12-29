@@ -23,8 +23,3 @@ QDataStream & Command::operator >>(QDataStream &stream, Command &what)
     return( stream );
 }
 
-int Command::GetMessage()
-{
-    return msg;
-}
-
