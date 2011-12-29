@@ -177,9 +177,10 @@ void QArawnWindow::initializeMenus()
      stateMainMenu->addTransition(k1);
      connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
      connect(k1, SIGNAL(triggered()), sounds[2], SLOT(play()));
- //    QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
- //    stateMainMenu->addTransition(k2);
- //    connect(k2, SIGNAL(triggered()), sounds[0], SLOT(play()));
+     QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k2->setTargetState(finalState);
+     stateMainMenu->addTransition(k2);
+     connect(k2, SIGNAL(triggered()), sounds[0], SLOT(play()));
 
 
 
