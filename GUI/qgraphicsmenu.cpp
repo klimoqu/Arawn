@@ -62,6 +62,10 @@ GraphicsMenu::GraphicsMenu(const QString &title, QGraphicsItem *par):
     tit = title;
     selected = 0;
     sum = 0;
+    titFont = qApp->font();
+    titFont.setPixelSize(52);
+    itemFont = qApp->font();
+    itemFont.setPixelSize(40);
 }
 
 void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -76,11 +80,13 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
     //Cím
     painter->setPen(QColor(100, 10, 10, 200));
+    painter->setFont(titFont);
     painter->drawText(QRectF(-225,-(sum*25 + 113), 450, 75).translated(4,4), tit, QTextOption(Qt::AlignCenter));
     painter->setPen(QColor(50, 150, 200));
     painter->drawText(QRectF(-225,-(sum*25 + 113), 450, 75), tit, QTextOption(Qt::AlignCenter));
 
     //Elemek
+    painter->setFont(itemFont);
     short i = 0;
     foreach (MenuItem m, menus) {
         painter->setPen(QColor(100, 10, 10, 200));
@@ -149,7 +155,7 @@ void GraphicsMenu::keyLeft()
 void GraphicsMenu::keyRight()
 {
     if(selected < menus.size()) return;
-    if(options[selected-menus.size()].prev())
+    if(options[selected-menus.size()].next())
         emit menuChanged();
     update(-225, selected*50-(sum*25), 450, 50);
     return;

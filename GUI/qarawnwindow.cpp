@@ -246,9 +246,6 @@ void QArawnWindow::initializeMenus()
 
      stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
      stateMainMenu->assignProperty(menuLocalGame, "pos", QPointF(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
      stateMainMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
      stateMainMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
      stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
@@ -263,9 +260,6 @@ void QArawnWindow::initializeMenus()
      QKeyEventTransition *k1 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
      stateMainMenu->addTransition(k1);
      connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
-     QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k2->setTargetState(finalState);
-     stateMainMenu->addTransition(k2);
      QKeyEventTransition *k3 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
      stateMainMenu->addTransition(k3);
      connect(k3, SIGNAL(triggered()), menuMain, SLOT(keyEnter()));
@@ -274,13 +268,9 @@ void QArawnWindow::initializeMenus()
      stateLocalGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
      stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
      stateLocalGameMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
-    //     stateLocalGameMenu->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
-    //     stateLocalGameMenu->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
-    //     stateLocalGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
-    //     stateLocalGameMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
+     stateLocalGameMenu->addTransition(menuLocalGame, SIGNAL(menu3Selected()), stateGameSettings);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
@@ -302,12 +292,8 @@ void QArawnWindow::initializeMenus()
      stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
      stateGameSettings->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
      stateGameSettings->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
- //     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
+     stateGameSettings->addTransition(menuGameSettings, SIGNAL(menu1Selected()), stateSMExtras);
+     stateGameSettings->addTransition(menuGameSettings, SIGNAL(menu2Selected()), stateEDDiseases);
      QKeyEventTransition *k8 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
      stateGameSettings->addTransition(k8);
      connect(k8, SIGNAL(triggered()), menuGameSettings, SLOT(keyDown()));
@@ -426,13 +412,6 @@ void QArawnWindow::playSound(uchar n)
     sounds[n]->play();
 }
 
-void QArawnWindow::close()
-{
-    //! TODO mentés
-    //ArawnSettings::instance()->save();
-    QGraphicsView::close();
-}
-
 void QArawnWindow::enterMenus()
 {
     scene->removeItem(pixArawnItem);
@@ -450,6 +429,12 @@ void QArawnWindow::enterMenus()
     dse->setOffset(1.5);
     copyright->setGraphicsEffect(dse);
     scene->addItem(copyright);
+}
+
+void QArawnWindow::closeEvent(QCloseEvent *event)
+{
+    //ArawnSettings::instance()->save();
+    event->accept();
 }
 
 

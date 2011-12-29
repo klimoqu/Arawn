@@ -71,6 +71,8 @@ private:
     uchar sum;
     MenuList menus;
     OptionList options;
+    QFont titFont;
+    QFont itemFont;
 };
 
 #endif // QGRAPHICSMENU_HPP

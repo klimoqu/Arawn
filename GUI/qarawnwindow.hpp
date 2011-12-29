@@ -22,10 +22,10 @@ public slots:
     void showArawnScreen();
     void enterMenus();
     void playSound(uchar n);
-    void close();
 
 private:
     inline void initializeMenus();
+    void closeEvent(QCloseEvent *);
 
     QGraphicsScene *scene;
     QStateMachine *machine;
@@ -50,8 +50,8 @@ private:
     QState *stateArawn;
     QState *stateMainMenu;
         QState *stateLocalGameMenu;
-            QState *statePlayerSetup;
-            QState *stateMapSelection;
+            QState *statePlayerSetup; // TODO
+            QState *stateMapSelection; // TODO
             QState *stateGameSettings;
             QState *stateSMExtras;
             QState *stateEDDiseases;
@@ -59,8 +59,8 @@ private:
         QState *stateNetworkGameMenu;
             /** TODO Szintén */
         QState *stateOptionsMenu;
-        QState *stateMapEditor;
-        QState *stateAbout;
+        QState *stateMapEditor; // TODO
+        QState *stateAbout; // TODO
         QFinalState *finalState;
 };
 
