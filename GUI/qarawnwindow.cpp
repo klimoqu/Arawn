@@ -154,8 +154,6 @@ void QArawnWindow::initializeOthers()
 }
 
 
-
-
 void QArawnWindow::initializeMenus()
 {
      menuMain = new GraphicsMenu(tr("Main Menu"));
@@ -168,19 +166,7 @@ void QArawnWindow::initializeMenus()
      connect(menuMain, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuMain);
      menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
-     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuMain, "pos"));
-     QKeyEventTransition *k0 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateMainMenu->addTransition(k0);
-     connect(k0, SIGNAL(triggered()), menuMain, SLOT(keyDown()));
-     QKeyEventTransition *k1 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateMainMenu->addTransition(k1);
-     connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
-     QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k2->setTargetState(finalState);
-     stateMainMenu->addTransition(k2);
-     connect(k2, SIGNAL(triggered()), sounds[0], SLOT(play()));
-
 
 
 
@@ -194,7 +180,6 @@ void QArawnWindow::initializeMenus()
      connect(menuLocalGame, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuLocalGame);
      menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
-     stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuLocalGame, "pos"));
 
 
@@ -208,7 +193,6 @@ void QArawnWindow::initializeMenus()
      connect(menuGameSettings, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuGameSettings);
      menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
-     stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuGameSettings, "pos"));
 
 
@@ -224,7 +208,6 @@ void QArawnWindow::initializeMenus()
      connect(menuSMExtras, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuSMExtras);
      menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
-     stateSMExtras->assignProperty(menuSMExtras, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuSMExtras, "pos"));
 
 
@@ -235,7 +218,6 @@ void QArawnWindow::initializeMenus()
      connect(menuEDDiseases, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuEDDiseases);
      menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
-     stateEDDiseases->assignProperty(menuEDDiseases, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuEDDiseases, "pos"));
 
 
@@ -246,7 +228,6 @@ void QArawnWindow::initializeMenus()
      scene->addItem(menuNetworkGame);
      /** TODO Itt még át kell gondolni */
      menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
-     stateNetworkGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuNetworkGame, "pos"));
 
 
@@ -259,8 +240,173 @@ void QArawnWindow::initializeMenus()
      connect(menuOptions, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuOptions);
      menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
-     stateOptionsMenu->assignProperty(menuOptions, "pos", QPointF(0,0));
      machine->addDefaultAnimation(new QPropertyAnimation(menuOptions, "pos"));
+
+//////////////////
+
+     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
+     stateMainMenu->assignProperty(menuLocalGame, "pos", QPointF(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
+     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
+     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
+     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
+     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
+     QKeyEventTransition *k0 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateMainMenu->addTransition(k0);
+     connect(k0, SIGNAL(triggered()), menuMain, SLOT(keyDown()));
+     QKeyEventTransition *k1 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateMainMenu->addTransition(k1);
+     connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
+     QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k2->setTargetState(finalState);
+     stateMainMenu->addTransition(k2);
+     QKeyEventTransition *k3 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
+     stateMainMenu->addTransition(k3);
+     connect(k3, SIGNAL(triggered()), menuMain, SLOT(keyEnter()));
+
+
+     stateLocalGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
+     stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
+     stateLocalGameMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
+    //     stateLocalGameMenu->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
+    //     stateLocalGameMenu->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
+    //     stateLocalGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
+    //     stateLocalGameMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
+     QKeyEventTransition *k4 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateLocalGameMenu->addTransition(k4);
+     connect(k4, SIGNAL(triggered()), menuLocalGame, SLOT(keyDown()));
+     QKeyEventTransition *k5 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateLocalGameMenu->addTransition(k5);
+     connect(k5, SIGNAL(triggered()), menuLocalGame, SLOT(keyUp()));
+     QKeyEventTransition *k6 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k6->setTargetState(stateMainMenu);
+     stateLocalGameMenu->addTransition(k6);
+     QKeyEventTransition *k7 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
+     stateLocalGameMenu->addTransition(k7);
+     connect(k7, SIGNAL(triggered()), menuLocalGame, SLOT(keyEnter()));
+
+
+     stateGameSettings->assignProperty(menuLocalGame, "pos", QPointF(-(scene->width()/2 + menuLocalGame->boundingRect().width()/2),0));
+     stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
+     stateGameSettings->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
+     stateGameSettings->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
+ //     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
+     QKeyEventTransition *k8 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateGameSettings->addTransition(k8);
+     connect(k8, SIGNAL(triggered()), menuGameSettings, SLOT(keyDown()));
+     QKeyEventTransition *k9 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateGameSettings->addTransition(k9);
+     connect(k9, SIGNAL(triggered()), menuGameSettings, SLOT(keyUp()));
+     QKeyEventTransition *k10 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
+     stateGameSettings->addTransition(k10);
+     connect(k10, SIGNAL(triggered()), menuGameSettings, SLOT(keyLeft()));
+     QKeyEventTransition *k11 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
+     stateGameSettings->addTransition(k11);
+     connect(k11, SIGNAL(triggered()), menuGameSettings, SLOT(keyRight()));
+     QKeyEventTransition *k12 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k12->setTargetState(stateLocalGameMenu);
+     stateGameSettings->addTransition(k12);
+     QKeyEventTransition *k13 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
+     stateGameSettings->addTransition(k13);
+     connect(k13, SIGNAL(triggered()), menuGameSettings, SLOT(keyEnter()));
+
+
+     stateSMExtras->assignProperty(menuGameSettings, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
+     stateSMExtras->assignProperty(menuSMExtras, "pos", QPointF(0,0));
+     QKeyEventTransition *k14 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateSMExtras->addTransition(k14);
+     connect(k14, SIGNAL(triggered()), menuSMExtras, SLOT(keyDown()));
+     QKeyEventTransition *k15 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateSMExtras->addTransition(k15);
+     connect(k15, SIGNAL(triggered()), menuSMExtras, SLOT(keyUp()));
+     QKeyEventTransition *k16 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
+     stateSMExtras->addTransition(k16);
+     connect(k16, SIGNAL(triggered()), menuSMExtras, SLOT(keyLeft()));
+     QKeyEventTransition *k17 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
+     stateSMExtras->addTransition(k17);
+     connect(k17, SIGNAL(triggered()), menuSMExtras, SLOT(keyRight()));
+     QKeyEventTransition *k18 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k18->setTargetState(stateGameSettings);
+     stateSMExtras->addTransition(k18);
+
+
+     stateEDDiseases->assignProperty(menuGameSettings, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
+     stateEDDiseases->assignProperty(menuEDDiseases, "pos", QPointF(0,0));
+     QKeyEventTransition *k19 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateEDDiseases->addTransition(k19);
+     connect(k19, SIGNAL(triggered()), menuEDDiseases, SLOT(keyDown()));
+     QKeyEventTransition *k20 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateEDDiseases->addTransition(k20);
+     connect(k20, SIGNAL(triggered()), menuEDDiseases, SLOT(keyUp()));
+     QKeyEventTransition *k21 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
+     stateEDDiseases->addTransition(k21);
+     connect(k21, SIGNAL(triggered()), menuEDDiseases, SLOT(keyLeft()));
+     QKeyEventTransition *k22 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
+     stateEDDiseases->addTransition(k22);
+     connect(k22, SIGNAL(triggered()), menuEDDiseases, SLOT(keyRight()));
+     QKeyEventTransition *k23 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k23->setTargetState(stateGameSettings);
+     stateEDDiseases->addTransition(k23);
+
+
+     stateNetworkGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
+     stateNetworkGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(0,0));
+//     stateNetworkGameMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
+//     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
+     QKeyEventTransition *k24 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateNetworkGameMenu->addTransition(k24);
+     connect(k24, SIGNAL(triggered()), menuNetworkGame, SLOT(keyDown()));
+     QKeyEventTransition *k25 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateNetworkGameMenu->addTransition(k25);
+     connect(k25, SIGNAL(triggered()), menuNetworkGame, SLOT(keyUp()));
+     QKeyEventTransition *k26 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k26->setTargetState(stateMainMenu);
+     stateNetworkGameMenu->addTransition(k26);
+     QKeyEventTransition *k27 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
+     stateNetworkGameMenu->addTransition(k27);
+     connect(k27, SIGNAL(triggered()), menuNetworkGame, SLOT(keyEnter()));
+
+
+     stateOptionsMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
+     stateOptionsMenu->assignProperty(menuOptions, "pos", QPointF(0,0));
+     QKeyEventTransition *k29 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateOptionsMenu->addTransition(k29);
+     connect(k29, SIGNAL(triggered()), menuOptions, SLOT(keyDown()));
+     QKeyEventTransition *k30 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateOptionsMenu->addTransition(k30);
+     connect(k30, SIGNAL(triggered()), menuOptions, SLOT(keyUp()));
+     QKeyEventTransition *k31 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
+     stateOptionsMenu->addTransition(k31);
+     connect(k31, SIGNAL(triggered()), menuOptions, SLOT(keyLeft()));
+     QKeyEventTransition *k32 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
+     stateOptionsMenu->addTransition(k32);
+     connect(k32, SIGNAL(triggered()), menuOptions, SLOT(keyRight()));
+     QKeyEventTransition *k33 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k33->setTargetState(stateMainMenu);
+     stateOptionsMenu->addTransition(k33);
+
 
 }
 
