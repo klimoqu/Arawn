@@ -263,7 +263,8 @@ void QArawnWindow::playSound(uchar n)
 
 void QArawnWindow::close()
 {
-    ArawnSettings::instance()->save();
+    //! TODO mentés
+    //ArawnSettings::instance()->save();
     QGraphicsView::close();
 }
 
@@ -278,25 +279,13 @@ void QArawnWindow::enterMenus()
     fnt.setPixelSize(20);
     copyright->setFont(fnt);
     copyright->setOpacity(0.7);
-    copyright->setPos(-(scene->width()/2)+5,(scene->height()/2)-25);
+    copyright->setPos(-(scene->width()/2)+5,(scene->height()/2)-30);
     QGraphicsDropShadowEffect *dse = new QGraphicsDropShadowEffect(copyright);
     dse->setColor(Qt::red);
     dse->setOffset(1.5);
     copyright->setGraphicsEffect(dse);
     scene->addItem(copyright);
 }
-
-void QArawnWindow::keyPressEvent(QKeyEvent *event)
-{
-    machine->postEvent(event);
-}
-
-void QArawnWindow::keyReleaseEvent(QKeyEvent *event)
-{
-    machine->postEvent(event);
-}
-
-
 
 
 

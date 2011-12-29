@@ -26,8 +26,6 @@ public slots:
 
 private:
     inline void initializeMenus();
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
 
     QGraphicsScene *scene;
     QStateMachine *machine;
