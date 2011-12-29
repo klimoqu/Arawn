@@ -149,7 +149,7 @@ void QArawnWindow::initializeOthers()
     stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMainMenu);
 
     //Végén
-    timerStLogoToStArawn->start(100);
+    timerStLogoToStArawn->start(1000);
     connect(machine, SIGNAL(finished()), this, SLOT(close()));
 }
 
@@ -185,11 +185,11 @@ void QArawnWindow::initializeMenus()
 
      menuGameSettings = new GraphicsMenu(tr("Game Settings"));
      menuGameSettings->addMenuItem(tr("Start/max extras"));
-     menuGameSettings->addMenuItem(tr("Enable/disable diseases"));
+     menuGameSettings->addMenuItem(tr("Enable diseases"));
      menuGameSettings->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
      menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
-     menuGameSettings->addOptionItem(tr("Bomb timer n/10s"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
-     menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+     menuGameSettings->addOptionItem(tr("Bomb timer 1/10 sec"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
+     menuGameSettings->addOptionItem(tr("Bomb speed f/10 sec"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
      connect(menuGameSettings, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuGameSettings);
      menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
@@ -211,7 +211,7 @@ void QArawnWindow::initializeMenus()
      machine->addDefaultAnimation(new QPropertyAnimation(menuSMExtras, "pos"));
 
 
-     menuEDDiseases = new GraphicsMenu(tr("Enable/disable diseases"));
+     menuEDDiseases = new GraphicsMenu(tr("Enable diseases"));
      menuEDDiseases->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
      menuEDDiseases->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
      menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
@@ -232,7 +232,7 @@ void QArawnWindow::initializeMenus()
 
 
      menuOptions = new GraphicsMenu(tr("Options"));
-     menuOptions->addOptionItem(tr("Show corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
+     menuOptions->addOptionItem(tr("Corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
      menuOptions->addOptionItem(tr("Shaky explosion"), ArawnSettings::instance()->shakyExplosion, ArawnSettings::instance()->shakyExplosionValues);
      menuOptions->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
      menuOptions->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
@@ -417,15 +417,23 @@ void QArawnWindow::enterMenus()
     scene->removeItem(pixArawnItem);
     scene->removeItem(pixHirItem);
     pixFireItem->setZValue(-2);
+    pixFireItem->setOpacity(0.6);
+    QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
+    firAnim->setLoopCount(-1);
+    firAnim->setEasingCurve(QEasingCurve::OutInBounce);
+    firAnim->setStartValue(0.4);
+    firAnim->setEndValue(0.8);
+    firAnim->setDuration(1600);
+    firAnim->start();
 
     copyright = new QGraphicsTextItem("Arawn 0.9b Copyright KliMoQu @ PPKE ITK");
     QFont fnt = qApp->font();
     fnt.setPixelSize(20);
     copyright->setFont(fnt);
-    copyright->setOpacity(0.7);
+    copyright->setOpacity(0.8);
     copyright->setPos(-(scene->width()/2)+5,(scene->height()/2)-30);
     QGraphicsDropShadowEffect *dse = new QGraphicsDropShadowEffect(copyright);
-    dse->setColor(Qt::red);
+    dse->setColor(QColor(100, 10, 10, 200));
     dse->setOffset(1.5);
     copyright->setGraphicsEffect(dse);
     scene->addItem(copyright);

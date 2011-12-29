@@ -63,9 +63,9 @@ GraphicsMenu::GraphicsMenu(const QString &title, QGraphicsItem *par):
     selected = 0;
     sum = 0;
     titFont = qApp->font();
-    titFont.setPixelSize(52);
+    titFont.setPixelSize(50);
     itemFont = qApp->font();
-    itemFont.setPixelSize(40);
+    itemFont.setPixelSize(38);
 }
 
 void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -75,33 +75,33 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     //Kistéglalap a kijelöléshez
     painter->setBrush(QColor(150,100,150,100));
     painter->setPen(Qt::NoPen);
-    painter->drawRect(-225, selected*50-(sum*25), 450, 50);
+    painter->drawRect(-240, selected*50-(sum*25), 480, 50);
 
 
     //Cím
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(titFont);
-    painter->drawText(QRectF(-225,-(sum*25 + 113), 450, 75).translated(4,4), tit, QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(-240,-(sum*25 + 113), 480, 75).translated(4,4), tit, QTextOption(Qt::AlignCenter));
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-225,-(sum*25 + 113), 450, 75), tit, QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(-240,-(sum*25 + 113), 480, 75), tit, QTextOption(Qt::AlignCenter));
 
     //Elemek
     painter->setFont(itemFont);
     short i = 0;
     foreach (MenuItem m, menus) {
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50).translated(4,4), m.name(), QTextOption(Qt::AlignCenter));
+        painter->drawText(QRectF(-240, i*50-(sum*25), 480, 50).translated(4,4), m.name(), QTextOption(Qt::AlignCenter));
         painter->setPen(QColor(50, 150, 200));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50), m.name(), QTextOption(Qt::AlignCenter));
+        painter->drawText(QRectF(-240, i*50-(sum*25), 480, 50), m.name(), QTextOption(Qt::AlignCenter));
         i++;
     }
     foreach (OptionItem o, options){
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50).translated(4,4), o.name(), QTextOption(Qt::AlignLeft));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50).translated(4,4), o.selected(), QTextOption(Qt::AlignRight));
+        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50).translated(4,4), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50).translated(4,4), o.selected(), QTextOption(Qt::AlignRight));
         painter->setPen(QColor(50, 150, 200));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50), o.name(), QTextOption(Qt::AlignLeft));
-        painter->drawText(QRectF(-225, i*50-(sum*25), 450, 50), o.selected(), QTextOption(Qt::AlignRight));
+        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50), o.selected(), QTextOption(Qt::AlignRight));
         i++;
     }
 
@@ -110,7 +110,7 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 QRectF GraphicsMenu::boundingRect() const
 {
-    return QRectF(-225,-(sum*25 + 113),450,117+sum*50);
+    return QRectF(-240,-(sum*25 + 113),480,117+sum*50);
 }
 
 void GraphicsMenu::addMenuItem(const QString &name)
