@@ -104,7 +104,7 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 QRectF GraphicsMenu::boundingRect() const
 {
-    return QRectF(-150,-(sum*25 + 113),300,88+sum*50);
+    return QRectF(-225,-(sum*25 + 113),450,108+sum*50);
 }
 
 void GraphicsMenu::addMenuItem(const QString &name)
@@ -119,64 +119,63 @@ void GraphicsMenu::addOptionItem(const QString &name, QVariant &variant, QVarian
     sum++;
 }
 
-void GraphicsMenu::keyPress(QKeyEvent *event)
+void GraphicsMenu::keyDown()
 {
-    if(event->key() == Qt::Key_Escape){
-        emit escapePushed();
-        return;
-    }
-    if(event->key() == Qt::Key_Down){
-        if(selected >= sum) return;
-        selected++;
-        //update(-150, (selected-1)*50-(sum*25), 300, 100);
-        updateMicroFocus();
-        return;
-    }
-    if(event->key() == Qt::Key_Up){
-        if(selected == 0) return;
-        selected--;
-        //update(-150, selected*50-(sum*25), 300, 100);
-        updateMicroFocus();
-        return;
-    }
-    if(event->key() == Qt::Key_Left){
-        if(selected < menus.size()) return;
-        options[selected-menus.size()].prev();
-        update(-150, selected*50-(sum*25), 300, 50);
-        return;
-    }
-    if(event->key() == Qt::Key_Right){
-        if(selected < menus.size()) return;
-        options[selected-menus.size()].next();
-        update(-150, selected*50-(sum*25), 300, 50);
-        return;
-    }
-    if(event->key() == Qt::Key_Enter ||
-       event->key() == Qt::Key_Return){
-        if(selected >= menus.size()) return;
-        switch(selected){
-        case 0:
-            emit menu1Selected();
-            break;
-        case 1:
-            emit menu2Selected();
-            break;
-        case 2:
-            emit menu3Selected();
-            break;
-        case 3:
-            emit menu4Selected();
-            break;
-        case 4:
-            emit menu5Selected();
-            break;
-        case 5:
-            emit menu6Selected();
-            break;
-        case 6:
-            emit menu7Selected();
-            break;
-        }
+    if(selected >= sum-1) return;
+    selected++;
+    update(-225, (selected-1)*50-(sum*25), 450, 100);
+    return;
+}
+
+void GraphicsMenu::keyUp()
+{
+    if(selected == 0) return;
+    selected--;
+    update(-225, selected*50-(sum*25), 450, 100);
+    return;
+}
+
+void GraphicsMenu::keyLeft()
+{
+    if(selected < menus.size()) return;
+    options[selected-menus.size()].prev();
+    update(-225, selected*50-(sum*25), 450, 50);
+    return;
+}
+
+void GraphicsMenu::keyRight()
+{
+    if(selected < menus.size()) return;
+    options[selected-menus.size()].prev();
+    update(-225, selected*50-(sum*25), 450, 50);
+    return;
+}
+
+void GraphicsMenu::keyEnter()
+{
+    if(selected >= menus.size()) return;
+    switch(selected){
+    case 0:
+        emit menu1Selected();
+        break;
+    case 1:
+        emit menu2Selected();
+        break;
+    case 2:
+        emit menu3Selected();
+        break;
+    case 3:
+        emit menu4Selected();
+        break;
+    case 4:
+        emit menu5Selected();
+        break;
+    case 5:
+        emit menu6Selected();
+        break;
+    case 6:
+        emit menu7Selected();
+        break;
     }
 }
 

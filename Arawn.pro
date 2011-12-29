@@ -56,9 +56,11 @@ OTHER_FILES += \
     GUI/res/3_putbomb.wav \
     GUI/res/2_step.wav \
     GUI/res/1_changemenu.wav \
-    GUI/res/0_tofrommenu.wav
+    GUI/res/0_tofrommenu.wav \
+    GUI/res/fire.jpg
 
 RESOURCES +=
+
 
 
 

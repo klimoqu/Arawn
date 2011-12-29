@@ -58,7 +58,11 @@ signals:
     void escapePushed();
 
 public slots:
-    void keyPress(QKeyEvent *event);
+    void keyDown();
+    void keyUp();
+    void keyLeft();
+    void keyRight();
+    void keyEnter();
 
 private:
 
