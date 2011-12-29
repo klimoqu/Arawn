@@ -1,7 +1,8 @@
-#include "CORE/game.hpp"
+#include "arawnheader.h"
 #include <math.h>
 
 void Game::NewGame(int id){}
+
 void Game::validate(Command c)
 {
     if(map->GetPlayer(c.GetPlayerId())==0)

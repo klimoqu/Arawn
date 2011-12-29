@@ -1,7 +1,5 @@
 #pragma once
 #include "arawnheader.h"
-#include "CORE/map.hpp"
-#include "CORE/command.hpp"
 
 class Game : public QObject
 {

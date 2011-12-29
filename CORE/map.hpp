@@ -3,10 +3,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <QList>
 
-#include "CORE/field.hpp"
-#include "CORE/bomb.hpp"
+#include "arawnheader.h"
 
 class Map : public QObject
 {
