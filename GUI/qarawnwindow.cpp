@@ -161,7 +161,7 @@ void QArawnWindow::initializeMenus()
      menuMain->addMenuItem(tr("Network Game"));
      menuMain->addMenuItem(tr("Options"));
      menuMain->addMenuItem(tr("Map editor"));
-     menuMain->addMenuItem(tr("About"));
+     menuMain->addMenuItem(tr("Credits"));
      menuMain->addMenuItem(tr("Quit"));
      connect(menuMain, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuMain);
@@ -242,17 +242,26 @@ void QArawnWindow::initializeMenus()
      menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
      machine->addDefaultAnimation(new QPropertyAnimation(menuOptions, "pos"));
 
+
+     aboutItem = new GraphicsAbout;
+     scene->addItem(aboutItem);
+     aboutItem->setPos(scene->width()/2 + aboutItem->boundingRect().width()/2,0);
+     machine->addDefaultAnimation(new QPropertyAnimation(aboutItem, "pos"));
+
+
+
 //////////////////
 
      stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
      stateMainMenu->assignProperty(menuLocalGame, "pos", QPointF(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0));
      stateMainMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
      stateMainMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
+     stateMainMenu->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
      stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
      stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
      stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
+     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
      stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
      QKeyEventTransition *k0 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
      stateMainMenu->addTransition(k0);
@@ -392,6 +401,12 @@ void QArawnWindow::initializeMenus()
      QKeyEventTransition *k33 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
      k33->setTargetState(stateMainMenu);
      stateOptionsMenu->addTransition(k33);
+
+     stateAbout->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
+     stateAbout->assignProperty(aboutItem, "pos", QPointF(0,0));
+     QKeyEventTransition *k34 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k34->setTargetState(stateMainMenu);
+     stateAbout->addTransition(k34);
 
 
 }

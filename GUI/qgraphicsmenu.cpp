@@ -189,3 +189,52 @@ void GraphicsMenu::keyEnter()
     }
 }
 
+
+
+
+GraphicsAbout::GraphicsAbout()
+{
+    h1 = tr("Credits");
+    h2 = "Hir yw'r dydd a hir yw'r nos, a hir yw aros Arawn";
+    p1 = "This is a bomberman like game inspired by the well known ClanBomber.\nIt is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.";
+    h1Font = qApp->font();
+    h1Font.setPixelSize(50);
+    h2Font = qApp->font();
+    h2Font.setPixelSize(40);
+    p1Font = qApp->font();
+    p1Font.setPixelSize(30);
+}
+
+QRectF GraphicsAbout::boundingRect() const
+{
+    return QRectF(-300, -275, 600, 550);
+}
+
+void GraphicsAbout::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    painter->save();
+
+    // Cím
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->setFont(h1Font);
+    painter->drawText(QRectF(-300,-275, 600, 75).translated(4,4), h1, QTextOption(Qt::AlignCenter | Qt::AlignTop));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(-300,-275, 600, 75), h1, QTextOption(Qt::AlignCenter | Qt::AlignTop));
+
+    // Alcím
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->setFont(h2Font);
+    painter->drawText(QRectF(-300,-190, 600, 125).translated(3,3), h2, QTextOption(Qt::AlignCenter));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(-300,-190, 600, 125), h2, QTextOption(Qt::AlignCenter));
+
+    //Szöveg
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->setFont(p1Font);
+    painter->drawText(QRectF(-290,-65, 580, 340).translated(2,2), p1, QTextOption(Qt::AlignTop | Qt::AlignLeading));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(-290,-65, 580, 340), p1, QTextOption(Qt::AlignTop | Qt::AlignLeading));
+
+    painter->restore();
+}
+

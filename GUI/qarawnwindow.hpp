@@ -5,6 +5,7 @@
 
 class PixmapObjectItem;
 class GraphicsMenu;
+class GraphicsAbout;
 
 class QArawnWindow : public QGraphicsView
 {
@@ -45,6 +46,7 @@ private:
             GraphicsMenu *menuEDDiseases;
         GraphicsMenu *menuNetworkGame;
         GraphicsMenu *menuOptions;
+        GraphicsAbout *aboutItem;
 
     QState *stateLogo;
     QState *stateArawn;

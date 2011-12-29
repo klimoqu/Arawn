@@ -75,4 +75,23 @@ private:
     QFont itemFont;
 };
 
+
+class GraphicsAbout : public QGraphicsObject
+{
+    Q_OBJECT
+public:
+    GraphicsAbout();
+
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+private:
+    QString h1;
+    QString h2;
+    QString p1;
+    QFont h1Font;
+    QFont h2Font;
+    QFont p1Font;
+};
+
 #endif // QGRAPHICSMENU_HPP
