@@ -104,7 +104,7 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 QRectF GraphicsMenu::boundingRect() const
 {
-    return QRectF(-225,-(sum*25 + 113),450,108+sum*50);
+    return QRectF(-225,-(sum*25 + 113),450,117+sum*50);
 }
 
 void GraphicsMenu::addMenuItem(const QString &name)
