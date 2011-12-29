@@ -55,6 +55,7 @@ signals:
     void menu5Selected();
     void menu6Selected();
     void menu7Selected();
+    void menuChanged();
 
 public slots:
     void keyDown();

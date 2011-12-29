@@ -123,6 +123,7 @@ void GraphicsMenu::keyDown()
 {
     if(selected >= sum-1) return;
     selected++;
+    emit menuChanged();
     update(-225, (selected-1)*50-(sum*25), 450, 100);
     return;
 }
@@ -131,6 +132,7 @@ void GraphicsMenu::keyUp()
 {
     if(selected == 0) return;
     selected--;
+    emit menuChanged();
     update(-225, selected*50-(sum*25), 450, 100);
     return;
 }
@@ -138,7 +140,8 @@ void GraphicsMenu::keyUp()
 void GraphicsMenu::keyLeft()
 {
     if(selected < menus.size()) return;
-    options[selected-menus.size()].prev();
+    if(options[selected-menus.size()].prev())
+        emit menuChanged();
     update(-225, selected*50-(sum*25), 450, 50);
     return;
 }
@@ -146,7 +149,8 @@ void GraphicsMenu::keyLeft()
 void GraphicsMenu::keyRight()
 {
     if(selected < menus.size()) return;
-    options[selected-menus.size()].prev();
+    if(options[selected-menus.size()].prev())
+        emit menuChanged();
     update(-225, selected*50-(sum*25), 450, 50);
     return;
 }

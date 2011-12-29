@@ -165,6 +165,7 @@ void QArawnWindow::initializeMenus()
      menuMain->addMenuItem(tr("Map editor"));
      menuMain->addMenuItem(tr("About"));
      menuMain->addMenuItem(tr("Quit"));
+     connect(menuMain, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuMain);
      menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
      stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
@@ -172,11 +173,9 @@ void QArawnWindow::initializeMenus()
      QKeyEventTransition *k0 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
      stateMainMenu->addTransition(k0);
      connect(k0, SIGNAL(triggered()), menuMain, SLOT(keyDown()));
-     connect(k0, SIGNAL(triggered()), sounds[2], SLOT(play()));
      QKeyEventTransition *k1 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
      stateMainMenu->addTransition(k1);
      connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
-     connect(k1, SIGNAL(triggered()), sounds[2], SLOT(play()));
      QKeyEventTransition *k2 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
      k2->setTargetState(finalState);
      stateMainMenu->addTransition(k2);
@@ -192,6 +191,7 @@ void QArawnWindow::initializeMenus()
      menuLocalGame->addMenuItem(tr("Start survival cup"));
      menuLocalGame->addMenuItem(tr("Start murder cup"));
      menuLocalGame->addMenuItem(tr("Load saved cup"));
+     connect(menuLocalGame, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuLocalGame);
      menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
      stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
@@ -205,6 +205,7 @@ void QArawnWindow::initializeMenus()
      menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
      menuGameSettings->addOptionItem(tr("Bomb timer n/10s"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
      menuGameSettings->addOptionItem(tr("Bomb speed n*field/10s"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+     connect(menuGameSettings, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuGameSettings);
      menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
      stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
@@ -220,6 +221,7 @@ void QArawnWindow::initializeMenus()
      menuSMExtras->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
      menuSMExtras->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
      menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
+     connect(menuSMExtras, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuSMExtras);
      menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
      stateSMExtras->assignProperty(menuSMExtras, "pos", QPointF(0,0));
@@ -230,6 +232,7 @@ void QArawnWindow::initializeMenus()
      menuEDDiseases->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
      menuEDDiseases->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
      menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+     connect(menuEDDiseases, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuEDDiseases);
      menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
      stateEDDiseases->assignProperty(menuEDDiseases, "pos", QPointF(0,0));
@@ -239,6 +242,7 @@ void QArawnWindow::initializeMenus()
      menuNetworkGame = new GraphicsMenu(tr("Network Game"));
      menuNetworkGame->addMenuItem(tr("Create"));
      menuNetworkGame->addMenuItem(tr("Connect"));
+     connect(menuNetworkGame, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuNetworkGame);
      /** TODO Itt még át kell gondolni */
      menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
@@ -252,6 +256,7 @@ void QArawnWindow::initializeMenus()
      menuOptions->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
      menuOptions->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
      menuOptions->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
+     connect(menuOptions, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
      scene->addItem(menuOptions);
      menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
      stateOptionsMenu->assignProperty(menuOptions, "pos", QPointF(0,0));
