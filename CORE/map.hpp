@@ -32,7 +32,7 @@ public:
     Bomb* GetBomb(int i){return bombs[i];}
 
 signals:
-    void BombPlanted(uchar x, uchar y, uchar id);
+    void BombPlanted(uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id, uchar direction);
     void PlayerDied(uchar id);
     void PlayerMoved(uchar id,uchar direction);
