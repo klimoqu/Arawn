@@ -68,9 +68,15 @@ OTHER_FILES += \
     GUI/res/spider.png \
     GUI/res/snake.png \
     GUI/res/bsd.png \
-    GUI/res/bombs.png
+    GUI/res/bombs.png \
+    GUI/res/field5.png \
+    GUI/res/field3.png \
+    GUI/res/field2.png \
+    GUI/res/field1.png \
+    GUI/res/field0.png
 
 RESOURCES +=
+
 
 
 
