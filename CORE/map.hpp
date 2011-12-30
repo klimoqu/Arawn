@@ -7,6 +7,7 @@
 
 class Map : public QObject
 {
+    Q_OBJECT
 protected:
     std::string name;
     int id;
@@ -19,7 +20,6 @@ protected:
 
 
 public:
-    Map(int id){}
     Map(int id,Player* player_0,Player* player_1);
     Map(int id,Player* player_0,Player* player_1,Player* player_2);
     Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3);
@@ -31,27 +31,27 @@ public:
     void AddBomb(Bomb* b){bombs.push_back(b);}
     Bomb* GetBomb(int i){return bombs[i];}
 
-    void bombplanted(uchar x, uchar y,uchar id)
+    void bomb_planted(uchar x, uchar y,uchar id)
     {
         emit BombPlanted(x,y,id);
     }
-    void fieldblasted(uchar x, uchar y, uchar id, uchar direction)
+    void field_blasted(uchar x, uchar y, uchar id, uchar direction)
     {
         emit FieldBlasted(x,y,id,direction);
     }
-    void playerdied(uchar id)
+    void player_died(uchar id)
     {
         emit PlayerDied(id);
     }
-    void playermoved(uchar id,uchar direction)
+    void player_moved(uchar id,uchar direction)
     {
         emit PlayerMoved(id,direction);
     }
-    void playerblasted(uchar id)
+    void player_blasted(uchar id)
     {
         emit PlayerBlasted(id);
     }
-    void fieldchanged(uchar x, uchar y, uchar type)
+    void field_changed(uchar x, uchar y, uchar type)
     {
         emit FieldChanged(x,y,type);
     }
