@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     CORE/player.cpp \
     CORE/map.cpp \
     CORE/game.cpp \
-    CORE/field.cpp
+    CORE/field.cpp \
+    GUI/graphicsmap.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -31,7 +32,8 @@ HEADERS  += \
     CORE/field.hpp \
     CORE/game.hpp \
     CORE/bomb.hpp \
-    CORE/command.hpp
+    CORE/command.hpp \
+    GUI/graphicsmap.hpp
 
 FORMS    +=
 
@@ -60,6 +62,8 @@ OTHER_FILES += \
     GUI/res/fire.jpg
 
 RESOURCES +=
+
+
 
 
 
