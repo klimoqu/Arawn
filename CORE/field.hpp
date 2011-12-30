@@ -9,13 +9,13 @@ class Field : public QObject
 {
     Q_OBJECT
     Field *top,*right,*left,*bottom;
-    unsigned int id,x,y;
+    uchar type,x,y;
     bool permeable;
 
 public:
     Field(){}
 
-    Field(unsigned int id, unsigned int x,unsigned int y)
+    Field(uchar id, uchar x,uchar y)
     {
         this->x=x;
         this->y=y;
@@ -25,15 +25,28 @@ public:
         std::string stringid;
         ss>>stringid;
     }
+    uchar GetType()
+    {
+        return this->type;
+    }
     bool IsPermeable()
     {
         return permeable;
     }
-    void SetNeighbours(Field *left, Field *top, Field *right, Field *bottom)
+    void SetTopNeighbours(Field *top)
     {
         this->top=top;
+    }
+    void SetLeftNeighbours(Field *left)
+    {
         this->left=left;
+    }
+    void SetRightNeighbours(Field *right)
+    {
         this->right=right;
+    }
+    void SetBottomNeighbours(Field *bottom)
+    {
         this->bottom=bottom;
     }
     Field* GetTopNeighbour()

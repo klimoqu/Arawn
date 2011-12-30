@@ -18,6 +18,18 @@ public:
         qt.start(timeout);
         connect(&qt,SIGNAL(timeout()), this, SLOT(Boom()));
     }
+    float GetX()
+    {
+        return x;
+    }
+    float GetY()
+    {
+        return y;
+    }
+    uchar GetSize()
+    {
+        return size;
+    }
 signals:
     void Planted(float x, float y);
     void Boomed(float x, float y,uchar size,uchar direction);
