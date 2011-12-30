@@ -92,13 +92,11 @@ public:
     {
         o<<x<<" "<<y<<" "<<type<<std::endl;
     }
-    void Load();
-    void Enter(Player *player);
-    void Exit(Player *player);
+    void StartBurn(uchar size,uchar id, uchar direction);
 signals:
     void Extincted(uchar x,uchar y);
-    void Boomed(uchar x,uchar y,int size, uchar direction);
+    void Boomed(uchar x,uchar y,uchar id,uchar direction);
 public slots:
-    void Boom(uchar x,uchar y,int size, uchar direction);
+    void Boom(uchar x,uchar y,uchar size, uchar id,uchar direction);
     void Extinction();
 };
