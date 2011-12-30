@@ -21,18 +21,24 @@ public slots:
     void plantBomb(uchar x, uchar y, uchar player);
 //    void plantBonus(uchar x, uchar y, uchar type);
     void blastField(uchar x, uchar y, uchar player, uchar dir);
+    void blastingOut(uchar x, uchar y);
     void changeField(uchar x, uchar y, uchar type);
-    //void moveBomb()
+//    void moveBomb()
     void movePlayer(uchar player, uchar dir);
     void diePlayer(uchar player);
     void blastPlayer(uchar player);
 
 private:
     uchar mapIDs[20][13];
-    QPixmap* fPixmaps[10];
+    QImage* fPixmaps[10];
 
     GraphicsPlayer* players[4];
     uchar playersCount;
+
+    QList<GraphicsBomb*> bombs;
+
+    uchar burning[20][13];
+    QMap<uchar, QImage*> bImages;
 
 };
 

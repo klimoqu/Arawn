@@ -17,11 +17,11 @@ public:
 
     inline void setDir(uchar d);
     inline void incAState();
-
+    uchar aState;
+    PlayerImage img;
 private:
     QImage* pix[10][4];
     bool big;
-    uchar aState;
     uchar dir;
 };
 

@@ -77,7 +77,7 @@ GraphicsBomb::GraphicsBomb(GraphicsPlayer::PlayerImage p, QGraphicsItem *parent)
 
 QRectF GraphicsBomb::boundingRect() const
 {
-    return QRectF(-20,-20,40,40);
+    return QRectF(0,0,40,40);
 }
 
 void GraphicsBomb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

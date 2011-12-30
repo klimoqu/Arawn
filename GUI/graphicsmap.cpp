@@ -2,40 +2,101 @@
 
 GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
 {
-
+    /// \todo fPixmaps, bImages
+    for(uchar i = 0; i < 20; i++){
+        for(uchar j = 0; j < 13; j++){
+            burning[i][j] = 42;
+        }
+    }
 }
 
 QRectF GraphicsMap::boundingRect() const
 {
-    return QRectF(-400, -260, 800, 520);
+    return QRectF(0,0,800,520);
 }
 
-void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QWidget *w)
 {
+    painter->save();
+
+    // Pálya
+    for(uchar i = 0; i < 20; i++){
+        for(uchar j = 0; j < 13; j++){
+            painter->drawImage(i*40, j*40, *(fPixmaps[mapIDs[i][j]]));
+        }
+    }
+
+    // Bombák
+    for(uchar i = 0; i < bombs.length(); i++){
+        bombs[i]->paint(painter, o, w);
+    }
+
+    // Játékosok
+    for(uchar i = 0; i < playersCount; i++){
+        players[i]->paint(painter, o, w);
+    }
+
+    // Tűz
+    for(uchar i = 0; i < 20; i++){
+        for(uchar j = 0; j < 13; j++){
+            painter->drawImage(i*40, j*40, *(bImages[burning[i][j]]));
+        }
+    }
+    painter->restore();
 }
 
 void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
+    GraphicsBomb *bomb = new GraphicsBomb(players[player]->img, this);
+    bomb->setX(x*40);
+    bomb->setY(y*40);
+    bombs.append(bomb);
 }
 
 void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
 {
+    burning[x][y] = dir;
+    /// TODO player
+}
+
+void GraphicsMap::blastingOut(uchar x, uchar y)
+{
+    burning[x][y] += 50;
 }
 
 void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 {
+    mapIDs[x][y] = type;
 }
 
 void GraphicsMap::movePlayer(uchar player, uchar dir)
 {
+    switch(dir){
+    case 0:
+        players[player]->setX(players[player]->x()-8);
+        return;
+    case 1:
+        players[player]->setY(players[player]->y()-8);
+        return;
+    case 2:
+        players[player]->setY(players[player]->y()+8);
+        return;
+    case 3:
+        players[player]->setX(players[player]->x()+8);
+        return;
+    default:
+        return;
+    }
 }
 
 void GraphicsMap::diePlayer(uchar player)
 {
+    players[player]->aState = 9;
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
+
 }
 
 void GraphicsMap::setMapIDs(Field **&fields)
