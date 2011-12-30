@@ -105,7 +105,8 @@ void GraphicsMap::diePlayer(uchar player)
 
 void GraphicsMap::blastPlayer(uchar player)
 {
-
+    players[player]->setVisible(false);
+    /// TODO ha látható a vér, rajzoljon ki néhányat
 }
 
 void GraphicsMap::setMapIDs(Field **&fields)
