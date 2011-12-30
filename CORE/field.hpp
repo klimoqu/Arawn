@@ -19,7 +19,7 @@ public:
     {
         this->x=x;
         this->y=y;
-        this->id=id;
+        this->type=type;
         std::stringstream ss;
         ss<<id;
         std::string stringid;
@@ -67,7 +67,7 @@ public:
     }
     void Save(std::ostream &o)
     {
-        o<<x<<" "<<y<<" "<<id<<std::endl;
+        o<<x<<" "<<y<<" "<<type<<std::endl;
     }
     void Load();
     void Enter(Player *player);

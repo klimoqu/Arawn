@@ -26,7 +26,7 @@ protected:
     uchar id;
 
 public:
-    Player(uchar id,QString Name)
+    Player(uchar id,QString* Name)
     {
         this->pName=Name;
         this->id=id;

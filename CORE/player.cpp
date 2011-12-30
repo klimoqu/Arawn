@@ -1,6 +1,6 @@
 #include "arawnheader.h"
 
-Player::Plant(int bombtimeout)
+void Player::Plant(int bombtimeout)
 {
     pCanDrop=false;
     QTimer qt=new QTimer();
