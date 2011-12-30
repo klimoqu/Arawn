@@ -1,4 +1,5 @@
 #include "arawnheader.h"
+#include <sstream>
 
 void Map::Upload(int id)
 {
