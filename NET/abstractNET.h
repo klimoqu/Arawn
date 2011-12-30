@@ -1,7 +1,7 @@
-#ifndef ABSTRACTNET_H
+ï»¿#ifndef ABSTRACTNET_H
 #define ABSTRACTNET_H
 
-//  str a változó neve, nem string
+//  str a vÃ¡ltozÃ³ neve, nem string
 //  port : 28300
 
 class abstractNet
@@ -11,13 +11,13 @@ public:
     void setIP(QString, quint8);
 
 signals:
-    void ServerNewMessage(Command *str);         //új bejövõ üzenet klienstõl signal
-    void ClientNewMessage(Command *str);         //új bejövõ üzenet szervertõl signal
+    void ServerNewMessage(Command *str);         //Ãºj bejÃ¶vÅ‘ Ã¼zenet klienstÅ‘l signal
+    void ClientNewMessage(Command *str);         //Ãºj bejÃ¶vÅ‘ Ã¼zenet szervertÅ‘l signal
 
-    void ServerSendMessage(Command *str);        //új üzenet kiküldése mindenkinek signal
-    void ClientSendMessage(Command *str);        //új üzenet szervernek signal
+    void ServerSendMessage(Command *str);        //Ãºj Ã¼zenet kikÃ¼ldÃ©se mindenkinek signal
+    void ClientSendMessage(Command *str);        //Ãºj Ã¼zenet szervernek signal
 
-    void finish();                              //kilépés signal
+    void finish();                              //kilÃ©pÃ©s signal
 
 public slots:
 
