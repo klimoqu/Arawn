@@ -1,37 +1,60 @@
 #pragma once
 
 #include <QObject>
+#include <QTimer>
 #include <iostream>
-#include <sstream>
 #include "player.hpp"
 
 class Field : public QObject
 {
     Q_OBJECT
     Field *top,*right,*left,*bottom;
-    uchar type,x,y;
-    bool permeable;
+    uchar type,x,y,state;
+    QTimer qt;
+    bool burning;
 
 public:
-    Field(){}
+    /*
+      0 - Fal
+      1 - Doboz
+      2 - Fű
+      3 - Nehézdoboz
+      4 - Űr
+      5 - Lyuk
+    */
 
     Field(uchar id, uchar x,uchar y)
     {
         this->x=x;
         this->y=y;
         this->type=type;
-        std::stringstream ss;
-        ss<<id;
-        std::string stringid;
-        ss>>stringid;
+        switch(id)
+        {
+        case 1:
+            state=1;
+            break;
+        case 3:
+            state=2;
+            break;
+        default:
+            state=0;
+        }
     }
     uchar GetType()
     {
         return this->type;
     }
+    bool IsBurn()
+    {
+        return burning;
+    }
     bool IsPermeable()
     {
-        return permeable;
+        return state==0 && type!=0;
+    }
+    bool IsBlastable()
+    {
+        return state!=0 && (type==1 || type==3);
     }
     void SetTopNeighbours(Field *top)
     {
@@ -72,7 +95,10 @@ public:
     void Load();
     void Enter(Player *player);
     void Exit(Player *player);
-
+signals:
+    void Extincted(uchar x,uchar y);
+    void Boomed(uchar x,uchar y,int size, uchar direction);
 public slots:
-    void Boom(uchar x,uchar y,int size, uchar diretion);
+    void Boom(uchar x,uchar y,int size, uchar direction);
+    void Extinction();
 };

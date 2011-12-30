@@ -1,10 +1,11 @@
 #pragma once
 #include "arawnheader.h"
 
+class Map;
 class Game : public QObject
 {
     Q_OBJECT
-    Map* map;
+    Map *map;
     int gametime,playersnumber,bombtimeout;
     bool server;
 

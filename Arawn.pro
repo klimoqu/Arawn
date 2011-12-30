@@ -36,7 +36,8 @@ HEADERS  += \
     CORE/bomb.hpp \
     CORE/command.hpp \
     GUI/graphicsmap.hpp \
-    GUI/graphicsplayer.hpp
+    GUI/graphicsplayer.hpp \
+	NET/abstractNET.h
 
 FORMS    +=
 

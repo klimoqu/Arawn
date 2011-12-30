@@ -14,6 +14,7 @@
 #include "CORE/bomb.hpp"
 #include "CORE/command.hpp"
 #include "CORE/field.hpp"
-#include "CORE/game.hpp"
-#include "CORE/map.hpp"
 #include "CORE/player.hpp"
+#include "CORE/map.hpp"
+#include "CORE/game.hpp"
+
