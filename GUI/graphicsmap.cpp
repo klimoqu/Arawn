@@ -1,8 +1,13 @@
 #include "graphicsmap.hpp"
 
+#define LE 0
+#define FEL 2
+#define JOBBRA 3
+#define BALRA 1
+#define MINDEN 255
+
 GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
 {
-    /// \todo, bImages
     fPixmaps[0] = new QImage("res/field0.png");
     fPixmaps[1] = new QImage("res/field1.png");
     fPixmaps[2] = new QImage("res/field2.png");
@@ -10,6 +15,16 @@ GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
     fPixmaps[4] = new QImage(40,40, QImage::Format_Mono);
     fPixmaps[5] = new QImage("res/field5.png");
 
+    QImage expl("res/explosion.png");
+    bImages[LE] = new QImage(expl.copy(160, 0, 40, 40));
+    bImages[BALRA] = new QImage(expl.copy(40,0,40,40));
+    bImages[FEL] = bImages[LE];
+    bImages[JOBBRA] = bImages[BALRA];
+    bImages[MINDEN] = new QImage(expl.copy(240,0,40,40));
+    bImages[LE+16] = new QImage(expl.copy(200,0,40,70));
+    bImages[BALRA+16] = new QImage(expl.copy(0,0,40,40));
+    bImages[FEL+16] = new QImage(expl.copy(120,0,40,40));
+    bImages[JOBBRA+16] = new QImage(expl.copy(80,0,40,40));
 
 
     for(uchar i = 0; i < 20; i++){
@@ -59,6 +74,7 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
     GraphicsBomb *bomb = new GraphicsBomb(players[player]->img, this);
     bomb->setX(x*40);
     bomb->setY(y*40);
+    emit bombPlanted();
     bombs.append(bomb);
 }
 
@@ -66,6 +82,8 @@ void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
 {
     burning[x][y] = dir;
     /// TODO player
+    /// TODO emit
+    /// TODO bomb
 }
 
 void GraphicsMap::blastingOut(uchar x, uchar y)
@@ -80,17 +98,18 @@ void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 
 void GraphicsMap::movePlayer(uchar player, uchar dir)
 {
+    players[player]->incAState();
     switch(dir){
-    case 0:
+    case BALRA:
         players[player]->setX(players[player]->x()-8);
         return;
-    case 1:
+    case FEL:
         players[player]->setY(players[player]->y()-8);
         return;
-    case 2:
+    case LE:
         players[player]->setY(players[player]->y()+8);
         return;
-    case 3:
+    case JOBBRA:
         players[player]->setX(players[player]->x()+8);
         return;
     default:
@@ -100,12 +119,14 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
 
 void GraphicsMap::diePlayer(uchar player)
 {
+    emit playerDied();
     players[player]->aState = 9;
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
+    emit playerBlasted();
     /// TODO ha látható a vér, rajzoljon ki néhányat
 }
 

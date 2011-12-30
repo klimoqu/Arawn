@@ -16,7 +16,13 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     inline void setDir(uchar d);
-    inline void incAState();
+    inline void incAState()
+    {
+        if(aState == 9) return;
+        if(aState < 8) aState++;
+        else aState = 0;
+    }
+
     uchar aState;
     PlayerImage img;
 private:

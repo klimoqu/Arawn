@@ -16,6 +16,9 @@ public:
 
 signals:
     void commanding(Command &c);
+    void bombPlanted();
+    void playerDied();
+    void playerBlasted();
 
 public slots:
     void plantBomb(uchar x, uchar y, uchar player);

@@ -47,12 +47,6 @@ void GraphicsPlayer::setDir(uchar d)
     dir = d;
 }
 
-void GraphicsPlayer::incAState()
-{
-    if(aState == 9) return;
-    if(aState < 8) aState++;
-    else aState = 0;
-}
 
 GraphicsBomb::GraphicsBomb(GraphicsPlayer::PlayerImage p, QGraphicsItem *parent)
 {
