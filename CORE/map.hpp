@@ -15,11 +15,11 @@ protected:
     Field* Fields[20][13];
     Player* players[4];
     uchar playersnumber;
-    void Upload(int id);
     QList<Bomb*> bombs;
 
 
 public:
+    void Upload(int id);
     Map(int id,Player* player_0,Player* player_1);
     Map(int id,Player* player_0,Player* player_1,Player* player_2);
     Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3);

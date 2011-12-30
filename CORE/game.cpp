@@ -3,7 +3,7 @@
 
 void Game::NewGame(int id)
 {
-    //this->map=new Map(id);
+    this->map->Upload(id);
 }
 
 void Game::validate(Command c)
@@ -14,7 +14,7 @@ void Game::validate(Command c)
     }
     if(!(map->GetPlayer(c.GetPlayerId())->IsAlive()))
     {
-            return;
+        return;
     }
     Player *player=map->GetPlayer(c.GetPlayerId());
 
@@ -84,18 +84,18 @@ void Game::clientsync(Command c)
     }
     if(c.GetMessageType()==2)//plant
     {
-        //map->bombplanted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
+        map->bomb_planted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
     }
     if(c.GetMessageType()==3)//boom
     {
-        //map->fieldblasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
+        map->field_blasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
     }
     if(c.GetMessageType()==4)//Fieldaction
     {
     }
     if(c.GetMessageType()==5)
     {
-        //if(c.GetMessage()==0){map->playerdied(c.GetPlayerId());}
-        //if(c.GetMessage()==1){map->playerblasted(c.GetPlayerId());}
+        if(c.GetMessage()==0){map->player_died(c.GetPlayerId());}
+        if(c.GetMessage()==1){map->player_blasted(c.GetPlayerId());}
     }
 }
