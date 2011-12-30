@@ -8,7 +8,7 @@
 
 #include "GUI/pixmapobjectitem.hpp"
 #include "GUI/qgraphicsmenu.hpp"
-
+#include "GUI/graphicsplayer.hpp"
 #include "GUI/qarawnwindow.hpp"
 
 #include "CORE/bomb.hpp"

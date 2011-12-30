@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     CORE/map.cpp \
     CORE/game.cpp \
     CORE/field.cpp \
-    GUI/graphicsmap.cpp
+    GUI/graphicsmap.cpp \
+    GUI/graphicsplayer.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -33,7 +34,8 @@ HEADERS  += \
     CORE/game.hpp \
     CORE/bomb.hpp \
     CORE/command.hpp \
-    GUI/graphicsmap.hpp
+    GUI/graphicsmap.hpp \
+    GUI/graphicsplayer.hpp
 
 FORMS    +=
 
@@ -59,9 +61,17 @@ OTHER_FILES += \
     GUI/res/2_step.wav \
     GUI/res/1_changemenu.wav \
     GUI/res/0_tofrommenu.wav \
-    GUI/res/fire.jpg
+    GUI/res/fire.jpg \
+    GUI/res/tux.png \
+    GUI/res/spider.png \
+    GUI/res/snake.png \
+    GUI/res/bsd.png \
+    GUI/res/bombs.png
 
 RESOURCES +=
+
+
+
 
 
 

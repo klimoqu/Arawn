@@ -1,25 +1,17 @@
-#include "arawnheader.h"
+#include "command.hpp"
 
-Command::Command(int _id, int _msgtype, int _msg)
+Command::Command(uchar _id, uchar _msgtype, int _msg)
 {
     id=_id;
     msgtype=_msgtype;
     msg=_msg;
 }
 
-QDataStream & Command::operator <<(QDataStream &stream, Command &what)
-{
-    stream  << what.id;
-    stream  << what.msgtype;
-    stream  << what.msg;
-    return( stream );
-}
+uchar Command::GetPlayerId(){return id;}
+uchar Command::GetMessageType(){return msgtype;}
+int Command::GetMessage(){return msg;}
 
-QDataStream & Command::operator >>(QDataStream &stream, Command &what)
+QString Command::toString()
 {
-    stream  >> what.id;
-    stream  >> what.msgtype;
-    stream  >> what.msg;
-    return( stream );
+    return (QString::number(this->id) + " " + QString::number(this->msgtype) + " " + QString::number(this->msg));
 }
-
