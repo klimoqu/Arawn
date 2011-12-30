@@ -12,8 +12,6 @@ void Map::Upload(int id)
     std::cout.flush();
     input.open(filename.c_str());
     getline(input,name);
-    input>>size_x;
-    input>>size_y;
     for(unsigned int i=0;i<20;i++)
     {
         for(unsigned int j=0;j<13;j++)
@@ -62,10 +60,9 @@ Map::Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* playe
 
 void Map::Save(std::ostream &o)
 {
-    o<<size_x<<" "<<size_y<<std::endl;
-    for(int i=0;i<size_x;i++)
+    for(int i=0;i<20;i++)
     {
-        for(int j=0;j<size_y;j++)
+        for(int j=0;j<13;j++)
         {
             Fields[i][j]->Save(o);
         }

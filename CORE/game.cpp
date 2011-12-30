@@ -61,10 +61,10 @@ void Game::execute(Command c)
     //Bomba lerakás:
     if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())
     {
-        float x=player->GetX();
-        float y=player->GetY();
+        float x=map->GetPlayer(c.GetPlayerId())->GetX();
+        float y=map->GetPlayer(c.GetPlayerId())->GetY();
         map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout));
-        map->GetPlayer(c.GetPlayerId())->Plant();
+        map->GetPlayer(c.GetPlayerId())->Plant(bombtimeout);
     }
     //Robbanások:
     if(c.GetMessageType()==3)

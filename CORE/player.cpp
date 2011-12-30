@@ -2,11 +2,10 @@
 
 void Player::Plant(int bombtimeout)
 {
-    pCanDrop=false;
-    QTimer qt=new QTimer();
-    qt.singleShot(true);
-    qt.timeout(bombtimeout);
-    connect(&qt,SIGNAL(timeout()), this, SLOT(CanDropNow()));
+    QTimer* qt=new QTimer();
+    qt->setSingleShot(true);
+    qt->start(bombtimeout);
+    connect(qt,SIGNAL(timeout()), this, SLOT(CanDropNow()));
 }
 void Player::Move(int direction)
 {

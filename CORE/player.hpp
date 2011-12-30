@@ -44,5 +44,5 @@ public:
 private slots:
     void CanDropNow(){pBombsNum++;}
 public slots:
-    void Die();
+    void Die(){}
 };
