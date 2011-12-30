@@ -32,7 +32,11 @@ public:
         this->id=id;
     }
     uchar GetId(){return id;}
-    void SetStartPosition(float x, float y);
+    void SetStartPosition(float x, float y)
+    {
+        pXcoord=x;
+        pYcoord=y;
+    }
     void Move(int direction);
     bool IsAlive(){return live;}
     float GetX(){return pXcoord;}
