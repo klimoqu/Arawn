@@ -19,6 +19,7 @@ SOURCES += main.cpp\
     CORE/map.cpp \
     CORE/game.cpp \
     CORE/field.cpp \
+	CORE/command.cpp \
     GUI/graphicsmap.cpp \
     GUI/graphicsplayer.cpp
 
