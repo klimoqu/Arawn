@@ -71,4 +71,8 @@ public slots:
         delete b;
     }
     void InputCommand(Command &c){}
+    void FieldBurning(uchar x, uchar y, uchar id,uchar direction)
+    {
+        emit FieldBlasted(x,y,id,direction);
+    }
 };
