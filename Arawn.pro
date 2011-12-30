@@ -73,9 +73,12 @@ OTHER_FILES += \
     GUI/res/field3.png \
     GUI/res/field2.png \
     GUI/res/field1.png \
-    GUI/res/field0.png
+    GUI/res/field0.png \
+    GUI/res/extras.png \
+    GUI/res/explosion.png
 
 RESOURCES +=
+
 
 
 

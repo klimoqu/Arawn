@@ -41,4 +41,7 @@ private:
     uchar aState;
 };
 
+
+
+
 #endif // GRAPHICSPLAYER_HPP
