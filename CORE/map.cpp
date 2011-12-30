@@ -14,16 +14,24 @@ void Map::Upload(int id)
     getline(input,name);
     input>>size_x;
     input>>size_y;
-    for(unsigned int i=0;i<size_x;i++)
+    for(unsigned int i=0;i<20;i++)
     {
-        std::vector<Field*> tempcolumn;
-        for(unsigned int j=0;j<size_y;j++)
+        for(unsigned int j=0;j<13;j++)
         {
             int tempFieldid;
             input>>tempFieldid;
-            tempcolumn.push_back(new Field(i,j,tempFieldid));
+            Fields[i][j]=new Field(i,j,tempFieldid);
+            if(i>0)
+            {
+                Fields[i][j]->SetLeftNeighbours(Fields[i-1][j]);
+                Fields[i-1][j]->SetRightNeighbours(Fields[i][j]);
+            }
+            if(j>0)
+            {
+                Fields[i][j]->SetTopNeighbours(Fields[i][j-1]);
+                Fields[i][j-1]->SetBottomNeighbours(Fields[i][j]);
+            }
         }
-        Fields.push_back(tempcolumn);
     }
     input.close();
 }

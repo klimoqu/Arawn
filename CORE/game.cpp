@@ -18,6 +18,10 @@ void Game::validate(Command c)
     //Move parancsok:
     if(c.GetMessageType()==1)
     {
+        if(c.GetMessage()<0 || c.GetMessage()>4)
+        {
+            return;
+        }
         float x=player->GetX();
         float y=player->GetY();
         Field *field=map->GetField(round(x),round(y));
@@ -40,13 +44,31 @@ void Game::validate(Command c)
         }
     }
     //Bomba lerakás:
-    if(c.GetMessageType()==2)
+    if(c.GetMessageType()==2 && !map->GetPlayer(c.GetPlayerId())->CanDrop())
+    {
+        return;
+    }
+    emit ServerExecute(c);
+    execute(c);
+}
+void Game::execute(Command c)
+{
+    // Mozgás
+    if(c.GetMessageType()==1)
+    {
+        map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage());
+    }
+    //Bomba lerakás:
+    if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())
     {
         float x=player->GetX();
         float y=player->GetY();
-        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),timeout));
+        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout));
+        map->GetPlayer(c.GetPlayerId())->Plant();
     }
-
-    emit ServerExecute(c);
+    //Robbanások:
+    if(c.GetMessageType()==3)
+    {
+        map->GetBomb(c.GetMessage())->Boom();
+    }
 }
-void Game::execute(Command c){}

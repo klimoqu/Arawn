@@ -5,7 +5,7 @@ class Game : public QObject
 {
     Q_OBJECT
     Map* map;
-    int time,playersnumber,timeout;
+    int gametime,playersnumber,bombtimeout;
     bool server;
 
     void validate(Command c);
@@ -13,12 +13,13 @@ class Game : public QObject
 
 
 public:
-    Game(int playersnumber,int timeout)
+    Game(int playersnumber)
     {
         this->playersnumber=playersnumber;
-        this->timeout=timeout;
+        this->bombtimeout=2500;
     }
     void NewGame(int id);
+    void SetGameTime(int time){this->gametime=time;}
 
 
 signals:
