@@ -16,18 +16,13 @@ public:
 
 signals:
     void commanding(Command &c);
-//    void bombPlanted(uchar x, uchar y, uchar player);
-//    void fieldBlasting(uchar x, uchar y, uchar player, uchar dir);
-//    void fielChanged(uchar x, uchar y, uchar type);
-//    void playerMoved(float x, float y);
-//    void playerDied(uchar player);
-//    void playerBlasted(uchar player);
 
 public slots:
     void plantBomb(uchar x, uchar y, uchar player);
 //    void plantBonus(uchar x, uchar y, uchar type);
     void blastField(uchar x, uchar y, uchar player, uchar dir);
     void changeField(uchar x, uchar y, uchar type);
+    //void moveBomb()
     void movePlayer(uchar player, uchar dir);
     void diePlayer(uchar player);
     void blastPlayer(uchar player);
@@ -35,6 +30,7 @@ public slots:
 private:
     uchar mapIDs[20][13];
     QPixmap* fPixmaps[10];
+
 
 };
 

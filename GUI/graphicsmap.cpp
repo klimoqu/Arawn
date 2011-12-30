@@ -40,5 +40,9 @@ void GraphicsMap::blastPlayer(uchar player)
 
 void GraphicsMap::setMapIDs(Field **&fields)
 {
-
+    for(uchar i = 0; i < 20; i++){
+        for(uchar j = 0; j < 13; j++){
+            mapIDs[i][j] = fields[i][j].GetType();
+        }
+    }
 }
