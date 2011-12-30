@@ -31,6 +31,8 @@ private:
     uchar mapIDs[20][13];
     QPixmap* fPixmaps[10];
 
+    GraphicsPlayer* players[4];
+    uchar playersCount;
 
 };
 
