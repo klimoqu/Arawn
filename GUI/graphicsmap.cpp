@@ -2,7 +2,16 @@
 
 GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
 {
-    /// \todo fPixmaps, bImages
+    /// \todo, bImages
+    fPixmaps[0] = new QImage("res/field0.png");
+    fPixmaps[1] = new QImage("res/field1.png");
+    fPixmaps[2] = new QImage("res/field2.png");
+    fPixmaps[3] = new QImage("res/field3.png");
+    fPixmaps[4] = new QImage(40,40, QImage::Format_Mono);
+    fPixmaps[5] = new QImage("res/field5.png");
+
+
+
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
             burning[i][j] = 42;
@@ -96,7 +105,8 @@ void GraphicsMap::diePlayer(uchar player)
 
 void GraphicsMap::blastPlayer(uchar player)
 {
-
+    players[player]->setVisible(false);
+    /// TODO ha látható a vér, rajzoljon ki néhányat
 }
 
 void GraphicsMap::setMapIDs(Field **&fields)
