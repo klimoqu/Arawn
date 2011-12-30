@@ -40,7 +40,7 @@ public slots:
         emit Boomed(this->x,this->y,this->size,0);
         emit DeleteThis(this);
     }
-    void Boom(float x, float y, uchar size, uchar diretion)
+    void Boom(float x, float y)
     {
         if(this->x==x && this->y==y)Boom();
     }
