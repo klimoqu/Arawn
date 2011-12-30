@@ -1,7 +1,6 @@
 #pragma once
 
 #include <fstream>
-#include <vector>
 #include <string>
 
 #include "arawnheader.h"
@@ -13,13 +12,14 @@ protected:
     int id;
     std::ifstream input;
     Field* Fields[20][13];
-    Player* players[];
+    Player* players[4];
     uchar playersnumber;
     void Upload(int id);
     QList<Bomb*> bombs;
 
 
 public:
+    Map(int id){}
     Map(int id,Player* player_0,Player* player_1);
     Map(int id,Player* player_0,Player* player_1,Player* player_2);
     Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3);
@@ -31,8 +31,33 @@ public:
     void AddBomb(Bomb* b){bombs.push_back(b);}
     Bomb* GetBomb(int i){return bombs[i];}
 
+    void bombplanted(uchar x, uchar y,uchar id)
+    {
+        emit BombPlanted(x,y,id);
+    }
+    void fieldblasted(uchar x, uchar y, uchar id, uchar direction)
+    {
+        emit FieldBlasted(x,y,id,direction);
+    }
+    void playerdied(uchar id)
+    {
+        emit PlayerDied(id);
+    }
+    void playermoved(uchar id,uchar direction)
+    {
+        emit PlayerMoved(id,direction);
+    }
+    void playerblasted(uchar id)
+    {
+        emit PlayerBlasted(id);
+    }
+    void fieldchanged(uchar x, uchar y, uchar type)
+    {
+        emit FieldChanged(x,y,type);
+    }
+
 signals:
-    void BombPlanted(uchar x, uchar y, uchar id);
+    void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id, uchar direction);
     void PlayerDied(uchar id);
     void PlayerMoved(uchar id,uchar direction);
@@ -45,6 +70,5 @@ public slots:
         bombs.removeAll(b);
         delete b;
     }
-    void InputCommand(Command &c);
-    void Boomed(int location);
+    void InputCommand(Command &c){}
 };

@@ -1,19 +1,20 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
+#include <QString>
+
 class Command
 {
-    int id,msgtype,msg;
+    uchar id,msgtype;
+    int msg;
 public:
-    Command(int _id, int _msgtype, int _msg);
-    Command();
-    int GetPlayerId(){return id;}
-    int GetMessageType(){return msgtype;}
-    int GetMessage() {return msg;}
+    Command(uchar _id, uchar _msgtype, int _msg);
 
-    friend QDataStream & operator<<(QDataStream & stream, Command & what);
-    friend QDataStream & operator>>(QDataStream & stream, Command & what);
+    uchar GetPlayerId();
+    uchar GetMessageType();
+    int GetMessage();
+
+    QString toString();
 };
-
 
 #endif // COMMAND_HPP

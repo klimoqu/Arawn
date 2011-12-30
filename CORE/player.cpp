@@ -11,16 +11,16 @@ void Player::Move(int direction)
 {
     switch(direction)
     {
-        case 1:
+        case 0:
             pYcoord--;
             break;
-        case 2:
+        case 1:
             pXcoord--;
             break;
-        case 3:
+        case 2:
             pXcoord++;
             break;
-        case 4:
+        case 3:
             pYcoord++;
             break;
         default:

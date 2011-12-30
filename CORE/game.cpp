@@ -1,7 +1,10 @@
 #include "arawnheader.h"
 #include <math.h>
 
-void Game::NewGame(int id){}
+void Game::NewGame(int id)
+{
+    this->map=new Map(id);
+}
 
 void Game::validate(Command c)
 {
@@ -18,7 +21,7 @@ void Game::validate(Command c)
     //Move parancsok:
     if(c.GetMessageType()==1)
     {
-        if(c.GetMessage()<0 || c.GetMessage()>4)
+        if(c.GetMessage()<0 || c.GetMessage()>3)
         {
             return;
         }
@@ -26,19 +29,19 @@ void Game::validate(Command c)
         float y=player->GetY();
         Field *field=map->GetField(round(x),round(y));
 
-        if(c.GetMessage()==1 && (field->GetLeftNeighbour()==0 || !field->GetLeftNeighbour()->IsPermeable()))
+        if(c.GetMessage()==0 && (field->GetLeftNeighbour()==0 || !field->GetLeftNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==2 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
+        if(c.GetMessage()==1 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==3 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
+        if(c.GetMessage()==2 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==4 && (field->GetRightNeighbour()==0 || !field->GetRightNeighbour()->IsPermeable()))
+        if(c.GetMessage()==3 && (field->GetRightNeighbour()==0 || !field->GetRightNeighbour()->IsPermeable()))
         {
             return;
         }
@@ -70,5 +73,30 @@ void Game::execute(Command c)
     if(c.GetMessageType()==3)
     {
         map->GetBomb(c.GetMessage())->Boom();
+    }
+}
+
+void Game::clientsync(Command c)
+{
+    if(c.GetMessageType()==1)//move
+    {
+        map->playermoved(c.GetPlayerId(),c.GetMessage());
+    }
+    if(c.GetMessageType()==2)//plant
+    {
+        map->bombplanted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
+    }
+    if(c.GetMessageType()==3)//boom
+    {
+        map->fieldblasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
+    }
+    if(c.GetMessageType()==4)//Fieldaction
+    {
+
+    }
+    if(c.GetMessageType()==5)
+    {
+        if(c.GetMessage()==0){map->playerdied(c.GetPlayerId());}
+        if(c.GetMessage()==1){map->playerblasted(c.GetPlayerId());}
     }
 }

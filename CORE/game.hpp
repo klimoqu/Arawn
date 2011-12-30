@@ -8,8 +8,10 @@ class Game : public QObject
     int gametime,playersnumber,bombtimeout;
     bool server;
 
-    void validate(Command c);
-    void execute(Command c);
+    void validate(Command c);//server
+    void execute(Command c);//server
+
+    void clientsync(Command c);//kliens
 
 
 public:
@@ -20,7 +22,6 @@ public:
     }
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}
-
 
 signals:
 
