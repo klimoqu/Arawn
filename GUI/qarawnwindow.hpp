@@ -45,6 +45,7 @@ private:
             GraphicsMenu *menuSMExtras;
             GraphicsMenu *menuEDDiseases;
         GraphicsMenu *menuNetworkGame;
+            GraphicsMenu *menuCreateNetwork;
         GraphicsMenu *menuOptions;
         GraphicsAbout *aboutItem;
 
@@ -59,6 +60,7 @@ private:
             QState *stateEDDiseases;
             QState *stateLoad; /** TODO Itt még át kell gondolni */
         QState *stateNetworkGameMenu;
+            QState *stateCreateNetwork;
             /** TODO Szintén */
         QState *stateOptionsMenu;
         QState *stateMapEditor; // TODO

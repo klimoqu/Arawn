@@ -121,6 +121,8 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateLoad);
     stateNetworkGameMenu = new QState;
     machine->addState(stateNetworkGameMenu);
+    stateCreateNetwork = new QState;
+    machine->addState(stateCreateNetwork);
     stateOptionsMenu = new QState;
     machine->addState(stateOptionsMenu);
     stateMapEditor = new QState;
@@ -229,6 +231,19 @@ void QArawnWindow::initializeMenus()
      /** TODO Itt még át kell gondolni */
      menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
      machine->addDefaultAnimation(new QPropertyAnimation(menuNetworkGame, "pos"));
+
+
+     menuCreateNetwork = new GraphicsMenu(tr("New network"));
+     menuCreateNetwork->addMenuItem(tr("Player setup"));
+     menuCreateNetwork->addMenuItem(tr("Map selection"));
+     menuCreateNetwork->addMenuItem(tr("Game settings"));
+     menuCreateNetwork->addMenuItem(tr("Start survival cup"));
+     menuCreateNetwork->addMenuItem(tr("Start murder cup"));
+     scene->addItem(menuCreateNetwork);
+     connect(menuCreateNetwork, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
+     menuCreateNetwork->setPos(scene->width()/2 + menuCreateNetwork->boundingRect().width()/2,0);
+     machine->addDefaultAnimation(new QPropertyAnimation(menuCreateNetwork, "pos"));
+
 
 
      menuOptions = new GraphicsMenu(tr("Options"));
@@ -363,8 +378,8 @@ void QArawnWindow::initializeMenus()
 
      stateNetworkGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
      stateNetworkGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(0,0));
-//     stateNetworkGameMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
+     stateNetworkGameMenu->assignProperty(menuCreateNetwork, "pos", QPointF(scene->width()/2 + menuCreateNetwork->boundingRect().width()/2,0));
+     stateNetworkGameMenu->addTransition(menuNetworkGame, SIGNAL(menu1Selected()), stateCreateNetwork);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
 //     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
@@ -382,6 +397,23 @@ void QArawnWindow::initializeMenus()
      QKeyEventTransition *k27 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
      stateNetworkGameMenu->addTransition(k27);
      connect(k27, SIGNAL(triggered()), menuNetworkGame, SLOT(keyEnter()));
+
+
+     stateCreateNetwork->assignProperty(menuNetworkGame, "pos", QPointF(-(scene->width()/2 + menuNetworkGame->boundingRect().width()/2),0));
+     stateCreateNetwork->assignProperty(menuCreateNetwork, "pos", QPointF(0,0));
+     QKeyEventTransition *k35 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
+     stateCreateNetwork->addTransition(k35);
+     connect(k35, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyDown()));
+     QKeyEventTransition *k36 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
+     stateCreateNetwork->addTransition(k36);
+     connect(k36, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyUp()));
+     QKeyEventTransition *k37 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
+     k37->setTargetState(stateNetworkGameMenu);
+     stateCreateNetwork->addTransition(k37);
+     QKeyEventTransition *k38 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
+     stateCreateNetwork->addTransition(k38);
+     connect(k38, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyEnter()));
+
 
 
      stateOptionsMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
