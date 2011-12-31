@@ -1,9 +1,9 @@
-#include "graphicsmap.hpp"
+#include "GUI/graphicsmap.hpp"
 
-#define LE 0
-#define FEL 2
+#define LE 2
+#define FEL 1
 #define JOBBRA 3
-#define BALRA 1
+#define BALRA 0
 #define MINDEN 255
 
 GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
@@ -82,8 +82,18 @@ void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
 {
     burning[x][y] = dir;
     /// TODO player
-    /// TODO emit
-    /// TODO bomb
+
+    for(uchar i = 0; i < bombs.length(); i++){
+        if(
+                (bombs[i]->x())/40 == x &&
+                (bombs[i]->y())/40 == y
+        ){
+            delete bombs[i];
+            bombs.removeAt(i);
+            i--;
+            emit bombBlasted();
+        }
+    }
 }
 
 void GraphicsMap::blastingOut(uchar x, uchar y)
@@ -127,7 +137,6 @@ void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
     emit playerBlasted();
-    /// TODO ha látható a vér, rajzoljon ki néhányat
 }
 
 void GraphicsMap::setMapIDs(Field **&fields)

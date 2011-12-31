@@ -15,8 +15,9 @@ public:
     void setMapIDs(Field** &fields);
 
 signals:
-    void commanding(Command &c);
+    void commanding(uchar c);
     void bombPlanted();
+    void bombBlasted();
     void playerDied();
     void playerBlasted();
 
