@@ -82,8 +82,17 @@ void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
 {
     burning[x][y] = dir;
     /// TODO player
-    /// TODO emit
-    /// TODO bomb
+
+    for(uchar i = 0; i < bombs.length(); i++){
+        if(
+                (bombs[i]->x())/40 == x &&
+                (bombs[i]->y())/40 == y
+        ){
+            bombs.removeAt(i);
+            i--;
+            emit bombBlasted();
+        }
+    }
 }
 
 void GraphicsMap::blastingOut(uchar x, uchar y)
