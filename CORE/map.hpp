@@ -2,8 +2,10 @@
 
 #include <fstream>
 #include <string>
-
-#include "arawnheader.h"
+#include "CORE/field.hpp"
+#include "CORE/bomb.hpp"
+#include "CORE/player.hpp"
+#include "CORE/command.hpp"
 
 class Map : public QObject
 {
@@ -20,12 +22,9 @@ protected:
 
 public:
     void Upload(int id);
-    Map(int id,Player* player_0,Player* player_1);
-    Map(int id,Player* player_0,Player* player_1,Player* player_2);
-    Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3);
+    Map(int playersnumber);
+
     int GetPlayersNumber(){return playersnumber;}
-    void Save(std::ostream &o);
-    void Load(std::istream &i);
     Player* GetPlayer(uchar id){if (id>=playersnumber) return 0;else return players[id];}
     Field* GetField(uchar x, uchar y){return Fields[x][y];}
     void AddBomb(Bomb* b){bombs.push_back(b);}
@@ -70,7 +69,7 @@ public slots:
         bombs.removeAll(b);
         delete b;
     }
-    void InputCommand(Command &c){}
+    void InputCommand(uchar c){}
     void FieldBurning(uchar x, uchar y, uchar id,uchar direction)
     {
         emit FieldBlasted(x,y,id,direction);

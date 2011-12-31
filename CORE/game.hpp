@@ -1,12 +1,13 @@
 #pragma once
-#include "arawnheader.h"
+#include "CORE/map.hpp"
 
-class Map;
+//class Map;
 class Game : public QObject
 {
     Q_OBJECT
     Map *map;
     int gametime,playersnumber,bombtimeout;
+    uchar playerid;
     bool server;
 
     void validate(Command c);//server
@@ -16,10 +17,13 @@ class Game : public QObject
 
 
 public:
-    Game(int playersnumber)
+    Game(int playersnumber,bool server,uchar playerid)
     {
         this->playersnumber=playersnumber;
         this->bombtimeout=2500;
+        this->server=server;
+        this->playerid=playerid;
+        map=new Map(playersnumber);
     }
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}

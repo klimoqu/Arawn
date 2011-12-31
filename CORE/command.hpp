@@ -1,5 +1,4 @@
-#ifndef COMMAND_HPP
-#define COMMAND_HPP
+#pragma once
 
 #include <QString>
 
@@ -16,5 +15,3 @@ public:
 
     QString toString();
 };
-
-#endif // COMMAND_HPP

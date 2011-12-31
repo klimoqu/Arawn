@@ -88,10 +88,6 @@ public:
     {
         return bottom;
     }
-    void Save(std::ostream &o)
-    {
-        o<<x<<" "<<y<<" "<<type<<std::endl;
-    }
     void StartBurn(uchar size,uchar id, uchar direction);
 signals:
     void Extincted(uchar x,uchar y);

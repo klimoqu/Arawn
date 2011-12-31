@@ -1,4 +1,4 @@
-#include "arawnheader.h"
+#include "CORE/map.hpp"
 #include <sstream>
 
 void Map::Upload(int id)
@@ -34,43 +34,11 @@ void Map::Upload(int id)
     }
     input.close();
 }
-Map::Map(int id,Player* player_0,Player* player_1)
+Map::Map(int playersnumber)
 {
-    Upload(id);
-    playersnumber=2;
-    players[0]=player_0;
-    players[1]=player_1;
-}
-Map::Map(int id,Player* player_0,Player* player_1,Player* player_2)
-{
-    Upload(id);
-    playersnumber=3;
-    players[0]=player_0;
-    players[1]=player_1;
-    players[2]=player_2;
-}
-Map::Map(int id,Player* player_0,Player* player_1,Player* player_2,Player* player_3)
-{
-    Upload(id);
-    playersnumber=4;
-    players[0]=player_0;
-    players[1]=player_1;
-    players[2]=player_2;
-    players[3]=player_3;
-}
-
-void Map::Save(std::ostream &o)
-{
-    for(int i=0;i<20;i++)
+    this->playersnumber=playersnumber;
+    for(uchar i=0;i<playersnumber;i++)
     {
-        for(int j=0;j<13;j++)
-        {
-            Fields[i][j]->Save(o);
-        }
+        players[i]=new Player(i);
     }
-    o.flush();
-}
-void Map::Load(std::istream &i)
-{
-
 }

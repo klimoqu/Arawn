@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QTimer>
 
 /// Absztrakt játékos osztály
 class Player : public QObject
@@ -26,6 +27,10 @@ protected:
     uchar id;
 
 public:
+    Player(uchar id)
+    {
+        this->id=id;
+    }
     Player(uchar id,QString* Name)
     {
         this->pName=Name;

@@ -1,4 +1,4 @@
-#include "arawnheader.h"
+#include "CORE/game.hpp"
 #include <math.h>
 
 void Game::NewGame(int id)
