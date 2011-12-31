@@ -111,8 +111,9 @@ void Game::clientsync(Command c)
     {
         map->field_blasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
     }
-    if(c.GetMessageType()==4)//Fieldaction
+    if(c.GetMessageType()==4)//kioltas
     {
+        map->field_excinted((c.GetMessage()/256)%256,c.GetMessage()%256);
     }
     if(c.GetMessageType()==5)
     {

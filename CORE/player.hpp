@@ -2,14 +2,13 @@
 
 #include <QObject>
 #include <QTimer>
+#include "math.h"
 
 /// Absztrakt játékos osztály
 class Player : public QObject
 {
     Q_OBJECT
 protected:
-    /// Játékos neve, amely megjelenik a listában is.
-    QString *pName;
     /// Játékos X koordinátája
     float pXcoord;
     /// Játékos Y koordinátája
@@ -23,7 +22,7 @@ protected:
     /// A játékos tud-e bombát a lerakás pillanatában dobni? (kezdetben false)
     bool pCanPush;
     /// A játékos él-e
-    bool live;
+    bool live,blastable;
     uchar id;
 
 public:
@@ -31,17 +30,13 @@ public:
     {
         this->id=id;
     }
-    void SetPlayerName(QString*name){this->pName=name;}
-    Player(uchar id,QString* Name)
-    {
-        this->pName=Name;
-        this->id=id;
-    }
     uchar GetId(){return id;}
     void SetStartPosition(float x, float y)
     {
         pXcoord=x;
         pYcoord=y;
+        live=true;
+        blastable=false;
     }
     void Move(int direction);
     bool IsAlive(){return live;}
@@ -51,8 +46,26 @@ public:
     bool CanDrop(){return pBombsNum>0;}
     void Plant(int bombtiemout);
 
+signals:
+    void Died(uchar playerid);
+    void Blasted(uchar playerid);
+
 private slots:
     void CanDropNow(){pBombsNum++;}
+
 public slots:
-    void Die(){}
+    void DieAndBlast(uchar x, uchar y)
+    {
+        if( round(pXcoord)==x && round(y)==y && live)
+        {
+            emit Died(id);
+            blastable=true;
+            live=false;
+        }
+        if( round(pXcoord)==x && round(y)==y && blastable)
+        {
+            emit Blasted(id);
+            blastable=false;
+        }
+    }
 };
