@@ -1,5 +1,23 @@
 #include "CORE/field.hpp"
 
+
+Field::Field(uchar id, uchar x,uchar y)
+{
+    this->x=x;
+    this->y=y;
+    this->type=type;
+    switch(id)
+    {
+    case 1:
+        state=1;
+        break;
+    case 3:
+        state=2;
+        break;
+    default:
+        state=0;
+    }
+}
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
     if(x!=this->x || this->y!=y)return;

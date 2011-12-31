@@ -12,21 +12,14 @@ class Game : public QObject
 
     void validate(Command c);//server
     void execute(Command c);//server
-
     void clientsync(Command c);//kliens
 
 
 public:
-    Game(int playersnumber,bool server,uchar playerid)
-    {
-        this->playersnumber=playersnumber;
-        this->bombtimeout=2500;
-        this->server=server;
-        this->playerid=playerid;
-        map=new Map(playersnumber);
-    }
+    Game(int playersnumber,bool server,uchar playerid);
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}
+    void MakeCommand(uchar c);
 
 signals:
 
@@ -34,6 +27,8 @@ signals:
     void KlientValidate(Command c);//elleőrizendő cumó
 
 public slots:
-    void ServerExecute(Command c){execute(c);}//ellenörzött parancs
+    void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
     void KlientExecute(Command c){validate(c);}//ellenőrzés
+
+    void InputCommand(uchar c){MakeCommand(c);}
 };

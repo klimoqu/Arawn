@@ -1,11 +1,32 @@
 #include "CORE/game.hpp"
 #include <math.h>
 
+Game::Game(int playersnumber,bool server,uchar playerid)
+{
+    this->playersnumber=playersnumber;
+    this->bombtimeout=2500;
+    this->server=server;
+    this->playerid=playerid;
+    map=new Map(playersnumber);
+}
+
 void Game::NewGame(int id)
 {
     this->map->Upload(id);
 }
-
+void Game::MakeCommand(uchar c)
+{
+    if(c==255)
+    {
+        Command ret=Command(playerid,2,map->GetPlayer(playerid)->GetX()*256+map->GetPlayer(playerid)->GetY());
+        emit KlientValidate(ret);
+    }
+    else
+    {
+        Command ret=Command(playerid,1,c);
+        emit KlientValidate(ret);
+    }
+}
 void Game::validate(Command c)
 {
     if(map->GetPlayer(c.GetPlayerId())==0)

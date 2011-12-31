@@ -69,7 +69,6 @@ public slots:
         bombs.removeAll(b);
         delete b;
     }
-    void InputCommand(uchar c){}
     void FieldBurning(uchar x, uchar y, uchar id,uchar direction)
     {
         emit FieldBlasted(x,y,id,direction);

@@ -31,6 +31,7 @@ public:
     {
         this->id=id;
     }
+    void SetPlayerName(QString*name){this->pName=name;}
     Player(uchar id,QString* Name)
     {
         this->pName=Name;
