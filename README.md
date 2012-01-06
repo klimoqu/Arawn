@@ -37,7 +37,7 @@ Részletesebb kifejtéshez:
         kód()
     }
 
-
+ha bomba lyukba esik majd, akkor olyan, mintha 255,255-nél robbanna
 
 
 
