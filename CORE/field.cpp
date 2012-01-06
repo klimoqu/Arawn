@@ -1,22 +1,12 @@
 #include "CORE/field.hpp"
 
 
-Field::Field(uchar id, uchar x,uchar y)
+Field::Field(uchar type, uchar x,uchar y)
 {
     this->x=x;
     this->y=y;
     this->type=type;
-    switch(id)
-    {
-    case 1:
-        state=1;
-        break;
-    case 3:
-        state=2;
-        break;
-    default:
-        state=0;
-    }
+    this->id=255;
 }
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
@@ -26,11 +16,14 @@ void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 void Field::Extinction()
 {
     burning=false;
+    this->id=255;
     emit Extincted(x,y);
 }
 void Field::StartBurn(uchar size, uchar id,uchar direction)
 {
-    burning=true;
+    if(this->type==2){burning=true;this->id=id;}
+    if(this->type==3){this->type=1;emit FieldChanged(this->x,this->y,this->type);}
+    if(this->type==1){this->type=2;emit FieldChanged(this->x,this->y,this->type);}
     qt.stop();
     qt.setSingleShot(true);
     qt.start(1000);
@@ -38,7 +31,7 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
 
     emit Boomed(x,y,id,size==0 ? direction+16 :direction);
 
-    if(size==0)return;
+    if( size==0 || !burning)return;
 
     if((direction==0 || direction==255) && left!=0 && (left->IsPermeable() || left->IsBlastable())){left->StartBurn(size-1,id,0);}
     if((direction==1 || direction==255) && top!=0 && (top->IsPermeable() || top->IsBlastable())){top->StartBurn(size-1,id,1);}

@@ -9,9 +9,10 @@ class Field : public QObject
 {
     Q_OBJECT
     Field *top,*right,*left,*bottom;
-    uchar type,x,y,state;
+    uchar x,y;
+    volatile uchar id,type;
     QTimer qt;
-    bool burning;
+    volatile bool burning;
 
 public:
     /*
@@ -23,7 +24,7 @@ public:
       5 - Lyuk
     */
 
-    Field(uchar id, uchar x,uchar y);
+    Field(uchar type, uchar x,uchar y);
     uchar GetType()
     {
         return this->type;
@@ -32,13 +33,17 @@ public:
     {
         return burning;
     }
+    uchar GetOwner()
+    {
+        return id;
+    }
     bool IsPermeable()
     {
-        return state==0 && type!=0;
+        return id==2;
     }
     bool IsBlastable()
     {
-        return state!=0 && (type==1 || type==3);
+        return (type==1 || type==3);
     }
     void SetTopNeighbours(Field *top)
     {
@@ -76,6 +81,7 @@ public:
 signals:
     void Extincted(uchar x,uchar y);
     void Boomed(uchar x,uchar y,uchar id,uchar direction);
+    void FieldChanged(uchar x,uchar y,uchar newtype);
 public slots:
     void Boom(uchar x,uchar y,uchar size, uchar id,uchar direction);
     void Extinction();
