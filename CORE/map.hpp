@@ -33,37 +33,50 @@ public:
     void bomb_planted(uchar x, uchar y,uchar id)
     {
         emit BombPlanted(x,y,id);
+        Command ret=Command(id,2,256*x+y);
+        emit ServerCommand(ret);
     }
     void field_blasted(uchar x, uchar y, uchar id, uchar direction)
     {
         emit FieldBlasted(x,y,id,direction);
+        Command ret=Command(id,3,256*256*direction+256*x+y);
+        emit ServerCommand(ret);
     }
-    void player_died(uchar id)
+    void player_died(uchar id,uchar murderid)
     {
-        emit PlayerDied(id);
+        emit PlayerDied(id,murderid);
+        Command ret=Command(id,5,murderid);
+        emit ServerCommand(ret);
     }
     void player_moved(uchar id,uchar direction)
     {
         emit PlayerMoved(id,direction);
+        Command ret=Command(id,1,direction);
+        emit ServerCommand(ret);
     }
     void player_blasted(uchar id)
     {
         emit PlayerBlasted(id);
+        Command ret=Command(id,5,1);
+        emit ServerCommand(ret);
     }
     void field_changed(uchar x, uchar y, uchar type)
     {
         emit FieldChanged(x,y,type);
+        Command ret=Command(255,6,256*256*type+256*x+y);
+        emit ServerCommand(ret);
     }
     void field_excinted(uchar x, uchar y)
     {
         emit FieldExcinted(x,y);
+        Command ret=Command(256,4,256*x+y);
+        emit ServerCommand(ret);
     }
 
 signals:
     void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
-    void FieldExcincted(uchar x, uchar y);
-    void PlayerDied(uchar id);
+    void PlayerDied(uchar id,uchar murderid);
     void PlayerMoved(uchar id,uchar direction);
     void PlayerBlasted(uchar id);
     void FieldChanged(uchar x, uchar y, uchar type);
@@ -83,14 +96,14 @@ public slots:
     }
     void FieldExcinguish(uchar x, uchar y)
     {
-        emit FieldExcincted(x,y);
+        emit FieldExcinted(x,y);
     }
-    void PlayerDie(uchar id)
+    void PlayerDie(uchar id,uchar murderid)
     {
-        emit PlayerDied(id);
+        emit PlayerDied(id,murderid);
     }
     void PlayerBlast(uchar id)
     {
-        emit PlayerDied(id);
+        emit PlayerBlasted(id);
     }
 };

@@ -16,7 +16,7 @@ protected:
     /// Játékos sebessége (1-)
     uchar pSpeed;
     /// Játékos által egyszerre lerakható bombák száma (1-)
-    uchar pBombsNum;
+    volatile uchar pBombsNum;
     /// Játékos által lerakott bombák ereje (1-)
     uchar pBombPower;
     /// A játékos tud-e bombát a lerakás pillanatában dobni? (kezdetben false)
@@ -44,28 +44,29 @@ public:
     float GetY(){return pYcoord;}
     uchar GetBombSize(){return pBombPower;}
     bool CanDrop(){return pBombsNum>0;}
-    void Plant(int bombtiemout);
+    void Plant(){pBombsNum--;}
 
 signals:
-    void Died(uchar playerid);
+    void Died(uchar playerid,uchar murderid);
     void Blasted(uchar playerid);
 
-private slots:
-    void CanDropNow(){pBombsNum++;}
-
 public slots:
-    void DieAndBlast(uchar x, uchar y)
+    void DieAndBlast(uchar id,uchar x, uchar y)
     {
         if( round(pXcoord)==x && round(y)==y && live)
         {
-            emit Died(id);
+            emit Died(this->id,id);
             blastable=true;
             live=false;
         }
         if( round(pXcoord)==x && round(y)==y && blastable)
         {
-            emit Blasted(id);
+            emit Blasted(this->id);
             blastable=false;
+        }
+        if(id=this->id)
+        {
+            pBombsNum++;
         }
     }
 };

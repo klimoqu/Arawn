@@ -30,5 +30,6 @@ public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
     void KlientExecute(Command c){validate(c);}//ellenőrzés
 
-    void InputCommand(uchar c){MakeCommand(c);}
+    void InputCommandFromGui(uchar c){MakeCommand(c);}
+    void InputCommandFromMap(Command c){ServerValidate(c);}
 };

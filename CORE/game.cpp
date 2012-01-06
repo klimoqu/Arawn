@@ -29,11 +29,15 @@ void Game::MakeCommand(uchar c)
 }
 void Game::validate(Command c)
 {
+    if( c.GetMessageType()!=1 && c.GetMessageType()!=2 )
+    {
+        return;
+    }
     if(map->GetPlayer(c.GetPlayerId())==0)
     {
         return;
     }
-    if(!(map->GetPlayer(c.GetPlayerId())->IsAlive()))
+    if(!(map->GetPlayer(c.GetPlayerId())->IsAlive()) && c.GetMessageType()!=5)
     {
         return;
     }
@@ -81,6 +85,10 @@ void Game::execute(Command c)
     if(c.GetMessageType()==1)
     {
         map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage());
+        if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsBurn())
+        {
+            map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
+        }
     }
     //Bomba lerakás:
     if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())
@@ -88,12 +96,7 @@ void Game::execute(Command c)
         float x=map->GetPlayer(c.GetPlayerId())->GetX();
         float y=map->GetPlayer(c.GetPlayerId())->GetY();
         map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout));
-        map->GetPlayer(c.GetPlayerId())->Plant(bombtimeout);
-    }
-    //Robbanások:
-    if(c.GetMessageType()==3)
-    {
-        map->GetBomb(c.GetMessage())->Boom();
+        map->GetPlayer(c.GetPlayerId())->Plant();
     }
 }
 
@@ -115,9 +118,12 @@ void Game::clientsync(Command c)
     {
         map->field_excinted((c.GetMessage()/256)%256,c.GetMessage()%256);
     }
-    if(c.GetMessageType()==5)
+    if(c.GetMessageType()==5)//die/blast
     {
-        if(c.GetMessage()==0){map->player_died(c.GetPlayerId());}
+        if(c.GetMessage()==0){map->player_died(c.GetPlayerId(),c.GetMessage());}
         if(c.GetMessage()==1){map->player_blasted(c.GetPlayerId());}
+    }
+    if(c.GetMessageType()==6)
+    {
     }
 }

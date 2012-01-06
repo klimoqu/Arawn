@@ -1,12 +1,6 @@
 #include "CORE/player.hpp"
 
-void Player::Plant(int bombtimeout)
-{
-    QTimer* qt=new QTimer();
-    qt->setSingleShot(true);
-    qt->start(bombtimeout);
-    connect(qt,SIGNAL(timeout()), this, SLOT(CanDropNow()));
-}
+
 void Player::Move(int direction)
 {
     switch(direction)
