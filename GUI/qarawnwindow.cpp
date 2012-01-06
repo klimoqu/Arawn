@@ -1,4 +1,6 @@
 #include "arawnheader.h"
+#include "GUI/qarawnwindow.hpp"
+#include "GUI/qgraphicsmenu.hpp"
 //#include <QtOpenGL/QtOpenGL>
 
 
@@ -103,32 +105,32 @@ void QArawnWindow::initializeOthers()
 //! [QStates]
     stateArawn = new QState;
     machine->addState(stateArawn);
-    stateMainMenu = new QState;
-    machine->addState(stateMainMenu);
-    stateLocalGameMenu = new QState;
-    machine->addState(stateLocalGameMenu);
+    stateMenu = new QState;
+    machine->addState(stateMenu);
+    stateMenuHistory = new QHistoryState(stateMenu);
+    stateAbout = new QState;
+    machine->addState(stateAbout);
+    stateGame = new QState;
+    machine->addState(stateGame);
+    stateNetSettings = new QState;
+    machine->addState(stateNetSettings);
     statePlayerSetup = new QState;
     machine->addState(statePlayerSetup);
     stateMapSelection = new QState;
     machine->addState(stateMapSelection);
-    stateGameSettings = new QState;
-    machine->addState(stateGameSettings);
-    stateSMExtras = new QState;
-    machine->addState(stateSMExtras);
-    stateEDDiseases = new QState;
-    machine->addState(stateEDDiseases);
-    stateLoad = new QState;
-    machine->addState(stateLoad);
-    stateNetworkGameMenu = new QState;
-    machine->addState(stateNetworkGameMenu);
-    stateCreateNetwork = new QState;
-    machine->addState(stateCreateNetwork);
-    stateOptionsMenu = new QState;
-    machine->addState(stateOptionsMenu);
-    stateMapEditor = new QState;
-    machine->addState(stateMapEditor);
-    stateAbout = new QState;
-    machine->addState(stateAbout);
+    stateSurvivalCup = new QState;
+    machine->addState(stateSurvivalCup);
+    stateMurderCup = new QState;
+    machine->addState(stateMurderCup);
+    stateNetPlayerSetup = new QState;
+    machine->addState(stateNetPlayerSetup);
+    stateNetSurvivalCup = new QState;
+    machine->addState(stateNetSurvivalCup);
+    stateNetMurderCup = new QState;
+    machine->addState(stateNetMurderCup);
+    stateQuit = new QState;
+    machine->addState(stateQuit);
+
     finalState = new QFinalState;
     machine->addState(finalState);
     initializeMenus();
@@ -148,299 +150,97 @@ void QArawnWindow::initializeOthers()
     connect(stateArawn, SIGNAL(exited()), this, SLOT(enterMenus()));
     connect(stateArawn, SIGNAL(exited()), sounds[0], SLOT(play()));
 
-    stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMainMenu);
+    stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMenu);
 
     //Végén
-    timerStLogoToStArawn->start(1000);
+    timerStLogoToStArawn->start(10);
     connect(machine, SIGNAL(finished()), this, SLOT(close()));
 }
 
 
 void QArawnWindow::initializeMenus()
 {
-     menuMain = new GraphicsMenu(tr("Main Menu"));
-     menuMain->addMenuItem(tr("Local Game"));
-     menuMain->addMenuItem(tr("Network Game"));
-     menuMain->addMenuItem(tr("Options"));
-     menuMain->addMenuItem(tr("Map editor"));
-     menuMain->addMenuItem(tr("Credits"));
-     menuMain->addMenuItem(tr("Quit"));
-     connect(menuMain, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuMain);
-     menuMain->setPos(scene->width()/2 + menuMain->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuMain, "pos"));
+     QState* sMainMenu = new QState(stateMenu);
+     stateMenu->setInitialState(sMainMenu);
+     GraphicsMenu *mainMenu = new GraphicsMenu(tr("Main menu"), stateQuit, sMainMenu, sounds[2], sounds[1], this);
+
+     GraphicsMenu* localMenu = mainMenu->addSubMenu(tr("Local game"));
+     GraphicsMenu* networkMenu = mainMenu->addSubMenu(tr("Network game"));
+     GraphicsMenu* optionsMenu = mainMenu->addSubMenu(tr("Options"));
+     mainMenu->addMenuItem(tr("Credits"), stateAbout);
+     mainMenu->addMenuItem(tr("Quit"), stateQuit);
+
+     localMenu->addMenuItem(tr("Player setup"), statePlayerSetup);
+     localMenu->addMenuItem(tr("Map selection"), stateMapSelection);
+     GraphicsMenu* gameSettingsMenu = localMenu->addSubMenu(tr("Game settings"));
+     localMenu->addMenuItem(tr("Start survival cup"), stateSurvivalCup);
+     localMenu->addMenuItem(tr("Start murder cup"), stateMurderCup);
+
+     GraphicsMenu* smE = gameSettingsMenu->addSubMenu(tr("Start/max extras"));
+     GraphicsMenu* edD = gameSettingsMenu->addSubMenu(tr("Enable diseases"));
+     gameSettingsMenu->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
+     gameSettingsMenu->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
+     gameSettingsMenu->addOptionItem(tr("Bomb timer 1/10 sec"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
+     gameSettingsMenu->addOptionItem(tr("Bomb speed f/10 sec"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+
+     smE->addOptionItem(tr("Start bombs"), ArawnSettings::instance()->startBombs, ArawnSettings::instance()->startBombsValues);
+     smE->addOptionItem(tr("Max bombs"), ArawnSettings::instance()->maxBombs, ArawnSettings::instance()->maxBombsValues);
+     smE->addOptionItem(tr("Start power"), ArawnSettings::instance()->startFire, ArawnSettings::instance()->startFireValues);
+     smE->addOptionItem(tr("Max power"), ArawnSettings::instance()->maxFire, ArawnSettings::instance()->maxFireValues);
+     smE->addOptionItem(tr("Start speed"), ArawnSettings::instance()->startSpeed, ArawnSettings::instance()->startSpeedValues);
+     smE->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
+     smE->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
+     smE->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
+
+     edD->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
+     edD->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
+     edD->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+
+     GraphicsMenu *createNetworkMenu = networkMenu->addSubMenu(tr("Create network"));
+     networkMenu->addMenuItem(tr("Connect"), stateNetSettings);
+
+     createNetworkMenu->addMenuItem(tr("Player setup"), stateNetPlayerSetup);
+     createNetworkMenu->addMenuItem(tr("Map selection"), stateMapSelection);
+     GraphicsMenu *netGameSettingsMenu = createNetworkMenu->addSubMenu(tr("Game settings"));
+     createNetworkMenu->addMenuItem(tr("Start survival cup"), stateNetSurvivalCup);
+     createNetworkMenu->addMenuItem(tr("Start murder cup"), stateNetMurderCup);
+
+     GraphicsMenu *NsmE = netGameSettingsMenu->addSubMenu(tr("Start/max extras"));
+     GraphicsMenu *NedD = netGameSettingsMenu->addSubMenu(tr("Enable diseases"));
+     netGameSettingsMenu->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
+     netGameSettingsMenu->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
+     netGameSettingsMenu->addOptionItem(tr("Bomb timer 1/10 sec"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
+     netGameSettingsMenu->addOptionItem(tr("Bomb speed f/10 sec"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
+
+     NsmE->addOptionItem(tr("Start bombs"), ArawnSettings::instance()->startBombs, ArawnSettings::instance()->startBombsValues);
+     NsmE->addOptionItem(tr("Max bombs"), ArawnSettings::instance()->maxBombs, ArawnSettings::instance()->maxBombsValues);
+     NsmE->addOptionItem(tr("Start power"), ArawnSettings::instance()->startFire, ArawnSettings::instance()->startFireValues);
+     NsmE->addOptionItem(tr("Max power"), ArawnSettings::instance()->maxFire, ArawnSettings::instance()->maxFireValues);
+     NsmE->addOptionItem(tr("Start speed"), ArawnSettings::instance()->startSpeed, ArawnSettings::instance()->startSpeedValues);
+     NsmE->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
+     NsmE->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
+     NsmE->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
+
+     NedD->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
+     NedD->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
+     NedD->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
+
+     optionsMenu->addOptionItem(tr("Corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
+     optionsMenu->addOptionItem(tr("Shaky explosion"), ArawnSettings::instance()->shakyExplosion, ArawnSettings::instance()->shakyExplosionValues);
+     optionsMenu->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
+     optionsMenu->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
+     optionsMenu->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
 
 
-
-     menuLocalGame = new GraphicsMenu(tr("Local Game"));
-     menuLocalGame->addMenuItem(tr("Player setup"));
-     menuLocalGame->addMenuItem(tr("Map selection"));
-     menuLocalGame->addMenuItem(tr("Game settings"));
-     menuLocalGame->addMenuItem(tr("Start survival cup"));
-     menuLocalGame->addMenuItem(tr("Start murder cup"));
-     menuLocalGame->addMenuItem(tr("Load saved cup"));
-     connect(menuLocalGame, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuLocalGame);
-     menuLocalGame->setPos(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuLocalGame, "pos"));
-
-
-     menuGameSettings = new GraphicsMenu(tr("Game Settings"));
-     menuGameSettings->addMenuItem(tr("Start/max extras"));
-     menuGameSettings->addMenuItem(tr("Enable diseases"));
-     menuGameSettings->addOptionItem(tr("Round time"), ArawnSettings::instance()->roundTimeDefault, ArawnSettings::instance()->roundTimeDefaultValues);
-     menuGameSettings->addOptionItem(tr("Points to win"), ArawnSettings::instance()->pointsToWin, ArawnSettings::instance()->pointsToWinValues);
-     menuGameSettings->addOptionItem(tr("Bomb timer 1/10 sec"), ArawnSettings::instance()->bombTimer, ArawnSettings::instance()->bombTimerValues);
-     menuGameSettings->addOptionItem(tr("Bomb speed f/10 sec"), ArawnSettings::instance()->bombSpeed, ArawnSettings::instance()->bombSpeedValues);
-     connect(menuGameSettings, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuGameSettings);
-     menuGameSettings->setPos(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuGameSettings, "pos"));
-
-
-     menuSMExtras = new GraphicsMenu(tr("Start/max extras"));
-     menuSMExtras->addOptionItem(tr("Start bombs"), ArawnSettings::instance()->startBombs, ArawnSettings::instance()->startBombsValues);
-     menuSMExtras->addOptionItem(tr("Max bombs"), ArawnSettings::instance()->maxBombs, ArawnSettings::instance()->maxBombsValues);
-     menuSMExtras->addOptionItem(tr("Start power"), ArawnSettings::instance()->startFire, ArawnSettings::instance()->startFireValues);
-     menuSMExtras->addOptionItem(tr("Max power"), ArawnSettings::instance()->maxFire, ArawnSettings::instance()->maxFireValues);
-     menuSMExtras->addOptionItem(tr("Start speed"), ArawnSettings::instance()->startSpeed, ArawnSettings::instance()->startSpeedValues);
-     menuSMExtras->addOptionItem(tr("Max speed"), ArawnSettings::instance()->maxSpeed, ArawnSettings::instance()->maxSpeedValues);
-     menuSMExtras->addOptionItem(tr("Start gloves"), ArawnSettings::instance()->startDropBombs, ArawnSettings::instance()->startDropBombsValues);
-     menuSMExtras->addOptionItem(tr("Start boot"), ArawnSettings::instance()->startPushBombs, ArawnSettings::instance()->startPushBombsValues);
-     connect(menuSMExtras, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuSMExtras);
-     menuSMExtras->setPos(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuSMExtras, "pos"));
-
-
-     menuEDDiseases = new GraphicsMenu(tr("Enable diseases"));
-     menuEDDiseases->addOptionItem(tr("Failing bombs"), ArawnSettings::instance()->enableFailingBombs, ArawnSettings::instance()->enableFailingBombsValues);
-     menuEDDiseases->addOptionItem(tr("Opposite controls"), ArawnSettings::instance()->enableOppositeControls, ArawnSettings::instance()->enableOppositeControlsValues);
-     menuEDDiseases->addOptionItem(tr("Invisibility"), ArawnSettings::instance()->enableInvisibility, ArawnSettings::instance()->enableInvisibilityValues);
-     connect(menuEDDiseases, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuEDDiseases);
-     menuEDDiseases->setPos(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuEDDiseases, "pos"));
-
-
-     menuNetworkGame = new GraphicsMenu(tr("Network Game"));
-     menuNetworkGame->addMenuItem(tr("Create"));
-     menuNetworkGame->addMenuItem(tr("Connect"));
-     connect(menuNetworkGame, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuNetworkGame);
-     /** TODO Itt még át kell gondolni */
-     menuNetworkGame->setPos(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuNetworkGame, "pos"));
-
-
-     menuCreateNetwork = new GraphicsMenu(tr("New network"));
-     menuCreateNetwork->addMenuItem(tr("Player setup"));
-     menuCreateNetwork->addMenuItem(tr("Map selection"));
-     menuCreateNetwork->addMenuItem(tr("Game settings"));
-     menuCreateNetwork->addMenuItem(tr("Start survival cup"));
-     menuCreateNetwork->addMenuItem(tr("Start murder cup"));
-     scene->addItem(menuCreateNetwork);
-     connect(menuCreateNetwork, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     menuCreateNetwork->setPos(scene->width()/2 + menuCreateNetwork->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuCreateNetwork, "pos"));
-
-
-
-     menuOptions = new GraphicsMenu(tr("Options"));
-     menuOptions->addOptionItem(tr("Corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
-     menuOptions->addOptionItem(tr("Shaky explosion"), ArawnSettings::instance()->shakyExplosion, ArawnSettings::instance()->shakyExplosionValues);
-     menuOptions->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
-     menuOptions->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
-     menuOptions->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
-     connect(menuOptions, SIGNAL(menuChanged()), sounds[2], SLOT(play()), Qt::DirectConnection);
-     scene->addItem(menuOptions);
-     menuOptions->setPos(scene->width()/2 + menuOptions->boundingRect().width()/2,0);
-     machine->addDefaultAnimation(new QPropertyAnimation(menuOptions, "pos"));
-
-
-     aboutItem = new GraphicsAbout;
-     scene->addItem(aboutItem);
+     GraphicsAbout *aboutItem = new GraphicsAbout;
      aboutItem->setPos(scene->width()/2 + aboutItem->boundingRect().width()/2,0);
+     scene->addItem(aboutItem);
      machine->addDefaultAnimation(new QPropertyAnimation(aboutItem, "pos"));
-
-
-
-//////////////////
-
-     stateMainMenu->assignProperty(menuMain, "pos", QPointF(0,0));
-     stateMainMenu->assignProperty(menuLocalGame, "pos", QPointF(scene->width()/2 + menuLocalGame->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(menuNetworkGame, "pos", QPointF(scene->width()/2 + menuNetworkGame->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(menuOptions, "pos", QPointF(scene->width()/2 + menuOptions->boundingRect().width()/2,0));
-     stateMainMenu->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
-     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
-     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
-     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
-     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
-     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
-     QKeyEventTransition *k0 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateMainMenu->addTransition(k0);
-     connect(k0, SIGNAL(triggered()), menuMain, SLOT(keyDown()));
-     QKeyEventTransition *k1 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateMainMenu->addTransition(k1);
-     connect(k1, SIGNAL(triggered()), menuMain, SLOT(keyUp()));
-     QKeyEventTransition *k3 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
-     stateMainMenu->addTransition(k3);
-     connect(k3, SIGNAL(triggered()), menuMain, SLOT(keyEnter()));
-
-
-     stateLocalGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
-     stateLocalGameMenu->assignProperty(menuLocalGame, "pos", QPointF(0,0));
-     stateLocalGameMenu->assignProperty(menuGameSettings, "pos", QPointF(scene->width()/2 + menuGameSettings->boundingRect().width()/2,0));
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu1Selected()), stateLocalGameMenu);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
-     stateLocalGameMenu->addTransition(menuLocalGame, SIGNAL(menu3Selected()), stateGameSettings);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
-     QKeyEventTransition *k4 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateLocalGameMenu->addTransition(k4);
-     connect(k4, SIGNAL(triggered()), menuLocalGame, SLOT(keyDown()));
-     QKeyEventTransition *k5 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateLocalGameMenu->addTransition(k5);
-     connect(k5, SIGNAL(triggered()), menuLocalGame, SLOT(keyUp()));
-     QKeyEventTransition *k6 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k6->setTargetState(stateMainMenu);
-     stateLocalGameMenu->addTransition(k6);
-     QKeyEventTransition *k7 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
-     stateLocalGameMenu->addTransition(k7);
-     connect(k7, SIGNAL(triggered()), menuLocalGame, SLOT(keyEnter()));
-
-
-     stateGameSettings->assignProperty(menuLocalGame, "pos", QPointF(-(scene->width()/2 + menuLocalGame->boundingRect().width()/2),0));
-     stateGameSettings->assignProperty(menuGameSettings, "pos", QPointF(0,0));
-     stateGameSettings->assignProperty(menuSMExtras, "pos", QPointF(scene->width()/2 + menuSMExtras->boundingRect().width()/2,0));
-     stateGameSettings->assignProperty(menuEDDiseases, "pos", QPointF(scene->width()/2 + menuEDDiseases->boundingRect().width()/2,0));
-     stateGameSettings->addTransition(menuGameSettings, SIGNAL(menu1Selected()), stateSMExtras);
-     stateGameSettings->addTransition(menuGameSettings, SIGNAL(menu2Selected()), stateEDDiseases);
-     QKeyEventTransition *k8 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateGameSettings->addTransition(k8);
-     connect(k8, SIGNAL(triggered()), menuGameSettings, SLOT(keyDown()));
-     QKeyEventTransition *k9 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateGameSettings->addTransition(k9);
-     connect(k9, SIGNAL(triggered()), menuGameSettings, SLOT(keyUp()));
-     QKeyEventTransition *k10 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
-     stateGameSettings->addTransition(k10);
-     connect(k10, SIGNAL(triggered()), menuGameSettings, SLOT(keyLeft()));
-     QKeyEventTransition *k11 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
-     stateGameSettings->addTransition(k11);
-     connect(k11, SIGNAL(triggered()), menuGameSettings, SLOT(keyRight()));
-     QKeyEventTransition *k12 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k12->setTargetState(stateLocalGameMenu);
-     stateGameSettings->addTransition(k12);
-     QKeyEventTransition *k13 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
-     stateGameSettings->addTransition(k13);
-     connect(k13, SIGNAL(triggered()), menuGameSettings, SLOT(keyEnter()));
-
-
-     stateSMExtras->assignProperty(menuGameSettings, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
-     stateSMExtras->assignProperty(menuSMExtras, "pos", QPointF(0,0));
-     QKeyEventTransition *k14 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateSMExtras->addTransition(k14);
-     connect(k14, SIGNAL(triggered()), menuSMExtras, SLOT(keyDown()));
-     QKeyEventTransition *k15 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateSMExtras->addTransition(k15);
-     connect(k15, SIGNAL(triggered()), menuSMExtras, SLOT(keyUp()));
-     QKeyEventTransition *k16 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
-     stateSMExtras->addTransition(k16);
-     connect(k16, SIGNAL(triggered()), menuSMExtras, SLOT(keyLeft()));
-     QKeyEventTransition *k17 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
-     stateSMExtras->addTransition(k17);
-     connect(k17, SIGNAL(triggered()), menuSMExtras, SLOT(keyRight()));
-     QKeyEventTransition *k18 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k18->setTargetState(stateGameSettings);
-     stateSMExtras->addTransition(k18);
-
-
-     stateEDDiseases->assignProperty(menuGameSettings, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
-     stateEDDiseases->assignProperty(menuEDDiseases, "pos", QPointF(0,0));
-     QKeyEventTransition *k19 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateEDDiseases->addTransition(k19);
-     connect(k19, SIGNAL(triggered()), menuEDDiseases, SLOT(keyDown()));
-     QKeyEventTransition *k20 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateEDDiseases->addTransition(k20);
-     connect(k20, SIGNAL(triggered()), menuEDDiseases, SLOT(keyUp()));
-     QKeyEventTransition *k21 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
-     stateEDDiseases->addTransition(k21);
-     connect(k21, SIGNAL(triggered()), menuEDDiseases, SLOT(keyLeft()));
-     QKeyEventTransition *k22 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
-     stateEDDiseases->addTransition(k22);
-     connect(k22, SIGNAL(triggered()), menuEDDiseases, SLOT(keyRight()));
-     QKeyEventTransition *k23 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k23->setTargetState(stateGameSettings);
-     stateEDDiseases->addTransition(k23);
-
-
-     stateNetworkGameMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
-     stateNetworkGameMenu->assignProperty(menuNetworkGame, "pos", QPointF(0,0));
-     stateNetworkGameMenu->assignProperty(menuCreateNetwork, "pos", QPointF(scene->width()/2 + menuCreateNetwork->boundingRect().width()/2,0));
-     stateNetworkGameMenu->addTransition(menuNetworkGame, SIGNAL(menu1Selected()), stateCreateNetwork);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu2Selected()), stateNetworkGameMenu);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu3Selected()), stateOptionsMenu);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu4Selected()), stateMapEditor);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu5Selected()), stateAbout);
-//     stateMainMenu->addTransition(menuMain, SIGNAL(menu6Selected()), finalState);
-     QKeyEventTransition *k24 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateNetworkGameMenu->addTransition(k24);
-     connect(k24, SIGNAL(triggered()), menuNetworkGame, SLOT(keyDown()));
-     QKeyEventTransition *k25 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateNetworkGameMenu->addTransition(k25);
-     connect(k25, SIGNAL(triggered()), menuNetworkGame, SLOT(keyUp()));
-     QKeyEventTransition *k26 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k26->setTargetState(stateMainMenu);
-     stateNetworkGameMenu->addTransition(k26);
-     QKeyEventTransition *k27 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
-     stateNetworkGameMenu->addTransition(k27);
-     connect(k27, SIGNAL(triggered()), menuNetworkGame, SLOT(keyEnter()));
-
-
-     stateCreateNetwork->assignProperty(menuNetworkGame, "pos", QPointF(-(scene->width()/2 + menuNetworkGame->boundingRect().width()/2),0));
-     stateCreateNetwork->assignProperty(menuCreateNetwork, "pos", QPointF(0,0));
-     QKeyEventTransition *k35 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateCreateNetwork->addTransition(k35);
-     connect(k35, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyDown()));
-     QKeyEventTransition *k36 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateCreateNetwork->addTransition(k36);
-     connect(k36, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyUp()));
-     QKeyEventTransition *k37 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k37->setTargetState(stateNetworkGameMenu);
-     stateCreateNetwork->addTransition(k37);
-     QKeyEventTransition *k38 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Return);
-     stateCreateNetwork->addTransition(k38);
-     connect(k38, SIGNAL(triggered()), menuCreateNetwork, SLOT(keyEnter()));
-
-
-
-     stateOptionsMenu->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuGameSettings->boundingRect().width()/2),0));
-     stateOptionsMenu->assignProperty(menuOptions, "pos", QPointF(0,0));
-     QKeyEventTransition *k29 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Down);
-     stateOptionsMenu->addTransition(k29);
-     connect(k29, SIGNAL(triggered()), menuOptions, SLOT(keyDown()));
-     QKeyEventTransition *k30 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Up);
-     stateOptionsMenu->addTransition(k30);
-     connect(k30, SIGNAL(triggered()), menuOptions, SLOT(keyUp()));
-     QKeyEventTransition *k31 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Left);
-     stateOptionsMenu->addTransition(k31);
-     connect(k31, SIGNAL(triggered()), menuOptions, SLOT(keyLeft()));
-     QKeyEventTransition *k32 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Right);
-     stateOptionsMenu->addTransition(k32);
-     connect(k32, SIGNAL(triggered()), menuOptions, SLOT(keyRight()));
-     QKeyEventTransition *k33 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k33->setTargetState(stateMainMenu);
-     stateOptionsMenu->addTransition(k33);
-
-     stateAbout->assignProperty(menuMain, "pos", QPointF(-(scene->width()/2 + menuMain->boundingRect().width()/2),0));
+     stateMenu->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
      stateAbout->assignProperty(aboutItem, "pos", QPointF(0,0));
      QKeyEventTransition *k34 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
-     k34->setTargetState(stateMainMenu);
+     k34->setTargetState(stateMenuHistory);
      stateAbout->addTransition(k34);
-
-
 }
 
 
@@ -491,6 +291,14 @@ void QArawnWindow::closeEvent(QCloseEvent *event)
     //ArawnSettings::instance()->save();
     event->accept();
 }
+
+
+
+
+
+
+
+
 
 
 

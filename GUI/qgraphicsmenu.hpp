@@ -1,17 +1,34 @@
 #ifndef QGRAPHICSMENU_HPP
 #define QGRAPHICSMENU_HPP
 
-#include "arawnheader.h"
+#include <QtGui>
 
-class MenuItem
+class QArawnWindow;
+
+/// StatedItemObject: Az (al)menü és menüelem absztrakt osztálya
+class StatedItemObject
 {
 public:
-    inline MenuItem(const QString &name);
-    inline QString name() const;
-protected:
-    QString itemName;
+    QString title;
+    QState *myState;
 };
 
+
+
+/// MenuItem: Menübejegyzés, melyből egy másik state hívható
+class MenuItem : public StatedItemObject
+{
+public:
+    inline MenuItem(const QString &title, QState *targetState)
+    {
+        this->title = title;
+        this->myState = targetState;
+    }
+};
+
+
+
+/// OptionItem: primitív struct, elemek közti váltásra alkalmas
 class OptionItem
 {
 public:
@@ -30,22 +47,24 @@ private:
 };
 
 
-typedef QList<MenuItem> MenuList;
-typedef QList<OptionItem> OptionList;
 
-class GraphicsMenu : public QGraphicsObject
+/// GraphicsMenu: menü és/vagy almenü
+class GraphicsMenu : public QGraphicsObject, public StatedItemObject
 {
     Q_OBJECT
 public:
-    GraphicsMenu(const QString &title, QGraphicsItem *parent = 0);
+    GraphicsMenu(const QString &title, QState *parentState, QState *ownState, QSound *menuStep, QSound *stepInto, QArawnWindow *window);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 
-    void addMenuItem(const QString &name);
+    GraphicsMenu* addSubMenu(const QString &name);
     void addOptionItem(const QString &name, QVariant &variant, QVariantMap &vmap);
+    void addMenuItem(const QString &title, QState *targetState);
 
+    void setMenuStepSound(QSound *sound);
+    void setIntoSound(QSound *sound);
 
 signals:
     void menu1Selected();
@@ -55,7 +74,6 @@ signals:
     void menu5Selected();
     void menu6Selected();
     void menu7Selected();
-    void menuChanged();
 
 public slots:
     void keyDown();
@@ -65,14 +83,16 @@ public slots:
     void keyEnter();
 
 private:
-
-    QString tit;
     char selected;
     uchar sum;
-    MenuList menus;
-    OptionList options;
+    QList<StatedItemObject> menus;
+    QList<OptionItem> options;
     QFont titFont;
     QFont itemFont;
+    QState *parentState;
+    QSound *menuStep;
+    QSound *stepInto;
+    QArawnWindow *win;
 };
 
 

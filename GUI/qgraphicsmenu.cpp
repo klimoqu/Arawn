@@ -1,13 +1,5 @@
-#include "arawnheader.h"
-
-
-MenuItem::MenuItem(const QString &name) : itemName(name){}
-
-QString MenuItem::name() const
-{
-    return itemName;
-}
-
+#include "GUI/qgraphicsmenu.hpp"
+#include "GUI/qarawnwindow.hpp"
 
 
 
@@ -56,16 +48,46 @@ QString OptionItem::name() const
 
 
 
-GraphicsMenu::GraphicsMenu(const QString &title, QGraphicsItem *par):
-    QGraphicsObject(par)
+GraphicsMenu::GraphicsMenu(const QString &title, QState *parentState, QState *ownState, QSound *menuStep, QSound *stepInto, QArawnWindow *window)
 {
-    tit = title;
+    this->win = window;
+    win->scene->addItem(this);
+    this->title = title;
     selected = 0;
     sum = 0;
     titFont = qApp->font();
     titFont.setPixelSize(50);
     itemFont = qApp->font();
     itemFont.setPixelSize(38);
+    this->menuStep = menuStep;
+    this->stepInto = stepInto;
+    myState = ownState;
+    this->parentState = parentState;
+
+    myState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
+    this->setPos(scene()->width()/2 + this->boundingRect().width()/2,0);
+    myState->assignProperty(this, "pos", QPointF(0,0));
+    this->parentState->assignProperty(this, "pos", QPointF(scene()->width()/2 + this->boundingRect().width()/2,0));
+
+    QKeyEventTransition *kdown = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Down);
+    myState->addTransition(kdown);
+    QKeyEventTransition *kup = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Up);
+    myState->addTransition(kup);
+    QKeyEventTransition *kleft = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Left);
+    myState->addTransition(kleft);
+    QKeyEventTransition *kright = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Right);
+    myState->addTransition(kright);
+    QKeyEventTransition *kenter = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Return);
+    myState->addTransition(kenter);
+    QKeyEventTransition *kesc = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Escape);
+    kesc->setTargetState(parentState);
+    myState->addTransition(kesc);
+    connect(kdown, SIGNAL(triggered()), this, SLOT(keyDown()));
+    connect(kup, SIGNAL(triggered()), this, SLOT(keyUp()));
+    connect(kleft, SIGNAL(triggered()), this, SLOT(keyLeft()));
+    connect(kright, SIGNAL(triggered()), this, SLOT(keyRight()));
+    connect(kenter, SIGNAL(triggered()), this, SLOT(keyEnter()));
+    connect(myState, SIGNAL(entered()), stepInto, SLOT(play()));
 }
 
 void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -75,33 +97,33 @@ void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     //Kistéglalap a kijelöléshez
     painter->setBrush(QColor(150,100,150,100));
     painter->setPen(Qt::NoPen);
-    painter->drawRect(-240, selected*50-(sum*25), 480, 50);
+    painter->drawRect(boundingRect().x(), selected*50-(sum*25), boundingRect().width(), 50);
 
 
     //Cím
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(titFont);
-    painter->drawText(QRectF(-240,-(sum*25 + 113), 480, 75).translated(4,4), tit, QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(boundingRect().x(),-(sum*25 + 113), boundingRect().width(), 75).translated(4,4), title, QTextOption(Qt::AlignCenter));
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-240,-(sum*25 + 113), 480, 75), tit, QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(boundingRect().x(),-(sum*25 + 113), boundingRect().width(), 75), title, QTextOption(Qt::AlignCenter));
 
     //Elemek
     painter->setFont(itemFont);
     short i = 0;
-    foreach (MenuItem m, menus) {
+    foreach (StatedItemObject m, menus) {
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(-240, i*50-(sum*25), 480, 50).translated(4,4), m.name(), QTextOption(Qt::AlignCenter));
+        painter->drawText(QRectF(boundingRect().x(), i*50-(sum*25), boundingRect().width(), 50).translated(4,4), m.title, QTextOption(Qt::AlignCenter));
         painter->setPen(QColor(50, 150, 200));
-        painter->drawText(QRectF(-240, i*50-(sum*25), 480, 50), m.name(), QTextOption(Qt::AlignCenter));
+        painter->drawText(QRectF(boundingRect().x(), i*50-(sum*25), boundingRect().width(), 50), m.title, QTextOption(Qt::AlignCenter));
         i++;
     }
     foreach (OptionItem o, options){
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50).translated(4,4), o.name(), QTextOption(Qt::AlignLeft));
-        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50).translated(4,4), o.selected(), QTextOption(Qt::AlignRight));
+        painter->drawText(QRectF(boundingRect().x()+2, i*50-(sum*25), boundingRect().width()-3, 50).translated(4,4), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(boundingRect().x()+2, i*50-(sum*25), boundingRect().width()-3, 50).translated(4,4), o.selected(), QTextOption(Qt::AlignRight));
         painter->setPen(QColor(50, 150, 200));
-        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50), o.name(), QTextOption(Qt::AlignLeft));
-        painter->drawText(QRectF(-238, i*50-(sum*25), 473, 50), o.selected(), QTextOption(Qt::AlignRight));
+        painter->drawText(QRectF(boundingRect().x()+2, i*50-(sum*25), boundingRect().width()-3, 50), o.name(), QTextOption(Qt::AlignLeft));
+        painter->drawText(QRectF(boundingRect().x()+2, i*50-(sum*25), boundingRect().width()-3, 50), o.selected(), QTextOption(Qt::AlignRight));
         i++;
     }
 
@@ -113,10 +135,40 @@ QRectF GraphicsMenu::boundingRect() const
     return QRectF(-240,-(sum*25 + 113),480,117+sum*50);
 }
 
-void GraphicsMenu::addMenuItem(const QString &name)
+GraphicsMenu* GraphicsMenu::addSubMenu(const QString &name)
 {
-    menus.push_back(MenuItem(name));
+    QState* child = new QState(myState->parentState());
+    child->assignProperty(this, "pos", QPointF(-(scene()->width()/2 + this->boundingRect().width()/2),0));
+
+    GraphicsMenu* grMenu = new GraphicsMenu(name, myState, child, menuStep, stepInto, win);
+    menus.append(*grMenu);
     sum++;
+
+    switch(menus.size()){
+    case 1:
+        myState->addTransition(this, SIGNAL(menu1Selected()), child);
+        break;
+    case 2:
+        myState->addTransition(this, SIGNAL(menu2Selected()), child);
+        break;
+    case 3:
+        myState->addTransition(this, SIGNAL(menu3Selected()), child);
+        break;
+    case 4:
+        myState->addTransition(this, SIGNAL(menu4Selected()), child);
+        break;
+    case 5:
+        myState->addTransition(this, SIGNAL(menu5Selected()), child);
+        break;
+    case 6:
+        myState->addTransition(this, SIGNAL(menu6Selected()), child);
+        break;
+    case 7:
+        myState->addTransition(this, SIGNAL(menu7Selected()), child);
+        break;
+    }
+
+    return grMenu;
 }
 
 void GraphicsMenu::addOptionItem(const QString &name, QVariant &variant, QVariantMap &vmap)
@@ -125,12 +177,43 @@ void GraphicsMenu::addOptionItem(const QString &name, QVariant &variant, QVarian
     sum++;
 }
 
+void GraphicsMenu::addMenuItem(const QString &title, QState *targetState)
+{
+    targetState->assignProperty(this, "pos", QPointF(-(scene()->width()/2 + this->boundingRect().width()/2),0));
+    menus.append(MenuItem(title, targetState));
+    sum++;
+
+    switch(menus.size()){
+    case 1:
+        myState->addTransition(this, SIGNAL(menu1Selected()), targetState);
+        break;
+    case 2:
+        myState->addTransition(this, SIGNAL(menu2Selected()), targetState);
+        break;
+    case 3:
+        myState->addTransition(this, SIGNAL(menu3Selected()), targetState);
+        break;
+    case 4:
+        myState->addTransition(this, SIGNAL(menu4Selected()), targetState);
+        break;
+    case 5:
+        myState->addTransition(this, SIGNAL(menu5Selected()), targetState);
+        break;
+    case 6:
+        myState->addTransition(this, SIGNAL(menu6Selected()), targetState);
+        break;
+    case 7:
+        myState->addTransition(this, SIGNAL(menu7Selected()), targetState);
+        break;
+    }
+}
+
 void GraphicsMenu::keyDown()
 {
     if(selected >= sum-1) return;
     selected++;
-    emit menuChanged();
-    update(-225, (selected-1)*50-(sum*25), 450, 100);
+    menuStep->play();
+    update(boundingRect().x(), (selected-1)*50-(sum*25), boundingRect().width(), 100);
     return;
 }
 
@@ -138,8 +221,8 @@ void GraphicsMenu::keyUp()
 {
     if(selected == 0) return;
     selected--;
-    emit menuChanged();
-    update(-225, selected*50-(sum*25), 450, 100);
+    menuStep->play();
+    update(boundingRect().x(), selected*50-(sum*25), boundingRect().width(), 100);
     return;
 }
 
@@ -147,8 +230,8 @@ void GraphicsMenu::keyLeft()
 {
     if(selected < menus.size()) return;
     if(options[selected-menus.size()].prev())
-        emit menuChanged();
-    update(-225, selected*50-(sum*25), 450, 50);
+        menuStep->play();
+    update(boundingRect().x(), selected*50-(sum*25), boundingRect().width(), 50);
     return;
 }
 
@@ -156,8 +239,8 @@ void GraphicsMenu::keyRight()
 {
     if(selected < menus.size()) return;
     if(options[selected-menus.size()].next())
-        emit menuChanged();
-    update(-225, selected*50-(sum*25), 450, 50);
+        menuStep->play();
+    update(boundingRect().x(), selected*50-(sum*25), boundingRect().width(), 50);
     return;
 }
 
@@ -188,6 +271,17 @@ void GraphicsMenu::keyEnter()
         break;
     }
 }
+
+void GraphicsMenu::setMenuStepSound(QSound *sound)
+{
+    menuStep = sound;
+}
+
+void GraphicsMenu::setIntoSound(QSound *sound)
+{
+    stepInto = sound;
+}
+
 
 
 
@@ -237,4 +331,20 @@ void GraphicsAbout::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
 
     painter->restore();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
