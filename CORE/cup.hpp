@@ -27,4 +27,9 @@ public slots:
     {
         if(id<playersnumber)pontok[id]+=change;
     }
+    void playerdie(uchar victim, uchar murder)
+    {
+        if(victim!=murder)pontok[murder]++;
+        else pontok[victim]--;
+    }
 };

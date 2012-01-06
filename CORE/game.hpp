@@ -1,11 +1,11 @@
 #pragma once
 #include "CORE/map.hpp"
-
-//class Map;
+#include "CORE/cup.hpp"
 class Game : public QObject
 {
     Q_OBJECT
     Map *map;
+    Cup *cup;
     int gametime,playersnumber,bombtimeout;
     uchar playerid;
     bool server;
@@ -16,7 +16,9 @@ class Game : public QObject
 
 
 public:
-    Game(int playersnumber,bool server,uchar playerid);
+    Game(uchar playerid);
+    Game(uchar playersnumber,int bombtimeout);
+    void SetCup(Cup *cup);
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}
     void MakeCommand(uchar c);
@@ -24,11 +26,21 @@ public:
 signals:
 
     void ServerValidate(Command c);//ellenörzött cumó
-    void KlientValidate(Command c);//elleőrizendő cumó
+    void ClientValidate(Command c);//elleőrizendő cumó
+
+
+    void BombPlanted(uchar x, uchar y,uchar id);
+    void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
+    void PlayerDied(uchar id,uchar murderid);
+    void PlayerMoved(uchar id,uchar direction);
+    void PlayerBlasted(uchar id);
+    void FieldChanged(uchar x, uchar y, uchar newtype);
+    void FieldExcinted(uchar x,uchar y);
+
 
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
-    void KlientExecute(Command c){validate(c);}//ellenőrzés
+    void ClientExecute(Command c){validate(c);}//ellenőrzés
 
     void InputCommandFromGui(uchar c){MakeCommand(c);}
     void InputCommandFromMap(Command c){ServerValidate(c);}

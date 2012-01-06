@@ -51,7 +51,7 @@ signals:
     void Blasted(uchar playerid);
 
 public slots:
-    void DieAndBlast(uchar id,uchar x, uchar y)
+    void DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
     {
         if( round(pXcoord)==x && round(y)==y && live)
         {
@@ -64,7 +64,7 @@ public slots:
             emit Blasted(this->id);
             blastable=false;
         }
-        if(id=this->id)
+        if(id==this->id)
         {
             pBombsNum++;
         }

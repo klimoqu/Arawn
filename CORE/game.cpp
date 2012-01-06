@@ -1,13 +1,26 @@
 #include "CORE/game.hpp"
 #include <math.h>
 
-Game::Game(int playersnumber,bool server,uchar playerid)
+Game::Game(uchar playerid)
+{
+    this->server=false;
+    this->playerid=playerid;
+    map=0;
+}
+
+Game::Game(uchar playersnumber,int bombtimeout)
 {
     this->playersnumber=playersnumber;
-    this->bombtimeout=2500;
-    this->server=server;
-    this->playerid=playerid;
+    this->bombtimeout=bombtimeout;
+    this->server=true;
+    this->playerid=0;
     map=new Map(playersnumber);
+    connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
+}
+void Game::SetCup(Cup *cup)
+{
+    this->cup=cup;
+    connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
 }
 
 void Game::NewGame(int id)
@@ -19,12 +32,12 @@ void Game::MakeCommand(uchar c)
     if(c==255)
     {
         Command ret=Command(playerid,2,map->GetPlayer(playerid)->GetX()*256+map->GetPlayer(playerid)->GetY());
-        emit KlientValidate(ret);
+        emit ClientValidate(ret);
     }
     else
     {
         Command ret=Command(playerid,1,c);
-        emit KlientValidate(ret);
+        emit ClientValidate(ret);
     }
 }
 void Game::validate(Command c)
@@ -104,26 +117,27 @@ void Game::clientsync(Command c)
 {
     if(c.GetMessageType()==1)//move
     {
-        map->player_moved(c.GetPlayerId(),c.GetMessage());
+        emit PlayerMoved(c.GetPlayerId(),c.GetMessage());
     }
     if(c.GetMessageType()==2)//plant
     {
-        map->bomb_planted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
+        emit BombPlanted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
     }
     if(c.GetMessageType()==3)//boom
     {
-        map->field_blasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
+        emit FieldBlasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
     }
     if(c.GetMessageType()==4)//kioltas
     {
-        map->field_excinted((c.GetMessage()/256)%256,c.GetMessage()%256);
+        emit FieldExcinted((c.GetMessage()/256)%256,c.GetMessage()%256);
     }
     if(c.GetMessageType()==5)//die/blast
     {
-        if(c.GetMessage()==0){map->player_died(c.GetPlayerId(),c.GetMessage());}
-        if(c.GetMessage()==1){map->player_blasted(c.GetPlayerId());}
+        if(c.GetMessage()==0){emit PlayerDied(c.GetPlayerId(),c.GetMessage());}
+        if(c.GetMessage()==1){emit PlayerBlasted(c.GetPlayerId());}
     }
     if(c.GetMessageType()==6)
     {
+        emit FieldChanged((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
     }
 }

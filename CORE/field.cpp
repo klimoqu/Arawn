@@ -21,9 +21,9 @@ void Field::Extinction()
 }
 void Field::StartBurn(uchar size, uchar id,uchar direction)
 {
-    if(this->type=2){burning=true;this->id=id;}
-    if(this->type=3){this->type=1;emit FieldChanged(this->x,this->y,this->type);}
-    if(this->type=1){this->type=2;emit FieldChanged(this->x,this->y,this->type);}
+    if(this->type==2){burning=true;this->id=id;}
+    if(this->type==3){this->type=1;emit FieldChanged(this->x,this->y,this->type);}
+    if(this->type==1){this->type=2;emit FieldChanged(this->x,this->y,this->type);}
     qt.stop();
     qt.setSingleShot(true);
     qt.start(1000);
