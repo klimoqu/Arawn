@@ -1,17 +1,18 @@
-﻿#ifndef ABSTRACTNET_H
-#define ABSTRACTNET_H
+﻿#pragma once
+#include <QObject>
+
 
 //  str a változó neve, nem string
 //  port : 28300
 
-class abstractNet
+class abstractNet : public QObject
 {
+    Q_OBJECT
 public:
-    bool isServer();                             //Server(true) vagy Client(false)
-    void setIP(QString, quint8);
+    virtual void setIP(QString, quint8)=0;
 
 signals:
-    void ServerNewMessage(Command *str);         //új bejövő üzenet klienstől signal
+    void ServerNewMessage(Command *str);       //új bejövő üzenet klienstől signal
     void ClientNewMessage(Command *str);         //új bejövő üzenet szervertől signal
 
     void ServerSendMessage(Command *str);        //új üzenet kiküldése mindenkinek signal
@@ -22,5 +23,3 @@ signals:
 public slots:
 
 };
-
-#endif // ABSTRACTNET_H

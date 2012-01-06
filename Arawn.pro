@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     GUI/graphicsmap.cpp \
     GUI/graphicsplayer.cpp \
     CORE/cup.cpp \
-    CORE/bonus.cpp
+    CORE/bonus.cpp \
+    NET/servernet.cpp \
+    NET/clientnet.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -41,7 +43,9 @@ HEADERS  += \
     GUI/graphicsplayer.hpp \
 	NET/abstractNET.h \
     CORE/cup.hpp \
-    CORE/bonus.hpp
+    CORE/bonus.hpp \
+    NET/servernet.hpp \
+    NET/clientnet.hpp
 
 FORMS    +=
 
@@ -82,6 +86,10 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
+
+
+
 
 
 
