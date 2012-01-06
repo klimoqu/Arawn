@@ -236,7 +236,7 @@ void QArawnWindow::initializeMenus()
      aboutItem->setPos(scene->width()/2 + aboutItem->boundingRect().width()/2,0);
      scene->addItem(aboutItem);
      machine->addDefaultAnimation(new QPropertyAnimation(aboutItem, "pos"));
-     stateMenu->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
+     machine->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
      stateAbout->assignProperty(aboutItem, "pos", QPointF(0,0));
      QKeyEventTransition *k34 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
      k34->setTargetState(stateMenuHistory);

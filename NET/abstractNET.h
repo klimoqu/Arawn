@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <QObject>
-
+#include "CORE/command.hpp"
 
 //  str a változó neve, nem string
 //  port : 28300
