@@ -162,7 +162,7 @@ void QArawnWindow::initializeMenus()
 {
      QState* sMainMenu = new QState(stateMenu);
      stateMenu->setInitialState(sMainMenu);
-     GraphicsMenu *mainMenu = new GraphicsMenu(tr("Main menu"), stateQuit, sMainMenu, sounds[2], sounds[1], this);
+     GraphicsMenu *mainMenu = new GraphicsMenu(tr("Main menu"), 0, sMainMenu, sounds[2], sounds[1], this);
 
      GraphicsMenu* localMenu = mainMenu->addSubMenu(tr("Local game"));
      GraphicsMenu* networkMenu = mainMenu->addSubMenu(tr("Network game"));
@@ -236,11 +236,17 @@ void QArawnWindow::initializeMenus()
      aboutItem->setPos(scene->width()/2 + aboutItem->boundingRect().width()/2,0);
      scene->addItem(aboutItem);
      machine->addDefaultAnimation(new QPropertyAnimation(aboutItem, "pos"));
-     machine->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
+     stateMenu->assignProperty(aboutItem, "pos", QPointF(scene->width()/2 + aboutItem->boundingRect().width()/2,0));
      stateAbout->assignProperty(aboutItem, "pos", QPointF(0,0));
      QKeyEventTransition *k34 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
      k34->setTargetState(stateMenuHistory);
      stateAbout->addTransition(k34);
+     connect(stateMenu, SIGNAL(entered()), sounds[0], SLOT(play()));
+     connect(stateAbout, SIGNAL(entered()), sounds[0], SLOT(play()));
+
+     stateQuit->assignProperty(mainMenu, "pos", QPointF(scene->width()/2 + mainMenu->boundingRect().width()/2,0));
+     connect(stateQuit, SIGNAL(entered()), sounds[0], SLOT(play()));
+     stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
 }
 
 

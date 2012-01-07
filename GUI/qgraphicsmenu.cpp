@@ -48,26 +48,27 @@ QString OptionItem::name() const
 
 
 
-GraphicsMenu::GraphicsMenu(const QString &title, QState *parentState, QState *ownState, QSound *menuStep, QSound *stepInto, QArawnWindow *window)
+GraphicsMenu::GraphicsMenu(const QString &_title, QState *_parentState, QState *ownState, QSound *_menuStep, QSound *_stepInto, QArawnWindow *window)
 {
-    this->win = window;
+    win = window;
     win->scene->addItem(this);
-    this->title = title;
+    title = _title;
     selected = 0;
     sum = 0;
     titFont = qApp->font();
     titFont.setPixelSize(50);
     itemFont = qApp->font();
     itemFont.setPixelSize(38);
-    this->menuStep = menuStep;
-    this->stepInto = stepInto;
+    menuStep = _menuStep;
+    stepInto = _stepInto;
     myState = ownState;
-    this->parentState = parentState;
+    parentState = _parentState;
 
     myState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
     this->setPos(scene()->width()/2 + this->boundingRect().width()/2,0);
     myState->assignProperty(this, "pos", QPointF(0,0));
-    this->parentState->assignProperty(this, "pos", QPointF(scene()->width()/2 + this->boundingRect().width()/2,0));
+    if(parentState)
+        this->parentState->assignProperty(this, "pos", QPointF(scene()->width()/2 + this->boundingRect().width()/2,0));
 
     QKeyEventTransition *kdown = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Down);
     myState->addTransition(kdown);
@@ -79,15 +80,17 @@ GraphicsMenu::GraphicsMenu(const QString &title, QState *parentState, QState *ow
     myState->addTransition(kright);
     QKeyEventTransition *kenter = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Return);
     myState->addTransition(kenter);
-    QKeyEventTransition *kesc = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Escape);
-    kesc->setTargetState(parentState);
-    myState->addTransition(kesc);
+    if(parentState){
+        QKeyEventTransition *kesc = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Escape);
+        kesc->setTargetState(parentState);
+        myState->addTransition(kesc);
+        connect(kesc, SIGNAL(triggered()), stepInto, SLOT(play()));
+    }
     connect(kdown, SIGNAL(triggered()), this, SLOT(keyDown()));
     connect(kup, SIGNAL(triggered()), this, SLOT(keyUp()));
     connect(kleft, SIGNAL(triggered()), this, SLOT(keyLeft()));
     connect(kright, SIGNAL(triggered()), this, SLOT(keyRight()));
     connect(kenter, SIGNAL(triggered()), this, SLOT(keyEnter()));
-    connect(myState, SIGNAL(entered()), stepInto, SLOT(play()));
 }
 
 void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -139,7 +142,7 @@ GraphicsMenu* GraphicsMenu::addSubMenu(const QString &name)
 {
     QState* child = new QState(myState->parentState());
     child->assignProperty(this, "pos", QPointF(-(scene()->width()/2 + this->boundingRect().width()/2),0));
-
+    connect(child, SIGNAL(entered()), stepInto, SLOT(play()));
     GraphicsMenu* grMenu = new GraphicsMenu(name, myState, child, menuStep, stepInto, win);
     menus.append(*grMenu);
     sum++;
