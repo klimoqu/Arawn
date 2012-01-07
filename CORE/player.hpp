@@ -64,7 +64,7 @@ public slots:
             emit Blasted(this->id);
             blastable=false;
         }
-        if(id==this->id)
+        if(id==this->id && dir==255)
         {
             pBombsNum++;
         }
