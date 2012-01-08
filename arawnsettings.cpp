@@ -169,10 +169,8 @@ ArawnSettings::ArawnSettings()
     resolutionValues.insert(tr("1024x600"), QPoint(1024, 600));
     resolutionValues.insert(tr("1280x720"), QPoint(1280, 720));
     resolutionValues.insert(tr("1280x800"), QPoint(1280, 800));
-    defaultPlayer1Name = "Nuadha";
-    defaultPlayer2Name = "Diarmait";
-    defaultPlayer3Name = "Fachtna";
-    defaultPlayer4Name = "Pryderi";
+    animateFireValues.insert(tr("Yes"), true);
+    animateFireValues.insert(tr("No"), false);
 
     // LOAD SAVED DATA
     if(load())
@@ -199,6 +197,12 @@ ArawnSettings::ArawnSettings()
     enableInvisibility = true;
     bombSpeed = 40;
     bombTimer = 28;
+    animateFire = true;
+    defaultPlayer1Name = "Nuadha";
+    defaultPlayer2Name = "Diarmait";
+    defaultPlayer3Name = "Fachtna";
+    defaultPlayer4Name = "Pryderi";
+    defaultIPAddress = "192.168.0.1";
 
     QRect sr = QApplication::desktop()->screenGeometry();
     if(((float)sr.width())/((float)sr.height()) > 1.7F){
@@ -269,11 +273,13 @@ bool ArawnSettings::load()
             stream >> bombTimer;
             stream >> resolution.toPoint().rx();
             stream >> resolution.toPoint().ry();
+            stream >> animateFire;
             stream >> wideLayout;
             stream >> defaultPlayer1Name;
             stream >> defaultPlayer2Name;
             stream >> defaultPlayer3Name;
             stream >> defaultPlayer4Name;
+            stream >> defaultIPAddress;
         sFile.close();
         return true;
     }
@@ -308,11 +314,13 @@ void ArawnSettings::save()
         stream << bombTimer.toInt();
         stream << resolution.toPoint().x();
         stream << resolution.toPoint().y();
+        stream << animateFire.toBool();
         stream << wideLayout;
         stream << defaultPlayer1Name.toString();
         stream << defaultPlayer2Name.toString();
         stream << defaultPlayer3Name.toString();
         stream << defaultPlayer4Name.toString();
+        stream << defaultIPAddress.toString();
     sFile.close();
 }
 

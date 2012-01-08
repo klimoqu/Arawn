@@ -228,6 +228,7 @@ void QArawnWindow::initializeMenus()
      optionsMenu->addOptionItem(tr("Corpse parts"), ArawnSettings::instance()->showCorpseParts, ArawnSettings::instance()->showCorpsePartsValues);
      optionsMenu->addOptionItem(tr("Shaky explosion"), ArawnSettings::instance()->shakyExplosion, ArawnSettings::instance()->shakyExplosionValues);
      optionsMenu->addOptionItem(tr("OpenGL"), ArawnSettings::instance()->openGlRendering, ArawnSettings::instance()->openGlRenderingValues);
+     optionsMenu->addOptionItem(tr("Animate backgrund"), ArawnSettings::instance()->animateFire, ArawnSettings::instance()->animateFireValues);
      optionsMenu->addOptionItem(tr("Resolution"), ArawnSettings::instance()->resolution, ArawnSettings::instance()->resolutionValues);
      optionsMenu->addOptionItem(tr("Language"), ArawnSettings::instance()->language, ArawnSettings::instance()->languageValues);
 
@@ -271,13 +272,15 @@ void QArawnWindow::enterMenus()
     scene->removeItem(pixHirItem);
     pixFireItem->setZValue(-2);
     pixFireItem->setOpacity(0.6);
-    QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
-    firAnim->setLoopCount(-1);
-    firAnim->setEasingCurve(QEasingCurve::OutInBounce);
-    firAnim->setStartValue(0.4);
-    firAnim->setEndValue(0.8);
-    firAnim->setDuration(1600);
-    firAnim->start();
+    if(ArawnSettings::instance()->animateFire.toBool()){
+        QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
+        firAnim->setLoopCount(-1);
+        firAnim->setEasingCurve(QEasingCurve::OutInBounce);
+        firAnim->setStartValue(0.4);
+        firAnim->setEndValue(0.8);
+        firAnim->setDuration(1600);
+        firAnim->start();
+    }
 
     copyright = new QGraphicsTextItem("Arawn 0.9b Copyright KliMoQu @ PPKE ITK");
     QFont fnt = qApp->font();

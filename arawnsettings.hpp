@@ -41,6 +41,9 @@ public:
     QVariantMap resolutionValues;
     QVariant resolution;
 
+    QVariantMap animateFireValues;
+    QVariant animateFire;
+
     bool wideLayout;
 
 // Game settings
@@ -103,6 +106,9 @@ public:
     QVariant defaultPlayer2Name;
     QVariant defaultPlayer3Name;
     QVariant defaultPlayer4Name;
+
+// Network settings
+    QVariant defaultIPAddress;
 
 };
 
