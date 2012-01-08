@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = Arawn
 TEMPLATE = app
@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     NET/servernet.cpp \
     NET/clientnet.cpp \
     GUI/graphicsplayersetup.cpp \
-    GUI/graphicsnetworksettings.cpp
+    GUI/graphicsnetworksettings.cpp \
+    NET/sockethandler.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -49,7 +50,8 @@ HEADERS  += \
     NET/servernet.hpp \
     NET/clientnet.hpp \
     GUI/graphicsplayersetup.hpp \
-    GUI/graphicsnetworksettings.hpp
+    GUI/graphicsnetworksettings.hpp \
+    NET/sockethandler.hpp
 
 FORMS    +=
 
@@ -90,6 +92,8 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
+
 
 
 

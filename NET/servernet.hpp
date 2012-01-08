@@ -1,16 +1,21 @@
 #pragma once
-#include "NET/abstractNET.h"
-#include <QtNetwork/QTcpServer>
+#include "NET/sockethandler.hpp"
 
-
-class servernet:public abstractNet
+class Servernet:public QObject
 {
-    uchar playersnumber;
-
+    Q_OBJECT
+    uchar playersnumber,act;
+    QTcpServer *tcpServer;
+    Sockethandler *clientConnections[3];
 
 public:
-    servernet(uchar playersnumber)
-    {
-        this->playersnumber=playersnumber;
-    }
+    Servernet(uchar playersnumber);
+signals:
+    void CommandReceivedFromClients(Command c);
+    void CommandReceivedFromServer(Command c);
+private slots:
+    void getConnection();
+public slots:
+    void GetMessageFromClients(Command c){emit CommandReceivedFromClients(c);}
+    void SendCommandToClients(Command c){emit CommandReceivedFromServer(c);}
 };

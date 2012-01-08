@@ -1,5 +1,5 @@
-#include "clientnet.hpp"
+#include "NET/clientnet.hpp"
 
-clientnet::clientnet()
+Clientnet::Clientnet()
 {
 }

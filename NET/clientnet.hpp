@@ -1,10 +1,9 @@
 #pragma once
-#include "NET/abstractNET.h"
-#include <QtNetwork/QTcpSocket>
+#include "NET/sockethandler.hpp"
 
-class clientnet:public abstractNet
+class Clientnet:public QObject
 {
 public:
-    clientnet();
+    Clientnet();
 };
 
