@@ -20,6 +20,7 @@ signals:
 public slots:
     void setGrabKeyboard();
     void setUnGrabKeyboard();
+    void connectionFail();
 
 private:
     void keyPressEvent(QKeyEvent *event);

@@ -119,6 +119,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             return;
         case Qt::Key_Enter:
         case Qt::Key_Return:
+            connecting = tr("Connecting...");
             emit startConnecting();
             selected = 2;
             update(-150,0,300,55);
@@ -145,6 +146,12 @@ void GraphicsNetworkSettings::setGrabKeyboard()
 void GraphicsNetworkSettings::setUnGrabKeyboard()
 {
     ungrabKeyboard();
+}
+
+void GraphicsNetworkSettings::connectionFail()
+{
+    connecting = tr("Fail!");
+    update(-360, 100, 362, 52);
 }
 
 
