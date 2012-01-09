@@ -171,6 +171,12 @@ ArawnSettings::ArawnSettings()
     resolutionValues.insert(tr("1280x800"), QPoint(1280, 800));
     animateFireValues.insert(tr("Yes"), true);
     animateFireValues.insert(tr("No"), false);
+    colorValues.insert(tr("Red"), RED);
+    colorValues.insert(tr("Blue"), BLUE);
+    colorValues.insert(tr("Cyan"), CYAN);
+    colorValues.insert(tr("Green"), GREEN);
+    colorValues.insert(tr("Purple"), PURPLE);
+    colorValues.insert(tr("Yellow"), YELLOW);
 
     // LOAD SAVED DATA
     if(load())
@@ -202,6 +208,7 @@ ArawnSettings::ArawnSettings()
     defaultPlayer2Name = "Diarmait";
     defaultPlayer3Name = "Fachtna";
     defaultPlayer4Name = "Pryderi";
+    defaultColor = RED;
     defaultIPAddress = "192.168.0.1";
 
     QRect sr = QApplication::desktop()->screenGeometry();
@@ -279,6 +286,7 @@ bool ArawnSettings::load()
             stream >> defaultPlayer2Name;
             stream >> defaultPlayer3Name;
             stream >> defaultPlayer4Name;
+            stream >> defaultColor;
             stream >> defaultIPAddress;
         sFile.close();
         return true;
@@ -320,6 +328,7 @@ void ArawnSettings::save()
         stream << defaultPlayer2Name.toString();
         stream << defaultPlayer3Name.toString();
         stream << defaultPlayer4Name.toString();
+        stream << defaultColor.toInt();
         stream << defaultIPAddress.toString();
     sFile.close();
 }

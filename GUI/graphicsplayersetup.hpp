@@ -42,7 +42,7 @@ private:
     QString names[4];
     QFont titFont;
     QFont itemFont;
-
+    uchar selected; // 0, 1, 2: local; 10: #1; 20: #2; ...
 };
 
 #endif // GRAPHICSPLAYERSETUP_HPP
