@@ -1,17 +1,20 @@
 #pragma once
-#include "NET/sockethandler.hpp"
+#include "CORE/command.hpp"
+#include <QtNetwork/QtNetwork>
 
 class Client:public QObject
 {
     Q_OBJECT
-    QTcpSocket *tcpSocket;
-    QDataStream ds;
+    QTcpSocket *socket;
+    uchar playerid;
+    QStringList players;
 public:
     Client(QString address);
+    uchar GetPlayerID(){return playerid;}
 signals:
     void CommandReceivedFromServer(Command c);
 private slots:
-    void ReceiveMessageFromServer();
+    void readyRead();
 public slots:
     void SendCommandToServer(Command c);
 };

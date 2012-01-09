@@ -20,7 +20,8 @@ Game::Game(uchar playersnumber,int bombtimeout)
     map=new Map(playersnumber);
     connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
     clientconnection=0;
-    serverconnection=new Servernet(playersnumber);
+    serverconnection=new Servernet();
+    serverconnection->SetPlayerNumber(playersnumber);
 
     connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));

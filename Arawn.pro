@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     NET/servernet.cpp \
     GUI/graphicsplayersetup.cpp \
     GUI/graphicsnetworksettings.cpp \
-    NET/sockethandler.cpp \
     NET/client.cpp
 
 HEADERS  += \
@@ -50,7 +49,6 @@ HEADERS  += \
     NET/servernet.hpp \
     GUI/graphicsplayersetup.hpp \
     GUI/graphicsnetworksettings.hpp \
-    NET/sockethandler.hpp \
     NET/client.hpp
 
 FORMS    +=
@@ -92,6 +90,8 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
+
 
 
 
