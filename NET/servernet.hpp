@@ -1,7 +1,11 @@
 #pragma once
 #include "CORE/command.hpp"
 #include <QtNetwork/QtNetwork>
+/*
 
+Tesztelésre vár, ne nyúlj hozzá
+
+*/
 class Servernet:public QTcpServer
 {
     Q_OBJECT
