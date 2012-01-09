@@ -1,11 +1,14 @@
 #include "CORE/game.hpp"
 #include <math.h>
 
-Game::Game(uchar playerid)
+Game::Game(QString address)
 {
     this->server=false;
-    this->playerid=playerid;
     map=0;
+    serverconnection=0;
+    clientconnection=new Client(address);
+    connect(this,SIGNAL(ClientValidate(Command)),clientconnection,SLOT(SendCommandToServer(Command)));
+    connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout)
@@ -16,6 +19,12 @@ Game::Game(uchar playersnumber,int bombtimeout)
     this->playerid=0;
     map=new Map(playersnumber);
     connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
+    clientconnection=0;
+    serverconnection=new Servernet(playersnumber);
+
+    connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
+    connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));
+    connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
 }
 void Game::SetCup(Cup *cup)
 {
@@ -139,5 +148,9 @@ void Game::clientsync(Command c)
     if(c.GetMessageType()==6)
     {
         emit FieldChanged((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
+    }
+    if(c.GetMessageType()==5)
+    {
+        this->playerid=c.GetPlayerId();
     }
 }

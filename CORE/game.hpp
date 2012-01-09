@@ -1,6 +1,8 @@
 #pragma once
 #include "CORE/map.hpp"
 #include "CORE/cup.hpp"
+#include "NET/servernet.hpp"
+#include "NET/client.hpp"
 class Game : public QObject
 {
     Q_OBJECT
@@ -9,6 +11,9 @@ class Game : public QObject
     int gametime,playersnumber,bombtimeout;
     uchar playerid;
     bool server;
+    Servernet *serverconnection;
+    Client *clientconnection;
+
 
     void validate(Command c);//server
     void execute(Command c);//server
@@ -16,7 +21,7 @@ class Game : public QObject
 
 
 public:
-    Game(uchar playerid);
+    Game(QString address);
     Game(uchar playersnumber,int bombtimeout);
     void SetCup(Cup *cup);
     void NewGame(int id);
