@@ -38,7 +38,7 @@ public:
         live=true;
         blastable=false;
     }
-    void Move(int direction);
+    void Move(uchar direction);
     bool IsAlive(){return live;}
     float GetX(){return pXcoord;}
     float GetY(){return pYcoord;}
@@ -47,6 +47,8 @@ public:
     void IncrementBombNumber(){pBombsNum++;}
     bool CanDrop(){return pBombsNum>0;}
     void Plant(){pBombsNum--;}
+    void SetSpeed(uchar change){pSpeed=pSpeed+change<1?1:pSpeed+change;}
+    uchar GetSpeed(){return pSpeed;}
 
 signals:
     void Died(uchar playerid,uchar murderid);

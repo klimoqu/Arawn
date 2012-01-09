@@ -69,27 +69,23 @@ void Game::validate(Command c)
     //Move parancsok:
     if(c.GetMessageType()==1)
     {
-        if(c.GetMessage()<0 || c.GetMessage()>3)
-        {
-            return;
-        }
         float x=player->GetX();
         float y=player->GetY();
         Field *field=map->GetField(round(x),round(y));
 
-        if(c.GetMessage()==0 && (field->GetLeftNeighbour()==0 || !field->GetLeftNeighbour()->IsPermeable()))
+        if(c.GetMessage()%256==0 && (field->GetLeftNeighbour()==0 || !field->GetLeftNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==1 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
+        if(c.GetMessage()%256==1 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==2 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
+        if(c.GetMessage()%256==2 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
         {
             return;
         }
-        if(c.GetMessage()==3 && (field->GetRightNeighbour()==0 || !field->GetRightNeighbour()->IsPermeable()))
+        if(c.GetMessage()%256==3 && (field->GetRightNeighbour()==0 || !field->GetRightNeighbour()->IsPermeable()))
         {
             return;
         }
@@ -107,10 +103,14 @@ void Game::execute(Command c)
     // Mozgás
     if(c.GetMessageType()==1)
     {
-        map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage());
+        map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage()%256);
         if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsBurn())
         {
             map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
+        }
+        if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1&&c.GetMessage()<256)
+        {
+            validate(Command(c.GetPlayerId(),c.GetMessageType(),256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
         }
     }
     //Bomba lerakás:

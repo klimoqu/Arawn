@@ -5,8 +5,9 @@
 class Bonus : public QObject
 {
     Q_OBJECT
+    uchar type;
 public:
-    Bonus();
+    Bonus(uchar type);
 signals:
 
 public slots:

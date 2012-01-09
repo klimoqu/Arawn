@@ -1,6 +1,6 @@
 #include "bonus.hpp"
 
-Bonus::Bonus()
+Bonus::Bonus(uchar type)
 {
-
+    this->type=type;
 }
