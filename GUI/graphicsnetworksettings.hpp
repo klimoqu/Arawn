@@ -1,25 +1,30 @@
 #ifndef GRAPHICSNETWORKSETTINGS_HPP
 #define GRAPHICSNETWORKSETTINGS_HPP
 #include <QtGui>
+class QArawnWindow;
 
 class GraphicsNetworkSettings : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState);
+    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState, QArawnWindow *window);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 signals:
+    void connectionClosing();
+    void previousState();
+    void startConnecting();
+
 public slots:
-    void keyDown();
-    void keyUp();
-    void keyBackspace();
-    void keyEnter();
-    void keyEscape();
+    void setGrabKeyboard();
+    void setUnGrabKeyboard();
 
 private:
+    void keyPressEvent(QKeyEvent *event);
+
+    QArawnWindow *win;
     QString title;
     QString text;
     QVariant lineEdit;

@@ -1,6 +1,7 @@
 #include "arawnheader.h"
 #include "GUI/qarawnwindow.hpp"
 #include "GUI/qgraphicsmenu.hpp"
+#include "GUI/graphicsnetworksettings.hpp"
 //#include <QtOpenGL/QtOpenGL>
 
 
@@ -114,6 +115,8 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateGame);
     stateNetSettings = new QState;
     machine->addState(stateNetSettings);
+    stateNetRoom = new QState;
+    machine->addState(stateNetRoom);
     statePlayerSetup = new QState;
     machine->addState(statePlayerSetup);
     stateMapSelection = new QState;
@@ -248,6 +251,12 @@ void QArawnWindow::initializeMenus()
      stateQuit->assignProperty(mainMenu, "pos", QPointF(scene->width()/2 + mainMenu->boundingRect().width()/2,0));
      connect(stateQuit, SIGNAL(entered()), sounds[0], SLOT(play()));
      stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
+
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateNetRoom, this);
+     netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
+     stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
+     scene->addItem(netSettingsItem);
+
 }
 
 
@@ -272,7 +281,7 @@ void QArawnWindow::enterMenus()
     scene->removeItem(pixHirItem);
     pixFireItem->setZValue(-2);
     pixFireItem->setOpacity(0.6);
-    if(ArawnSettings::instance()->animateFire.toBool()){
+    if(ArawnSettings::instance()->animateFire.toBool() && false){
         QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
         firAnim->setLoopCount(-1);
         firAnim->setEasingCurve(QEasingCurve::OutInBounce);
@@ -282,7 +291,7 @@ void QArawnWindow::enterMenus()
         firAnim->start();
     }
 
-    copyright = new QGraphicsTextItem("Arawn 0.9b Copyright KliMoQu @ PPKE ITK");
+    copyright = new QGraphicsTextItem("Arawn 0.9a Copyright KliMoQu @ PPKE ITK");
     QFont fnt = qApp->font();
     fnt.setPixelSize(20);
     copyright->setFont(fnt);
