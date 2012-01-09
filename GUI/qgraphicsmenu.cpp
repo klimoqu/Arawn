@@ -68,7 +68,7 @@ GraphicsMenu::GraphicsMenu(const QString &_title, QState *_parentState, QState *
     this->setPos(scene()->width()/2 + this->boundingRect().width()/2,0);
     myState->assignProperty(this, "pos", QPointF(0,0));
     if(parentState)
-        this->parentState->assignProperty(this, "pos", QPointF(scene()->width()/2 + this->boundingRect().width()/2,0));
+        parentState->assignProperty(this, "pos", QPointF(scene()->width()/2 + this->boundingRect().width()/2,0));
 
     QKeyEventTransition *kdown = new QKeyEventTransition(win, QEvent::KeyPress, Qt::Key_Down);
     myState->addTransition(kdown);
