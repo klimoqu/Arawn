@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
+CONFIG += console
 
 TARGET = Arawn
 TEMPLATE = app
@@ -44,7 +45,6 @@ HEADERS  += \
     CORE/command.hpp \
     GUI/graphicsmap.hpp \
     GUI/graphicsplayer.hpp \
-	NET/abstractNET.h \
     CORE/cup.hpp \
     CORE/bonus.hpp \
     NET/servernet.hpp \
@@ -92,6 +92,7 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
 
 
 
