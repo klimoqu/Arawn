@@ -252,7 +252,7 @@ void QArawnWindow::initializeMenus()
      connect(stateQuit, SIGNAL(entered()), sounds[0], SLOT(play()));
      stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateNetRoom, this);
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateNetRoom);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);

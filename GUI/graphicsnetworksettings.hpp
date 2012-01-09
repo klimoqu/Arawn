@@ -1,13 +1,12 @@
 #ifndef GRAPHICSNETWORKSETTINGS_HPP
 #define GRAPHICSNETWORKSETTINGS_HPP
 #include <QtGui>
-class QArawnWindow;
 
 class GraphicsNetworkSettings : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState, QArawnWindow *window);
+    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -25,7 +24,6 @@ public slots:
 private:
     void keyPressEvent(QKeyEvent *event);
 
-    QArawnWindow *win;
     QString title;
     QString text;
     QVariant lineEdit;
@@ -39,5 +37,7 @@ private:
     QFont lineFont;
     char selected; //0: sorszerkesztő, 1: gomb, 2: várakozás(csak esc)
 };
+
+
 
 #endif // GRAPHICSNETWORKSETTINGS_HPP
