@@ -3,6 +3,16 @@
 
 #include "arawnheader.h"
 
+enum PlayerColors
+{
+    RED = 0xfff70f0f,
+    BLUE = 0xff1937ef,
+    CYAN = 0xff02defa,
+    GREEN = 0xff37ce19,
+    PURPLE = 0xffdf02fa,
+    YELLOW = 0xfff5f33f
+};
+
 class ArawnSettings
 {
     Q_DECLARE_TR_FUNCTIONS(ArawnSettings)

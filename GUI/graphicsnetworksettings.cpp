@@ -1,9 +1,8 @@
 #include "GUI/graphicsnetworksettings.hpp"
 #include "arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState, QArawnWindow *window)
+GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState)
 {
-    win = window;
     ownState = _ownState;
     backState = _backState;
     nextState = _nextState;
