@@ -90,6 +90,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
         case Qt::Key_Enter:
         case Qt::Key_Return:
         case Qt::Key_Tab:
+        case Qt::Key_Backtab:
             selected = 1;
             update(-360,-86, 362, 52);
             update(-150,0,300,55);
@@ -113,6 +114,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
         switch(event->key()){
         case Qt::Key_Up:
         case Qt::Key_Tab:
+        case Qt::Key_Backtab:
             selected = 0;
             update(-360,-86, 362, 52);
             update(-150,0,300,55);
