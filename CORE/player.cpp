@@ -1,7 +1,7 @@
 #include "CORE/player.hpp"
 
 
-void Player::Move(int direction)
+void Player::Move(uchar direction)
 {
     switch(direction)
     {

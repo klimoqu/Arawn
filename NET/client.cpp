@@ -2,21 +2,30 @@
 
 Client::Client(QString address)
 {
-    tcpSocket = new QTcpSocket(this);
-    ds.setDevice(tcpSocket);
-    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(ReceiveMessageFromServer()));
-    tcpSocket->abort();
-    tcpSocket->connectToHost(QHostAddress(address),28300);
-
+    socket = new QTcpSocket(this);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    socket->connectToHost(address,28300);
+}
+void Client::readyRead()
+{
+    QByteArray message=socket->readAll();
+        if(message.count()==6)
+        {
+            uchar id=message.at(0);
+            uchar type=message.at(1);
+            int msg=message.right(4).toInt();
+            emit CommandReceivedFromServer(Command(id,type,msg));
+        }
+        else
+        {
+            players = QString(message).split(",");
+        }
 }
 void Client::SendCommandToServer(Command c)
 {
-    ds<<c.GetPlayerId()<<c.GetMessageType()<<c.GetMessage();
-}
-void Client::ReceiveMessageFromServer()
-{
-    uchar id,type;
-    int msg;
-    ds>>id>>type>>msg;
-    emit CommandReceivedFromServer(Command(id,type,msg));
+    QByteArray command;
+    command.append((uchar)c.GetPlayerId());
+    command.append((uchar)c.GetMessageType());
+    command.append(QByteArray::number(c.GetMessage()));
+    socket->write(command);
 }

@@ -1,21 +1,29 @@
 #pragma once
-#include "NET/sockethandler.hpp"
+#include "CORE/command.hpp"
+#include <QtNetwork/QtNetwork>
+/*
 
-class Servernet:public QObject
+Tesztelésre vár, ne nyúlj hozzá
+
+*/
+class Servernet:public QTcpServer
 {
     Q_OBJECT
-    uchar playersnumber,act;
-    QTcpServer *tcpServer;
-    Sockethandler *clientConnections[3];
-
+    uchar playernumber,actid;
+    QSet<QTcpSocket*> clients;
+    QMap<QTcpSocket*,QString> players;
+protected:
+    void incommingConnection(int socketfd);
 public:
-    Servernet(uchar playersnumber);
+    Servernet(QObject *parent=0);
+    void SetPlayerNumber(uchar num){playernumber=num;}
+    uchar GetPlayerNumber(){return playernumber;}
 signals:
     void CommandReceivedFromClients(Command c);
-    void CommandReceivedFromServer(Command c);
 private slots:
-    void getConnection();
+    void readyRead();
+    void disconnected();
+    void sendusernames();
 public slots:
-    void GetMessageFromClients(Command c){emit CommandReceivedFromClients(c);}
-    void SendCommandToClients(Command c){emit CommandReceivedFromServer(c);}
+    void SendCommandToClients(Command c);
 };
