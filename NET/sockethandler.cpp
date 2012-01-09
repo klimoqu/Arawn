@@ -1,11 +1,13 @@
 #include "NET/sockethandler.hpp"
 #include <iostream>
-Sockethandler::Sockethandler(QTcpSocket *socket)
+Sockethandler::Sockethandler(QTcpSocket *socket,uchar id)
 {
     this->clientSocket=socket;
     connect(clientSocket, SIGNAL(readyRead()), this, SLOT(receivemessage()));
     connect(clientSocket, SIGNAL(disconnected()),clientSocket, SLOT(deleteLater()));
     connect(clientSocket, SIGNAL(disconnected()),this, SLOT(killMe()));
+    QDataStream ds(clientSocket);
+    ds<<id<<255<<0;
 }
 
 void Sockethandler::receivemessage()

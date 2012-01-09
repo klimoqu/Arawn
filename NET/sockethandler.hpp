@@ -7,7 +7,7 @@ class Sockethandler : public QObject
     Q_OBJECT
     QTcpSocket *clientSocket;
 public:
-    Sockethandler(QTcpSocket *socket);
+    Sockethandler(QTcpSocket *socket,uchar id);
 signals:
     void MessageReceived(Command c);
 private slots:
