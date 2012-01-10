@@ -32,6 +32,7 @@ void Servernet::readyRead()
             auth.append((uchar)255);
             auth.append(QByteArray::number(0));
             client->write(auth);
+            client->flush();
             sendusernames();
         }
 }
@@ -55,5 +56,5 @@ void Servernet::SendCommandToClients(Command c)
     command.append((uchar)c.GetPlayerId());
     command.append((uchar)c.GetMessageType());
     command.append(QByteArray::number(c.GetMessage()));
-    foreach(QTcpSocket *client,clients)client->write(command);
+    foreach(QTcpSocket *client,clients){client->write(command);client->flush();}
 }

@@ -28,4 +28,5 @@ void Client::SendCommandToServer(Command c)
     command.append((uchar)c.GetMessageType());
     command.append(QByteArray::number(c.GetMessage()));
     socket->write(command);
+    socket->flush();
 }
