@@ -6,7 +6,6 @@ GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *_backState, QSt
     ownState = _ownState;
     backState = _backState;
     nextState = _nextState;
-    lineEdit = ArawnSettings::instance()->defaultIPAddress;
     title = tr("Connect to network");
     text = tr("Enter the IP address or hostname:");
     connectText = tr("Connect");
@@ -51,10 +50,10 @@ void GraphicsNetworkSettings::paint(QPainter *painter, const QStyleOptionGraphic
     // Sor +kijelölve?
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(lineFont);
-    painter->drawText(QRectF(-360,-86, 360, 50).translated(2,3), (selected == 0 ? lineEdit.toString()+"_" : lineEdit.toString()), QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-360,-86, 360, 50).translated(2,3), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress.toString()+"_" : ArawnSettings::instance()->defaultIPAddress.toString()), QTextOption(Qt::AlignLeading));
     painter->drawLine(-358, -46, 2, -46);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-360,-86, 360, 50), (selected == 0 ? lineEdit.toString()+"_" : lineEdit.toString()), QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-360,-86, 360, 50), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress.toString()+"_" : ArawnSettings::instance()->defaultIPAddress.toString()), QTextOption(Qt::AlignLeading));
     painter->drawLine(-360, -48, 0, -48);
 
     // Gomb /kijelölve?
@@ -96,15 +95,17 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             return;
         case Qt::Key_Backspace:
         case Qt::Key_Left:
-            if(lineEdit.toString().length() == 0) return;
-            lineEdit = lineEdit.toString().section("", 0, lineEdit.toString().length()-1);
+            if(ArawnSettings::instance()->defaultIPAddress.toString().length() == 0) return;
+            ArawnSettings::instance()->defaultIPAddress =
+                    ArawnSettings::instance()->defaultIPAddress.toString().section("", 0, ArawnSettings::instance()->defaultIPAddress.toString().length()-1);
             update(-360,-86, 362, 52);
             return;
         case Qt::Key_Escape:
             emit previousState();
             return;
         default:
-            lineEdit = lineEdit.toString() + event->text();
+            ArawnSettings::instance()->defaultIPAddress =
+                    ArawnSettings::instance()->defaultIPAddress.toString() + event->text();
             update(-360,-86, 362, 52);
             return;
         }

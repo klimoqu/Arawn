@@ -2,6 +2,7 @@
 #include "GUI/qarawnwindow.hpp"
 #include "GUI/qgraphicsmenu.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
+#include "GUI/graphicsplayersetup.hpp"
 //#include <QtOpenGL/QtOpenGL>
 
 
@@ -256,6 +257,11 @@ void QArawnWindow::initializeMenus()
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
+
+     GraphicsNPSetup *npSetup = new GraphicsNPSetup(stateMenuHistory, stateNetPlayerSetup);
+     npSetup->setPos(scene->width(),0);
+     stateMenu->assignProperty(npSetup, "pos", QPointF(scene->width(),0));
+     scene->addItem(npSetup);
 
 }
 

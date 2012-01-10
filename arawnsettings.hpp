@@ -111,11 +111,13 @@ public:
     QVariantMap bombTimerValues;
     QVariant bombTimer; // 1/10 s
 
-// Player Names
+// Players
     QVariant defaultPlayer1Name;
     QVariant defaultPlayer2Name;
     QVariant defaultPlayer3Name;
     QVariant defaultPlayer4Name;
+    QVariantMap colorValues;
+    QVariant defaultColor;
 
 // Network settings
     QVariant defaultIPAddress;

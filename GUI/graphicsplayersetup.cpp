@@ -1,6 +1,6 @@
 #include "GUI/graphicsplayersetup.hpp"
 
-GraphicsNPSetup::GraphicsNPSetup(QAbstractState *_backState, QState *_ownState, QState *_nextState)
+GraphicsNPSetup::GraphicsNPSetup(QAbstractState *_backState, QState *_ownState)
 {
     title = tr("Players setup");
     names[0] = tr("Local player");
@@ -13,6 +13,11 @@ GraphicsNPSetup::GraphicsNPSetup(QAbstractState *_backState, QState *_ownState, 
     titFont.setPixelSize(50);
     itemFont = qApp->font();
     itemFont.setPixelSize(30);
+    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
+    _ownState->assignProperty(this, "pos", QPointF(0,0));
+    connect(_ownState, SIGNAL(propertiesAssigned()), this, SLOT(setGrabKeyboard()));
+    connect(this, SIGNAL(previousState()), this, SLOT(setUnGrabKeyboard()));
+    _ownState->addTransition(this, SIGNAL(previousState()), _backState);
 }
 
 QRectF GraphicsNPSetup::boundingRect() const
@@ -69,27 +74,44 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     painter->drawText(QRectF(-366, -50, 300, 50).translated(2,3), names[2], QTextOption(Qt::AlignLeading));
     if(playersnum > 2)    painter->setPen(QColor(50, 150, 200));
     else                  painter->setPen(QColor(95, 95, 100));
-    painter->drawText(QRectF(-366, -50, 300, 50), names[3], QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-366, -50, 300, 50), names[2], QTextOption(Qt::AlignLeading));
 
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-366, 0, 300, 50).translated(2,3), names[4], QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-366, 0, 300, 50).translated(2,3), names[3], QTextOption(Qt::AlignLeading));
     if(playersnum > 3)    painter->setPen(QColor(50, 150, 200));
     else                  painter->setPen(QColor(95, 95, 100));
-    painter->drawText(QRectF(-366, 0, 300, 50), names[4], QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-366, 0, 300, 50), names[3], QTextOption(Qt::AlignLeading));
 
     //Név
     painter->setPen(QColor(100, 10, 10, 200));
     painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeading));
-    painter->drawLine(-33, -110, 133, -110);
+    painter->drawLine(-31, -108, 133, -108);
     painter->setPen(QColor(50, 150, 200));
     painter->drawText(QRectF(-33, -150, 166, 50), (selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeading));
-    painter->drawLine(-31, -108, 135, -108);
+    painter->drawLine(-33, -110, 131, -110);
 
     // Szín
-
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->drawText(QRectF(166, -150, 110, 50).translated(2,3), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->defaultColor, "Blank"), QTextOption(Qt::AlignLeading));
+    painter->setPen(QRgb(ArawnSettings::instance()->defaultColor.toInt()));
+    painter->drawText(QRectF(166, -150, 110, 50), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->defaultColor, "Blank"), QTextOption(Qt::AlignLeading));
 
 
     painter->restore();
+}
+
+void GraphicsNPSetup::keyPressEvent(QKeyEvent *event)
+{
+}
+
+void GraphicsNPSetup::setGrabKeyboard()
+{
+    grabKeyboard();
+}
+
+void GraphicsNPSetup::setUnGrabKeyboard()
+{
+    ungrabKeyboard();
 }
 
 

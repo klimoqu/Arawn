@@ -26,7 +26,6 @@ private:
 
     QString title;
     QString text;
-    QVariant lineEdit;
     QString connectText;
     QString connecting;
     QAbstractState *backState;
