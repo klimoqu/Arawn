@@ -1,6 +1,5 @@
 #include "CORE/player.hpp"
 
-
 void Player::Move(uchar direction)
 {
     switch(direction)
@@ -50,9 +49,20 @@ void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
 }
 void Player::Invisibility()
 {
-    qtvisible.stop();
-    qtvisible.setSingleShot(true);
-    qtvisible.start(6000);
-    connect(&qtvisible,SIGNAL(timeout()),this,SIGNAL(ReturnToVisible()));
+    t_visible.stop();
+    t_visible.setSingleShot(true);
+    t_visible.start(6000);
+    connect(&t_visible,SIGNAL(timeout()),this,SIGNAL(ReturnToVisible()));
 }
-
+void Player::InversControl()
+{
+    isoppositecontrol=true;
+    t_oppositecontrol.stop();
+    t_oppositecontrol.setSingleShot(true);
+    t_oppositecontrol.start(6000);
+    connect(&t_oppositecontrol,SIGNAL(timeout()),this,SLOT(returntonormalcontrol()));
+}
+void Player::returntonormalcontrol()
+{
+    isoppositecontrol=false;
+}

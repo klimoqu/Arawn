@@ -4,6 +4,8 @@ Client::Client(QString address)
 {
     socket = new QTcpSocket(this);
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(socket,SIGNAL(connected()),this,SIGNAL(Connected()));
+    connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SIGNAL(ConnectionFailed()));
     socket->connectToHost(address,28300);
 }
 void Client::readyRead()

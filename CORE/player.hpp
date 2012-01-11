@@ -22,14 +22,14 @@ protected:
     /// A játékos él-e,robbantható-e,gebasz van a bombával
     bool live,blastable,fail,isvisible,isoppositecontrol;
     uchar id;
-    QTimer qtvisible;
+    QTimer t_visible,t_oppositecontrol;
 
 public:
     Player(uchar id){this->id=id;}
     bool IsVisible(){return isvisible;}
     bool IsAlive(){return live;}
     bool CanFail(){return fail;}
-    bool CanControll(){return isoppositecontrol;}
+    bool CanControll(){return !isoppositecontrol;}
     bool CanDrop(){return pBombsNum>0;}
     uchar GetId(){return id;}
     uchar GetX(){return pXcoord;}
@@ -44,13 +44,17 @@ public:
     void IncrementBombNumber(){pBombsNum++;}
     void DecrementBombNumber(){if(pBombsNum>1)pBombsNum--;}
     void SpeedUp(){pSpeed++;}
-    void SpeedDwon(){if(pSpeed>1)pSpeed--;}
+    void SpeedDown(){if(pSpeed>1)pSpeed--;}
     void Invisibility();
+    void InversControl();
 
 signals:
     void Died(uchar playerid,uchar murderid);
     void Blasted(uchar playerid);
     void ReturnToVisible();
+
+private slots:
+    void returntonormalcontrol();
 
 public slots:
     void DieAndBlast(uchar id,uchar x, uchar y,uchar dir);

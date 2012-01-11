@@ -39,7 +39,7 @@ signals:
 public slots:
     void Boom()
     {
-        if(!canfail)emit Boomed(this->x,this->y,this->size,0);
+        canfail?emit Boomed(255,255,0,255):emit Boomed(this->x,this->y,this->size,255);
         emit DeleteThis(this);
     }
     void Boom(uchar x, uchar y)
