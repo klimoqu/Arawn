@@ -25,16 +25,16 @@ private:
     ArawnSettings *settings;
     void bonusupload();
 
+
 public:
     void Upload(int id);
     Map(uchar playersnumber,ArawnSettings *settings);
-
     uchar GetPlayersNumber(){return playersnumber;}
     Player* GetPlayer(uchar id){return id>=playersnumber ? 0:players[id];}
     Field* GetField(uchar x, uchar y){return Fields[x][y];}
     Bomb* GetBomb(int i){return bombs[i];}
-
     void AddBomb(Bomb* b){bombs.push_back(b);}
+    void SetPlayersStartPoints();
 
 signals:
 

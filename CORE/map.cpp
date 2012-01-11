@@ -14,6 +14,10 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
 }
 void Map::Upload(int id)
 {
+    for(int i=0;i<20;i++)delete Fields[i];
+    delete[] Fields;
+    bombs.clear();
+
     this->id=id;
     std::stringstream ss;
     ss<<id;
@@ -52,6 +56,7 @@ void Map::Upload(int id)
         }
     }
     input.close();
+    bonusupload();
 }
 void Map::bonusupload()
 {
@@ -83,5 +88,16 @@ void Map::bonusupload()
             default:break;
             }
         }
+    }
+}
+void Map::SetPlayersStartPoints()
+{
+    switch(playersnumber)
+    {
+    case 4:players[3]->SetStartPosition(19,12);emit ServerCommand(Command(3,254,19*256+12));
+    case 3:players[2]->SetStartPosition(0,12);emit ServerCommand(Command(3,254,12));
+    case 2:players[1]->SetStartPosition(19,0);emit ServerCommand(Command(3,254,19*256));
+    default:players[0]->SetStartPosition(0,0);emit ServerCommand(Command(3,254,0));
+        break;
     }
 }

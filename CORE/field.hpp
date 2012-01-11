@@ -20,8 +20,8 @@ public:
 
     Field(uchar x,uchar y,uchar type);
     bool HasBonus(){return bonus!=0;}
-    bool IsBurn(){return burning;}
-    bool IsPermeable(){return id==2;}
+    bool IsDeadly(){return burning || type==4;}
+    bool IsPermeable(){return (type==2 || type==4);}
     bool IsBlastable(){return (type==1 || type==3);}
     uchar GetType(){return this->type;}
     uchar GetOwner(){return id;}

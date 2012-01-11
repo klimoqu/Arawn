@@ -17,7 +17,7 @@ class Game : public QObject
     ArawnSettings *settings;
     Servernet *serverconnection;
     Client *clientconnection;
-    QTimer connectwait;
+    QTimer connectwait,gametimer;
 
     QMap<QTimer*,Command> tempcommands;
 
@@ -46,7 +46,8 @@ signals:
     void ServerIsRunning();//szerver
     void NewPlayer();//szerver
 
-    void GameStarted();
+    void SetPlayerStartPosition(uchar id, uchar x, uchar y);
+    void GameStarted(int roundtime);
 
     void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
@@ -64,6 +65,7 @@ signals:
 private slots:
     void WaitingCommandExecute();
     void StartGame();
+    void TimeIsOver(){}
 
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs

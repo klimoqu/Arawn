@@ -55,6 +55,7 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
 }
 void Field::SetBonus(Bonus *bonus)
 {
+    if(this->type==0||this->type>3){delete bonus;return;}
     this->bonus=bonus;
     connect(bonus,SIGNAL(TurnVisible()),this,SLOT(BonusTurnToVisible()));
     connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
