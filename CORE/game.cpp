@@ -39,7 +39,11 @@ void Game::SetCup(Cup *cup)
     this->cup=cup;
     connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
 }
-
+QStringList Game::GetPlayers()
+{
+    if(clientconnection)clientconnection->GetPlayers();
+    else serverconnection->GetPlayers();
+}
 void Game::NewGame(int id)
 {
     this->map->Upload(id);

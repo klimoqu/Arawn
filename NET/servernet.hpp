@@ -18,6 +18,7 @@ public:
     Servernet(QObject *parent=0);
     void SetPlayerNumber(uchar num){playernumber=num;}
     uchar GetPlayerNumber(){return playernumber;}
+    QStringList GetPlayers();
 signals:
     void CommandReceivedFromClients(Command c);
     void ServerIsRunning();

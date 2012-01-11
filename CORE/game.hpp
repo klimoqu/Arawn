@@ -32,6 +32,7 @@ public:
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}
     void MakeCommand(uchar c);
+    QStringList GetPlayers();
 
 signals:
 
