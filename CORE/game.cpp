@@ -1,9 +1,9 @@
 #include "CORE/game.hpp"
+#include <QTimer>
 #include <math.h>
 
 Game::Game(QString address)
 {
-    this->server=false;
     map=0;
     serverconnection=0;
     clientconnection=new Client(address);
@@ -11,19 +11,20 @@ Game::Game(QString address)
     connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
 }
 
-Game::Game(uchar playersnumber,int bombtimeout)
+Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
 {
+    this->settings=settings;
     this->playersnumber=playersnumber;
     this->bombtimeout=bombtimeout;
-    this->server=true;
     this->playerid=0;
-    map=new Map(playersnumber);
+    map=new Map(playersnumber,settings);
     connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
     clientconnection=0;
     serverconnection=new Servernet();
     serverconnection->SetPlayerNumber(playersnumber);
 
     connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
+    connect(this,SIGNAL(ClientValidate(Command)),this,SLOT(ClientExecute(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
 }
@@ -69,9 +70,9 @@ void Game::validate(Command c)
     //Move parancsok:
     if(c.GetMessageType()==1)
     {
-        float x=player->GetX();
-        float y=player->GetY();
-        Field *field=map->GetField(round(x),round(y));
+        uchar x=player->GetX();
+        uchar y=player->GetY();
+        Field *field=map->GetField(x,y);
 
         if(c.GetMessage()%256==0 && (field->GetLeftNeighbour()==0 || !field->GetLeftNeighbour()->IsPermeable()))
         {
@@ -108,21 +109,38 @@ void Game::execute(Command c)
         {
             map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
         }
-        if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1&&c.GetMessage()<256)
+        if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1 && c.GetMessage()<256)
         {
-            validate(Command(c.GetPlayerId(),c.GetMessageType(),256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
+            QTimer *qt;
+            qt->setSingleShot(true);
+            qt->start(50);
+            connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
+            tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),65536+256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
+        }
+        if(c.GetMessage()>65536 && (c.GetMessage()/256)%256>0)
+        {
+            QTimer *qt;
+            qt->setSingleShot(true);
+            qt->start(50);
+            connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
+            tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-256));
         }
     }
     //Bomba lerakás:
     if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())
     {
-        float x=map->GetPlayer(c.GetPlayerId())->GetX();
-        float y=map->GetPlayer(c.GetPlayerId())->GetY();
-        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout));
+        uchar x=map->GetPlayer(c.GetPlayerId())->GetX();
+        uchar y=map->GetPlayer(c.GetPlayerId())->GetY();
+        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout,settings->enableFailingBombs.toBool()));
         map->GetPlayer(c.GetPlayerId())->Plant();
     }
 }
-
+void Game::WaitingCommandExecute()
+{
+    emit InnerCommand(tempcommands[(QTimer*)sender()]);
+    tempcommands.remove((QTimer*)sender());
+    delete (QTimer*)sender();
+}
 void Game::clientsync(Command c)
 {
     if(c.GetMessageType()==1)//move

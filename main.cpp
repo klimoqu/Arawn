@@ -320,7 +320,13 @@ int main(int argc, char *argv[])
     qDebug() << "GraphicsMap:" << sizeof(GraphicsMap);
     qDebug() << "GraphicsNetworkSettings:" << sizeof(GraphicsNetworkSettings);
     qDebug() << "Game:" << sizeof(Game);
+    qDebug() << "Map:" << sizeof(Map);
+    qDebug() << "Player:" << sizeof(Player);
     qDebug() << "Field:" << sizeof(Field);
+    qDebug() << "Bonus:" << sizeof(Bonus);
+    qDebug() << "Command:" << sizeof(Command);
+    qDebug() << "Bomb:" << sizeof(Bomb);
+    qDebug() << "Cup:" << sizeof(Cup);
 
     return a.exec();
 }

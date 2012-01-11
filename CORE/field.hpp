@@ -12,7 +12,7 @@ class Field : public QObject
     uchar x,y;
     volatile uchar id,type;
     QTimer qt;
-    volatile bool burning;
+    bool burning;
 
 public:
     /*

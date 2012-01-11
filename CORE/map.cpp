@@ -42,8 +42,9 @@ void Map::Upload(int id)
     }
     input.close();
 }
-Map::Map(int playersnumber)
+Map::Map(uchar playersnumber,ArawnSettings *settings)
 {
+    this->settings=settings;
     this->playersnumber=playersnumber;
     for(uchar i=0;i<playersnumber;i++)
     {
