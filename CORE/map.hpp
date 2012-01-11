@@ -10,11 +10,10 @@ class ArawnSettings;
 #include "CORE/command.hpp"
 #include "CORE/bonus.hpp"
 
-
 class Map : public QObject
 {
     Q_OBJECT
-protected:
+private:
     std::string name;
     int id;
     std::ifstream input;
@@ -23,17 +22,18 @@ protected:
     uchar playersnumber;
     QList<Bomb*> bombs;
     ArawnSettings *settings;
+    void bonusupload();
+
 
 public:
     void Upload(int id);
     Map(uchar playersnumber,ArawnSettings *settings);
-
     uchar GetPlayersNumber(){return playersnumber;}
     Player* GetPlayer(uchar id){return id>=playersnumber ? 0:players[id];}
     Field* GetField(uchar x, uchar y){return Fields[x][y];}
     Bomb* GetBomb(int i){return bombs[i];}
-
     void AddBomb(Bomb* b){bombs.push_back(b);}
+    void SetPlayersStartPoints();
 
 signals:
 

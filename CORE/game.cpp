@@ -31,7 +31,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
     connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
     connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
     connect(serverconnection,SIGNAL(ServerIsRunning()),this,SIGNAL(ServerIsRunning()));
-    connect(serverconnection,SIGNAL(NewPlayerConnected(QString)),this,SIGNAL(NewPlayer(QString)));
+    connect(serverconnection,SIGNAL(NewPlayerConnected()),this,SIGNAL(NewPlayer()));
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
 }
@@ -117,7 +117,7 @@ void Game::execute(Command c)
     if(c.GetMessageType()==1)
     {
         map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage()%256);
-        if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsBurn())
+        if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsDeadly())
         {
             map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
         }
@@ -159,18 +159,19 @@ void Game::AllReady()
     connectwait.setSingleShot(true);
     connectwait.start(1000);
     connect(&connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
+    map->SetPlayersStartPoints();
 }
 void Game::StartGame()
 {
-    Command ret=Command(255,0,0);
+    Command ret=Command(255,0,settings->roundTimeDefault.toInt());
     emit ServerExecute(ret);
-    emit GameStarted();
+    emit GameStarted(settings->roundTimeDefault.toInt());
 }
 void Game::clientsync(Command c)
 {
     if(c.GetMessage()==0)
     {
-        emit GameStarted();
+        emit GameStarted(c.GetMessage());
     }
     if(c.GetMessageType()==1)//move
     {
@@ -216,6 +217,14 @@ void Game::clientsync(Command c)
         default:
             break;
         }
+    }
+    if(c.GetMessageType()==253)
+    {
+        emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+    }
+    if(c.GetMessageType()==254)
+    {
+        emit SetPlayerStartPosition(c.GetPlayerId(),(c.GetMessage()/256)%256,c.GetMessage()%256);
     }
     if(c.GetMessageType()==255)
     {

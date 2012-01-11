@@ -1,12 +1,10 @@
 #pragma once
-#include "arawnsettings.hpp"
-class ArawnSettings;
 #include "CORE/map.hpp"
-class Map;
 #include "CORE/cup.hpp"
 #include "NET/servernet.hpp"
 #include "NET/client.hpp"
-
+class ArawnSettings;
+class Map;
 class Game : public QObject
 {
     Q_OBJECT
@@ -17,7 +15,7 @@ class Game : public QObject
     ArawnSettings *settings;
     Servernet *serverconnection;
     Client *clientconnection;
-    QTimer connectwait;
+    QTimer connectwait,gametimer;
 
     QMap<QTimer*,Command> tempcommands;
 
@@ -44,9 +42,10 @@ signals:
     void ConnectionFailed();//kliens+szerver
 
     void ServerIsRunning();//szerver
-    void NewPlayer(QString newplayername);//szerver
+    void NewPlayer();//szerver
 
-    void GameStarted();
+    void SetPlayerStartPosition(uchar id, uchar x, uchar y);
+    void GameStarted(int roundtime);
 
     void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
@@ -61,9 +60,12 @@ signals:
     void PlayerTurnVisible(uchar playerid);
     void PlayerTurnInvisible(uchar playerid);
 
+    void PlayerWonTheCup(QString winnername);
+
 private slots:
     void WaitingCommandExecute();
     void StartGame();
+    void TimeIsOver(){}
 
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
@@ -73,4 +75,5 @@ public slots:
     void InputCommandFromMap(Command c){ServerValidate(c);}
 
     void AllReady();
+    void PlayerWin(uchar playerid,QString name){emit PlayerWonTheCup(name);emit ServerValidate(Command(playerid,253,0));}
 };

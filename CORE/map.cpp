@@ -1,8 +1,23 @@
 #include "CORE/map.hpp"
 #include <sstream>
 
+Map::Map(uchar playersnumber,ArawnSettings *settings)
+{
+    this->settings=settings;
+    this->playersnumber=playersnumber;
+    for(uchar i=0;i<playersnumber;i++)
+    {
+        players[i]=new Player(i);
+        connect(players[i],SIGNAL(Blasted(uchar)),this,SLOT(PlayerBlast(uchar)));
+        connect(players[i],SIGNAL(Died(uchar,uchar)),this,SLOT(PlayerDie(uchar,uchar)));
+    }
+}
 void Map::Upload(int id)
 {
+    for(int i=0;i<20;i++)delete Fields[i];
+    delete[] Fields;
+    bombs.clear();
+
     this->id=id;
     std::stringstream ss;
     ss<<id;
@@ -19,7 +34,7 @@ void Map::Upload(int id)
         {
             int tempFieldid;
             input>>tempFieldid;
-            Fields[i][j]=new Field(i,j,tempFieldid);
+            Fields[i][j]=new Field(i,j,(uchar)tempFieldid);
             connect(Fields[i][j],SIGNAL(Boomed(uchar,uchar,uchar,uchar)),this,SLOT(FieldBurning(uchar,uchar,uchar,uchar)));
             connect(Fields[i][j],SIGNAL(Extincted(uchar,uchar)),this,SLOT(FieldExcinguish(uchar,uchar)));
             connect(Fields[i][j],SIGNAL(FieldChanged(uchar,uchar,uchar)),this,SLOT(FieldChange(uchar,uchar,uchar)));
@@ -41,15 +56,48 @@ void Map::Upload(int id)
         }
     }
     input.close();
+    bonusupload();
 }
-Map::Map(uchar playersnumber,ArawnSettings *settings)
+void Map::bonusupload()
 {
-    this->settings=settings;
-    this->playersnumber=playersnumber;
-    for(uchar i=0;i<playersnumber;i++)
+    for(unsigned int i=0;i<20;i++)
     {
-        players[i]=new Player(i);
-        connect(players[i],SIGNAL(Blasted(uchar)),this,SLOT(PlayerBlast(uchar)));
-        connect(players[i],SIGNAL(Died(uchar,uchar)),this,SLOT(PlayerDie(uchar,uchar)));
+        for(unsigned int j=0;j<13;j++)
+        {
+            switch(((int)Fields[i][j])%60)
+            {
+            case 1:
+            case 2:
+            case 3:
+            case 4:Fields[i][j]->SetBonus(new Bonus(1));break;//bomba erő +
+            case 5:
+            case 6:Fields[i][j]->SetBonus(new Bonus(2));break;//bomba erő -
+            case 7:
+            case 8:
+            case 9:
+            case 10:Fields[i][j]->SetBonus(new Bonus(3));break;//bomba darab +
+            case 11:
+            case 12:Fields[i][j]->SetBonus(new Bonus(4));break;//bomba darab -
+            case 13:Fields[i][j]->SetBonus(new Bonus(5));break;//sebesség +
+            case 14:Fields[i][j]->SetBonus(new Bonus(6));break;//sebesség -
+            case 15:if(settings->enableInvisibility.toBool())Fields[i][j]->SetBonus(new Bonus(7));break;//láthatatlanság
+            case 16:
+            case 17:if(settings->enableOppositeControls.toBool())Fields[i][j]->SetBonus(new Bonus(8));break;//ellenkontrol
+            case 18:
+            case 19:if(settings->enableFailingBombs.toBool())Fields[i][j]->SetBonus(new Bonus(9));break;//besülés
+            default:break;
+            }
+        }
+    }
+}
+void Map::SetPlayersStartPoints()
+{
+    switch(playersnumber)
+    {
+    case 4:players[3]->SetStartPosition(19,12);emit ServerCommand(Command(3,254,19*256+12));
+    case 3:players[2]->SetStartPosition(0,12);emit ServerCommand(Command(3,254,12));
+    case 2:players[1]->SetStartPosition(19,0);emit ServerCommand(Command(3,254,19*256));
+    default:players[0]->SetStartPosition(0,0);emit ServerCommand(Command(3,254,0));
+        break;
     }
 }

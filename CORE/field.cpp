@@ -1,6 +1,12 @@
 #include "CORE/field.hpp"
-
-
+/*
+  0 - Fal
+  1 - Doboz
+  2 - Fű
+  3 - Nehézdoboz
+  4 - Űr
+  5 - Lyuk
+*/
 Field::Field(uchar type, uchar x,uchar y)
 {
     this->x=x;
@@ -49,6 +55,7 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
 }
 void Field::SetBonus(Bonus *bonus)
 {
+    if(this->type==0||this->type>3){delete bonus;return;}
     this->bonus=bonus;
     connect(bonus,SIGNAL(TurnVisible()),this,SLOT(BonusTurnToVisible()));
     connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
