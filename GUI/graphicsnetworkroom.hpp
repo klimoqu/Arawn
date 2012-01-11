@@ -12,22 +12,16 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-signals:
-    void startGame();
-public slots:
-    void setGrabKeyboard();
-    void setUnGrabKeyboard();
-
 private:
-    void keyPressEvent(QKeyEvent *event);
 
     Game *g;
     QString title;
     QString playerStrs[4];
     QString playerNames[4];
-    uchar playerNums;
+    uchar playerNums; // 0,1,2,3
     QFont titFont;
     QFont itemFont;
+    QFont nameFont;
 };
 
 #endif // GRAPHICSNETWORKROOM_HPP
