@@ -16,6 +16,8 @@ public:
     Client(QString address);
     uchar GetPlayerID(){return playerid;}
 signals:
+    void Connected();
+    void ConnectionFailed();
     void CommandReceivedFromServer(Command c);
 private slots:
     void readyRead();

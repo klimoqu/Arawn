@@ -7,8 +7,11 @@ Game::Game(QString address)
     map=0;
     serverconnection=0;
     clientconnection=new Client(address);
+
     connect(this,SIGNAL(ClientValidate(Command)),clientconnection,SLOT(SendCommandToServer(Command)));
     connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
+    connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
+    connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
@@ -18,15 +21,18 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
     this->bombtimeout=bombtimeout;
     this->playerid=0;
     map=new Map(playersnumber,settings);
-    connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
     clientconnection=0;
     serverconnection=new Servernet();
     serverconnection->SetPlayerNumber(playersnumber);
 
-    connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
+    connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
     connect(this,SIGNAL(ClientValidate(Command)),this,SLOT(ClientExecute(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
+    connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
+    connect(serverconnection,SIGNAL(ServerIsRunning()),this,SIGNAL(ServerIsRunning()));
+    connect(serverconnection,SIGNAL(NewPlayerConnected(QString)),this,SIGNAL(NewPlayer(QString)));
+    connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
 }
 void Game::SetCup(Cup *cup)
 {
@@ -37,6 +43,7 @@ void Game::SetCup(Cup *cup)
 void Game::NewGame(int id)
 {
     this->map->Upload(id);
+
 }
 void Game::MakeCommand(uchar c)
 {
@@ -96,7 +103,7 @@ void Game::validate(Command c)
     {
         return;
     }
-    emit ServerExecute(c);
+    emit ServerValidate(c);
     execute(c);
 }
 void Game::execute(Command c)
@@ -131,13 +138,13 @@ void Game::execute(Command c)
     {
         uchar x=map->GetPlayer(c.GetPlayerId())->GetX();
         uchar y=map->GetPlayer(c.GetPlayerId())->GetY();
-        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout,settings->enableFailingBombs.toBool()));
+        map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout,map->GetPlayer(c.GetPlayerId())->CanFail()));
         map->GetPlayer(c.GetPlayerId())->Plant();
     }
 }
 void Game::WaitingCommandExecute()
 {
-    emit InnerCommand(tempcommands[(QTimer*)sender()]);
+    validate(tempcommands[(QTimer*)sender()]);
     tempcommands.remove((QTimer*)sender());
     delete (QTimer*)sender();
 }
@@ -161,14 +168,34 @@ void Game::clientsync(Command c)
     }
     if(c.GetMessageType()==5)//die/blast
     {
-        if(c.GetMessage()==0){emit PlayerDied(c.GetPlayerId(),c.GetMessage());}
-        if(c.GetMessage()==1){emit PlayerBlasted(c.GetPlayerId());}
+        if(c.GetMessage()!=256){emit PlayerDied(c.GetPlayerId(),c.GetMessage());}
+        else{emit PlayerBlasted(c.GetPlayerId());}
     }
     if(c.GetMessageType()==6)
     {
         emit FieldChanged((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
     }
-    if(c.GetMessageType()==5)
+    if(c.GetMessageType()==7)
+    {
+        switch(c.GetMessage()/(256*256*256))
+        {
+        case 1:
+            emit BonusTurnVisible((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
+            break;
+        case 2:
+            emit BonusTurnInvisible((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
+            break;
+        case 3:
+            emit PlayerTurnVisible(c.GetPlayerId());
+            break;
+        case 4:
+            emit PlayerTurnInvisible(c.GetPlayerId());
+            break;
+        default:
+            break;
+        }
+    }
+    if(c.GetMessageType()==255)
     {
         this->playerid=c.GetPlayerId();
     }

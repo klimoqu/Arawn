@@ -68,7 +68,7 @@ public slots:
     }
     void PlayerBlast(uchar id)
     {
-        Command ret=Command(id,5,1);
+        Command ret=Command(id,5,256);
         emit ServerCommand(ret);
     }
 };

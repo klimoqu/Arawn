@@ -3,7 +3,8 @@
 Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
     playernumber=4;
-    this->listen(QHostAddress::Any,28300);
+    if(this->listen(QHostAddress::Any,28300))emit ServerIsRunning();
+    else emit ServerNetworkError();
 }
 void Servernet::incommingConnection(int socketfd)
 {
@@ -27,6 +28,7 @@ void Servernet::readyRead()
         else
         {
             players[client]=QString(message);
+            emit NewPlayerConnected(QString(message));
             QByteArray auth;
             auth.append((uchar)clients.size());
             auth.append((uchar)255);

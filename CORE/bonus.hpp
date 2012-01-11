@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QObject>
+#include "player.hpp"
+
 /*
   1 bomba erő növelése
   2 bomba erő csökkentése
@@ -12,15 +14,17 @@
   8 ellenkező írány
   9 besülés
 */
+
 class Bonus : public QObject
 {
     Q_OBJECT
-    uchar type;
+    uchar x,y,type;
     bool visible,usable;
 public:
     Bonus(uchar type);
+    uchar GetType(){return type;}
 signals:
-
+    void TurnVisible();
+    void PickUpOrDestroyed();
 public slots:
-
 };

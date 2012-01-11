@@ -37,10 +37,12 @@ signals:
 
     void ServerValidate(Command c);//ellenörzött cumó
     void ClientValidate(Command c);//elleőrizendő cumó
-    void InnerCommand(Command c);//belső rekúrzió
 
-    void Connected();
-    void ConnectionFailed();
+    void Connected();//kliens
+    void ConnectionFailed();//kliens+szerver
+
+    void ServerIsRunning();//szerver
+    void NewPlayer(QString newplayername);//szerver
 
     void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
@@ -49,9 +51,14 @@ signals:
     void PlayerBlasted(uchar id);
     void FieldChanged(uchar x, uchar y, uchar newtype);
     void FieldExcinted(uchar x,uchar y);
+    void BonusTurnVisible(uchar x, uchar y, uchar type);
+    void BonusTurnInvisible(uchar x, uchar y, uchar type);
+    void PlayerTurnVisible(uchar playerid);
+    void PlayerTurnInvisible(uchar playerid);
 
 private slots:
     void WaitingCommandExecute();
+
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
     void ClientExecute(Command c){validate(c);}//ellenőrzés

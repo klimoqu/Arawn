@@ -4,3 +4,4 @@ Bonus::Bonus(uchar type)
 {
     this->type=type;
 }
+

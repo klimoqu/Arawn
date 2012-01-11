@@ -20,6 +20,9 @@ public:
     uchar GetPlayerNumber(){return playernumber;}
 signals:
     void CommandReceivedFromClients(Command c);
+    void ServerIsRunning();
+    void ServerNetworkError();
+    void NewPlayerConnected(QString newplayername);
 private slots:
     void readyRead();
     void disconnected();
