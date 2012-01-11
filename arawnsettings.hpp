@@ -117,7 +117,10 @@ public:
     QVariant defaultPlayer3Name;
     QVariant defaultPlayer4Name;
     QVariantMap colorValues;
-    QVariant defaultColor;
+    QVariant default1Color;
+    QVariant default2Color;
+    QVariant default3Color;
+    QVariant default4Color;
 
     uchar noOfPlayers;
 
