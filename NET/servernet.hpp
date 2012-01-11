@@ -23,7 +23,7 @@ signals:
     void CommandReceivedFromClients(Command c);
     void ServerIsRunning();
     void ServerNetworkError();
-    void NewPlayerConnected(QString newplayername);
+    void NewPlayerConnected();
     void AllPlayersConnected();
 private slots:
     void readyRead();
