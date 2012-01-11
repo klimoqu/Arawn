@@ -3,7 +3,7 @@
 #include "GUI/qgraphicsmenu.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
 #include "GUI/graphicsplayersetup.hpp"
-//#include <QtOpenGL/QtOpenGL>
+#include <QtOpenGL/QtOpenGL>
 
 
 void QArawnWindow::initWindow()
@@ -18,7 +18,6 @@ void QArawnWindow::initWindow()
 //    if(ArawnSettings::instance()->openGlRendering.toBool()){
 //        setViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
 //    }
-    //setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     setRenderHint(QPainter::SmoothPixmapTransform);
     scale(((qreal)sr.width()) / (qreal)ArawnSettings::instance()->resolution.toPoint().x(),
           ((qreal)sr.height()) / (qreal)ArawnSettings::instance()->resolution.toPoint().y());
@@ -116,8 +115,6 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateGame);
     stateNetSettings = new QState;
     machine->addState(stateNetSettings);
-    stateNetRoom = new QState;
-    machine->addState(stateNetRoom);
     statePlayerSetup = new QState;
     machine->addState(statePlayerSetup);
     stateMapSelection = new QState;
@@ -253,15 +250,15 @@ void QArawnWindow::initializeMenus()
      connect(stateQuit, SIGNAL(entered()), sounds[0], SLOT(play()));
      stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateNetRoom);
-     netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
-     stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
-     scene->addItem(netSettingsItem);
-
      GraphicsNPSetup *npSetup = new GraphicsNPSetup(stateMenuHistory, stateNetPlayerSetup);
      npSetup->setPos(scene->width(),0);
      stateMenu->assignProperty(npSetup, "pos", QPointF(scene->width(),0));
      scene->addItem(npSetup);
+
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateGame);
+     netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
+     machine->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
+     scene->addItem(netSettingsItem);
 
 }
 

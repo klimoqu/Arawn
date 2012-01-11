@@ -7,31 +7,31 @@ class GraphicsNetworkSettings : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState);
+    explicit GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_gameState);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 signals:
     void previousState();
-    void connectionOk();
+    void trNextState();
 
 public slots:
     void setGrabKeyboard();
     void setUnGrabKeyboard();
     void connectionFail();
+    void connectionOk();
 
 private:
     void keyPressEvent(QKeyEvent *event);
 
+    QState *gameState;
+    QState *roomState;
     Game *g;
     QString title;
     QString text;
     QString connectText;
     QString connecting;
-    QAbstractState *backState;
-    QState *ownState;
-    QState *nextState;
     QFont titFont;
     QFont itemFont;
     QFont lineFont;

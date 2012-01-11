@@ -1,11 +1,12 @@
 #include "GUI/graphicsnetworksettings.hpp"
+#include "GUI/graphicsnetworkroom.hpp"
 #include "arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *_backState, QState *_ownState, QState *_nextState)
+GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QState *ownState, QState *_gameState)
 {
-    ownState = _ownState;
-    backState = _backState;
-    nextState = _nextState;
+    gameState = _gameState;
+    roomState = new QState;
+    ownState->machine()->addState(roomState);
     title = tr("Connect to network");
     text = tr("Enter the IP address or hostname:");
     connectText = tr("Connect");
@@ -22,6 +23,7 @@ GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *_backState, QSt
     connect(ownState, SIGNAL(propertiesAssigned()), this, SLOT(setGrabKeyboard()));
     connect(this, SIGNAL(previousState()), this, SLOT(setUnGrabKeyboard()));
     ownState->addTransition(this, SIGNAL(previousState()), backState);
+    ownState->addTransition(this, SIGNAL(trNextState()), roomState);
 }
 
 QRectF GraphicsNetworkSettings::boundingRect() const
@@ -127,7 +129,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             update(-360, 100, 362, 52);
             g = new Game(ArawnSettings::instance()->defaultIPAddress.toString());
             connect(g, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
-            connect(g, SIGNAL(Connected()), this, SIGNAL(connectionOk()));
+            connect(g, SIGNAL(Connected()), this, SLOT(connectionOk()));
             return;
         case Qt::Key_Escape:
             emit previousState();
@@ -156,6 +158,17 @@ void GraphicsNetworkSettings::connectionFail()
 {
     connecting = tr("Fail!");
     update(-360, 100, 362, 52);
+}
+
+void GraphicsNetworkSettings::connectionOk()
+{
+    QState *roomState = new QState;
+    gameState->machine()->addState(roomState);
+    GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
+    room->setPos(scene()->width(), 0);
+    scene()->addItem(room);
+    room->setParams(g, roomState, gameState);
+    emit trNextState();
 }
 
 

@@ -1,24 +1,17 @@
-#include "graphicsnetworkroom.hpp"
+#include "GUI/graphicsnetworkroom.hpp"
 
-GraphicsNetworkRoom::GraphicsNetworkRoom(Game *_g, QState *_ownState, QState *_gameState)
+GraphicsNetworkRoom::GraphicsNetworkRoom()
 {
-    g = _g;
-    title = ArawnSettings::instance()->defaultIPAddress.toString();
     playerStrs[0] = tr("#1 player");
     playerStrs[1] = tr("#2 player");
     playerStrs[2] = tr("#3 player");
     playerStrs[3] = tr("#4 player");
-    playerNums = g->GetPlayers().size();
-    for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
     titFont = qApp->font();
     titFont.setPixelSize(50);
     itemFont = qApp->font();
     itemFont.setPixelSize(40);
     nameFont = qApp->font();
     nameFont.setPixelSize(30);
-    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
-    _ownState->assignProperty(this, "pos", QPointF(0,0));
-    _ownState->addTransition(g, SIGNAL(GameStarted()), _gameState);
 }
 
 QRectF GraphicsNetworkRoom::boundingRect() const
@@ -33,9 +26,9 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
     // Cím
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(titFont);
-    painter->drawText(QRectF(-300,-266, 600, 66).translated(4,4), title, QTextOption(Qt::AlignCenter | Qt::AlignTop));
+    painter->drawText(QRectF(-300,-266, 600, 66).translated(4,4), ArawnSettings::instance()->defaultIPAddress.toString(), QTextOption(Qt::AlignCenter | Qt::AlignTop));
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-300,-266, 600, 66), title, QTextOption(Qt::AlignCenter | Qt::AlignTop));
+    painter->drawText(QRectF(-300,-266, 600, 66), ArawnSettings::instance()->defaultIPAddress.toString(), QTextOption(Qt::AlignCenter | Qt::AlignTop));
 
     // játékosok
     if(playerNums >= 0){
@@ -112,6 +105,25 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
     }
 
     painter->restore();
+}
+
+void GraphicsNetworkRoom::pushPlayer()
+{
+    playerNums = g->GetPlayers().size();
+    for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
+    update(boundingRect());
+}
+
+void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameState)
+{
+    g = _g;
+    playerNums = g->GetPlayers().size();
+    for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
+    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
+    _ownState->assignProperty(this, "pos", QPointF(0,0));
+    _ownState->addTransition(g, SIGNAL(GameStarted()), _gameState);
+    connect(g, SIGNAL(GameStarted()), this, SLOT(deleteLater()));
+    connect(g, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));
 }
 
 

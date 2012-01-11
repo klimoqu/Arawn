@@ -43,7 +43,6 @@ private:
     QState *stateMenu;
     QHistoryState *stateMenuHistory;
     QState *stateNetSettings;
-    QState *stateNetRoom;
     QState *statePlayerSetup;
     QState *stateMapSelection;
     QState *stateSurvivalCup;
