@@ -71,4 +71,14 @@ public slots:
         Command ret=Command(id,5,256);
         emit ServerCommand(ret);
     }
+    void ChangeBonus(uchar x, uchar y, uchar type,uchar visibleorstate)
+    {
+        Command ret=Command(0,7,(visibleorstate*256*256*256)+(256*256*type)+(256*x)+y);
+        emit ServerCommand(ret);
+    }
+    void PlayerInvisibility(uchar playerid,bool visible)
+    {
+        Command ret=Command(playerid,7,(((visible?3:4))*256*256*256));
+        emit ServerCommand(ret);
+    }
 };

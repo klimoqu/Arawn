@@ -33,6 +33,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
     connect(serverconnection,SIGNAL(ServerIsRunning()),this,SIGNAL(ServerIsRunning()));
     connect(serverconnection,SIGNAL(NewPlayerConnected(QString)),this,SIGNAL(NewPlayer(QString)));
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
+    connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
 }
 void Game::SetCup(Cup *cup)
 {
@@ -41,8 +42,8 @@ void Game::SetCup(Cup *cup)
 }
 QStringList Game::GetPlayers()
 {
-    if(clientconnection)clientconnection->GetPlayers();
-    else serverconnection->GetPlayers();
+    if(clientconnection)return clientconnection->GetPlayers();
+    else return serverconnection->GetPlayers();
 }
 void Game::NewGame(int id)
 {
@@ -136,6 +137,7 @@ void Game::execute(Command c)
             connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
             tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-256));
         }
+        map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->Visit(map->GetPlayer(c.GetPlayerId()));
     }
     //Bomba lerakás:
     if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())
@@ -152,8 +154,24 @@ void Game::WaitingCommandExecute()
     tempcommands.remove((QTimer*)sender());
     delete (QTimer*)sender();
 }
+void Game::AllReady()
+{
+    connectwait.setSingleShot(true);
+    connectwait.start(1000);
+    connect(&connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
+}
+void Game::StartGame()
+{
+    Command ret=Command(255,0,0);
+    emit ServerExecute(ret);
+    emit GameStarted();
+}
 void Game::clientsync(Command c)
 {
+    if(c.GetMessage()==0)
+    {
+        emit GameStarted();
+    }
     if(c.GetMessageType()==1)//move
     {
         emit PlayerMoved(c.GetPlayerId(),c.GetMessage());

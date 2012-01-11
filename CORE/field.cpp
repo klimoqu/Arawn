@@ -8,17 +8,17 @@ Field::Field(uchar type, uchar x,uchar y)
     this->type=type;
     this->id=255;
     this->burning=false;
-    this->hasbonus=false;
     this->top=0;
     this->bottom=0;
     this->left=0;
     this->right=0;
+    this->bonus=0;
 }
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
     if(x!=this->x || this->y!=y)return;
-    hasbonus=false;
     emit BonusChanged(this->x,this->y,bonus->GetType(),false);
+    bonus=0;
     StartBurn(size,id,direction);
 }
 void Field::Extinction()
@@ -46,4 +46,15 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
     if((direction==2 || direction==255) && bottom!=0 && (bottom->IsPermeable() || bottom->IsBlastable())){bottom->StartBurn(size-1,id,2);}
     if((direction==3 || direction==255) && right!=0 && (right->IsPermeable() || right->IsBlastable())){right->StartBurn(size-1,id,3);}
 
+}
+void Field::SetBonus(Bonus *bonus)
+{
+    this->bonus=bonus;
+    connect(bonus,SIGNAL(TurnVisible()),this,SLOT(BonusTurnToVisible()));
+    connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
+}
+void Field::Visit(Player* player)
+{
+    if(bonus)bonus->Pickup(player);
+    bonus=0;
 }

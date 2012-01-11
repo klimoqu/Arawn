@@ -20,19 +20,19 @@ class Field : public QObject
     uchar x,y;
     uchar id,type;
     QTimer qt;
-    bool burning,hasbonus;
+    bool burning;
     Bonus *bonus;
 
 public:
 
     Field(uchar type, uchar x,uchar y);
-    bool HasBonus(){return hasbonus;}
+    bool HasBonus(){return bonus!=0;}
     bool IsBurn(){return burning;}
     bool IsPermeable(){return id==2;}
     bool IsBlastable(){return (type==1 || type==3);}
     uchar GetType(){return this->type;}
     uchar GetOwner(){return id;}
-    void SetBonus(Bonus *bonus){hasbonus=true;this->bonus=bonus;}
+    void SetBonus(Bonus *bonus);
     void SetTopNeighbours(Field *top){this->top=top;}
     void SetLeftNeighbours(Field *left){this->left=left;}
     void SetRightNeighbours(Field *right){this->right=right;}
@@ -42,16 +42,18 @@ public:
     Field* GetLeftNeighbour(){return left;}
     Field* GetRightNeighbour(){return right;}
     Field* GetBottomNeighbour(){return bottom;}
+    Bonus* GetBonus(){return bonus;}
+    void Visit(Player *player);
 
 signals:
     void Extincted(uchar x,uchar y);
     void Boomed(uchar x,uchar y,uchar id,uchar direction);
     void FieldChanged(uchar x,uchar y,uchar newtype);
-    void BonusChanged(uchar x,uchar y, uchar type,bool visible);
+    void BonusChanged(uchar x,uchar y, uchar type,uchar visibleorstate);
 
 public slots:
     void Boom(uchar x,uchar y,uchar size, uchar id,uchar direction);
     void Extinction();
-    void BonusTurnToVisible(){}
-    void BonusPickUpOrDestroye(){}
+    void BonusTurnToVisible(){emit BonusChanged(this->x,this->y,bonus->GetType(),1);}
+    void BonusPickUpOrDestroye(){emit BonusChanged(this->x,this->y,bonus->GetType(),2);}
 };
