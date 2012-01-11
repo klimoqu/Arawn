@@ -208,7 +208,10 @@ ArawnSettings::ArawnSettings()
     defaultPlayer2Name = "Diarmait";
     defaultPlayer3Name = "Fachtna";
     defaultPlayer4Name = "Pryderi";
-    defaultColor = RED;
+    default1Color = RED;
+    default1Color = GREEN;
+    default1Color = BLUE;
+    default1Color = YELLOW;
     noOfPlayers = 4;
     defaultIPAddress = "192.168.0.1";
 
@@ -287,7 +290,10 @@ bool ArawnSettings::load()
             stream >> defaultPlayer2Name;
             stream >> defaultPlayer3Name;
             stream >> defaultPlayer4Name;
-            stream >> defaultColor;
+            stream >> default1Color;
+            stream >> default2Color;
+            stream >> default3Color;
+            stream >> default4Color;
             stream >> noOfPlayers;
             stream >> defaultIPAddress;
         sFile.close();
@@ -330,7 +336,10 @@ void ArawnSettings::save()
         stream << defaultPlayer2Name.toString();
         stream << defaultPlayer3Name.toString();
         stream << defaultPlayer4Name.toString();
-        stream << defaultColor.toInt();
+        stream << default1Color.toInt();
+        stream << default2Color.toInt();
+        stream << default3Color.toInt();
+        stream << default4Color.toInt();
         stream << noOfPlayers;
         stream << defaultIPAddress.toString();
     sFile.close();

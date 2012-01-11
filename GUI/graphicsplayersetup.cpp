@@ -12,25 +12,26 @@ GraphicsNPSetup::GraphicsNPSetup(QAbstractState *_backState, QState *_ownState)
     titFont.setPixelSize(50);
     itemFont = qApp->font();
     itemFont.setPixelSize(30);
-    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
-    _ownState->assignProperty(this, "pos", QPointF(0,0));
-    connect(_ownState, SIGNAL(propertiesAssigned()), this, SLOT(setGrabKeyboard()));
-    connect(this, SIGNAL(previousState()), this, SLOT(setUnGrabKeyboard()));
-    _ownState->addTransition(this, SIGNAL(previousState()), _backState);
+    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos")); /// Alapértelmezett animáció
+    _ownState->assignProperty(this, "pos", QPointF(0,0)); /// Saját állapotra kényszerített hely
+    connect(_ownState, SIGNAL(propertiesAssigned()), this, SLOT(setGrabKeyboard())); /// Ha elérte a helyét, legyen billentyűzet
+    connect(this, SIGNAL(previousState()), this, SLOT(setUnGrabKeyboard())); /// Visszalépéskor engedje el
+    _ownState->addTransition(this, SIGNAL(previousState()), _backState); /// SignalTransition a visszalépéshez
 }
 
 QRectF GraphicsNPSetup::boundingRect() const
 {
-    return QRectF(-366, -270, 650, 330);
+    return QRectF(-366, -270, 650, 330); /// Hard coded kiterjedés, 0,0 középponthoz képest
 }
 
 void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->save();
+    painter->save(); /// save->restore a gyorsabb rajzolásért
 
     // Cím
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(titFont);
+    /// Először mindig az árnyékot rajzoljuk, 4,4-es eltolással
     painter->drawText(QRectF(-233,-266, 466, 66).translated(4,4), title, QTextOption(Qt::AlignCenter | Qt::AlignTop));
     painter->setPen(QColor(50, 150, 200));
     painter->drawText(QRectF(-233,-266, 466, 66), title, QTextOption(Qt::AlignCenter | Qt::AlignTop));
@@ -38,6 +39,7 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     //Kijelölés
     painter->setBrush(QColor(150,100,150,100));
     painter->setPen(Qt::NoPen);
+    /// Itt lesz majd egy kicsit komplexebb feladat. A szövegmezőre nem rajzolunk téglalapot kijelöléskor, de a színmezőre igen.
     switch(selected){
     case 0:
         painter->drawRect(-366, -150, 300, 50);
@@ -56,7 +58,7 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
         break;
     }
 
-    //Jelzők
+    //Jelzők(names[x])
     painter->setFont(itemFont);
 
     painter->setPen(QColor(100, 10, 10, 200));
@@ -71,17 +73,19 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
 
     painter->setPen(QColor(100, 10, 10, 200));
     painter->drawText(QRectF(-360, -50, 300, 50).translated(2,3), names[2], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
-    if(ArawnSettings::instance()->noOfPlayers > 2)    painter->setPen(QColor(50, 150, 200));
-    else                  painter->setPen(QColor(95, 95, 100));
+    /// A játékosszám függvényében szürke/szines
+    if(ArawnSettings::instance()->noOfPlayers > 2) painter->setPen(QColor(50, 150, 200));
+    else painter->setPen(QColor(95, 95, 100));
     painter->drawText(QRectF(-360, -50, 300, 50), names[2], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
 
     painter->setPen(QColor(100, 10, 10, 200));
     painter->drawText(QRectF(-360, 0, 300, 50).translated(2,3), names[3], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
-    if(ArawnSettings::instance()->noOfPlayers > 3)    painter->setPen(QColor(50, 150, 200));
-    else                  painter->setPen(QColor(95, 95, 100));
+    if(ArawnSettings::instance()->noOfPlayers > 3) painter->setPen(QColor(50, 150, 200));
+    else painter->setPen(QColor(95, 95, 100));
     painter->drawText(QRectF(-360, 0, 300, 50), names[3], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
 
     //Név
+    /// Itt is több kell majd, hiszen mindenkinek van neve (ArawnSettings), és mindegyik szerkeszthető is
     painter->setPen(QColor(100, 10, 10, 200));
     painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, -108, 133, -108);
@@ -90,17 +94,20 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     painter->drawLine(-33, -110, 131, -110);
 
     // Szín
+    /// Fentihez hasonlóan
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(166, -150, 110, 50).translated(2,3), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->defaultColor, "Blank"), QTextOption(Qt::AlignCenter));
-    painter->setPen(QRgb(ArawnSettings::instance()->defaultColor.toInt()));
-    painter->drawText(QRectF(166, -150, 110, 50), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->defaultColor, "Blank"), QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(166, -150, 110, 50).translated(2,3), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"), QTextOption(Qt::AlignCenter));
+    painter->setPen(QRgb(ArawnSettings::instance()->default1Color.toInt()));
+    painter->drawText(QRectF(166, -150, 110, 50), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"), QTextOption(Qt::AlignCenter));
 
 
     painter->restore();
 }
 
+// Ugyan így, csak több case-ág van.
 void GraphicsNPSetup::keyPressEvent(QKeyEvent *event)
 {
+    // Az esc minden kijelölésre ugyan azt csinálja
     if(event->key() == Qt::Key_Escape) { emit previousState(); return; }
 
     switch(selected){
@@ -120,6 +127,7 @@ void GraphicsNPSetup::keyPressEvent(QKeyEvent *event)
             update(boundingRect()); return; }
         ArawnSettings::instance()->defaultPlayer1Name =
                 ArawnSettings::instance()->defaultPlayer1Name.toString() + event->text();
+        update(boundingRect());
         break;
     case 2:
         if(event->key() == Qt::Key_Left) { selected = 1; update(boundingRect()); return; }
