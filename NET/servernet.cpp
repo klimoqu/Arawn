@@ -34,7 +34,7 @@ void Servernet::readyRead()
         else
         {
             players[client]=QString(message);
-            emit NewPlayerConnected(QString(message));
+            emit NewPlayerConnected();
             QByteArray auth;
             auth.append((uchar)clients.size());
             auth.append((uchar)255);

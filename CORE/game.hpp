@@ -44,7 +44,7 @@ signals:
     void ConnectionFailed();//kliens+szerver
 
     void ServerIsRunning();//szerver
-    void NewPlayer(QString newplayername);//szerver
+    void NewPlayer();//szerver
 
     void GameStarted();
 

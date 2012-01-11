@@ -1,6 +1,12 @@
 #include "CORE/field.hpp"
-
-
+/*
+  0 - Fal
+  1 - Doboz
+  2 - Fű
+  3 - Nehézdoboz
+  4 - Űr
+  5 - Lyuk
+*/
 Field::Field(uchar type, uchar x,uchar y)
 {
     this->x=x;

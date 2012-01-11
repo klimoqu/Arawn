@@ -1,12 +1,5 @@
 #pragma once
-/*
-  0 - Fal
-  1 - Doboz
-  2 - Fű
-  3 - Nehézdoboz
-  4 - Űr
-  5 - Lyuk
-*/
+
 #include <QObject>
 #include <QTimer>
 #include <iostream>
@@ -25,7 +18,7 @@ class Field : public QObject
 
 public:
 
-    Field(uchar type, uchar x,uchar y);
+    Field(uchar x,uchar y,uchar type);
     bool HasBonus(){return bonus!=0;}
     bool IsBurn(){return burning;}
     bool IsPermeable(){return id==2;}

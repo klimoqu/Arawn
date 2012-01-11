@@ -14,7 +14,7 @@ class ArawnSettings;
 class Map : public QObject
 {
     Q_OBJECT
-protected:
+private:
     std::string name;
     int id;
     std::ifstream input;
@@ -23,6 +23,7 @@ protected:
     uchar playersnumber;
     QList<Bomb*> bombs;
     ArawnSettings *settings;
+    void bonusupload();
 
 public:
     void Upload(int id);

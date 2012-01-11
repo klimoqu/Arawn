@@ -31,7 +31,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
     connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
     connect(serverconnection,SIGNAL(CommandReceivedFromClients(Command)),this,SLOT(ClientExecute(Command)));
     connect(serverconnection,SIGNAL(ServerIsRunning()),this,SIGNAL(ServerIsRunning()));
-    connect(serverconnection,SIGNAL(NewPlayerConnected(QString)),this,SIGNAL(NewPlayer(QString)));
+    connect(serverconnection,SIGNAL(NewPlayerConnected()),this,SIGNAL(NewPlayer()));
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
 }
