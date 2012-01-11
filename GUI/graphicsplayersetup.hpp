@@ -50,7 +50,6 @@ private:
     QFont titFont;
     QFont itemFont;
     uchar selected; // 0, 1, 2: local; 10: #1; 20: #2; ...
-    uchar playersnum;
 };
 
 #endif // GRAPHICSPLAYERSETUP_HPP

@@ -209,6 +209,7 @@ ArawnSettings::ArawnSettings()
     defaultPlayer3Name = "Fachtna";
     defaultPlayer4Name = "Pryderi";
     defaultColor = RED;
+    noOfPlayers = 4;
     defaultIPAddress = "192.168.0.1";
 
     QRect sr = QApplication::desktop()->screenGeometry();
@@ -287,6 +288,7 @@ bool ArawnSettings::load()
             stream >> defaultPlayer3Name;
             stream >> defaultPlayer4Name;
             stream >> defaultColor;
+            stream >> noOfPlayers;
             stream >> defaultIPAddress;
         sFile.close();
         return true;
@@ -329,6 +331,7 @@ void ArawnSettings::save()
         stream << defaultPlayer3Name.toString();
         stream << defaultPlayer4Name.toString();
         stream << defaultColor.toInt();
+        stream << noOfPlayers;
         stream << defaultIPAddress.toString();
     sFile.close();
 }

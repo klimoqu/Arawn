@@ -119,6 +119,8 @@ public:
     QVariantMap colorValues;
     QVariant defaultColor;
 
+    uchar noOfPlayers;
+
 // Network settings
     QVariant defaultIPAddress;
 
