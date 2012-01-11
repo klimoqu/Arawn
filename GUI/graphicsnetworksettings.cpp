@@ -122,10 +122,12 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
         case Qt::Key_Enter:
         case Qt::Key_Return:
             connecting = tr("Connecting...");
-            emit startConnecting();
             selected = 2;
             update(-150,0,300,55);
             update(-360, 100, 362, 52);
+            g = new Game(ArawnSettings::instance()->defaultIPAddress.toString());
+            connect(g, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
+            connect(g, SIGNAL(Connected()), this, SIGNAL(connectionOk()));
             return;
         case Qt::Key_Escape:
             emit previousState();

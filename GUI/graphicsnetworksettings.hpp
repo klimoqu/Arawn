@@ -1,6 +1,7 @@
 #ifndef GRAPHICSNETWORKSETTINGS_HPP
 #define GRAPHICSNETWORKSETTINGS_HPP
 #include <QtGui>
+#include "CORE/game.hpp"
 
 class GraphicsNetworkSettings : public QGraphicsObject
 {
@@ -12,9 +13,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 signals:
-    void connectionClosing();
     void previousState();
-    void startConnecting();
+    void connectionOk();
 
 public slots:
     void setGrabKeyboard();
@@ -24,6 +24,7 @@ public slots:
 private:
     void keyPressEvent(QKeyEvent *event);
 
+    Game *g;
     QString title;
     QString text;
     QString connectText;

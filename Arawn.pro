@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     NET/servernet.cpp \
     GUI/graphicsplayersetup.cpp \
     GUI/graphicsnetworksettings.cpp \
-    NET/client.cpp
+    NET/client.cpp \
+    GUI/graphicsnetworkroom.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -49,7 +50,8 @@ HEADERS  += \
     NET/servernet.hpp \
     GUI/graphicsplayersetup.hpp \
     GUI/graphicsnetworksettings.hpp \
-    NET/client.hpp
+    NET/client.hpp \
+    GUI/graphicsnetworkroom.hpp
 
 FORMS    +=
 
@@ -90,6 +92,8 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
+
 
 
 
