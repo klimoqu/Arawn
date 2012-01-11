@@ -3,7 +3,6 @@
 #include "GUI/qgraphicsmenu.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
 #include "GUI/graphicsplayersetup.hpp"
-#include <QtOpenGL/QtOpenGL>
 
 
 void QArawnWindow::initWindow()
