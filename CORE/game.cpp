@@ -137,6 +137,7 @@ void Game::execute(Command c)
             connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
             tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-256));
         }
+        map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->Visit(map->GetPlayer(c.GetPlayerId()));
     }
     //Bomba lerakás:
     if(c.GetMessageType()==2 && map->GetPlayer(c.GetPlayerId())->CanDrop())

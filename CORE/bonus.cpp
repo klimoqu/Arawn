@@ -49,5 +49,6 @@ void Bonus::Pickup(Player *owner)
         break;
     }
     emit PickUpOrDestroyed();
+    delete this;
 }
 

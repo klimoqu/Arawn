@@ -32,7 +32,7 @@ public:
     bool IsBlastable(){return (type==1 || type==3);}
     uchar GetType(){return this->type;}
     uchar GetOwner(){return id;}
-    void SetBonus(Bonus *bonus){this->bonus=bonus;}
+    void SetBonus(Bonus *bonus);
     void SetTopNeighbours(Field *top){this->top=top;}
     void SetLeftNeighbours(Field *left){this->left=left;}
     void SetRightNeighbours(Field *right){this->right=right;}
@@ -43,6 +43,7 @@ public:
     Field* GetRightNeighbour(){return right;}
     Field* GetBottomNeighbour(){return bottom;}
     Bonus* GetBonus(){return bonus;}
+    void Visit(Player *player);
 
 signals:
     void Extincted(uchar x,uchar y);

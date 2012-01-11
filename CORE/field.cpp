@@ -47,3 +47,14 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
     if((direction==3 || direction==255) && right!=0 && (right->IsPermeable() || right->IsBlastable())){right->StartBurn(size-1,id,3);}
 
 }
+void Field::SetBonus(Bonus *bonus)
+{
+    this->bonus=bonus;
+    connect(bonus,SIGNAL(TurnVisible()),this,SLOT(BonusTurnToVisible()));
+    connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
+}
+void Field::Visit(Player* player)
+{
+    if(bonus)bonus->Pickup(player);
+    bonus=0;
+}

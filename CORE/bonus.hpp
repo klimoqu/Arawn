@@ -6,7 +6,7 @@
 class Bonus : public QObject
 {
     Q_OBJECT
-    uchar x,y,type;
+    uchar type;
     bool usable;
 public:
     Bonus(uchar type);
@@ -17,4 +17,5 @@ signals:
     void TurnVisible();
     void PickUpOrDestroyed();
 public slots:
+
 };
