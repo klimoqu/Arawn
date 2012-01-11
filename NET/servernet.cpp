@@ -14,6 +14,12 @@ void Servernet::incommingConnection(int socketfd)
     connect(client,SIGNAL(readyRead()),this,SLOT(readyRead()));
     connect(client,SIGNAL(disconnected()),this,SLOT(disconnected()));
 }
+QStringList Servernet::GetPlayers()
+{
+    QStringList playerslist;
+    foreach(QString player,players.values())playerslist<<player;
+    return playerslist;
+}
 void Servernet::readyRead()
 {
     QTcpSocket *client =(QTcpSocket*)sender();
