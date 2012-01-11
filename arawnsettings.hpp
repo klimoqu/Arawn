@@ -1,7 +1,7 @@
 #ifndef ARAWNSETTINGS_HPP
 #define ARAWNSETTINGS_HPP
 
-#include "arawnheader.h"
+#include <QtCore>
 
 enum PlayerColors
 {
