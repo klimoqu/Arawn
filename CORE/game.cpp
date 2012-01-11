@@ -218,6 +218,10 @@ void Game::clientsync(Command c)
             break;
         }
     }
+    if(c.GetMessageType()==253)
+    {
+        emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+    }
     if(c.GetMessageType()==254)
     {
         emit SetPlayerStartPosition(c.GetPlayerId(),(c.GetMessage()/256)%256,c.GetMessage()%256);

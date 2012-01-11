@@ -9,6 +9,7 @@
   5 halál, test robbanása
   6 mezőváltozás
   7 bonuszok
+  253 játékos nyert
   254 starthelyek beállítása
   255 id beállítás
 */

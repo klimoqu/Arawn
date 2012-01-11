@@ -10,7 +10,6 @@ class ArawnSettings;
 #include "CORE/command.hpp"
 #include "CORE/bonus.hpp"
 
-
 class Map : public QObject
 {
     Q_OBJECT

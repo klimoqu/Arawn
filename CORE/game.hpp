@@ -1,12 +1,10 @@
 #pragma once
-#include "arawnsettings.hpp"
-class ArawnSettings;
 #include "CORE/map.hpp"
-class Map;
 #include "CORE/cup.hpp"
 #include "NET/servernet.hpp"
 #include "NET/client.hpp"
-
+class ArawnSettings;
+class Map;
 class Game : public QObject
 {
     Q_OBJECT
@@ -62,6 +60,8 @@ signals:
     void PlayerTurnVisible(uchar playerid);
     void PlayerTurnInvisible(uchar playerid);
 
+    void PlayerWonTheCup(QString winnername);
+
 private slots:
     void WaitingCommandExecute();
     void StartGame();
@@ -75,4 +75,5 @@ public slots:
     void InputCommandFromMap(Command c){ServerValidate(c);}
 
     void AllReady();
+    void PlayerWin(uchar playerid,QString name){emit PlayerWonTheCup(name);emit ServerValidate(Command(playerid,253,0));}
 };
