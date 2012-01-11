@@ -21,16 +21,24 @@ void Player::Move(uchar direction)
         break;
     }
 }
-
+void Player::SetStartPosition(uchar x, uchar y)
+{
+    pXcoord=x;
+    pYcoord=y;
+    live=true;
+    blastable=false;
+    pBombsNum=1;
+    pBombPower=1;
+}
 void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
 {
-    if( round(pXcoord)==x && round(y)==y && live)
+    if( pXcoord==x && pYcoord==y && live)
     {
         emit Died(this->id,id);
         blastable=true;
         live=false;
     }
-    if( round(pXcoord)==x && round(y)==y && blastable)
+    if( pXcoord==x && pYcoord==y && blastable)
     {
         emit Blasted(this->id);
         blastable=false;
@@ -40,3 +48,11 @@ void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
         pBombsNum++;
     }
 }
+void Player::Invisibility()
+{
+    qtvisible.stop();
+    qtvisible.setSingleShot(true);
+    qtvisible.start(6000);
+    connect(&qtvisible,SIGNAL(timeout()),this,SIGNAL(ReturnToVisible()));
+}
+

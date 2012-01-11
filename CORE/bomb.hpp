@@ -5,12 +5,14 @@
 class Bomb : QObject
 {
     Q_OBJECT
-    float x,y;
+    uchar x,y;
     uchar size;
     QTimer qt;
+    bool canfail;
 public:
-    Bomb(float x, float y, uchar size, int timeout)
+    Bomb(uchar x, uchar y, uchar size, int timeout,bool canfail)
     {
+        this->canfail=canfail;
         this->x=x;
         this->y=y;
         this->size=size;
@@ -18,11 +20,11 @@ public:
         qt.start(timeout);
         connect(&qt,SIGNAL(timeout()), this, SLOT(Boom()));
     }
-    float GetX()
+    uchar GetX()
     {
         return x;
     }
-    float GetY()
+    uchar GetY()
     {
         return y;
     }
@@ -31,16 +33,16 @@ public:
         return size;
     }
 signals:
-    void Planted(float x, float y);
-    void Boomed(float x, float y,uchar size,uchar direction);
+    void Planted(uchar x, uchar y);
+    void Boomed(uchar x, uchar y,uchar size,uchar direction);
     void DeleteThis(Bomb* b);
 public slots:
     void Boom()
     {
-        emit Boomed(this->x,this->y,this->size,0);
+        if(!canfail)emit Boomed(this->x,this->y,this->size,0);
         emit DeleteThis(this);
     }
-    void Boom(float x, float y)
+    void Boom(uchar x, uchar y)
     {
         if(this->x==x && this->y==y)Boom();
     }

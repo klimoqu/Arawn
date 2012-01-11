@@ -10,49 +10,47 @@ class Player : public QObject
     Q_OBJECT
 protected:
     /// Játékos X koordinátája
-    float pXcoord;
+    uchar pXcoord;
     /// Játékos Y koordinátája
-    float pYcoord;
+    uchar pYcoord;
     /// Játékos sebessége (1-)
     uchar pSpeed;
     /// Játékos által egyszerre lerakható bombák száma (1-)
-    volatile uchar pBombsNum;
+    uchar pBombsNum;
     /// Játékos által lerakott bombák ereje (1-)
     uchar pBombPower;
-    /// A játékos tud-e bombát a lerakás pillanatában dobni? (kezdetben false)
-    bool pCanPush;
-    /// A játékos él-e
-    bool live,blastable;
+    /// A játékos él-e,robbantható-e,gebasz van a bombával
+    bool live,blastable,fail,isvisible,isoppositecontrol;
     uchar id;
+    QTimer qtvisible;
 
 public:
-    Player(uchar id)
-    {
-        this->id=id;
-    }
-    uchar GetId(){return id;}
-    void SetStartPosition(float x, float y)
-    {
-        pXcoord=x;
-        pYcoord=y;
-        live=true;
-        blastable=false;
-    }
-    void Move(uchar direction);
+    Player(uchar id){this->id=id;}
+    bool IsVisible(){return isvisible;}
     bool IsAlive(){return live;}
-    float GetX(){return pXcoord;}
-    float GetY(){return pYcoord;}
-    uchar GetBombSize(){return pBombPower;}
-    void IncrementBombSize(){pBombPower++;}
-    void IncrementBombNumber(){pBombsNum++;}
+    bool CanFail(){return fail;}
+    bool CanControll(){return isoppositecontrol;}
     bool CanDrop(){return pBombsNum>0;}
-    void Plant(){pBombsNum--;}
-    void SetSpeed(uchar change){pSpeed=pSpeed+change<1?1:pSpeed+change;}
+    uchar GetId(){return id;}
+    uchar GetX(){return pXcoord;}
+    uchar GetY(){return pYcoord;}
+    uchar GetBombSize(){return pBombPower;}
     uchar GetSpeed(){return pSpeed;}
+    void SetStartPosition(uchar x, uchar y);
+    void Move(uchar direction);
+    void Plant(){pBombsNum--;}
+    void IncrementBombSize(){pBombPower++;}
+    void DecrementBombSize(){pBombPower--;}
+    void IncrementBombNumber(){pBombsNum++;}
+    void DecrementBombNumber(){if(pBombsNum>1)pBombsNum--;}
+    void SpeedUp(){pSpeed++;}
+    void SpeedDwon(){if(pSpeed>1)pSpeed--;}
+    void Invisibility();
 
 signals:
     void Died(uchar playerid,uchar murderid);
     void Blasted(uchar playerid);
+    void ReturnToVisible();
 
 public slots:
     void DieAndBlast(uchar id,uchar x, uchar y,uchar dir);

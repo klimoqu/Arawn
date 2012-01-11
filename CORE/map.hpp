@@ -2,11 +2,14 @@
 
 #include <fstream>
 #include <string>
+#include "arawnsettings.hpp"
+class ArawnSettings;
 #include "CORE/field.hpp"
 #include "CORE/bomb.hpp"
 #include "CORE/player.hpp"
 #include "CORE/command.hpp"
 #include "CORE/bonus.hpp"
+
 
 class Map : public QObject
 {
@@ -19,17 +22,18 @@ protected:
     Player* players[4];
     uchar playersnumber;
     QList<Bomb*> bombs;
-
+    ArawnSettings *settings;
 
 public:
     void Upload(int id);
-    Map(int playersnumber);
+    Map(uchar playersnumber,ArawnSettings *settings);
 
-    int GetPlayersNumber(){return playersnumber;}
-    Player* GetPlayer(uchar id){if (id>=playersnumber) return 0;else return players[id];}
+    uchar GetPlayersNumber(){return playersnumber;}
+    Player* GetPlayer(uchar id){return id>=playersnumber ? 0:players[id];}
     Field* GetField(uchar x, uchar y){return Fields[x][y];}
-    void AddBomb(Bomb* b){bombs.push_back(b);}
     Bomb* GetBomb(int i){return bombs[i];}
+
+    void AddBomb(Bomb* b){bombs.push_back(b);}
 
 signals:
 
