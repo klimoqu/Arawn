@@ -7,7 +7,7 @@ class GraphicsNetworkRoom : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsNetworkRoom();
+    explicit GraphicsNetworkRoom(Game *_g, QState *_ownState, QState *_gameState);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -24,6 +24,8 @@ private:
     Game *g;
     QString title;
     QString playerStrs[4];
+    QString playerNames[4];
+    uchar playerNums;
     QFont titFont;
     QFont itemFont;
 };
