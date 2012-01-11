@@ -8,17 +8,17 @@ Field::Field(uchar type, uchar x,uchar y)
     this->type=type;
     this->id=255;
     this->burning=false;
-    this->hasbonus=false;
     this->top=0;
     this->bottom=0;
     this->left=0;
     this->right=0;
+    this->bonus=0;
 }
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
     if(x!=this->x || this->y!=y)return;
-    hasbonus=false;
     emit BonusChanged(this->x,this->y,bonus->GetType(),false);
+    bonus=0;
     StartBurn(size,id,direction);
 }
 void Field::Extinction()

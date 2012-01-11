@@ -49,10 +49,11 @@ void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
 }
 void Player::Invisibility()
 {
+    emit ChangeVisibility(this->id,true);
     t_visible.stop();
     t_visible.setSingleShot(true);
     t_visible.start(6000);
-    connect(&t_visible,SIGNAL(timeout()),this,SIGNAL(ReturnToVisible()));
+    connect(&t_visible,SIGNAL(timeout()),this,SLOT(returntovisible()()));
 }
 void Player::InversControl()
 {

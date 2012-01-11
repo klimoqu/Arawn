@@ -24,6 +24,7 @@ signals:
     void ServerIsRunning();
     void ServerNetworkError();
     void NewPlayerConnected(QString newplayername);
+    void AllPlayersConnected();
 private slots:
     void readyRead();
     void disconnected();

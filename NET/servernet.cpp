@@ -42,6 +42,7 @@ void Servernet::readyRead()
             client->write(auth);
             client->flush();
             sendusernames();
+            if(players.size()==this->playernumber)emit AllPlayersConnected();
         }
 }
 void Servernet::disconnected()
