@@ -529,7 +529,7 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="168"/>
         <source>Options</source>
-        <translation>Beállítésok</translation>
+        <translation type="unfinished">Beállítások</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="169"/>
