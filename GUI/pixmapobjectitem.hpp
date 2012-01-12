@@ -1,7 +1,7 @@
 #ifndef PIXMAPOBJECTITEM_HPP
 #define PIXMAPOBJECTITEM_HPP
 
-#include "arawnheader.h"
+#include <QtGui>
 
 class PixmapObjectItem : public QObject, public QGraphicsPixmapItem
 {

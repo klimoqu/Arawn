@@ -1,4 +1,3 @@
-#include "arawnheader.h"
 #include "GUI/qarawnwindow.hpp"
 #include "GUI/qgraphicsmenu.hpp"
 #include "GUI/graphicsnetworksettings.hpp"

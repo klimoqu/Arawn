@@ -33,7 +33,6 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
-    arawnheader.h \
     GUI/qgraphicsmenu.hpp \
     arawnsettings.hpp \
     GUI/pixmapobjectitem.hpp \
@@ -92,6 +91,7 @@ OTHER_FILES += \
     GUI/res/explosion.png
 
 RESOURCES +=
+
 
 
 
