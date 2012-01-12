@@ -87,10 +87,10 @@ void GraphicsNPSetup::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     //Név
     /// Itt is több kell majd, hiszen mindenkinek van neve (ArawnSettings), és mindegyik szerkeszthető is
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (selected == 1 ? ArawnSettings::instance()->defaultPlayer1Name+"_" : ArawnSettings::instance()->defaultPlayer1Name), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, -108, 133, -108);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-33, -150, 166, 50), (selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -150, 166, 50), (selected == 1 ? ArawnSettings::instance()->defaultPlayer1Name+"_" : ArawnSettings::instance()->defaultPlayer1Name), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-33, -110, 131, -110);
 
     // Szín
@@ -120,13 +120,13 @@ void GraphicsNPSetup::keyPressEvent(QKeyEvent *event)
         if(event->key() == Qt::Key_Right) { selected = 2; update(boundingRect()); return; }
         if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) { selected = 2; update(boundingRect()); return; }
         if(event->key() == Qt::Key_Backspace) {
-            if(ArawnSettings::instance()->defaultPlayer1Name.toString().length() == 0) return;
+            if(ArawnSettings::instance()->defaultPlayer1Name.length() == 0) return;
             ArawnSettings::instance()->defaultPlayer1Name =
-                    ArawnSettings::instance()->defaultPlayer1Name.toString().section("", 0, ArawnSettings::instance()->defaultPlayer1Name.toString().length()-1);
+                    ArawnSettings::instance()->defaultPlayer1Name.section("", 0, ArawnSettings::instance()->defaultPlayer1Name.length()-1);
             update(-360,-86, 362, 52);
             update(boundingRect()); return; }
         ArawnSettings::instance()->defaultPlayer1Name =
-                ArawnSettings::instance()->defaultPlayer1Name.toString() + event->text();
+                ArawnSettings::instance()->defaultPlayer1Name + event->text();
         update(boundingRect());
         break;
     case 2:
@@ -269,31 +269,31 @@ void GraphicsPlayerSetup::paint(QPainter *painter, const QStyleOptionGraphicsIte
     //Név
     /// Itt is több kell majd, hiszen mindenkinek van neve (ArawnSettings), és mindegyik szerkeszthető is
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (rows == 0 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -150, 166, 50).translated(2,3), (rows == 0 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name)+"_" : (ArawnSettings::instance()->defaultPlayer1Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, -108, 133, -108);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-33, -150, 166, 50), (rows == 0 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer1Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -150, 166, 50), (rows == 0 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer1Name)+"_" : (ArawnSettings::instance()->defaultPlayer1Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-33, -110, 131, -110);
 
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-33, -100, 166, 50).translated(2,3), (rows == 1 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer2Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer2Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -100, 166, 50).translated(2,3), (rows == 1 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer2Name)+"_" : (ArawnSettings::instance()->defaultPlayer2Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, -58, 133, -58);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-33, -100, 166, 50), (rows == 1 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer2Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer2Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -100, 166, 50), (rows == 1 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer2Name)+"_" : (ArawnSettings::instance()->defaultPlayer2Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-33, -60, 131, -60);
 
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-33, -50, 166, 50).translated(2,3), (rows == 2 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer3Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer3Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -50, 166, 50).translated(2,3), (rows == 2 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer3Name)+"_" : (ArawnSettings::instance()->defaultPlayer3Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, -12, 133, -12);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-33, -50, 166, 50), (rows == 2 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer3Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer3Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, -50, 166, 50), (rows == 2 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer3Name)+"_" : (ArawnSettings::instance()->defaultPlayer3Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-33, -10, 131, -10);
 
     painter->setPen(QColor(100, 10, 10, 200));
-    painter->drawText(QRectF(-33, 0, 166, 50).translated(2,3), (rows == 3 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer4Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer4Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, 0, 166, 50).translated(2,3), (rows == 3 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer4Name)+"_" : (ArawnSettings::instance()->defaultPlayer4Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-31, 42, 133, 42);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-33, 0, 166, 50), (rows == 3 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer4Name).toString()+"_" : (ArawnSettings::instance()->defaultPlayer4Name).toString()), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
+    painter->drawText(QRectF(-33, 0, 166, 50), (rows == 3 && selected == 1 ? (ArawnSettings::instance()->defaultPlayer4Name)+"_" : (ArawnSettings::instance()->defaultPlayer4Name)), QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
     painter->drawLine(-33, 40, 131, 40);
 
     // Szín
@@ -342,23 +342,23 @@ void GraphicsPlayerSetup::keyPressEvent(QKeyEvent *event)
         {
             switch (rows){
             case 0 :
-                if(ArawnSettings::instance()->defaultPlayer1Name.toString().length() == 0) return;
-                ArawnSettings::instance()->defaultPlayer1Name = ArawnSettings::instance()->defaultPlayer1Name.toString().section("", 0, ArawnSettings::instance()->defaultPlayer1Name.toString().length()-1);
+                if(ArawnSettings::instance()->defaultPlayer1Name.length() == 0) return;
+                ArawnSettings::instance()->defaultPlayer1Name = ArawnSettings::instance()->defaultPlayer1Name.section("", 0, ArawnSettings::instance()->defaultPlayer1Name.length()-1);
                 update(-360,-86, 362, 100);
                 break;
             case 1 :
-                if(ArawnSettings::instance()->defaultPlayer2Name.toString().length() == 0) return;
-                ArawnSettings::instance()->defaultPlayer2Name = ArawnSettings::instance()->defaultPlayer2Name.toString().section("", 0, ArawnSettings::instance()->defaultPlayer2Name.toString().length()-1);
+                if(ArawnSettings::instance()->defaultPlayer2Name.length() == 0) return;
+                ArawnSettings::instance()->defaultPlayer2Name = ArawnSettings::instance()->defaultPlayer2Name.section("", 0, ArawnSettings::instance()->defaultPlayer2Name.length()-1);
 //                update(-360,-86, 362, 52);        /// ez az utasítás nem tudom miért kell, megy enélkül is
                 break;
             case 2 :
-                if(ArawnSettings::instance()->defaultPlayer3Name.toString().length() == 0) return;
-                ArawnSettings::instance()->defaultPlayer3Name = ArawnSettings::instance()->defaultPlayer3Name.toString().section("", 0, ArawnSettings::instance()->defaultPlayer3Name.toString().length()-1);
+                if(ArawnSettings::instance()->defaultPlayer3Name.length() == 0) return;
+                ArawnSettings::instance()->defaultPlayer3Name = ArawnSettings::instance()->defaultPlayer3Name.section("", 0, ArawnSettings::instance()->defaultPlayer3Name.length()-1);
 //                update(-360,-86, 362, 52);
                 break;
             case 3 :
-                if(ArawnSettings::instance()->defaultPlayer4Name.toString().length() == 0) return;
-                ArawnSettings::instance()->defaultPlayer4Name = ArawnSettings::instance()->defaultPlayer4Name.toString().section("", 0, ArawnSettings::instance()->defaultPlayer4Name.toString().length()-1);
+                if(ArawnSettings::instance()->defaultPlayer4Name.length() == 0) return;
+                ArawnSettings::instance()->defaultPlayer4Name = ArawnSettings::instance()->defaultPlayer4Name.section("", 0, ArawnSettings::instance()->defaultPlayer4Name.length()-1);
 //                update(-360,-86, 362, 52);
                 break;
             }
@@ -368,16 +368,16 @@ void GraphicsPlayerSetup::keyPressEvent(QKeyEvent *event)
         }
         switch (rows){
         case 0 :
-            ArawnSettings::instance()->defaultPlayer1Name = ArawnSettings::instance()->defaultPlayer1Name.toString() + event->text();
+            ArawnSettings::instance()->defaultPlayer1Name = ArawnSettings::instance()->defaultPlayer1Name + event->text();
             break;
         case 1 :
-            ArawnSettings::instance()->defaultPlayer2Name = ArawnSettings::instance()->defaultPlayer2Name.toString() + event->text();
+            ArawnSettings::instance()->defaultPlayer2Name = ArawnSettings::instance()->defaultPlayer2Name + event->text();
             break;
         case 2 :
-            ArawnSettings::instance()->defaultPlayer3Name = ArawnSettings::instance()->defaultPlayer3Name.toString() + event->text();
+            ArawnSettings::instance()->defaultPlayer3Name = ArawnSettings::instance()->defaultPlayer3Name + event->text();
             break;
         case 3 :
-            ArawnSettings::instance()->defaultPlayer4Name = ArawnSettings::instance()->defaultPlayer4Name.toString() + event->text();
+            ArawnSettings::instance()->defaultPlayer4Name = ArawnSettings::instance()->defaultPlayer4Name + event->text();
             break;
         }
         update(boundingRect());
