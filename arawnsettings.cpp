@@ -68,8 +68,6 @@ ArawnSettings::ArawnSettings()
         }
         wideLayout = false;
     }}}
-
-
 }
 
 bool ArawnSettings::load()

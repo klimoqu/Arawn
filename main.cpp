@@ -312,7 +312,10 @@ int main(int argc, char *argv[])
 
     ArawnSettings::create(); // TODO delete
 
-//    QDir::setCurrent(QDir::currentPath()+"/res/");
+    ArawnSettings::instance()->loadLists();
+
+    QString str = QDir::currentPath();
+    QDir::setCurrent(QDir::currentPath()+"/res/");
 
     QTranslator translator;
 
@@ -327,7 +330,7 @@ int main(int argc, char *argv[])
                 a.installTranslator(&translator);
         }
 
-    ArawnSettings::instance()->loadLists();
+    QDir::setCurrent(str);
 
     QArawnWindow aWindow;
     aWindow.initWindow();
