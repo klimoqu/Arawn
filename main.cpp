@@ -327,6 +327,7 @@ int main(int argc, char *argv[])
                 a.installTranslator(&translator);
         }
 
+    ArawnSettings::instance()->loadLists();
 
     QArawnWindow aWindow;
     aWindow.initWindow();

@@ -164,7 +164,8 @@ void GraphicsNetworkSettings::connectionFail()
 void GraphicsNetworkSettings::connectionOk()
 {
     GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
-    room->setPos(scene()->width(), 0);
+    room->setPos(0, 0);
+    room->setVisible(false);
     scene()->addItem(room);
     room->setParams(g, roomState, gameState);
     emit trNextState();

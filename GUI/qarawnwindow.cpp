@@ -133,14 +133,14 @@ void QArawnWindow::initializeOthers()
 
     finalState = new QFinalState;
     machine->addState(finalState);
-    initializeMenus();
 
-    QState *mapState = new QState(stateGame);
-    QState *cupState = new QState(stateGame);
-    QFinalState gameFinal = new QFinalState(stateGame);
+    mapState = new QState(stateGame);
+    cupState = new QState(stateGame);
+    gameFinal = new QFinalState(stateGame);
     stateGame->setInitialState(mapState);
     stateGame->addTransition(stateGame, SIGNAL(finished()), stateMenuHistory);
 
+    initializeMenus();
 
     QTimer *timerStLogoToStArawn = new QTimer(this);
     timerStLogoToStArawn->setSingleShot(true);
@@ -266,7 +266,7 @@ void QArawnWindow::initializeMenus()
      stateMenu->assignProperty(pSetup, "pos", QPointF(scene->width(),0));
      scene->addItem(pSetup);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateGame);
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, roomState, stateGame);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
