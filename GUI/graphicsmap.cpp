@@ -12,6 +12,8 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     g = _g;
     mapState = _mapState;
     cupState = _cupState;
+
+    connect(g, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs()));
     fPixmaps[0] = new QImage("res/field0.png");
     fPixmaps[1] = new QImage("res/field1.png");
     fPixmaps[2] = new QImage("res/field2.png");
@@ -143,11 +145,11 @@ void GraphicsMap::blastPlayer(uchar player)
     emit playerBlasted();
 }
 
-void GraphicsMap::setMapIDs(Field **&fields)
+void GraphicsMap::setMapIDs()
 {
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            mapIDs[i][j] = fields[i][j].GetType();
+            mapIDs[i][j] = g->GetFields()[i][j];
         }
     }
 }

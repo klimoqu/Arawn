@@ -335,8 +335,15 @@ void QArawnWindow::enterGame()
     mapState->assignProperty(grMap, "visible", true);
     cupState->assignProperty(grMap, "visible", false);
     scene->addItem(grMap);
+    grTimer = new GraphicsTimer;
+    grTimer->setPos(-400, -300);
+    mapState->assignProperty(grTimer, "visible", true);
+    cupState->assignProperty(grTimer, "visible", false);
+    scene->addItem(grTimer);
 
     mapState->addTransition(g, SIGNAL(GameOver()), cupState);
+    cupState->addTransition(g, SIGNAL(GameStarted(int)), mapState);
+    connect(g, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
 
 }
 

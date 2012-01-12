@@ -15,7 +15,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setMapIDs(Field** &fields);
+
 
 signals:
     void commanding(uchar c);
@@ -25,6 +25,7 @@ signals:
     void playerBlasted();
 
 public slots:
+    void setMapIDs();
     void plantBomb(uchar x, uchar y, uchar player);
 //    void plantBonus(uchar x, uchar y, uchar type);
     void blastField(uchar x, uchar y, uchar player, uchar dir);

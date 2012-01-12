@@ -40,6 +40,7 @@ private:
     QGraphicsTextItem *copyright;
 
     GraphicsMap *grMap;
+    GraphicsTimer *grTimer;
     Game *g;
 
     QState *stateLogo;
