@@ -26,9 +26,9 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
     // Cím
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(titFont);
-    painter->drawText(QRectF(-300,-266, 600, 66).translated(4,4), ArawnSettings::instance()->defaultIPAddress.toString(), QTextOption(Qt::AlignCenter | Qt::AlignTop));
+    painter->drawText(QRectF(-300,-266, 600, 66).translated(4,4), ArawnSettings::instance()->defaultIPAddress, QTextOption(Qt::AlignCenter | Qt::AlignTop));
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-300,-266, 600, 66), ArawnSettings::instance()->defaultIPAddress.toString(), QTextOption(Qt::AlignCenter | Qt::AlignTop));
+    painter->drawText(QRectF(-300,-266, 600, 66), ArawnSettings::instance()->defaultIPAddress, QTextOption(Qt::AlignCenter | Qt::AlignTop));
 
     // játékosok
     if(playerNums >= 0){

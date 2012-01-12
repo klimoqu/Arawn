@@ -1,7 +1,9 @@
 #ifndef GRAPHICSMAP_HPP
 #define GRAPHICSMAP_HPP
 
-#include "arawnheader.h"
+#include <QtGui>
+#include "CORE/field.hpp"
+#include "GUI/graphicsplayer.hpp"
 
 class GraphicsMap : public QGraphicsObject
 {

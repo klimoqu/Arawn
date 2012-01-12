@@ -112,10 +112,10 @@ public:
     QVariant bombTimer; // 1/10 s
 
 // Players
-    QVariant defaultPlayer1Name;
-    QVariant defaultPlayer2Name;
-    QVariant defaultPlayer3Name;
-    QVariant defaultPlayer4Name;
+    QString defaultPlayer1Name;
+    QString defaultPlayer2Name;
+    QString defaultPlayer3Name;
+    QString defaultPlayer4Name;
     QVariantMap colorValues;
     QVariant default1Color;
     QVariant default2Color;
@@ -125,7 +125,7 @@ public:
     uchar noOfPlayers;
 
 // Network settings
-    QVariant defaultIPAddress;
+    QString defaultIPAddress;
 
 };
 

@@ -52,10 +52,10 @@ void GraphicsNetworkSettings::paint(QPainter *painter, const QStyleOptionGraphic
     // Sor +kijelölve?
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(lineFont);
-    painter->drawText(QRectF(-360,-86, 360, 50).translated(2,3), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress.toString()+"_" : ArawnSettings::instance()->defaultIPAddress.toString()), QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-360,-86, 360, 50).translated(2,3), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress+"_" : ArawnSettings::instance()->defaultIPAddress), QTextOption(Qt::AlignLeading));
     painter->drawLine(-358, -46, 2, -46);
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(-360,-86, 360, 50), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress.toString()+"_" : ArawnSettings::instance()->defaultIPAddress.toString()), QTextOption(Qt::AlignLeading));
+    painter->drawText(QRectF(-360,-86, 360, 50), (selected == 0 ? ArawnSettings::instance()->defaultIPAddress+"_" : ArawnSettings::instance()->defaultIPAddress), QTextOption(Qt::AlignLeading));
     painter->drawLine(-360, -48, 0, -48);
 
     // Gomb /kijelölve?
@@ -97,9 +97,9 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             return;
         case Qt::Key_Backspace:
         case Qt::Key_Left:
-            if(ArawnSettings::instance()->defaultIPAddress.toString().length() == 0) return;
+            if(ArawnSettings::instance()->defaultIPAddress.length() == 0) return;
             ArawnSettings::instance()->defaultIPAddress =
-                    ArawnSettings::instance()->defaultIPAddress.toString().section("", 0, ArawnSettings::instance()->defaultIPAddress.toString().length()-1);
+                    ArawnSettings::instance()->defaultIPAddress.section("", 0, ArawnSettings::instance()->defaultIPAddress.length()-1);
             update(-360,-86, 362, 52);
             return;
         case Qt::Key_Escape:
@@ -107,7 +107,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             return;
         default:
             ArawnSettings::instance()->defaultIPAddress =
-                    ArawnSettings::instance()->defaultIPAddress.toString() + event->text();
+                    ArawnSettings::instance()->defaultIPAddress + event->text();
             update(-360,-86, 362, 52);
             return;
         }
@@ -127,7 +127,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             selected = 2;
             update(-150,0,300,55);
             update(-360, 100, 362, 52);
-            g = new Game(ArawnSettings::instance()->defaultIPAddress.toString());
+            g = new Game(ArawnSettings::instance()->defaultIPAddress);
             connect(g, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
             connect(g, SIGNAL(Connected()), this, SLOT(connectionOk()));
             return;

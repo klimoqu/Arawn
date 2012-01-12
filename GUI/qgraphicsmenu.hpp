@@ -40,8 +40,8 @@ public:
     inline QString name() const;
 private:
     QString itemName;
-    QVariant target;
-    QVariantMap values;
+    QVariant *target;
+    QVariantMap *values;
     uchar sel;
     QStringList keys;
 };

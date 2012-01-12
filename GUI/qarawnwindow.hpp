@@ -3,9 +3,7 @@
 
 #include <QtGui>
 #include "GUI/pixmapobjectitem.hpp"
-
-class GraphicsMenu;
-class GraphicsAbout;
+#include "GUI/qgraphicsmenu.hpp"
 
 class QArawnWindow : public QGraphicsView
 {

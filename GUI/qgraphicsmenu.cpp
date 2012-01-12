@@ -4,12 +4,14 @@
 
 
 OptionItem::OptionItem(const QString &name, QVariant &variant, QVariantMap &valuesMap):
-    itemName(name), target(variant), values(valuesMap)
+    itemName(name)
 {
-    keys = values.keys();
+    target = &variant;
+    values = &valuesMap;
+    keys = values->keys();
     sel = 0;
     foreach (QString k, keys) {
-        if(values[k] == target)
+        if(values->value(k) == (*target))
             break;
         sel++;
     }
@@ -19,7 +21,7 @@ bool OptionItem::next()
 {
     if(sel < (keys.size()-1)){
         sel++;
-        target = values[keys[sel]];
+        (*target) = values->value(keys[sel]);
         return true;
     }
     return false;
@@ -29,7 +31,7 @@ bool OptionItem::prev()
 {
     if(sel > 0){
         sel--;
-        target = values[keys[sel]];
+        (*target) = values->value(keys[sel]);
         return true;
     }
     return false;
