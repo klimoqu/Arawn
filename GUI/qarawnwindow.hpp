@@ -1,9 +1,9 @@
 #ifndef QARAWNWINDOW_HPP
 #define QARAWNWINDOW_HPP
 
-#include "arawnheader.h"
+#include <QtGui>
+#include "GUI/pixmapobjectitem.hpp"
 
-class PixmapObjectItem;
 class GraphicsMenu;
 class GraphicsAbout;
 
