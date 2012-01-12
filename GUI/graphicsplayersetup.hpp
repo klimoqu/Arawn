@@ -4,21 +4,35 @@
 #include <QtGui>
 #include "arawnsettings.hpp"
 
-//class GraphicsPlayerSetup : public QGraphicsObject
-//{
-//    Q_OBJECT
-//public:
-//    GraphicsPlayerSetup() {}
+class GraphicsPlayerSetup : public QGraphicsObject
+{
+    Q_OBJECT
+public:
+    GraphicsPlayerSetup(QAbstractState *_backState, QState *_ownState);
 
-//    QRectF boundingRect() const;
-//    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+signals:
+    /// Ugorj vissza a menübe
+    void previousState();
 
-//private:
-//    QString title;
-//    QString names[4];QFont titFont;
-//    QFont itemFont;
-//    uchar selected;
-//};
+public slots:
+    /// billentyű elkapása
+    void setGrabKeyboard();
+
+    /// billentyű elengedése
+    void setUnGrabKeyboard();
+
+private:
+    void keyPressEvent(QKeyEvent *event);
+
+    QString title;
+    QString names[4];
+    QFont titFont;
+    QFont itemFont;
+    uchar selected;
+    uchar rows;/// 1, 2, 3, 4
+};
 
 
 /**

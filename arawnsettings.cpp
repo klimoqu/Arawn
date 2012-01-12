@@ -209,9 +209,9 @@ ArawnSettings::ArawnSettings()
     defaultPlayer3Name = "Fachtna";
     defaultPlayer4Name = "Pryderi";
     default1Color = RED;
-    default1Color = GREEN;
-    default1Color = BLUE;
-    default1Color = YELLOW;
+    default2Color = GREEN;
+    default3Color = BLUE;
+    default4Color = YELLOW;
     noOfPlayers = 4;
     defaultIPAddress = "192.168.0.1";
 
