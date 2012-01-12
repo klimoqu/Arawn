@@ -1,6 +1,7 @@
 #include "GUI/qarawnwindow.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
 #include "GUI/graphicsplayersetup.hpp"
+#include "CORE/cup.hpp"
 
 
 void QArawnWindow::initWindow()
@@ -139,6 +140,8 @@ void QArawnWindow::initializeOthers()
     gameFinal = new QFinalState(stateGame);
     stateGame->setInitialState(mapState);
     stateGame->addTransition(stateGame, SIGNAL(finished()), stateMenuHistory);
+    connect(stateGame, SIGNAL(entered()), this, SLOT(enterGame()));
+    connect(stateGame, SIGNAL(finished()), this, SLOT(finishGame()));
 
     initializeMenus();
 
@@ -266,7 +269,7 @@ void QArawnWindow::initializeMenus()
      stateMenu->assignProperty(pSetup, "pos", QPointF(scene->width(),0));
      scene->addItem(pSetup);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, roomState, stateGame);
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(g, stateMenuHistory, stateNetSettings, roomState, stateGame);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
@@ -323,6 +326,22 @@ void QArawnWindow::closeEvent(QCloseEvent *event)
     ArawnSettings::instance()->save();
     ArawnSettings::deleteInstance();
     event->accept();
+}
+
+void QArawnWindow::enterGame()
+{
+    grMap = new GraphicsMap(g, mapState, cupState);
+    grMap->setPos(-400, -230);
+    mapState->assignProperty(grMap, "visible", true);
+    cupState->assignProperty(grMap, "visible", false);
+    scene->addItem(grMap);
+
+    mapState->addTransition(g, SIGNAL(GameOver()), cupState);
+
+}
+
+void QArawnWindow::finishGame()
+{
 }
 
 

@@ -6,8 +6,12 @@
 #define BALRA 0
 #define MINDEN 255
 
-GraphicsMap::GraphicsMap(QGraphicsItem *parent) : QGraphicsObject(parent)
+GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphicsItem *parent) :
+    QGraphicsObject(parent)
 {
+    g = _g;
+    mapState = _mapState;
+    cupState = _cupState;
     fPixmaps[0] = new QImage("res/field0.png");
     fPixmaps[1] = new QImage("res/field1.png");
     fPixmaps[2] = new QImage("res/field2.png");
@@ -147,3 +151,64 @@ void GraphicsMap::setMapIDs(Field **&fields)
         }
     }
 }
+
+
+
+
+QRectF GraphicsTimer::boundingRect() const
+{
+    return QRectF(0, 0, 300, 66);
+}
+
+void GraphicsTimer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    painter->save();
+
+    painter->drawImage(0, 0, (secs > 0) ? clock : noclock);
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->setFont(font);
+    painter->drawText(QRectF(45, 0, 200, 66).translated(4,4), QString(secs/60 + ":" + secs%60), QTextOption(Qt::AlignCenter));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(45, 0, 200, 66), QString(secs/60 + ":" + secs%60), QTextOption(Qt::AlignCenter));
+
+    painter->restore();
+}
+
+void GraphicsTimer::setTimer(int roundTime)
+{
+    secs = roundTime;
+    timer.start(1000);
+}
+
+void GraphicsTimer::tick()
+{
+    if(secs > 0){
+        secs--;
+        if(secs == 0) timer.stop();
+        update(boundingRect());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

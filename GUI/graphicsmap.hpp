@@ -3,13 +3,14 @@
 
 #include <QtGui>
 #include "CORE/field.hpp"
+#include "CORE/game.hpp"
 #include "GUI/graphicsplayer.hpp"
 
 class GraphicsMap : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    GraphicsMap(QGraphicsItem *parent = 0);
+    GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphicsItem *parent = 0);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -46,6 +47,39 @@ private:
     uchar burning[20][13];
     QMap<uchar, QImage*> bImages;
 
+    Game *g;
+    QState *mapState;
+    QState *cupState;
+};
+
+
+class GraphicsTimer : public QGraphicsObject
+{
+    Q_OBJECT
+public:
+    GraphicsTimer() {
+        timer.setSingleShot(false);
+        connect(&timer, SIGNAL(timeout()), this, SLOT(tick()));
+        QImage observer("res/observer.png");
+        clock = (observer.copy(40, 0, 40, 40));
+        noclock = (observer.copy(80, 0, 40, 40));
+        font = qApp->font();
+        font.setPixelSize(50);
+    }
+
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+public slots:
+    void setTimer(int roundTime);
+    void tick();
+
+private:
+    QImage clock;
+    QImage noclock;
+    QTimer timer;
+    ushort secs;
+    QFont font;
 };
 
 #endif // GRAPHICSMAP_HPP

@@ -2,8 +2,9 @@
 #include "GUI/graphicsnetworkroom.hpp"
 #include "arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
+GraphicsNetworkSettings::GraphicsNetworkSettings(Game *_g, QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
 {
+    g = _g;
     gameState = _gameState;
     roomState = _roomState;
     title = tr("Connect to network");

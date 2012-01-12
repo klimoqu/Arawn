@@ -4,6 +4,7 @@
 #include <QtGui>
 #include "GUI/pixmapobjectitem.hpp"
 #include "GUI/qgraphicsmenu.hpp"
+#include "GUI/graphicsmap.hpp"
 
 class QArawnWindow : public QGraphicsView
 {
@@ -20,6 +21,8 @@ public slots:
     void initializeOthers();
     void showArawnScreen();
     void enterMenus();
+    void enterGame();
+    void finishGame();
     void playSound(uchar n);
 
 private:
@@ -35,6 +38,9 @@ private:
     PixmapObjectItem *pixHirItem;
 
     QGraphicsTextItem *copyright;
+
+    GraphicsMap *grMap;
+    Game *g;
 
     QState *stateLogo;
     QState *stateArawn;
