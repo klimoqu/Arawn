@@ -149,7 +149,7 @@ void GraphicsMap::setMapIDs()
 {
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            mapIDs[i][j] = g->GetFields()[i][j];
+            mapIDs[i][j] = g->GetFields(i, j);
         }
     }
 }
