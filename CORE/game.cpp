@@ -35,6 +35,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     connect(serverconnection,SIGNAL(NewPlayerConnected()),this,SIGNAL(NewPlayer()));
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
+    connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
 }
 void Game::SetCup(Cup *cup)
 {
@@ -200,7 +201,8 @@ void Game::TimeIsOver()
 }
 void Game::DestroyField()
 {
-    Command(255,6,256*256*4+256*act/13+act%13);
+    emit ServerValidate(Command(255,6,256*256*4+256*act/13+act%13));
+    emit FieldDestroyedByMap(act/13,act%13);
     act++;
     if (act==260)destroymap.stop();
 }

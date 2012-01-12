@@ -1,4 +1,4 @@
-#include "arawnheader.h"
+#include "graphicsplayer.hpp"
 
 GraphicsPlayer::GraphicsPlayer(PlayerImage p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {

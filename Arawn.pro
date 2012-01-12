@@ -90,6 +90,10 @@ OTHER_FILES += \
     GUI/res/extras.png \
     GUI/res/explosion.png
 
+TRANSLATIONS += Arawn_hu.ts
+
+CODECFORSRC += UTF-8	
+	
 RESOURCES +=
 
 

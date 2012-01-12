@@ -10,6 +10,7 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
         players[i]=new Player(i);
         connect(players[i],SIGNAL(Blasted(uchar)),this,SLOT(PlayerBlast(uchar)));
         connect(players[i],SIGNAL(Died(uchar,uchar)),this,SLOT(PlayerDie(uchar,uchar)));
+        connect(this,SIGNAL(FieldDestroyed(uchar,uchar)),players[i],SLOT(Die(uchar,uchar)));
     }
 }
 void Map::Upload(int id)

@@ -64,6 +64,7 @@ signals:
     void PlayerWonTheCup(QString winnername);
     void PlayerPointChanged(uchar id, int point);
     void GameOver();
+    void FieldDestroyedByMap(uchar x,uchar y);
 
 private slots:
     void WaitingCommandExecute();
