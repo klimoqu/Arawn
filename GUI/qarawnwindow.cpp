@@ -312,6 +312,7 @@ void QArawnWindow::enterMenus()
 void QArawnWindow::closeEvent(QCloseEvent *event)
 {
     ArawnSettings::instance()->save();
+    ArawnSettings::deleteInstance();
     event->accept();
 }
 
