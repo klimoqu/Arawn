@@ -47,6 +47,14 @@ void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
         pBombsNum++;
     }
 }
+void Die(uchar x, uchar y)
+{
+    if( pXcoord==x && pYcoord==y && live)
+    {
+        emit Died(this->id,255);
+        live=false;
+    }
+}
 void Player::Invisibility()
 {
     emit ChangeVisibility(this->id,true);
