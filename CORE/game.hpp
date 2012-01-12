@@ -31,7 +31,7 @@ public:
     void SetGameTime(int time){this->gametime=time;}
     void MakeCommand(uchar c);
     QStringList GetPlayers();
-    uchar* GetFields(){return *fields;}
+    uchar GetFields(uchar x, uchar y){return fields[x][y];}
 
 signals:
 
