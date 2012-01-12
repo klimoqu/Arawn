@@ -120,6 +120,8 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateSurvivalCup);
     stateMurderCup = new QState;
     machine->addState(stateMurderCup);
+    roomState = new QState;
+    machine->addState(roomState);
     stateNetPlayerSetup = new QState;
     machine->addState(stateNetPlayerSetup);
     stateNetSurvivalCup = new QState;
@@ -132,6 +134,13 @@ void QArawnWindow::initializeOthers()
     finalState = new QFinalState;
     machine->addState(finalState);
     initializeMenus();
+
+    QState *mapState = new QState(stateGame);
+    QState *cupState = new QState(stateGame);
+    QFinalState gameFinal = new QFinalState(stateGame);
+    stateGame->setInitialState(mapState);
+    stateGame->addTransition(stateGame, SIGNAL(finished()), stateMenuHistory);
+
 
     QTimer *timerStLogoToStArawn = new QTimer(this);
     timerStLogoToStArawn->setSingleShot(true);

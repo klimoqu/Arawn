@@ -46,6 +46,7 @@ private:
     QState *stateSurvivalCup;
     QState *stateMurderCup;
     QState *stateNetPlayerSetup;
+    QState *roomState;
     QState *stateNetSurvivalCup;
     QState *stateNetMurderCup;
     QState *stateAbout;

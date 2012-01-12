@@ -2,11 +2,10 @@
 #include "GUI/graphicsnetworkroom.hpp"
 #include "arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QState *ownState, QState *_gameState)
+GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
 {
     gameState = _gameState;
-    roomState = new QState;
-    ownState->machine()->addState(roomState);
+    roomState = _roomState;
     title = tr("Connect to network");
     text = tr("Enter the IP address or hostname:");
     connectText = tr("Connect");
@@ -20,6 +19,8 @@ GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QSta
     selected = 1;
     ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
     ownState->assignProperty(this, "pos", QPointF(0,0));
+    ownState->assignProperty(this, "visible", true);
+    _roomState->assignProperty(this, "visible", false);
     connect(ownState, SIGNAL(propertiesAssigned()), this, SLOT(setGrabKeyboard()));
     connect(this, SIGNAL(previousState()), this, SLOT(setUnGrabKeyboard()));
     ownState->addTransition(this, SIGNAL(previousState()), backState);
@@ -162,8 +163,6 @@ void GraphicsNetworkSettings::connectionFail()
 
 void GraphicsNetworkSettings::connectionOk()
 {
-    QState *roomState = new QState;
-    gameState->machine()->addState(roomState);
     GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
     room->setPos(scene()->width(), 0);
     scene()->addItem(room);
