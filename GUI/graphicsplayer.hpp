@@ -1,7 +1,7 @@
 #ifndef GRAPHICSPLAYER_HPP
 #define GRAPHICSPLAYER_HPP
 
-#include "arawnheader.h"
+#include <QtGui>
 
 class GraphicsPlayer : public QGraphicsItem
 {

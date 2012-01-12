@@ -299,7 +299,8 @@ POSSIBILITY OF SUCH DAMAGES.
 
  ***************************************************************************/
 
-#include "arawnheader.h"
+#include "GUI/qgraphicsmenu.hpp"
+#include "GUI/qarawnwindow.hpp"
 #include "GUI/graphicsmap.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
 #include "CORE/game.hpp"

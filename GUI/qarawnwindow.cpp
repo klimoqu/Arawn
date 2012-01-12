@@ -260,7 +260,7 @@ void QArawnWindow::initializeMenus()
 
      GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateGame);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
-     machine->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
+     stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
 
 }

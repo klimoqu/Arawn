@@ -1,4 +1,6 @@
-#include "arawnheader.h"
+#include "arawnsettings.hpp"
+#include <QApplication>
+#include <QDesktopWidget>
 
 ArawnSettings* ArawnSettings::aSettings = 0;
 
