@@ -14,8 +14,9 @@ Game::Game(QString address)
     connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 }
 
-Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
+Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
 {
+    this->survive=survive;
     this->settings=settings;
     this->playersnumber=playersnumber;
     this->bombtimeout=bombtimeout;
@@ -37,8 +38,17 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings)
 }
 void Game::SetCup(Cup *cup)
 {
+    delete cup;
     this->cup=cup;
-    connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
+    if(survive)
+    {
+        connect(this,SIGNAL(PlayerSurvived(uchar)),this->cup,SLOT(PlayerSurvive(uchar)));
+    }
+    else
+    {
+        connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
+    }
+    connect(cup,SIGNAL(PlayerPointChanged(uchar,int)),this,SLOT(ChangePlayerPoint(uchar,int)));
 }
 QStringList Game::GetPlayers()
 {
@@ -47,8 +57,10 @@ QStringList Game::GetPlayers()
 }
 void Game::NewGame(int id)
 {
+    destroymap.stop();
+    gametimer.stop();
     this->map->Upload(id);
-
+    sendmap();
 }
 void Game::MakeCommand(uchar c)
 {
@@ -156,6 +168,7 @@ void Game::WaitingCommandExecute()
 }
 void Game::AllReady()
 {
+    sendmap();
     connectwait.setSingleShot(true);
     connectwait.start(1000);
     connect(&connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
@@ -163,42 +176,82 @@ void Game::AllReady()
 }
 void Game::StartGame()
 {
-    Command ret=Command(255,0,settings->roundTimeDefault.toInt());
-    emit ServerExecute(ret);
+    Command ret=Command(255,251,settings->roundTimeDefault.toInt());
+    emit ServerValidate(ret);
     emit GameStarted(settings->roundTimeDefault.toInt());
+}
+void Game::sendmap()
+{
+    for(uchar i=0;i<20;i++)
+        for(uchar j=0;j<13;j++)
+            emit ServerExecute(Command(255,250,map->GetField(i,j)->GetType()*256*256+i*256+j));
+}
+void Game::PlayerWin(uchar playerid,QString name)
+{
+    emit PlayerWonTheCup(name);
+    emit ServerValidate(Command(playerid,253,0));
+}
+void Game::TimeIsOver()
+{
+    act=0;
+    destroymap.setSingleShot(false);
+    destroymap.start(1000);
+    connect(&destroymap,SIGNAL(timeout()), this, SLOT(DestroyField));
+}
+void Game::DestroyField()
+{
+    Command(255,6,256*256*4+256*act/13+act%13);
+    act++;
+    if (act==260)destroymap.stop();
+}
+void Game::GameIsEnd()
+{
+    emit GameOver();
+    for(uchar i=0;i<playersnumber;i++)
+        if(map->GetPlayer(i)->IsAlive())
+            emit PlayerSurvived(i);
 }
 void Game::clientsync(Command c)
 {
-    if(c.GetMessage()==0)
+    switch(c.GetMessageType())
     {
-        emit GameStarted(c.GetMessage());
+    case 0:
+    {
+        emit PlayerPointChanged(c.GetPlayerId(),c.GetMessage());
+        break;
     }
-    if(c.GetMessageType()==1)//move
+    case 1://move
     {
         emit PlayerMoved(c.GetPlayerId(),c.GetMessage());
+        break;
     }
-    if(c.GetMessageType()==2)//plant
+    case 2://plant
     {
         emit BombPlanted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId());
+        break;
     }
-    if(c.GetMessageType()==3)//boom
+    case 3://boom
     {
         emit FieldBlasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
+        break;
     }
-    if(c.GetMessageType()==4)//kioltas
+    case 4://kioltas
     {
         emit FieldExcinted((c.GetMessage()/256)%256,c.GetMessage()%256);
+        break;
     }
-    if(c.GetMessageType()==5)//die/blast
+    case 5://die/blast
     {
         if(c.GetMessage()!=256){emit PlayerDied(c.GetPlayerId(),c.GetMessage());}
         else{emit PlayerBlasted(c.GetPlayerId());}
+        break;
     }
-    if(c.GetMessageType()==6)
+    case 6://mezőváltozás
     {
         emit FieldChanged((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
+        break;
     }
-    if(c.GetMessageType()==7)
+    case 7://bónuszok
     {
         switch(c.GetMessage()/(256*256*256))
         {
@@ -217,17 +270,41 @@ void Game::clientsync(Command c)
         default:
             break;
         }
+        break;
     }
-    if(c.GetMessageType()==253)
+    case 250://pályaszinkron
+    {
+        fields[(c.GetMessage()/256)%256][c.GetMessage()%256]=(c.GetMessage()/(256*256))%256;
+        break;
+    }
+    case 251://játék kezdete
+    {
+        emit GameStarted(c.GetMessage());
+        break;
+    }
+    case 252://játék vége
+    {
+        emit GameOver();
+        break;
+    }
+    case 253://a győztes
     {
         emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+        break;
     }
-    if(c.GetMessageType()==254)
+    case 254://alaphelyzetbe állítás
     {
         emit SetPlayerStartPosition(c.GetPlayerId(),(c.GetMessage()/256)%256,c.GetMessage()%256);
+        break;
     }
-    if(c.GetMessageType()==255)
+    case 255://azonosítás
     {
         this->playerid=c.GetPlayerId();
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }

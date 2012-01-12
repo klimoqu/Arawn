@@ -2,7 +2,6 @@
 #include <QtCore>
 #include "CORE/player.hpp"
 #include "arawnsettings.hpp"
-class ArawnSettings;
 
 class Cup : public QObject
 {
@@ -34,16 +33,21 @@ public:
     }
 signals:
     void PlayerWonTheCup(uchar playerid, QString playername);
+    void PlayerPointChanged(uchar playerid,int point);
 public slots:
-    void playerdie(uchar victim, uchar murder)
+    void PlayerDie(uchar victim, uchar murder)
     {
-        if(victim!=murder)pontok[murder]++;
-        else pontok[victim]--;
+        if(victim!=murder)
+            pontok[murder]++;
+        else
+            pontok[victim]--;
+        emit PlayerPointChanged(murder,pontok[murder]);
         if(pontok[murder]==settings->pointsToWin.toInt())emit PlayerWonTheCup(murder,nevek[murder]);
     }
-    void playersurvive(uchar surviver)
+    void PlayerSurvive(uchar surviver)
     {
         pontok[surviver]++;
+        emit PlayerPointChanged(surviver,pontok[surviver]);
         if(pontok[surviver]==settings->pointsToWin.toInt())emit PlayerWonTheCup(surviver,nevek[surviver]);
     }
 };

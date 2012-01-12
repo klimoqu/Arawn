@@ -3,35 +3,35 @@
 #include "CORE/cup.hpp"
 #include "NET/servernet.hpp"
 #include "NET/client.hpp"
-class ArawnSettings;
-class Map;
 class Game : public QObject
 {
     Q_OBJECT
+    bool survive;
     Map *map;
     Cup *cup;
-    int gametime,playersnumber,bombtimeout;
+    int gametime,playersnumber,bombtimeout,act;
     uchar playerid;
     ArawnSettings *settings;
     Servernet *serverconnection;
     Client *clientconnection;
-    QTimer connectwait,gametimer;
-
+    QTimer connectwait,gametimer,destroymap;
     QMap<QTimer*,Command> tempcommands;
+    uchar fields[20][13];
 
     void validate(Command c);//server
     void execute(Command c);//server
     void clientsync(Command c);//kliens
-
+    void sendmap();
 
 public:
     Game(QString address);
-    Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings);
+    Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive);
     void SetCup(Cup *cup);
     void NewGame(int id);
     void SetGameTime(int time){this->gametime=time;}
     void MakeCommand(uchar c);
     QStringList GetPlayers();
+    uchar* GetFields(){return *fields;}
 
 signals:
 
@@ -60,12 +60,17 @@ signals:
     void PlayerTurnVisible(uchar playerid);
     void PlayerTurnInvisible(uchar playerid);
 
+    void PlayerSurvived(uchar id);
     void PlayerWonTheCup(QString winnername);
+    void PlayerPointChanged(uchar id, int point);
+    void GameOver();
 
 private slots:
     void WaitingCommandExecute();
     void StartGame();
-    void TimeIsOver(){}
+    void TimeIsOver();
+    void GameIsEnd();
+    void DestroyField();
 
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs
@@ -75,5 +80,6 @@ public slots:
     void InputCommandFromMap(Command c){ServerValidate(c);}
 
     void AllReady();
-    void PlayerWin(uchar playerid,QString name){emit PlayerWonTheCup(name);emit ServerValidate(Command(playerid,253,0));}
+    void PlayerWin(uchar playerid,QString name);
+    void ChangePlayerPoint(uchar id, int point){emit ServerValidate(Command(id,0,point));}
 };

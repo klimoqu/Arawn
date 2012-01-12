@@ -1,7 +1,7 @@
 #pragma once
 #include <QtCore>
 /*
-  0 játék kezdete
+  0 pontok átvitele
   1 mozgások
   2 bombalerakás
   3 robbanások
@@ -9,6 +9,9 @@
   5 halál, test robbanása
   6 mezőváltozás
   7 bonuszok
+  250 mezők szinkronizálása
+  251 játék kezdete
+  252 játék vége
   253 játékos nyert
   254 starthelyek beállítása
   255 id beállítás

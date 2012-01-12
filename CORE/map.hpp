@@ -24,7 +24,6 @@ private:
     ArawnSettings *settings;
     void bonusupload();
 
-
 public:
     void Upload(int id);
     Map(uchar playersnumber,ArawnSettings *settings);
