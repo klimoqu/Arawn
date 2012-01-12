@@ -36,6 +36,8 @@ public:
         aSettings = new ArawnSettings;
     }
 
+    void loadLists();
+
     static ArawnSettings* instance()
     {
         return aSettings;

@@ -46,10 +46,14 @@ private:
     QState *stateSurvivalCup;
     QState *stateMurderCup;
     QState *stateNetPlayerSetup;
+    QState *roomState;
     QState *stateNetSurvivalCup;
     QState *stateNetMurderCup;
     QState *stateAbout;
     QState *stateGame;
+    QState *mapState;
+    QState *cupState;
+    QFinalState *gameFinal;
     QState *stateQuit;
     QFinalState *finalState;
 };
