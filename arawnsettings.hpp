@@ -26,6 +26,11 @@ private:
 public:
     void save();
 
+    static void deleteInstance()
+    {
+        delete aSettings;
+    }
+
     static void create()
     {
         aSettings = new ArawnSettings;

@@ -288,7 +288,6 @@ void QArawnWindow::enterMenus()
     pixFireItem->setOpacity(0.6);
     if(ArawnSettings::instance()->animateFire.toBool()){
         QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
-        firAnim->thread()->setPriority(QThread::LowestPriority);
         firAnim->setLoopCount(-1);
         firAnim->setEasingCurve(QEasingCurve::OutInBounce);
         firAnim->setStartValue(0.4);
@@ -313,6 +312,7 @@ void QArawnWindow::enterMenus()
 void QArawnWindow::closeEvent(QCloseEvent *event)
 {
     ArawnSettings::instance()->save();
+    ArawnSettings::deleteInstance();
     event->accept();
 }
 
