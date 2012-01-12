@@ -38,7 +38,7 @@ signals:
 
     void ServerCommand(Command c);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
-
+    void FieldDestroyed(uchar x, uchar y);
 public slots:
     void DeleteThis(Bomb *b)
     {
