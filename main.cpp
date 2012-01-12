@@ -312,7 +312,7 @@ int main(int argc, char *argv[])
 
     ArawnSettings::create(); // TODO delete
 
-    QDir::setCurrent(QDir::currentPath()+"/res/");
+//    QDir::setCurrent(QDir::currentPath()+"/res/");
 
     QTranslator translator;
 
