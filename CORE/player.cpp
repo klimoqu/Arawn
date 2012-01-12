@@ -47,7 +47,7 @@ void Player::DieAndBlast(uchar id,uchar x, uchar y,uchar dir)
         pBombsNum++;
     }
 }
-void Die(uchar x, uchar y)
+void Player::Die(uchar x, uchar y)
 {
     if( pXcoord==x && pYcoord==y && live)
     {
