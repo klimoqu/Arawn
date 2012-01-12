@@ -6,6 +6,230 @@ ArawnSettings* ArawnSettings::aSettings = 0;
 
 ArawnSettings::ArawnSettings()
 {
+    // LOAD SAVED DATA
+    if(load())
+        return;
+
+    language = 0;
+    openGlRendering = false;
+    showCorpseParts = true;
+    shakyExplosion = true;
+    roundTimeDefault = 60;
+    pointsToWin = 5;
+    startBombs = 1;
+    maxBombs = 8;
+    startFire = 1;
+    maxFire = 8;
+    startSpeed = 1;
+    maxSpeed = 8;
+    startPushBombs = false;
+    enablePushBombs = true;
+    startDropBombs = false;
+    enableDropBombs = true;
+    enableFailingBombs = true;
+    enableOppositeControls = true;
+    enableInvisibility = true;
+    bombSpeed = 40;
+    bombTimer = 28;
+    animateFire = true;
+    defaultPlayer1Name = "Nuadha";
+    defaultPlayer2Name = "Diarmait";
+    defaultPlayer3Name = "Fachtna";
+    defaultPlayer4Name = "Pryderi";
+    default1Color = RED;
+    default2Color = GREEN;
+    default3Color = BLUE;
+    default4Color = YELLOW;
+    noOfPlayers = 4;
+    defaultIPAddress = "192.168.0.1";
+
+    QRect sr = QApplication::desktop()->screenGeometry();
+    if(((float)sr.width())/((float)sr.height()) > 1.7F){
+        if(sr.width() >= 1280){
+            resolution = QPoint(1280, 720);
+        }else{
+            resolution = QPoint(1024, 600);
+        }
+        wideLayout = true;
+    }else{
+    if(((float)sr.width())/((float)sr.height()) > 1.5F){
+        if(sr.width() >= 1280){
+            resolution = QPoint(1280, 800);
+        }else{
+            resolution = QPoint(1024, 600);
+        }
+        wideLayout = true;
+    }else{
+    if(((float)sr.width())/((float)sr.height()) < 1.4F){
+        if(sr.width() >= 1024){
+            resolution = QPoint(1024, 768);
+        }else{
+            resolution = QPoint(800, 600);
+        }
+        wideLayout = false;
+    }}}
+}
+
+bool ArawnSettings::load()
+{
+#ifdef Q_OS_WIN
+    QDir dir(QDir::homePath() + "/AppData");
+    if(!dir.exists("Arawn"))
+        dir.mkdir("Arawn");
+    path = QDir::homePath() + "/AppData/Arawn/";
+#else
+    QDir dir(QDir::homePath() + "/.config");
+    if(!dir.exists("Arawn"))
+        dir.mkdir("Arawn");
+    path = QDir::homePath() + "/.config/Arawn/";
+#endif
+    if(QFile::exists(path+"gamesettings")){
+        QFile sFile(path+"gamesettings");
+        sFile.open(QFile::ReadOnly);
+        QDataStream stream(&sFile);
+        int _language;
+        bool _opengl;
+        bool _corpseparts;
+        bool _shaky;
+        int _roundtime;
+        int _pointstowin;
+        int _startbombs;
+        int _maxbombs;
+        int _startfire;
+        int _maxfire;
+        int _startspeed;
+        int _maxspeed;
+        bool _startpushbombs;
+        bool _enablepushbombs;
+        bool _startdropbombs;
+        bool _enabledropbombs;
+        bool _enablefailing;
+        bool _enableopposite;
+        bool _enableinvisibility;
+        int _bombspeed;
+        int _bombtimer;
+        int _resx;
+        int _resy;
+        bool _animfire;
+        uint _color1;
+        uint _color2;
+        uint _color3;
+        uint _color4;
+
+        stream >> _language;
+        stream >> _opengl;
+        stream >> _corpseparts;
+        stream >> _shaky;
+        stream >> _roundtime;
+        stream >> _pointstowin;
+        stream >> _startbombs;
+        stream >> _maxbombs;
+        stream >> _startfire;
+        stream >> _maxfire;
+        stream >> _startspeed;
+        stream >> _maxspeed;
+        stream >> _startpushbombs;
+        stream >> _enablepushbombs;
+        stream >> _startdropbombs;
+        stream >> _enabledropbombs;
+        stream >> _enablefailing;
+        stream >> _enableopposite;
+        stream >> _enableinvisibility;
+        stream >> _bombspeed;
+        stream >> _bombtimer;
+        stream >> _resx;
+        stream >> _resy;
+        stream >> _animfire;
+        stream >> wideLayout;
+        stream >> defaultPlayer1Name;
+        stream >> defaultPlayer2Name;
+        stream >> defaultPlayer3Name;
+        stream >> defaultPlayer4Name;
+        stream >> _color1;
+        stream >> _color2;
+        stream >> _color3;
+        stream >> _color4;
+        stream >> noOfPlayers;
+        stream >> defaultIPAddress;
+
+        language = _language;
+        openGlRendering = _opengl;
+        showCorpseParts = _corpseparts;
+        shakyExplosion = _shaky;
+        roundTimeDefault = _roundtime;
+        pointsToWin = _pointstowin;
+        startBombs = _startbombs;
+        maxBombs = _maxbombs;
+        startFire = _startfire;
+        maxFire = _maxfire;
+        startSpeed = _startspeed;
+        maxSpeed = _maxspeed;
+        startPushBombs = _startpushbombs;
+        enablePushBombs = _enablepushbombs;
+        startDropBombs = _startdropbombs;
+        enableDropBombs = _enabledropbombs;
+        enableFailingBombs = _enablefailing;
+        enableOppositeControls = _enableopposite;
+        enableInvisibility = _enableinvisibility;
+        bombSpeed = _bombspeed;
+        bombTimer = _bombtimer;
+        resolution = QPointF(_resx, _resy);
+        animateFire = _animfire;
+        default1Color = _color1;
+        default2Color = _color2;
+        default3Color = _color3;
+        default4Color = _color4;
+        sFile.close();
+        return true;
+    }
+    return false;
+}
+
+void ArawnSettings::save()
+{
+    QFile sFile(path+"gamesettings");
+    sFile.open(QFile::WriteOnly);
+    QDataStream stream(&sFile);
+        stream << language.toInt();
+        stream << openGlRendering.toBool();
+        stream << showCorpseParts.toBool();
+        stream << shakyExplosion.toBool();
+        stream << roundTimeDefault.toInt();
+        stream << pointsToWin.toInt();
+        stream << startBombs.toInt();
+        stream << maxBombs.toInt();
+        stream << startFire.toInt();
+        stream << maxFire.toInt();
+        stream << startSpeed.toInt();
+        stream << maxSpeed.toInt();
+        stream << startPushBombs.toBool();
+        stream << enablePushBombs.toBool();
+        stream << startDropBombs.toBool();
+        stream << enableDropBombs.toBool();
+        stream << enableFailingBombs.toBool();
+        stream << enableOppositeControls.toBool();
+        stream << enableInvisibility.toBool();
+        stream << bombSpeed.toInt();
+        stream << bombTimer.toInt();
+        stream << resolution.toPoint().x();
+        stream << resolution.toPoint().y();
+        stream << animateFire.toBool();
+        stream << wideLayout;
+        stream << defaultPlayer1Name;
+        stream << defaultPlayer2Name;
+        stream << defaultPlayer3Name;
+        stream << defaultPlayer4Name;
+        stream << default1Color.toUInt();
+        stream << default2Color.toUInt();
+        stream << default3Color.toUInt();
+        stream << default4Color.toUInt();
+        stream << noOfPlayers;
+        stream << defaultIPAddress;
+        sFile.close();
+}
+
+void ArawnSettings::loadLists()
+{
     languageValues.insert(tr("English"), 0);
     languageValues.insert(tr("Magyar"), 1);
     openGlRenderingValues.insert(tr("Yes"), true);
@@ -179,229 +403,6 @@ ArawnSettings::ArawnSettings()
     colorValues.insert(tr("Green"), GREEN);
     colorValues.insert(tr("Purple"), PURPLE);
     colorValues.insert(tr("Yellow"), YELLOW);
-
-    // LOAD SAVED DATA
-    if(load())
-        return;
-
-    language = 0;
-    openGlRendering = false;
-    showCorpseParts = true;
-    shakyExplosion = true;
-    roundTimeDefault = 60;
-    pointsToWin = 5;
-    startBombs = 1;
-    maxBombs = 8;
-    startFire = 1;
-    maxFire = 8;
-    startSpeed = 1;
-    maxSpeed = 8;
-    startPushBombs = false;
-    enablePushBombs = true;
-    startDropBombs = false;
-    enableDropBombs = true;
-    enableFailingBombs = true;
-    enableOppositeControls = true;
-    enableInvisibility = true;
-    bombSpeed = 40;
-    bombTimer = 28;
-    animateFire = true;
-    defaultPlayer1Name = "Nuadha";
-    defaultPlayer2Name = "Diarmait";
-    defaultPlayer3Name = "Fachtna";
-    defaultPlayer4Name = "Pryderi";
-    default1Color = RED;
-    default2Color = GREEN;
-    default3Color = BLUE;
-    default4Color = YELLOW;
-    noOfPlayers = 4;
-    defaultIPAddress = "192.168.0.1";
-
-    QRect sr = QApplication::desktop()->screenGeometry();
-    if(((float)sr.width())/((float)sr.height()) > 1.7F){
-        if(sr.width() >= 1280){
-            resolution = QPoint(1280, 720);
-        }else{
-            resolution = QPoint(1024, 600);
-        }
-        wideLayout = true;
-    }else{
-    if(((float)sr.width())/((float)sr.height()) > 1.5F){
-        if(sr.width() >= 1280){
-            resolution = QPoint(1280, 800);
-        }else{
-            resolution = QPoint(1024, 600);
-        }
-        wideLayout = true;
-    }else{
-    if(((float)sr.width())/((float)sr.height()) < 1.4F){
-        if(sr.width() >= 1024){
-            resolution = QPoint(1024, 768);
-        }else{
-            resolution = QPoint(800, 600);
-        }
-        wideLayout = false;
-    }}}
-
-
-}
-
-bool ArawnSettings::load()
-{
-#ifdef Q_OS_WIN
-    QDir dir(QDir::homePath() + "/AppData");
-    if(!dir.exists("Arawn"))
-        dir.mkdir("Arawn");
-    path = QDir::homePath() + "/AppData/Arawn/";
-#else
-    QDir dir(QDir::homePath() + "/.config");
-    if(!dir.exists("Arawn"))
-        dir.mkdir("Arawn");
-    path = QDir::homePath() + "/.config/Arawn/";
-#endif
-    if(QFile::exists(path+"gamesettings")){
-        QFile sFile(path+"gamesettings");
-        sFile.open(QFile::ReadOnly);
-        QDataStream stream(&sFile);
-        int _language;
-        bool _opengl;
-        bool _corpseparts;
-        bool _shaky;
-        int _roundtime;
-        int _pointstowin;
-        int _startbombs;
-        int _maxbombs;
-        int _startfire;
-        int _maxfire;
-        int _startspeed;
-        int _maxspeed;
-        bool _startpushbombs;
-        bool _enablepushbombs;
-        bool _startdropbombs;
-        bool _enabledropbombs;
-        bool _enablefailing;
-        bool _enableopposite;
-        bool _enableinvisibility;
-        int _bombspeed;
-        int _bombtimer;
-        int _resx;
-        int _resy;
-        bool _animfire;
-        uint _color1;
-        uint _color2;
-        uint _color3;
-        uint _color4;
-
-        stream >> _language;
-        stream >> _opengl;
-        stream >> _corpseparts;
-        stream >> _shaky;
-        stream >> _roundtime;
-        stream >> _pointstowin;
-        stream >> _startbombs;
-        stream >> _maxbombs;
-        stream >> _startfire;
-        stream >> _maxfire;
-        stream >> _startspeed;
-        stream >> _maxspeed;
-        stream >> _startpushbombs;
-        stream >> _enablepushbombs;
-        stream >> _startdropbombs;
-        stream >> _enabledropbombs;
-        stream >> _enablefailing;
-        stream >> _enableopposite;
-        stream >> _enableinvisibility;
-        stream >> _bombspeed;
-        stream >> _bombtimer;
-        stream >> _resx;
-        stream >> _resy;
-        stream >> _animfire;
-        stream >> wideLayout;
-        stream >> defaultPlayer1Name;
-        stream >> defaultPlayer2Name;
-        stream >> defaultPlayer3Name;
-        stream >> defaultPlayer4Name;
-        stream >> _color1;
-        stream >> _color2;
-        stream >> _color3;
-        stream >> _color4;
-        stream >> noOfPlayers;
-        stream >> defaultIPAddress;
-
-        language = _language;
-        openGlRendering = _opengl;
-        showCorpseParts = _corpseparts;
-        shakyExplosion = _shaky;
-        roundTimeDefault = _roundtime;
-        pointsToWin = _pointstowin;
-        startBombs = _startbombs;
-        maxBombs = _maxbombs;
-        startFire = _startfire;
-        maxFire = _maxfire;
-        startSpeed = _startspeed;
-        maxSpeed = _maxspeed;
-        startPushBombs = _startpushbombs;
-        enablePushBombs = _enablepushbombs;
-        startDropBombs = _startdropbombs;
-        enableDropBombs = _enabledropbombs;
-        enableFailingBombs = _enablefailing;
-        enableOppositeControls = _enableopposite;
-        enableInvisibility = _enableinvisibility;
-        bombSpeed = _bombspeed;
-        bombTimer = _bombtimer;
-        resolution = QPointF(_resx, _resy);
-        animateFire = _animfire;
-        default1Color = _color1;
-        default2Color = _color2;
-        default3Color = _color3;
-        default4Color = _color4;
-        sFile.close();
-        return true;
-    }
-    return false;
-}
-
-void ArawnSettings::save()
-{
-    QFile sFile(path+"gamesettings");
-    sFile.open(QFile::WriteOnly);
-    QDataStream stream(&sFile);
-        stream << language.toInt();
-        stream << openGlRendering.toBool();
-        stream << showCorpseParts.toBool();
-        stream << shakyExplosion.toBool();
-        stream << roundTimeDefault.toInt();
-        stream << pointsToWin.toInt();
-        stream << startBombs.toInt();
-        stream << maxBombs.toInt();
-        stream << startFire.toInt();
-        stream << maxFire.toInt();
-        stream << startSpeed.toInt();
-        stream << maxSpeed.toInt();
-        stream << startPushBombs.toBool();
-        stream << enablePushBombs.toBool();
-        stream << startDropBombs.toBool();
-        stream << enableDropBombs.toBool();
-        stream << enableFailingBombs.toBool();
-        stream << enableOppositeControls.toBool();
-        stream << enableInvisibility.toBool();
-        stream << bombSpeed.toInt();
-        stream << bombTimer.toInt();
-        stream << resolution.toPoint().x();
-        stream << resolution.toPoint().y();
-        stream << animateFire.toBool();
-        stream << wideLayout;
-        stream << defaultPlayer1Name;
-        stream << defaultPlayer2Name;
-        stream << defaultPlayer3Name;
-        stream << defaultPlayer4Name;
-        stream << default1Color.toUInt();
-        stream << default2Color.toUInt();
-        stream << default3Color.toUInt();
-        stream << default4Color.toUInt();
-        stream << noOfPlayers;
-        stream << defaultIPAddress;
-    sFile.close();
 }
 
 

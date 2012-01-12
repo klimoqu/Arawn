@@ -1,6 +1,7 @@
 #include "GUI/qarawnwindow.hpp"
 #include "GUI/graphicsnetworksettings.hpp"
 #include "GUI/graphicsplayersetup.hpp"
+#include "CORE/cup.hpp"
 
 
 void QArawnWindow::initWindow()
@@ -120,6 +121,8 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateSurvivalCup);
     stateMurderCup = new QState;
     machine->addState(stateMurderCup);
+    roomState = new QState;
+    machine->addState(roomState);
     stateNetPlayerSetup = new QState;
     machine->addState(stateNetPlayerSetup);
     stateNetSurvivalCup = new QState;
@@ -131,6 +134,15 @@ void QArawnWindow::initializeOthers()
 
     finalState = new QFinalState;
     machine->addState(finalState);
+
+    mapState = new QState(stateGame);
+    cupState = new QState(stateGame);
+    gameFinal = new QFinalState(stateGame);
+    stateGame->setInitialState(mapState);
+    stateGame->addTransition(stateGame, SIGNAL(finished()), stateMenuHistory);
+    connect(stateGame, SIGNAL(entered()), this, SLOT(enterGame()));
+    connect(stateGame, SIGNAL(finished()), this, SLOT(finishGame()));
+
     initializeMenus();
 
     QTimer *timerStLogoToStArawn = new QTimer(this);
@@ -257,7 +269,7 @@ void QArawnWindow::initializeMenus()
      stateMenu->assignProperty(pSetup, "pos", QPointF(scene->width(),0));
      scene->addItem(pSetup);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, stateGame);
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(g, stateMenuHistory, stateNetSettings, roomState, stateGame);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
@@ -288,7 +300,6 @@ void QArawnWindow::enterMenus()
     pixFireItem->setOpacity(0.6);
     if(ArawnSettings::instance()->animateFire.toBool()){
         QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
-        firAnim->thread()->setPriority(QThread::LowestPriority);
         firAnim->setLoopCount(-1);
         firAnim->setEasingCurve(QEasingCurve::OutInBounce);
         firAnim->setStartValue(0.4);
@@ -313,7 +324,31 @@ void QArawnWindow::enterMenus()
 void QArawnWindow::closeEvent(QCloseEvent *event)
 {
     ArawnSettings::instance()->save();
+    ArawnSettings::deleteInstance();
     event->accept();
+}
+
+void QArawnWindow::enterGame()
+{
+    grMap = new GraphicsMap(g, mapState, cupState);
+    grMap->setPos(-400, -230);
+    mapState->assignProperty(grMap, "visible", true);
+    cupState->assignProperty(grMap, "visible", false);
+    scene->addItem(grMap);
+    grTimer = new GraphicsTimer;
+    grTimer->setPos(-400, -300);
+    mapState->assignProperty(grTimer, "visible", true);
+    cupState->assignProperty(grTimer, "visible", false);
+    scene->addItem(grTimer);
+
+    mapState->addTransition(g, SIGNAL(GameOver()), cupState);
+    cupState->addTransition(g, SIGNAL(GameStarted(int)), mapState);
+    connect(g, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
+
+}
+
+void QArawnWindow::finishGame()
+{
 }
 
 

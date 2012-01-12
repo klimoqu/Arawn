@@ -119,8 +119,7 @@ void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameSt
     g = _g;
     playerNums = g->GetPlayers().size();
     for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
-    _ownState->machine()->addDefaultAnimation(new QPropertyAnimation(this, "pos"));
-    _ownState->assignProperty(this, "pos", QPointF(0,0));
+    _ownState->assignProperty(this, "visible", true);
     _ownState->addTransition(g, SIGNAL(GameStarted()), _gameState);
     connect(g, SIGNAL(GameStarted()), this, SLOT(deleteLater()));
     connect(g, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));

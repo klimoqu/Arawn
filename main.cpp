@@ -311,23 +311,31 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     ArawnSettings::create(); // TODO delete
+
+    ArawnSettings::instance()->loadLists();
+
+    QString str = QDir::currentPath();
+    QDir::setCurrent(QDir::currentPath()+"/res/");
+
+    QTranslator translator;
+
+    if(ArawnSettings::instance()->language == 0)
+    {
+        if(translator.load("Arawn_en")){
+                a.installTranslator(&translator);
+        }
+    }
+    else if(ArawnSettings::instance()->language == 1)
+        if(translator.load("Arawn_hu")){
+                a.installTranslator(&translator);
+        }
+
+    QDir::setCurrent(str);
+
     QArawnWindow aWindow;
     aWindow.initWindow();
     aWindow.showFullScreen();
 
-    qDebug() << "ArawnSettings:" << sizeof(ArawnSettings);
-    qDebug() << "ArawnWindow:" << sizeof(QArawnWindow);
-    qDebug() << "Menu:" << sizeof(GraphicsMenu);
-    qDebug() << "GraphicsMap:" << sizeof(GraphicsMap);
-    qDebug() << "GraphicsNetworkSettings:" << sizeof(GraphicsNetworkSettings);
-    qDebug() << "Game:" << sizeof(Game);
-    qDebug() << "Map:" << sizeof(Map);
-    qDebug() << "Player:" << sizeof(Player);
-    qDebug() << "Field:" << sizeof(Field);
-    qDebug() << "Bonus:" << sizeof(Bonus);
-    qDebug() << "Command:" << sizeof(Command);
-    qDebug() << "Bomb:" << sizeof(Bomb);
-    qDebug() << "Cup:" << sizeof(Cup);
 
     return a.exec();
 }

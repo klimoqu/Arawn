@@ -88,9 +88,15 @@ OTHER_FILES += \
     GUI/res/field1.png \
     GUI/res/field0.png \
     GUI/res/extras.png \
-    GUI/res/explosion.png
+    GUI/res/explosion.png \
+    GUI/res/observer.png
 
+TRANSLATIONS += Arawn_hu.ts
+
+CODECFORSRC += UTF-8	
+	
 RESOURCES +=
+
 
 
 
