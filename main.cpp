@@ -312,13 +312,21 @@ int main(int argc, char *argv[])
 
     ArawnSettings::create(); // TODO delete
 
-    QDir::setCurrent(QDir::currentPath()+"/../Arawn/");
+    QDir::setCurrent(QDir::currentPath()+"/res/");
 
     QTranslator translator;
 
-    if(translator.load("Arawn_hu")){
-            a.installTranslator(&translator);
+    if(ArawnSettings::instance()->language == 0)
+    {
+        if(translator.load("Arawn_en")){
+                a.installTranslator(&translator);
+        }
     }
+    else if(ArawnSettings::instance()->language == 1)
+        if(translator.load("Arawn_hu")){
+                a.installTranslator(&translator);
+        }
+
 
     QArawnWindow aWindow;
     aWindow.initWindow();
