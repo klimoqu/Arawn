@@ -4,14 +4,23 @@ Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
     players.clear();
     playernumber=4;
-    if(this->listen(QHostAddress::Any,28300)){emit ServerIsRunning();qDebug()<<"server okes";}
-    else {emit ServerNetworkError();qDebug()<<"server gond";}
+    if(this->listen(QHostAddress::Any,(quint16)28300))
+    {
+        emit ServerIsRunning();
+        qDebug()<<"server okes";
+    }
+    else {
+        emit ServerNetworkError();
+        qDebug()<<"server gond";
+    }
 }
-void Servernet::incommingConnection(int socketfd)
+void Servernet::incomingConnection(int socketfd)
 {
     QTcpSocket *client=new QTcpSocket(this);
     client->setSocketDescriptor(socketfd);
     clients.insert(client);
+    players.insert(client, "");
+
     connect(client,SIGNAL(readyRead()),this,SLOT(readyRead()));
     connect(client,SIGNAL(disconnected()),this,SLOT(disconnected()));
 }
@@ -44,7 +53,6 @@ void Servernet::readyRead()
             client->write(auth);
             client->flush();
             sendusernames();
-            if(players.size()==this->playernumber)emit AllPlayersConnected();
         }
 }
 void Servernet::disconnected()
@@ -68,3 +76,4 @@ void Servernet::SendCommandToClients(Command c)
     command.append(QByteArray::number(c.GetMessage()));
     foreach(QTcpSocket *client,clients){client->write(command);client->flush();}
 }
+

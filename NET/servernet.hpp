@@ -14,7 +14,7 @@ class Servernet:public QTcpServer
     QMap<QTcpSocket*,QString> players;
     QString name;
 protected:
-    void incommingConnection(int socketfd);
+    void incomingConnection(int socketfd);
 public:
     Servernet(QObject *parent=0);
     void SetLocalPlayername(QString name){this->name=name;}
@@ -33,4 +33,5 @@ private slots:
     void sendusernames();
 public slots:
     void SendCommandToClients(Command c);
+
 };

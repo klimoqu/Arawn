@@ -7,11 +7,12 @@ Game::Game(QString address)
     this->settings=aSetInstance;
     map=0;
     serverconnection=0;
-    clientconnection=new Client(address,settings->defaultPlayer1Name);
+    clientconnection=new Client(settings->defaultPlayer1Name);
     connect(this,SIGNAL(ClientValidate(Command)),clientconnection,SLOT(SendCommandToServer(Command)));
     connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
     connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
     connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
+    connect(clientconnection, SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -39,6 +40,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
     connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
 }
+
 void Game::SetCup(Cup *cup)
 {
     if(this->cup)delete this->cup;
@@ -54,6 +56,12 @@ void Game::SetCup(Cup *cup)
     connect(cup,SIGNAL(PlayerPointChanged(uchar,int)),this,SLOT(ChangePlayerPoint(uchar,int)));
     qDebug()<<"setcup";
 }
+
+void Game::ConnectToServer(QString str)
+{
+    clientconnection->connectToServer(str);
+}
+
 QStringList Game::GetPlayers()
 {
     if(clientconnection)return clientconnection->GetPlayers();

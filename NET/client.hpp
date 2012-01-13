@@ -14,16 +14,19 @@ class Client:public QObject
     QStringList players;
     QString name;
 public:
-    Client(QString address,QString name);
+    Client(QString name);
     uchar GetPlayerID(){return playerid;}
     QStringList GetPlayers(){return players;}
 signals:
     void Connected();
     void ConnectionFailed();
+    void refreshPlayers();
     void CommandReceivedFromServer(Command c);
 private slots:
     void readyRead();
 public slots:
     void SendCommandToServer(Command c);
     void SendUsernameToServer();
+    void connectToServer(QString address);
 };
+

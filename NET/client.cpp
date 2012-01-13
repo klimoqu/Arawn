@@ -1,15 +1,21 @@
 #include "client.hpp"
 
-Client::Client(QString address,QString name)
+Client::Client(QString name)
 {
     this->name=name;
     socket = new QTcpSocket(this);
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    connect(socket,SIGNAL(connected()),this,SIGNAL(Connected()));
-    connect(socket,SIGNAL(connected()),this,SLOT(SendUsernameToServer()));
-    connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SIGNAL(ConnectionFailed()));
-    socket->connectToHost(address,28300);
+    connect(socket, SIGNAL(connected()), this, SIGNAL(Connected()));
+    connect(socket, SIGNAL(connected()), this, SLOT(SendUsernameToServer()));
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SIGNAL(ConnectionFailed()));
 }
+
+void Client::connectToServer(QString address)
+{
+    socket->connectToHost(address,(quint16)28300);
+    socket->waitForConnected();
+}
+
 void Client::readyRead()
 {
     QByteArray message=socket->readAll();
@@ -23,6 +29,7 @@ void Client::readyRead()
         else
         {
             players = QString(message).split(",");
+            emit refreshPlayers();
         }
 }
 void Client::SendCommandToServer(Command c)

@@ -31,7 +31,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->drawText(QRectF(-300,-266, 600, 66), ArawnSettings::instance()->defaultIPAddress, QTextOption(Qt::AlignCenter | Qt::AlignTop));
 
     // játékosok
-    if(playerNums >= 0){
+    if(playerNums > 0){
         painter->setPen(QColor(100, 10, 10, 200));
         painter->setFont(itemFont);
         painter->drawText(QRectF(-360, -166, 233, 66).translated(3,3), playerStrs[0], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
@@ -49,7 +49,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
         painter->setPen(QRgb(ArawnSettings::instance()->default1Color.toInt()));
         painter->drawText(QRectF(200, -166, 133, 66), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"), QTextOption(Qt::AlignCenter));
     }
-    if(playerNums >= 1){
+    if(playerNums > 1){
         painter->setPen(QColor(100, 10, 10, 200));
         painter->setFont(itemFont);
         painter->drawText(QRectF(-360, -100, 233, 66).translated(3,3), playerStrs[1], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
@@ -67,7 +67,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
         painter->setPen(QRgb(ArawnSettings::instance()->default2Color.toInt()));
         painter->drawText(QRectF(200, -100, 133, 66), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default2Color, "Blank"), QTextOption(Qt::AlignCenter));
     }
-    if(playerNums >= 2){
+    if(playerNums > 2){
         painter->setPen(QColor(100, 10, 10, 200));
         painter->setFont(itemFont);
         painter->drawText(QRectF(-360, -33, 233, 66).translated(3,3), playerStrs[2], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
@@ -85,7 +85,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
         painter->setPen(QRgb(ArawnSettings::instance()->default3Color.toInt()));
         painter->drawText(QRectF(200, -33, 133, 66), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default3Color, "Blank"), QTextOption(Qt::AlignCenter));
     }
-    if(playerNums >= 3){
+    if(playerNums > 3){
         painter->setPen(QColor(100, 10, 10, 200));
         painter->setFont(itemFont);
         painter->drawText(QRectF(-360, 33, 233, 66).translated(3,3), playerStrs[3], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
@@ -109,7 +109,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 void GraphicsNetworkRoom::pushPlayer()
 {
-    playerNums = g->GetPlayers().size()-1;
+    playerNums = g->GetPlayers().size();
     for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
     update(boundingRect());
 }
@@ -117,16 +117,18 @@ void GraphicsNetworkRoom::pushPlayer()
 void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameState)
 {
     g = _g;
-    playerNums = g->GetPlayers().size()-1;
-    for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
+    playerNums = g->GetPlayers().size();
+    for(uchar i = 0; i < playerNums; i++)
+    {
+        playerNames[i]=g->GetPlayers()[i];
+    }
     _ownState->assignProperty(this, "visible", true);
     _gameState->assignProperty(this, "visible", false);
     _ownState->addTransition(g, SIGNAL(GameStarted(int)), _gameState);
     connect(g, SIGNAL(GameStarted(int)), this, SLOT(deleteLater()));
     connect(g, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));
+    connect(g, SIGNAL(RefreshPlayers()), this, SLOT(pushPlayer()));
 }
-
-
 
 
 

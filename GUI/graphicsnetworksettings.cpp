@@ -132,6 +132,7 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             g = new Game(ArawnSettings::instance()->defaultIPAddress);
             connect(g, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
             connect(g, SIGNAL(Connected()), this, SLOT(connectionOk()));
+            g->ConnectToServer(ArawnSettings::instance()->defaultIPAddress);
             return;
         case Qt::Key_Escape:
             emit previousState();

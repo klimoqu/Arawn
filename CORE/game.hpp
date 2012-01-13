@@ -34,6 +34,7 @@ public:
     uchar GetFields(uchar x, uchar y){return fields[x][y];}
     bool IsSurvive() const {return survive;}
     Cup* GetCup() const {return cup;}
+    void ConnectToServer(QString);
 
 signals:
 
@@ -42,6 +43,7 @@ signals:
 
     void Connected();//kliens
     void ConnectionFailed();//kliens+szerver
+    void RefreshPlayers();
 
     void ServerIsRunning();//szerver
     void NewPlayer();//szerver
@@ -85,4 +87,5 @@ public slots:
     void AllReady();
     void PlayerWin(uchar playerid,QString name);
     void ChangePlayerPoint(uchar id, int point){emit ServerValidate(Command(id,0,point));}
+
 };

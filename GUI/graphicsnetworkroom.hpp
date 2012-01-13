@@ -25,6 +25,8 @@ private:
     QFont titFont;
     QFont itemFont;
     QFont nameFont;
+
+
 };
 
 #endif // GRAPHICSNETWORKROOM_HPP
