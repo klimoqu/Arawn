@@ -1,32 +1,25 @@
 #include "graphicsplayer.hpp"
 
-GraphicsPlayer::GraphicsPlayer(PlayerImage p, QGraphicsItem *parent) : QGraphicsItem(parent)
+GraphicsPlayer::GraphicsPlayer(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
     aState = 0;
     dir = 2;
     QImage img;
-    if(p == TUX){
-        img = QImage("res/tux.png");
-        big = true;
+    if(p == 0){
+        img = QImage("res/a_red.png");
     }
-    if(p == BSD){
-        img = QImage("res/bsd.png");
-        big = true;
+    if(p == 1){
+        img = QImage("res/a_green.png");
     }
-    if(p == SPIDER){
-        img = QImage("res/spider.png");
-        big = false;
+    if(p == 2){
+        img = QImage("res/a_blue.png");
     }
-    if(p == SNAKE){
-        img = QImage("res/snake.png");
-        big = true;
+    if(p == 3){
+        img = QImage("res/a_yellow.png");
     }
     for(uchar i = 0; i < 10; i++){
         for(uchar j = 0; j < 4; j++){
-            if(big)
-                pix[i][j] = new QImage(img.copy(i*40, j*60, 40, 60));
-            else
-                pix[i][j] = new QImage(img.copy(i*40, j*40, 40, 40));
+            pix[i][j] = new QImage(img.copy(i*40, j*60, 40, 60));
         }
     }
 
@@ -34,7 +27,7 @@ GraphicsPlayer::GraphicsPlayer(PlayerImage p, QGraphicsItem *parent) : QGraphics
 
 QRectF GraphicsPlayer::boundingRect() const
 {
-    return big ? QRectF(-20, -40, 40, 60) : QRectF(-20, -20, 40, 40); // TODO korrektúrázni
+    return QRectF(0, -20, 40, 60);
 }
 
 void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -48,22 +41,23 @@ void GraphicsPlayer::setDir(uchar d)
 }
 
 
-GraphicsBomb::GraphicsBomb(GraphicsPlayer::PlayerImage p, QGraphicsItem *parent)
+
+GraphicsBomb::GraphicsBomb(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
+    bombs = QImage("res/bombs.png");
     aState = 0;
-    QImage img("res/bombs.png");
     for(uchar i = 0; i < 4; i++){
-        if(p == GraphicsPlayer::TUX){
-            pix [i] = new QImage(img.copy(160+i*40, 0, 40, 40));
+        if(p == 0){
+            pix [i] = new QImage(bombs.copy(i*40, 0, 40, 40));
         }
-        if(p == GraphicsPlayer::BSD){
-            pix [i] = new QImage(img.copy(160+i*40, 40, 40, 40));
+        if(p == 1){
+            pix [i] = new QImage(bombs.copy(i*40, 40, 40, 40));
         }
-        if(p == GraphicsPlayer::SPIDER){
-            pix [i] = new QImage(img.copy(i*40, 40, 40, 40));
+        if(p == 2){
+            pix [i] = new QImage(bombs.copy(i*40, 80, 40, 40));
         }
-        if(p == GraphicsPlayer::SNAKE){
-            pix [i] = new QImage(img.copy(i*40, 0, 40, 40));
+        if(p == 3){
+            pix [i] = new QImage(bombs.copy(i*40, 120, 40, 40));
         }
     }
 

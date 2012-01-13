@@ -49,6 +49,10 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     bImages[JOBBRA+16] = new QImage(expl.copy(80,0,40,40));
 
     // TODO load players
+    players[0] = new GraphicsPlayer(0, this);
+    players[1] = new GraphicsPlayer(1, this);
+    players[2] = new GraphicsPlayer(2, this);
+    players[3] = new GraphicsPlayer(3, this);
 
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
@@ -100,7 +104,7 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
 
 void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
-    GraphicsBomb *bomb = new GraphicsBomb(players[player]->img, this);
+    GraphicsBomb *bomb = new GraphicsBomb(player, this);
     bomb->setPos(x*40, y*40);
     scene()->addItem(bomb);
     emit bombPlanted();

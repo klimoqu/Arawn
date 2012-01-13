@@ -6,11 +6,7 @@
 class GraphicsPlayer : public QGraphicsItem
 {
 public:
-    enum PlayerImage{
-        TUX, BSD, SPIDER, SNAKE
-    };
-
-    GraphicsPlayer(PlayerImage p, QGraphicsItem *parent);
+    GraphicsPlayer(uchar id, QGraphicsItem *parent);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -24,18 +20,15 @@ public:
     }
 
     uchar aState;
-    PlayerImage img;
 private:
     QImage* pix[10][4];
-    bool big;
     uchar dir;
 };
 
 class GraphicsBomb : public QGraphicsItem
 {
-
 public:
-    GraphicsBomb(GraphicsPlayer::PlayerImage p, QGraphicsItem *parent);
+    GraphicsBomb(uchar id, QGraphicsItem *parent);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -43,6 +36,7 @@ public:
     inline void incAState();
 
 private:
+    QImage bombs;
     QImage* pix[4];
     uchar aState;
 };

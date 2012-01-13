@@ -77,10 +77,6 @@ OTHER_FILES += \
     GUI/res/1_changemenu.wav \
     GUI/res/0_tofrommenu.wav \
     GUI/res/fire.jpg \
-    GUI/res/tux.png \
-    GUI/res/spider.png \
-    GUI/res/snake.png \
-    GUI/res/bsd.png \
     GUI/res/bombs.png \
     GUI/res/field5.png \
     GUI/res/field3.png \
@@ -89,13 +85,24 @@ OTHER_FILES += \
     GUI/res/field0.png \
     GUI/res/extras.png \
     GUI/res/explosion.png \
-    GUI/res/observer.png
+    GUI/res/observer.png \
+    GUI/res/a_yellow.png \
+    GUI/res/a_red.png \
+    GUI/res/a_purple.png \
+    GUI/res/a_green.png \
+    GUI/res/a_cyan.png \
+    GUI/res/a_blue.png
 
 TRANSLATIONS += Arawn_hu.ts
 
 CODECFORSRC += UTF-8	
 	
 RESOURCES +=
+
+
+
+
+
 
 
 
