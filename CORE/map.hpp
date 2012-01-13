@@ -48,7 +48,7 @@ public slots:
         bombs.removeAll(b);
         delete b;
     }
-    void FieldBurning(uchar x, uchar y, uchar id,uchar direction)
+    void FieldBurning(uchar x, uchar y,uchar size, uchar id,uchar direction)
     {
         Command ret=Command(id,3,256*256*direction+256*x+y);
         emit ServerCommand(ret);

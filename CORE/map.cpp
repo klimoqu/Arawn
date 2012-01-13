@@ -41,7 +41,7 @@ void Map::Upload(int id)
             int tempFieldid;
             input>>tempFieldid;
             Fields[i][j]=new Field(i,j,(uchar)tempFieldid);
-            connect(Fields[i][j],SIGNAL(Boomed(uchar,uchar,uchar,uchar)),this,SLOT(FieldBurning(uchar,uchar,uchar,uchar)));
+            connect(Fields[i][j],SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SLOT(FieldBurning(uchar,uchar,uchar,uchar,uchar)));
             connect(Fields[i][j],SIGNAL(Extincted(uchar,uchar)),this,SLOT(FieldExcinguish(uchar,uchar)));
             connect(Fields[i][j],SIGNAL(FieldChanged(uchar,uchar,uchar)),this,SLOT(FieldChange(uchar,uchar,uchar)));
             connect(this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)),Fields[i][j],SLOT(Boom(uchar,uchar,uchar,uchar,uchar)));
