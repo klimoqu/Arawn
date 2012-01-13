@@ -47,7 +47,7 @@ void Map::Upload(int id)
             connect(this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)),Fields[i][j],SLOT(Boom(uchar,uchar,uchar,uchar,uchar)));
             for(uchar k=0;k<playersnumber;k++)
             {
-                connect(Fields[i][j],SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)),players[k],SLOT(DieAndBlast(uchar,uchar,uchar,uchar,uchar)));
+                connect(Fields[i][j],SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),players[k],SLOT(DieAndBlast(uchar,uchar,uchar,uchar,uchar)));
             }
             if(i>0)
             {
