@@ -16,16 +16,16 @@ protected:
     /// Játékos sebessége (1-)
     uchar pSpeed;
     /// Játékos által egyszerre lerakható bombák száma (1-)
-    uchar pBombsNum;
+    uchar pBombsNum,maxbomb;
     /// Játékos által lerakott bombák ereje (1-)
-    uchar pBombPower;
+    uchar pBombPower,maxpower;
     /// A játékos él-e,robbantható-e,gebasz van a bombával
     bool live,blastable,fail,isvisible,isoppositecontrol;
     uchar id;
     QTimer t_visible,t_oppositecontrol;
 
 public:
-    Player(uchar id){this->id=id;}
+    Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower);
     bool IsVisible(){return isvisible;}
     bool IsAlive(){return live;}
     bool CanFail(){if(fail){fail=false;return true;}else return fail;}
