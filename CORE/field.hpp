@@ -40,7 +40,7 @@ public:
 
 signals:
     void Extincted(uchar x,uchar y);
-    void Boomed(uchar x,uchar y,uchar id,uchar direction);
+    void Boomed(uchar x,uchar y,uchar size,uchar id,uchar direction);
     void FieldChanged(uchar x,uchar y,uchar newtype);
     void BonusChanged(uchar x,uchar y, uchar type,uchar visibleorstate);
 

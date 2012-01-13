@@ -43,7 +43,7 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
     qt.start(1000);
     connect(&qt,SIGNAL(timeout()),this,SLOT(Extinction()));
 
-    emit Boomed(x,y,id,size==0 ? direction+16 :direction);
+    emit Boomed(x,y,size,id,size==0 ? direction+16 :direction);
 
     if( size==0 || !burning)return;
 
