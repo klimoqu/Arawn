@@ -34,7 +34,7 @@ GraphicsPlayer::GraphicsPlayer(PlayerImage p, QGraphicsItem *parent) : QGraphics
 
 QRectF GraphicsPlayer::boundingRect() const
 {
-    return big ? QRectF(-20, -40, 40, 60) : QRectF(-20, -20, 40, 40);
+    return big ? QRectF(-20, -40, 40, 60) : QRectF(-20, -20, 40, 40); // TODO korrektúrázni
 }
 
 void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -84,3 +84,73 @@ void GraphicsBomb::incAState()
     if(aState < 3) aState++;
     else aState = 0;
 }
+
+GraphicsBonus::GraphicsBonus(uchar type, int xcoord, int ycoord, QGraphicsItem *parent) :
+    QGraphicsItem(parent)
+{
+    setPos(xcoord, ycoord);
+    QImage extras("res/extras.png");
+    switch(type){
+    case 1:
+        pix = new QImage(extras.copy(40, 0, 40, 40));
+        return;
+    case 2:
+        pix = new QImage(extras.copy(360, 0, 40, 40));
+        return;
+    case 3:
+        pix = new QImage(extras.copy(0, 0, 40, 40));
+        return;
+    case 4:
+        pix = new QImage(extras.copy(320, 0, 40, 40));
+        return;
+    case 5:
+        pix = new QImage(extras.copy(80, 0, 40, 40));
+        return;
+    case 6:
+        pix = new QImage(extras.copy(400, 0, 40, 40));
+        return;
+    case 7:
+        pix = new QImage(extras.copy(280, 0, 40, 40));
+        return;
+    case 8:
+        pix = new QImage(extras.copy(240, 0, 40, 40));
+        return;
+    case 9:
+        pix = new QImage(extras.copy(200, 0, 40, 40));
+        return;
+    }
+}
+
+QRectF GraphicsBonus::boundingRect() const
+{
+    return QRectF(0, 0, 40, 40);
+}
+
+void GraphicsBonus::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    painter->drawImage(0, 0, *pix);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

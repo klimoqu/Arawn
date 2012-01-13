@@ -47,6 +47,17 @@ private:
     uchar aState;
 };
 
+class GraphicsBonus : public QGraphicsItem
+{
+public:
+    GraphicsBonus(uchar type, int xcoord, int ycoord, QGraphicsItem *parent);
+
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+private:
+    QImage *pix;
+};
 
 
 

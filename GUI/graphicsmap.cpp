@@ -14,6 +14,22 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     cupState = _cupState;
 
     connect(g, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs()));
+
+    connect(g, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
+    connect(g, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
+    connect(g, SIGNAL(FieldChanged(uchar,uchar,uchar)), this, SLOT(changeField(uchar,uchar,uchar)));
+    connect(g, SIGNAL(FieldExcinted(uchar,uchar)), this, SLOT(blastingOut(uchar,uchar)));
+    connect(g, SIGNAL(PlayerBlasted(uchar)), this, SLOT(blastPlayer(uchar)));
+    connect(g, SIGNAL(PlayerMoved(uchar,uchar)), this, SLOT(movePlayer(uchar,uchar)));
+    connect(g, SIGNAL(PlayerDied(uchar,uchar)), this, SLOT(diePlayer(uchar, uchar)));
+    connect(g, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)));
+    connect(g, SIGNAL(BonusTurnVisible(uchar,uchar,uchar)), this, SLOT(plantBonus(uchar,uchar,uchar)));
+    connect(g, SIGNAL(BonusTurnInvisible(uchar,uchar,uchar)), this, SLOT(deleteBonus(uchar,uchar,uchar)));
+    connect(g, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
+    connect(g, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
+    connect(g, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
+
+
     fPixmaps[0] = new QImage("res/field0.png");
     fPixmaps[1] = new QImage("res/field1.png");
     fPixmaps[2] = new QImage("res/field2.png");
@@ -32,6 +48,7 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     bImages[FEL+16] = new QImage(expl.copy(120,0,40,40));
     bImages[JOBBRA+16] = new QImage(expl.copy(80,0,40,40));
 
+    // TODO load players
 
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
@@ -61,6 +78,12 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
         bombs[i]->paint(painter, o, w);
     }
 
+    // Bónuszok
+    for(uchar i = 0; i < bonuses.length(); i++){
+        bonuses[i]->paint(painter, o, w);
+    }
+
+
     // Játékosok
     for(uchar i = 0; i < playersCount; i++){
         players[i]->paint(painter, o, w);
@@ -78,8 +101,8 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
 void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
     GraphicsBomb *bomb = new GraphicsBomb(players[player]->img, this);
-    bomb->setX(x*40);
-    bomb->setY(y*40);
+    bomb->setPos(x*40, y*40);
+    scene()->addItem(bomb);
     emit bombPlanted();
     bombs.append(bomb);
 }
@@ -133,16 +156,18 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
     }
 }
 
-void GraphicsMap::diePlayer(uchar player)
+void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {
     emit playerDied();
     players[player]->aState = 9;
+    // TODO Cup
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
     emit playerBlasted();
+    // TODO corpse parts
 }
 
 void GraphicsMap::setMapIDs()
@@ -153,6 +178,49 @@ void GraphicsMap::setMapIDs()
         }
     }
 }
+
+void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
+{
+    players[id]->setVisible(true);
+    players[id]->setPos(x*40, y*40);
+}
+
+void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
+{
+    GraphicsBonus *bonus = new GraphicsBonus(type, x*40, y*40, this);
+    scene()->addItem(bonus);
+    bonuses.append(bonus);
+}
+
+void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
+{
+    for(uchar i = 0; i < bonuses.length(); i++){
+        if(
+                (bonuses[i]->x())/40 == x &&
+                (bonuses[i]->y())/40 == y
+        ){
+            delete bonuses[i];
+            bonuses.removeAt(i);
+            i--;
+        }
+    }
+}
+
+void GraphicsMap::invisiblePlayer(uchar playerid)
+{
+    players[playerid]->setVisible(false);
+}
+
+void GraphicsMap::visiblePlayer(uchar playerid)
+{
+    players[playerid]->setVisible(true);
+}
+
+void GraphicsMap::destroyField(uchar x, uchar y)
+{
+    mapIDs[x][y] = 4;
+}
+
 
 
 
@@ -190,6 +258,34 @@ void GraphicsTimer::tick()
         update(boundingRect());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

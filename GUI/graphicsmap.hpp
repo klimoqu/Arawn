@@ -27,14 +27,18 @@ signals:
 public slots:
     void setMapIDs();
     void plantBomb(uchar x, uchar y, uchar player);
-//    void plantBonus(uchar x, uchar y, uchar type);
+    void plantBonus(uchar x, uchar y, uchar type);
+    void deleteBonus(uchar x, uchar y, uchar type);
     void blastField(uchar x, uchar y, uchar player, uchar dir);
     void blastingOut(uchar x, uchar y);
     void changeField(uchar x, uchar y, uchar type);
-//    void moveBomb()
     void movePlayer(uchar player, uchar dir);
-    void diePlayer(uchar player);
+    void diePlayer(uchar player, uchar murderid);
     void blastPlayer(uchar player);
+    void startPlayerFrom(uchar id, uchar x, uchar y);
+    void invisiblePlayer(uchar playerid);
+    void visiblePlayer(uchar playerid);
+    void destroyField(uchar x,uchar y);
 
 private:
     uchar mapIDs[20][13];
@@ -44,6 +48,7 @@ private:
     uchar playersCount;
 
     QList<GraphicsBomb*> bombs;
+    QList<GraphicsBonus*> bonuses;
 
     uchar burning[20][13];
     QMap<uchar, QImage*> bImages;
