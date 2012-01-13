@@ -16,7 +16,7 @@ Game::Game(QString address)
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
 {
-
+    this->cup=0;
     this->survive=survive;
     this->settings=settings;
     this->playersnumber=playersnumber;
@@ -38,11 +38,10 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
     connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
-    std::cout<<"game vege"<<std::endl;
 }
 void Game::SetCup(Cup *cup)
 {
-    delete this->cup;
+    if(this->cup)delete this->cup;
     this->cup=cup;
     if(survive)
     {
@@ -53,6 +52,7 @@ void Game::SetCup(Cup *cup)
         connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
     }
     connect(cup,SIGNAL(PlayerPointChanged(uchar,int)),this,SLOT(ChangePlayerPoint(uchar,int)));
+    qDebug()<<"setcup";
 }
 QStringList Game::GetPlayers()
 {
