@@ -295,7 +295,7 @@ GraphicsAbout::GraphicsAbout()
 {
     h1 = tr("Credits");
     h2 = "Hir yw'r dydd a hir yw'r nos, a hir yw aros Arawn";
-    p1 = "This is a bomberman like game inspired by the well known ClanBomber.\nIt is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.";
+    p1 = tr("This is a bomberman like game inspired by the well known ClanBomber.\nIt is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.");
     h1Font = qApp->font();
     h1Font.setPixelSize(50);
     h2Font = qApp->font();
