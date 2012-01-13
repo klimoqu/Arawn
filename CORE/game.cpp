@@ -38,6 +38,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
     connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
     connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
+    std::cout<<"game vege"<<std::endl;
 }
 void Game::SetCup(Cup *cup)
 {
