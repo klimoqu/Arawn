@@ -56,8 +56,7 @@ void Servernet::disconnected()
 }
 void Servernet::sendusernames()
 {
-    QStringList playerslist;
-    foreach(QString player,players.values())playerslist<<player;
+    QStringList playerslist=GetPlayers();
     foreach(QTcpSocket *client,clients)client->write(QString(playerslist.join(",")).toUtf8());
 }
 void Servernet::SendCommandToClients(Command c)
