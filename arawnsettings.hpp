@@ -136,4 +136,6 @@ public:
 
 };
 
+#define aSetInstance ArawnSettings::instance()
+
 #endif // ARAWNSETTINGS_HPP

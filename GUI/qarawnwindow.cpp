@@ -127,8 +127,10 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateNetPlayerSetup);
     stateNetSurvivalCup = new QState;
     machine->addState(stateNetSurvivalCup);
+    connect(stateNetSurvivalCup, SIGNAL(entered()), this, SLOT(startSurvival()));
     stateNetMurderCup = new QState;
     machine->addState(stateNetMurderCup);
+    connect(stateNetMurderCup, SIGNAL(entered()), this, SLOT(startMurder()));
     stateQuit = new QState;
     machine->addState(stateQuit);
 
@@ -378,6 +380,21 @@ void QArawnWindow::finishGame()
         firAnim->setDuration(1600);
         firAnim->start();
     }
+}
+
+void QArawnWindow::startSurvival()
+{
+    g = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, true);
+    c = new Cup(aSetInstance);
+    g->SetCup(c);
+
+}
+
+void QArawnWindow::startMurder()
+{
+    g = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, false);
+    c = new Cup(aSetInstance);
+    g->SetCup(c);
 }
 
 

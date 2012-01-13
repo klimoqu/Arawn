@@ -24,6 +24,8 @@ public slots:
     void enterGame();
     void finishGame();
     void playSound(uchar n);
+    void startSurvival();
+    void startMurder();
 
 private:
     inline void initializeMenus();
@@ -43,6 +45,7 @@ private:
     GraphicsTimer *grTimer;
     GraphicsCup *grCup;
     Game *g;
+    Cup *c;
 
     QState *stateLogo;
     QState *stateArawn;
