@@ -109,7 +109,7 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 void GraphicsNetworkRoom::pushPlayer()
 {
-    playerNums = g->GetPlayers().size();
+    playerNums = g->GetPlayers().size()-1;
     for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
     update(boundingRect());
 }
@@ -117,7 +117,7 @@ void GraphicsNetworkRoom::pushPlayer()
 void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameState)
 {
     g = _g;
-    playerNums = g->GetPlayers().size();
+    playerNums = g->GetPlayers().size()-1;
     for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
     _ownState->assignProperty(this, "visible", true);
     _gameState->assignProperty(this, "visible", false);
