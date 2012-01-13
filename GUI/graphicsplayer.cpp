@@ -44,20 +44,20 @@ void GraphicsPlayer::setDir(uchar d)
 
 GraphicsBomb::GraphicsBomb(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-    bombs = QImage("res/bombs.png");
+    QImage bombsF("res/bombs.hpp");
     aState = 0;
     for(uchar i = 0; i < 4; i++){
         if(p == 0){
-            pix [i] = new QImage(bombs.copy(i*40, 0, 40, 40));
+            pix [i] = new QImage(bombsF.copy(i*40, 0, 40, 40));
         }
         if(p == 1){
-            pix [i] = new QImage(bombs.copy(i*40, 40, 40, 40));
+            pix [i] = new QImage(bombsF.copy(i*40, 40, 40, 40));
         }
         if(p == 2){
-            pix [i] = new QImage(bombs.copy(i*40, 80, 40, 40));
+            pix [i] = new QImage(bombsF.copy(i*40, 80, 40, 40));
         }
         if(p == 3){
-            pix [i] = new QImage(bombs.copy(i*40, 120, 40, 40));
+            pix [i] = new QImage(bombsF.copy(i*40, 120, 40, 40));
         }
     }
 
@@ -82,35 +82,35 @@ void GraphicsBomb::incAState()
 GraphicsBonus::GraphicsBonus(uchar type, int xcoord, int ycoord, QGraphicsItem *parent) :
     QGraphicsItem(parent)
 {
+    QImage extrasF("res/extras.png");
     setPos(xcoord, ycoord);
-    QImage extras("res/extras.png");
     switch(type){
     case 1:
-        pix = new QImage(extras.copy(40, 0, 40, 40));
+        pix = new QImage(extrasF.copy(40, 0, 40, 40));
         return;
     case 2:
-        pix = new QImage(extras.copy(360, 0, 40, 40));
+        pix = new QImage(extrasF.copy(360, 0, 40, 40));
         return;
     case 3:
-        pix = new QImage(extras.copy(0, 0, 40, 40));
+        pix = new QImage(extrasF.copy(0, 0, 40, 40));
         return;
     case 4:
-        pix = new QImage(extras.copy(320, 0, 40, 40));
+        pix = new QImage(extrasF.copy(320, 0, 40, 40));
         return;
     case 5:
-        pix = new QImage(extras.copy(80, 0, 40, 40));
+        pix = new QImage(extrasF.copy(80, 0, 40, 40));
         return;
     case 6:
-        pix = new QImage(extras.copy(400, 0, 40, 40));
+        pix = new QImage(extrasF.copy(400, 0, 40, 40));
         return;
     case 7:
-        pix = new QImage(extras.copy(280, 0, 40, 40));
+        pix = new QImage(extrasF.copy(280, 0, 40, 40));
         return;
     case 8:
-        pix = new QImage(extras.copy(240, 0, 40, 40));
+        pix = new QImage(extrasF.copy(240, 0, 40, 40));
         return;
     case 9:
-        pix = new QImage(extras.copy(200, 0, 40, 40));
+        pix = new QImage(extrasF.copy(200, 0, 40, 40));
         return;
     }
 }
