@@ -2,9 +2,10 @@
 #include <QRegExp>
 Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
+    players.clear();
     playernumber=4;
-    if(this->listen(QHostAddress::Any,28300))emit ServerIsRunning();
-    else emit ServerNetworkError();
+    if(this->listen(QHostAddress::Any,28300)){emit ServerIsRunning();qDebug()<<"server okes";}
+    else {emit ServerNetworkError();qDebug()<<"server gond";}
 }
 void Servernet::incommingConnection(int socketfd)
 {
@@ -18,7 +19,7 @@ QStringList Servernet::GetPlayers()
 {
     QStringList playerslist;
     playerslist<<name;
-    foreach(QString player,players.values())playerslist<<player;
+    if(players.size()>0)foreach(QString player,players.values())playerslist<<player;
     return playerslist;
 }
 void Servernet::readyRead()

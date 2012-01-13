@@ -8,6 +8,7 @@ Cup::Cup(ArawnSettings *settings)
     pontok[2]=0;
     pontok[3]=0;
     this->settings=settings;
+    qDebug()<<"new cup";
 }
 void Cup::PlayerDie(uchar victim, uchar murder)
 {
