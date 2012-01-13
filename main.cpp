@@ -299,12 +299,7 @@ POSSIBILITY OF SUCH DAMAGES.
 
  ***************************************************************************/
 
-#include "GUI/qgraphicsmenu.hpp"
 #include "GUI/qarawnwindow.hpp"
-#include "GUI/graphicsmap.hpp"
-#include "GUI/graphicsnetworksettings.hpp"
-#include "CORE/game.hpp"
-#include "CORE/field.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -312,25 +307,20 @@ int main(int argc, char *argv[])
 
     ArawnSettings::create();
 
-    ArawnSettings::instance()->loadLists();
-
-    QString str = QDir::currentPath();
-    QDir::setCurrent(QDir::currentPath()+"/res/");
-
     QTranslator translator;
 
     if(ArawnSettings::instance()->language == 0)
     {
-        if(translator.load("Arawn_en")){
+        if(translator.load("res/Arawn_en")){
                 a.installTranslator(&translator);
         }
     }
     else if(ArawnSettings::instance()->language == 1)
-        if(translator.load("Arawn_hu")){
+        if(translator.load("res/Arawn_hu")){
                 a.installTranslator(&translator);
         }
 
-    QDir::setCurrent(str);
+    ArawnSettings::instance()->loadLists();
 
     QArawnWindow aWindow;
     aWindow.initWindow();

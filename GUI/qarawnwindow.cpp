@@ -2,6 +2,7 @@
 #include "GUI/graphicsnetworksettings.hpp"
 #include "GUI/graphicsplayersetup.hpp"
 #include "CORE/cup.hpp"
+#include "GUI/graphicsplayer.hpp"
 
 
 void QArawnWindow::initWindow()

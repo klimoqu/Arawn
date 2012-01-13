@@ -11,7 +11,7 @@
     <message>
         <location filename="arawnsettings.cpp" line="8"/>
         <source>Magyar</source>
-        <translation>Hungarian</translation>
+        <translation>Magyar</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="9"/>

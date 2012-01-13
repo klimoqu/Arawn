@@ -473,12 +473,12 @@
         <location filename="GUI/graphicsnetworksettings.cpp" line="13"/>
         <location filename="GUI/graphicsnetworksettings.cpp" line="126"/>
         <source>Connecting...</source>
-        <translation>Csatlakozás</translation>
+        <translation>Csatlakozás...</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="159"/>
         <source>Fail!</source>
-        <translation>Sikertelen</translation>
+        <translation>Sikertelen!</translation>
     </message>
 </context>
 <context>
@@ -611,7 +611,7 @@
         <location filename="GUI/qarawnwindow.cpp" line="212"/>
         <source>Bomb speed f/10 sec</source>
         <translatorcomment>bomba sebessége field/sec</translatorcomment>
-        <translation type="unfinished">Bomba sebessége (mező/10 s)</translation>
+        <translation>Bomba sebessége (mező/10 s)</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="185"/>
