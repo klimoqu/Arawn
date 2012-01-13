@@ -105,6 +105,7 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
     scene()->addItem(bomb);
     emit bombPlanted();
     bombs.append(bomb);
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
@@ -123,16 +124,19 @@ void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
             emit bombBlasted();
         }
     }
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::blastingOut(uchar x, uchar y)
 {
     burning[x][y] += 50;
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 {
     mapIDs[x][y] = type;
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::movePlayer(uchar player, uchar dir)
@@ -141,32 +145,32 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
     switch(dir){
     case BALRA:
         players[player]->setX(players[player]->x()-8);
-        return;
+        break;
     case FEL:
         players[player]->setY(players[player]->y()-8);
-        return;
+        break;
     case LE:
         players[player]->setY(players[player]->y()+8);
-        return;
+        break;
     case JOBBRA:
         players[player]->setX(players[player]->x()+8);
-        return;
-    default:
-        return;
+        break;
     }
+    update(x*40-8, y*40-8, 56, 56);
 }
 
 void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {
     emit playerDied();
     players[player]->aState = 9;
-    // TODO Cup
+    update(players[player]->boundingRect());
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
     emit playerBlasted();
+    update(players[player]->boundingRect());
     // TODO corpse parts
 }
 
@@ -177,12 +181,14 @@ void GraphicsMap::setMapIDs()
             mapIDs[i][j] = g->GetFields(i, j);
         }
     }
+    update(boundingRect());
 }
 
 void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 {
     players[id]->setVisible(true);
     players[id]->setPos(x*40, y*40);
+    update(players[id]->boundingRect());
 }
 
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
@@ -190,6 +196,7 @@ void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
     GraphicsBonus *bonus = new GraphicsBonus(type, x*40, y*40, this);
     scene()->addItem(bonus);
     bonuses.append(bonus);
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
@@ -204,21 +211,25 @@ void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
             i--;
         }
     }
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::invisiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(false);
+    update(players[id]->boundingRect());
 }
 
 void GraphicsMap::visiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(true);
+    update(players[id]->boundingRect());
 }
 
 void GraphicsMap::destroyField(uchar x, uchar y)
 {
     mapIDs[x][y] = 4;
+    update(x*40, y*40, 40, 40);
 }
 
 

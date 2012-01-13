@@ -298,8 +298,8 @@ void QArawnWindow::enterMenus()
     scene->removeItem(pixHirItem);
     pixFireItem->setZValue(-2);
     pixFireItem->setOpacity(0.6);
+    firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
     if(ArawnSettings::instance()->animateFire.toBool()){
-        QPropertyAnimation *firAnim = new QPropertyAnimation(pixFireItem, "opacity", pixFireItem);
         firAnim->setLoopCount(-1);
         firAnim->setEasingCurve(QEasingCurve::OutInBounce);
         firAnim->setStartValue(0.4);
@@ -330,6 +330,10 @@ void QArawnWindow::closeEvent(QCloseEvent *event)
 
 void QArawnWindow::enterGame()
 {
+    copyright->setVisible(false);
+    pixFireItem->setVisible(false);
+    firAnim->stop();
+
     grMap = new GraphicsMap(g, mapState, cupState);
     grMap->setPos(-400, -230);
     mapState->assignProperty(grMap, "visible", true);
@@ -354,6 +358,19 @@ void QArawnWindow::enterGame()
 
 void QArawnWindow::finishGame()
 {
+    grMap->deleteLater();
+    grTimer->deleteLater();
+    grCup->deleteLater();
+
+    copyright->setVisible(true);
+    if(ArawnSettings::instance()->animateFire.toBool()){
+        firAnim->setLoopCount(-1);
+        firAnim->setEasingCurve(QEasingCurve::OutInBounce);
+        firAnim->setStartValue(0.4);
+        firAnim->setEndValue(0.8);
+        firAnim->setDuration(1600);
+        firAnim->start();
+    }
 }
 
 

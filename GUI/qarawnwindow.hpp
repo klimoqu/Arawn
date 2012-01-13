@@ -36,7 +36,7 @@ private:
     PixmapObjectItem *pixFireItem;
     PixmapObjectItem *pixArawnItem;
     PixmapObjectItem *pixHirItem;
-
+    QPropertyAnimation *firAnim;
     QGraphicsTextItem *copyright;
 
     GraphicsMap *grMap;
