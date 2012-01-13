@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include "arawnsettings.hpp"
-class ArawnSettings;
 #include "CORE/field.hpp"
 #include "CORE/bomb.hpp"
 #include "CORE/player.hpp"

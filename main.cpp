@@ -331,7 +331,6 @@ int main(int argc, char *argv[])
     aWindow.initWindow();
     aWindow.showFullScreen();
 
-
     return a.exec();
 }
 

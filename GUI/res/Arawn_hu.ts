@@ -6,7 +6,7 @@
     <message>
         <location filename="arawnsettings.cpp" line="7"/>
         <source>English</source>
-        <translation>Angol</translation>
+        <translation>English</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="8"/>
@@ -385,7 +385,7 @@
     <message>
         <location filename="arawnsettings.cpp" line="178"/>
         <source>Purple</source>
-        <translation></translation>
+        <translation>Rózsaszín</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="179"/>
@@ -398,7 +398,7 @@
     <message>
         <location filename="GUI/qgraphicsmenu.cpp" line="294"/>
         <source>Credits</source>
-        <translation>A játékról</translation>
+        <translation>Névjegy</translation>
     </message>
 </context>
 <context>
@@ -467,7 +467,7 @@
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
-        <translation>Kapcsolat</translation>
+        <translation>Kapcsolódás</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="13"/>
@@ -514,7 +514,7 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="164"/>
         <source>Main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="166"/>
@@ -529,12 +529,12 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="168"/>
         <source>Options</source>
-        <translation type="unfinished">Beállítások</translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="169"/>
         <source>Credits</source>
-        <translation>A játékról</translation>
+        <translation>Névjegy</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="170"/>
@@ -557,79 +557,87 @@
         <location filename="GUI/qarawnwindow.cpp" line="174"/>
         <location filename="GUI/qarawnwindow.cpp" line="203"/>
         <source>Game settings</source>
-        <translation>Játékbeállítás</translation>
+        <translation>Játékbeállítások</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="175"/>
         <location filename="GUI/qarawnwindow.cpp" line="204"/>
         <source>Start survival cup</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>túlélős</translatorcomment>
+        <translation>Túlélő kupa</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="176"/>
         <location filename="GUI/qarawnwindow.cpp" line="205"/>
         <source>Start murder cup</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>gyilkolós</translatorcomment>
+        <translation>Mestergyilkos kupa</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="178"/>
         <location filename="GUI/qarawnwindow.cpp" line="207"/>
         <source>Start/max extras</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>extrák ki be</translatorcomment>
+        <translation>Extrák engedélyezése</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="179"/>
         <location filename="GUI/qarawnwindow.cpp" line="208"/>
         <source>Enable diseases</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>sziavtások</translatorcomment>
+        <translation>Szivatások</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="180"/>
         <location filename="GUI/qarawnwindow.cpp" line="209"/>
         <source>Round time</source>
-        <translation type="unfinished"></translation>
+        <translation>Köridő</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="181"/>
         <location filename="GUI/qarawnwindow.cpp" line="210"/>
         <source>Points to win</source>
-        <translation type="unfinished"></translation>
+        <translation>Végcél</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="182"/>
         <location filename="GUI/qarawnwindow.cpp" line="211"/>
         <source>Bomb timer 1/10 sec</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>robbanási idő millisec</translatorcomment>
+        <translation>Robbanási idő (0,1 s)</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="183"/>
         <location filename="GUI/qarawnwindow.cpp" line="212"/>
         <source>Bomb speed f/10 sec</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>bomba sebessége field/sec</translatorcomment>
+        <translation type="unfinished">Bomba sebessége (mező/10 s)</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="185"/>
         <location filename="GUI/qarawnwindow.cpp" line="214"/>
         <source>Start bombs</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>kezdő érték</translatorcomment>
+        <translation>Bombák száma</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="186"/>
         <location filename="GUI/qarawnwindow.cpp" line="215"/>
         <source>Max bombs</source>
-        <translation type="unfinished">Bombák maximális száma</translation>
+        <translation>max Bombák</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="187"/>
         <location filename="GUI/qarawnwindow.cpp" line="216"/>
         <source>Start power</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>tűzerő</translatorcomment>
+        <translation>Tűzerő</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="188"/>
         <location filename="GUI/qarawnwindow.cpp" line="217"/>
         <source>Max power</source>
-        <translation type="unfinished"></translation>
+        <translation>Max tűzerő</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="189"/>
@@ -647,25 +655,29 @@
         <location filename="GUI/qarawnwindow.cpp" line="191"/>
         <location filename="GUI/qarawnwindow.cpp" line="220"/>
         <source>Start gloves</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>dobási lehetőség</translatorcomment>
+        <translation>Kesztyű</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="192"/>
         <location filename="GUI/qarawnwindow.cpp" line="221"/>
         <source>Start boot</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>bomba rúgása</translatorcomment>
+        <translation>Bakancs</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="194"/>
         <location filename="GUI/qarawnwindow.cpp" line="223"/>
         <source>Failing bombs</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>besülő bombák</translatorcomment>
+        <translation>Besülő bombák</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="195"/>
         <location filename="GUI/qarawnwindow.cpp" line="224"/>
         <source>Opposite controls</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>irányok megcserélése</translatorcomment>
+        <translation>iránycsere</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="196"/>
@@ -676,27 +688,29 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="198"/>
         <source>Create network</source>
-        <translation>Hálózat létrehozása</translation>
+        <translation>Új Hálózat</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="199"/>
         <source>Connect</source>
-        <translation>Kapcsolat</translation>
+        <translation>Kapcsolódás</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="227"/>
         <source>Corpse parts</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>fröccsenés/ hulladarabok</translatorcomment>
+        <translation>Vér</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="228"/>
         <source>Shaky explosion</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>rázkódó robbanás</translatorcomment>
+        <translation>Rázkódás</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="229"/>
         <source>OpenGL</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenGL</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="230"/>
@@ -706,12 +720,12 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="231"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Felbontás</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="232"/>
         <source>Language</source>
-        <translation>Nyelv</translation>
+        <translation>Language</translation>
     </message>
 </context>
 </TS>
