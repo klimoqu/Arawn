@@ -34,7 +34,7 @@ void Servernet::readyRead()
         }
         else
         {
-            players[client]=QString(message);
+            players[client]=QString::fromUtf8(message);
             emit NewPlayerConnected();
             QByteArray auth;
             auth.append((uchar)clients.size());
