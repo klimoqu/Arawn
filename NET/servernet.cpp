@@ -17,6 +17,7 @@ void Servernet::incommingConnection(int socketfd)
 QStringList Servernet::GetPlayers()
 {
     QStringList playerslist;
+    playerslist<<name;
     foreach(QString player,players.values())playerslist<<player;
     return playerslist;
 }
@@ -33,7 +34,7 @@ void Servernet::readyRead()
         }
         else
         {
-            players[client]=QString(message);
+            players[client]=QString::fromUtf8(message);
             emit NewPlayerConnected();
             QByteArray auth;
             auth.append((uchar)clients.size());

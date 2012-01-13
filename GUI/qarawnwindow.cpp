@@ -3,6 +3,7 @@
 #include "GUI/graphicsplayersetup.hpp"
 #include "CORE/cup.hpp"
 #include "GUI/graphicsplayer.hpp"
+#include "GUI/graphicsnetworkroom.hpp"
 
 
 void QArawnWindow::initWindow()
@@ -129,8 +130,10 @@ void QArawnWindow::initializeOthers()
     stateNetSurvivalCup = new QState;
     machine->addState(stateNetSurvivalCup);
     connect(stateNetSurvivalCup, SIGNAL(entered()), this, SLOT(startSurvival()));
+    stateNetSurvivalCup->addTransition(this, SIGNAL(trRoom()), roomState);
     stateNetMurderCup = new QState;
     machine->addState(stateNetMurderCup);
+    stateNetMurderCup->addTransition(this, SIGNAL(trRoom()), roomState);
     connect(stateNetMurderCup, SIGNAL(entered()), this, SLOT(startMurder()));
     stateQuit = new QState;
     machine->addState(stateQuit);
@@ -389,6 +392,12 @@ void QArawnWindow::startSurvival()
     c = new Cup(aSetInstance);
     g->SetCup(c);
 
+    GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
+    room->setPos(0, 0);
+    room->setVisible(false);
+    scene->addItem(room);
+    room->setParams(g, roomState, stateGame);
+    emit trRoom();
 }
 
 void QArawnWindow::startMurder()
@@ -396,6 +405,13 @@ void QArawnWindow::startMurder()
     g = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, false);
     c = new Cup(aSetInstance);
     g->SetCup(c);
+
+    GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
+    room->setPos(0, 0);
+    room->setVisible(false);
+    scene->addItem(room);
+    room->setParams(g, roomState, stateGame);
+    emit trRoom();
 }
 
 

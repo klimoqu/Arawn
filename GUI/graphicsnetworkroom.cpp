@@ -121,7 +121,7 @@ void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameSt
     for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
     _ownState->assignProperty(this, "visible", true);
     _ownState->addTransition(g, SIGNAL(GameStarted()), _gameState);
-    connect(g, SIGNAL(GameStarted()), this, SLOT(deleteLater()));
+    connect(g, SIGNAL(GameStarted(int)), this, SLOT(deleteLater()));
     connect(g, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));
 }
 

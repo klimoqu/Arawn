@@ -17,6 +17,9 @@ public:
 
     QGraphicsScene *scene;
 
+signals:
+    void trRoom();
+
 public slots:
     void initializeOthers();
     void showArawnScreen();

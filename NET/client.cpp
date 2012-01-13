@@ -1,10 +1,12 @@
 #include "client.hpp"
 
-Client::Client(QString address)
+Client::Client(QString address,QString name)
 {
+    this->name=name;
     socket = new QTcpSocket(this);
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket,SIGNAL(connected()),this,SIGNAL(Connected()));
+    connect(socket,SIGNAL(connected()),this,SLOT(SendUsernameToServer()));
     connect(socket,SIGNAL(error(QAbstractSocket::SocketError)),this,SIGNAL(ConnectionFailed()));
     socket->connectToHost(address,28300);
 }
@@ -30,5 +32,10 @@ void Client::SendCommandToServer(Command c)
     command.append((uchar)c.GetMessageType());
     command.append(QByteArray::number(c.GetMessage()));
     socket->write(command);
+    socket->flush();
+}
+void Client::SendUsernameToServer()
+{
+    socket->write(name.toUtf8());
     socket->flush();
 }
