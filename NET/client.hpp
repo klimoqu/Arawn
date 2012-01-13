@@ -12,8 +12,9 @@ class Client:public QObject
     QTcpSocket *socket;
     uchar playerid;
     QStringList players;
+    QString name;
 public:
-    Client(QString address);
+    Client(QString address,QString name);
     uchar GetPlayerID(){return playerid;}
     QStringList GetPlayers(){return players;}
 signals:
@@ -24,4 +25,5 @@ private slots:
     void readyRead();
 public slots:
     void SendCommandToServer(Command c);
+    void SendUsernameToServer();
 };

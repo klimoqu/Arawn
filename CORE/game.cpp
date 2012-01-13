@@ -4,10 +4,10 @@
 
 Game::Game(QString address)
 {
+    this->settings=aSetInstance;
     map=0;
     serverconnection=0;
-    clientconnection=new Client(address);
-
+    clientconnection=new Client(address,settings->defaultPlayer1Name);
     connect(this,SIGNAL(ClientValidate(Command)),clientconnection,SLOT(SendCommandToServer(Command)));
     connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
     connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
@@ -16,6 +16,7 @@ Game::Game(QString address)
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
 {
+
     this->survive=survive;
     this->settings=settings;
     this->playersnumber=playersnumber;
@@ -25,7 +26,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     clientconnection=0;
     serverconnection=new Servernet();
     serverconnection->SetPlayerNumber(playersnumber);
-
+    serverconnection->SetLocalPlayername(settings->defaultPlayer1Name);
     connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
     connect(this,SIGNAL(ClientValidate(Command)),this,SLOT(ClientExecute(Command)));
     connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));
@@ -189,6 +190,8 @@ void Game::WaitingCommandExecute()
 }
 void Game::AllReady()
 {
+    cup->AddPlayer(settings->defaultPlayer1Name);
+    for(uchar i=0;i<playersnumber-1;i++)cup->AddPlayer(serverconnection->GetPlayers().at(i));
     sendmap();
     connectwait.setSingleShot(true);
     connectwait.start(1000);

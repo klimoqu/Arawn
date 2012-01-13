@@ -12,10 +12,12 @@ class Servernet:public QTcpServer
     uchar playernumber,actid;
     QSet<QTcpSocket*> clients;
     QMap<QTcpSocket*,QString> players;
+    QString name;
 protected:
     void incommingConnection(int socketfd);
 public:
     Servernet(QObject *parent=0);
+    void SetLocalPlayername(QString name){this->name=name;}
     void SetPlayerNumber(uchar num){playernumber=num;}
     uchar GetPlayerNumber(){return playernumber;}
     QStringList GetPlayers();

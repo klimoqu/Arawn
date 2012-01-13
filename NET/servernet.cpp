@@ -17,6 +17,7 @@ void Servernet::incommingConnection(int socketfd)
 QStringList Servernet::GetPlayers()
 {
     QStringList playerslist;
+    playerslist<<name;
     foreach(QString player,players.values())playerslist<<player;
     return playerslist;
 }
