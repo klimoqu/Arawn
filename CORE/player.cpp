@@ -1,5 +1,12 @@
 #include "CORE/player.hpp"
-
+Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower)
+{
+    this->id=id;
+    this->pBombsNum=bombnum;
+    this->pBombPower=bombpower;
+    this->maxbomb=maxbomb;
+    this->maxpower=maxpower;
+}
 void Player::Move(uchar direction)
 {
     switch(direction)

@@ -7,7 +7,7 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
     this->playersnumber=playersnumber;
     for(uchar i=0;i<playersnumber;i++)
     {
-        players[i]=new Player(i);
+        players[i]=new Player(i,(uchar)settings->startBombs.toInt(),(uchar)settings->startFire.toInt(),(uchar)settings->maxBombs.toInt(),(uchar)settings->maxFire.toInt());
         connect(players[i],SIGNAL(Blasted(uchar)),this,SLOT(PlayerBlast(uchar)));
         connect(players[i],SIGNAL(Died(uchar,uchar)),this,SLOT(PlayerDie(uchar,uchar)));
         connect(this,SIGNAL(FieldDestroyed(uchar,uchar)),players[i],SLOT(Die(uchar,uchar)));
