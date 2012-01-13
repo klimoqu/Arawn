@@ -4,391 +4,391 @@
 <context>
     <name>ArawnSettings</name>
     <message>
-        <location filename="arawnsettings.cpp" line="7"/>
+        <location filename="../../arawnsettings.cpp" line="233"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="8"/>
+        <location filename="../../arawnsettings.cpp" line="234"/>
         <source>Magyar</source>
         <translation>Magyar</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="9"/>
-        <location filename="arawnsettings.cpp" line="11"/>
-        <location filename="arawnsettings.cpp" line="13"/>
-        <location filename="arawnsettings.cpp" line="127"/>
-        <location filename="arawnsettings.cpp" line="129"/>
-        <location filename="arawnsettings.cpp" line="131"/>
-        <location filename="arawnsettings.cpp" line="133"/>
-        <location filename="arawnsettings.cpp" line="135"/>
-        <location filename="arawnsettings.cpp" line="137"/>
-        <location filename="arawnsettings.cpp" line="139"/>
-        <location filename="arawnsettings.cpp" line="172"/>
+        <location filename="../../arawnsettings.cpp" line="235"/>
+        <location filename="../../arawnsettings.cpp" line="237"/>
+        <location filename="../../arawnsettings.cpp" line="239"/>
+        <location filename="../../arawnsettings.cpp" line="353"/>
+        <location filename="../../arawnsettings.cpp" line="355"/>
+        <location filename="../../arawnsettings.cpp" line="357"/>
+        <location filename="../../arawnsettings.cpp" line="359"/>
+        <location filename="../../arawnsettings.cpp" line="361"/>
+        <location filename="../../arawnsettings.cpp" line="363"/>
+        <location filename="../../arawnsettings.cpp" line="365"/>
+        <location filename="../../arawnsettings.cpp" line="398"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="10"/>
-        <location filename="arawnsettings.cpp" line="12"/>
-        <location filename="arawnsettings.cpp" line="14"/>
-        <location filename="arawnsettings.cpp" line="128"/>
-        <location filename="arawnsettings.cpp" line="130"/>
-        <location filename="arawnsettings.cpp" line="132"/>
-        <location filename="arawnsettings.cpp" line="134"/>
-        <location filename="arawnsettings.cpp" line="136"/>
-        <location filename="arawnsettings.cpp" line="138"/>
-        <location filename="arawnsettings.cpp" line="140"/>
-        <location filename="arawnsettings.cpp" line="173"/>
+        <location filename="../../arawnsettings.cpp" line="236"/>
+        <location filename="../../arawnsettings.cpp" line="238"/>
+        <location filename="../../arawnsettings.cpp" line="240"/>
+        <location filename="../../arawnsettings.cpp" line="354"/>
+        <location filename="../../arawnsettings.cpp" line="356"/>
+        <location filename="../../arawnsettings.cpp" line="358"/>
+        <location filename="../../arawnsettings.cpp" line="360"/>
+        <location filename="../../arawnsettings.cpp" line="362"/>
+        <location filename="../../arawnsettings.cpp" line="364"/>
+        <location filename="../../arawnsettings.cpp" line="366"/>
+        <location filename="../../arawnsettings.cpp" line="399"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="15"/>
-        <location filename="arawnsettings.cpp" line="141"/>
-        <location filename="arawnsettings.cpp" line="156"/>
+        <location filename="../../arawnsettings.cpp" line="241"/>
+        <location filename="../../arawnsettings.cpp" line="367"/>
+        <location filename="../../arawnsettings.cpp" line="382"/>
         <source>30</source>
         <translation>30</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="16"/>
-        <location filename="arawnsettings.cpp" line="144"/>
+        <location filename="../../arawnsettings.cpp" line="242"/>
+        <location filename="../../arawnsettings.cpp" line="370"/>
         <source>45</source>
         <translation>45</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="17"/>
+        <location filename="../../arawnsettings.cpp" line="243"/>
         <source>60</source>
         <translation>60</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="18"/>
+        <location filename="../../arawnsettings.cpp" line="244"/>
         <source>90</source>
         <translation>90</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="19"/>
+        <location filename="../../arawnsettings.cpp" line="245"/>
         <source>120</source>
         <translation>120</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="20"/>
+        <location filename="../../arawnsettings.cpp" line="246"/>
         <source>180</source>
         <translation>180</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="21"/>
+        <location filename="../../arawnsettings.cpp" line="247"/>
         <source>240</source>
         <translation>240</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="22"/>
-        <location filename="arawnsettings.cpp" line="37"/>
-        <location filename="arawnsettings.cpp" line="52"/>
-        <location filename="arawnsettings.cpp" line="67"/>
-        <location filename="arawnsettings.cpp" line="82"/>
-        <location filename="arawnsettings.cpp" line="97"/>
-        <location filename="arawnsettings.cpp" line="112"/>
+        <location filename="../../arawnsettings.cpp" line="248"/>
+        <location filename="../../arawnsettings.cpp" line="263"/>
+        <location filename="../../arawnsettings.cpp" line="278"/>
+        <location filename="../../arawnsettings.cpp" line="293"/>
+        <location filename="../../arawnsettings.cpp" line="308"/>
+        <location filename="../../arawnsettings.cpp" line="323"/>
+        <location filename="../../arawnsettings.cpp" line="338"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="23"/>
-        <location filename="arawnsettings.cpp" line="38"/>
-        <location filename="arawnsettings.cpp" line="53"/>
-        <location filename="arawnsettings.cpp" line="68"/>
-        <location filename="arawnsettings.cpp" line="83"/>
-        <location filename="arawnsettings.cpp" line="98"/>
-        <location filename="arawnsettings.cpp" line="113"/>
+        <location filename="../../arawnsettings.cpp" line="249"/>
+        <location filename="../../arawnsettings.cpp" line="264"/>
+        <location filename="../../arawnsettings.cpp" line="279"/>
+        <location filename="../../arawnsettings.cpp" line="294"/>
+        <location filename="../../arawnsettings.cpp" line="309"/>
+        <location filename="../../arawnsettings.cpp" line="324"/>
+        <location filename="../../arawnsettings.cpp" line="339"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="24"/>
-        <location filename="arawnsettings.cpp" line="39"/>
-        <location filename="arawnsettings.cpp" line="54"/>
-        <location filename="arawnsettings.cpp" line="69"/>
-        <location filename="arawnsettings.cpp" line="84"/>
-        <location filename="arawnsettings.cpp" line="99"/>
-        <location filename="arawnsettings.cpp" line="114"/>
+        <location filename="../../arawnsettings.cpp" line="250"/>
+        <location filename="../../arawnsettings.cpp" line="265"/>
+        <location filename="../../arawnsettings.cpp" line="280"/>
+        <location filename="../../arawnsettings.cpp" line="295"/>
+        <location filename="../../arawnsettings.cpp" line="310"/>
+        <location filename="../../arawnsettings.cpp" line="325"/>
+        <location filename="../../arawnsettings.cpp" line="340"/>
         <source>3</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="25"/>
-        <location filename="arawnsettings.cpp" line="40"/>
-        <location filename="arawnsettings.cpp" line="55"/>
-        <location filename="arawnsettings.cpp" line="70"/>
-        <location filename="arawnsettings.cpp" line="85"/>
-        <location filename="arawnsettings.cpp" line="100"/>
-        <location filename="arawnsettings.cpp" line="115"/>
+        <location filename="../../arawnsettings.cpp" line="251"/>
+        <location filename="../../arawnsettings.cpp" line="266"/>
+        <location filename="../../arawnsettings.cpp" line="281"/>
+        <location filename="../../arawnsettings.cpp" line="296"/>
+        <location filename="../../arawnsettings.cpp" line="311"/>
+        <location filename="../../arawnsettings.cpp" line="326"/>
+        <location filename="../../arawnsettings.cpp" line="341"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="26"/>
-        <location filename="arawnsettings.cpp" line="41"/>
-        <location filename="arawnsettings.cpp" line="56"/>
-        <location filename="arawnsettings.cpp" line="71"/>
-        <location filename="arawnsettings.cpp" line="86"/>
-        <location filename="arawnsettings.cpp" line="101"/>
-        <location filename="arawnsettings.cpp" line="116"/>
+        <location filename="../../arawnsettings.cpp" line="252"/>
+        <location filename="../../arawnsettings.cpp" line="267"/>
+        <location filename="../../arawnsettings.cpp" line="282"/>
+        <location filename="../../arawnsettings.cpp" line="297"/>
+        <location filename="../../arawnsettings.cpp" line="312"/>
+        <location filename="../../arawnsettings.cpp" line="327"/>
+        <location filename="../../arawnsettings.cpp" line="342"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="27"/>
-        <location filename="arawnsettings.cpp" line="42"/>
-        <location filename="arawnsettings.cpp" line="57"/>
-        <location filename="arawnsettings.cpp" line="72"/>
-        <location filename="arawnsettings.cpp" line="87"/>
-        <location filename="arawnsettings.cpp" line="102"/>
-        <location filename="arawnsettings.cpp" line="117"/>
+        <location filename="../../arawnsettings.cpp" line="253"/>
+        <location filename="../../arawnsettings.cpp" line="268"/>
+        <location filename="../../arawnsettings.cpp" line="283"/>
+        <location filename="../../arawnsettings.cpp" line="298"/>
+        <location filename="../../arawnsettings.cpp" line="313"/>
+        <location filename="../../arawnsettings.cpp" line="328"/>
+        <location filename="../../arawnsettings.cpp" line="343"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="28"/>
-        <location filename="arawnsettings.cpp" line="43"/>
-        <location filename="arawnsettings.cpp" line="58"/>
-        <location filename="arawnsettings.cpp" line="73"/>
-        <location filename="arawnsettings.cpp" line="88"/>
-        <location filename="arawnsettings.cpp" line="103"/>
-        <location filename="arawnsettings.cpp" line="118"/>
+        <location filename="../../arawnsettings.cpp" line="254"/>
+        <location filename="../../arawnsettings.cpp" line="269"/>
+        <location filename="../../arawnsettings.cpp" line="284"/>
+        <location filename="../../arawnsettings.cpp" line="299"/>
+        <location filename="../../arawnsettings.cpp" line="314"/>
+        <location filename="../../arawnsettings.cpp" line="329"/>
+        <location filename="../../arawnsettings.cpp" line="344"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="29"/>
-        <location filename="arawnsettings.cpp" line="44"/>
-        <location filename="arawnsettings.cpp" line="59"/>
-        <location filename="arawnsettings.cpp" line="74"/>
-        <location filename="arawnsettings.cpp" line="89"/>
-        <location filename="arawnsettings.cpp" line="104"/>
-        <location filename="arawnsettings.cpp" line="119"/>
+        <location filename="../../arawnsettings.cpp" line="255"/>
+        <location filename="../../arawnsettings.cpp" line="270"/>
+        <location filename="../../arawnsettings.cpp" line="285"/>
+        <location filename="../../arawnsettings.cpp" line="300"/>
+        <location filename="../../arawnsettings.cpp" line="315"/>
+        <location filename="../../arawnsettings.cpp" line="330"/>
+        <location filename="../../arawnsettings.cpp" line="345"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="30"/>
-        <location filename="arawnsettings.cpp" line="45"/>
-        <location filename="arawnsettings.cpp" line="60"/>
-        <location filename="arawnsettings.cpp" line="75"/>
-        <location filename="arawnsettings.cpp" line="90"/>
-        <location filename="arawnsettings.cpp" line="105"/>
-        <location filename="arawnsettings.cpp" line="120"/>
+        <location filename="../../arawnsettings.cpp" line="256"/>
+        <location filename="../../arawnsettings.cpp" line="271"/>
+        <location filename="../../arawnsettings.cpp" line="286"/>
+        <location filename="../../arawnsettings.cpp" line="301"/>
+        <location filename="../../arawnsettings.cpp" line="316"/>
+        <location filename="../../arawnsettings.cpp" line="331"/>
+        <location filename="../../arawnsettings.cpp" line="346"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="31"/>
-        <location filename="arawnsettings.cpp" line="46"/>
-        <location filename="arawnsettings.cpp" line="61"/>
-        <location filename="arawnsettings.cpp" line="76"/>
-        <location filename="arawnsettings.cpp" line="91"/>
-        <location filename="arawnsettings.cpp" line="106"/>
-        <location filename="arawnsettings.cpp" line="121"/>
-        <location filename="arawnsettings.cpp" line="146"/>
+        <location filename="../../arawnsettings.cpp" line="257"/>
+        <location filename="../../arawnsettings.cpp" line="272"/>
+        <location filename="../../arawnsettings.cpp" line="287"/>
+        <location filename="../../arawnsettings.cpp" line="302"/>
+        <location filename="../../arawnsettings.cpp" line="317"/>
+        <location filename="../../arawnsettings.cpp" line="332"/>
+        <location filename="../../arawnsettings.cpp" line="347"/>
+        <location filename="../../arawnsettings.cpp" line="372"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="32"/>
-        <location filename="arawnsettings.cpp" line="47"/>
-        <location filename="arawnsettings.cpp" line="62"/>
-        <location filename="arawnsettings.cpp" line="77"/>
-        <location filename="arawnsettings.cpp" line="92"/>
-        <location filename="arawnsettings.cpp" line="107"/>
-        <location filename="arawnsettings.cpp" line="122"/>
+        <location filename="../../arawnsettings.cpp" line="258"/>
+        <location filename="../../arawnsettings.cpp" line="273"/>
+        <location filename="../../arawnsettings.cpp" line="288"/>
+        <location filename="../../arawnsettings.cpp" line="303"/>
+        <location filename="../../arawnsettings.cpp" line="318"/>
+        <location filename="../../arawnsettings.cpp" line="333"/>
+        <location filename="../../arawnsettings.cpp" line="348"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="33"/>
-        <location filename="arawnsettings.cpp" line="48"/>
-        <location filename="arawnsettings.cpp" line="63"/>
-        <location filename="arawnsettings.cpp" line="78"/>
-        <location filename="arawnsettings.cpp" line="93"/>
-        <location filename="arawnsettings.cpp" line="108"/>
-        <location filename="arawnsettings.cpp" line="123"/>
-        <location filename="arawnsettings.cpp" line="147"/>
-        <location filename="arawnsettings.cpp" line="149"/>
+        <location filename="../../arawnsettings.cpp" line="259"/>
+        <location filename="../../arawnsettings.cpp" line="274"/>
+        <location filename="../../arawnsettings.cpp" line="289"/>
+        <location filename="../../arawnsettings.cpp" line="304"/>
+        <location filename="../../arawnsettings.cpp" line="319"/>
+        <location filename="../../arawnsettings.cpp" line="334"/>
+        <location filename="../../arawnsettings.cpp" line="349"/>
+        <location filename="../../arawnsettings.cpp" line="373"/>
+        <location filename="../../arawnsettings.cpp" line="375"/>
         <source>12</source>
         <translation>12</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="34"/>
-        <location filename="arawnsettings.cpp" line="49"/>
-        <location filename="arawnsettings.cpp" line="64"/>
-        <location filename="arawnsettings.cpp" line="79"/>
-        <location filename="arawnsettings.cpp" line="94"/>
-        <location filename="arawnsettings.cpp" line="109"/>
-        <location filename="arawnsettings.cpp" line="124"/>
+        <location filename="../../arawnsettings.cpp" line="260"/>
+        <location filename="../../arawnsettings.cpp" line="275"/>
+        <location filename="../../arawnsettings.cpp" line="290"/>
+        <location filename="../../arawnsettings.cpp" line="305"/>
+        <location filename="../../arawnsettings.cpp" line="320"/>
+        <location filename="../../arawnsettings.cpp" line="335"/>
+        <location filename="../../arawnsettings.cpp" line="350"/>
         <source>13</source>
         <translation>13</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="35"/>
-        <location filename="arawnsettings.cpp" line="50"/>
-        <location filename="arawnsettings.cpp" line="65"/>
-        <location filename="arawnsettings.cpp" line="80"/>
-        <location filename="arawnsettings.cpp" line="95"/>
-        <location filename="arawnsettings.cpp" line="110"/>
-        <location filename="arawnsettings.cpp" line="125"/>
-        <location filename="arawnsettings.cpp" line="148"/>
+        <location filename="../../arawnsettings.cpp" line="261"/>
+        <location filename="../../arawnsettings.cpp" line="276"/>
+        <location filename="../../arawnsettings.cpp" line="291"/>
+        <location filename="../../arawnsettings.cpp" line="306"/>
+        <location filename="../../arawnsettings.cpp" line="321"/>
+        <location filename="../../arawnsettings.cpp" line="336"/>
+        <location filename="../../arawnsettings.cpp" line="351"/>
+        <location filename="../../arawnsettings.cpp" line="374"/>
         <source>14</source>
         <translation>14</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="36"/>
-        <location filename="arawnsettings.cpp" line="51"/>
-        <location filename="arawnsettings.cpp" line="66"/>
-        <location filename="arawnsettings.cpp" line="81"/>
-        <location filename="arawnsettings.cpp" line="96"/>
-        <location filename="arawnsettings.cpp" line="111"/>
-        <location filename="arawnsettings.cpp" line="126"/>
+        <location filename="../../arawnsettings.cpp" line="262"/>
+        <location filename="../../arawnsettings.cpp" line="277"/>
+        <location filename="../../arawnsettings.cpp" line="292"/>
+        <location filename="../../arawnsettings.cpp" line="307"/>
+        <location filename="../../arawnsettings.cpp" line="322"/>
+        <location filename="../../arawnsettings.cpp" line="337"/>
+        <location filename="../../arawnsettings.cpp" line="352"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="142"/>
+        <location filename="../../arawnsettings.cpp" line="368"/>
         <source>35</source>
         <translation>35</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="143"/>
-        <location filename="arawnsettings.cpp" line="161"/>
+        <location filename="../../arawnsettings.cpp" line="369"/>
+        <location filename="../../arawnsettings.cpp" line="387"/>
         <source>40</source>
         <translation>40</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="145"/>
-        <location filename="arawnsettings.cpp" line="166"/>
+        <location filename="../../arawnsettings.cpp" line="371"/>
+        <location filename="../../arawnsettings.cpp" line="392"/>
         <source>50</source>
         <translation>50</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="150"/>
+        <location filename="../../arawnsettings.cpp" line="376"/>
         <source>18</source>
         <translation>18</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="151"/>
+        <location filename="../../arawnsettings.cpp" line="377"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="152"/>
+        <location filename="../../arawnsettings.cpp" line="378"/>
         <source>22</source>
         <translation>22</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="153"/>
+        <location filename="../../arawnsettings.cpp" line="379"/>
         <source>24</source>
         <translation>24</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="154"/>
+        <location filename="../../arawnsettings.cpp" line="380"/>
         <source>26</source>
         <translation>26</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="155"/>
+        <location filename="../../arawnsettings.cpp" line="381"/>
         <source>28</source>
         <translation>28</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="157"/>
+        <location filename="../../arawnsettings.cpp" line="383"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="158"/>
+        <location filename="../../arawnsettings.cpp" line="384"/>
         <source>34</source>
         <translation>34</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="159"/>
+        <location filename="../../arawnsettings.cpp" line="385"/>
         <source>36</source>
         <translation>36</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="160"/>
+        <location filename="../../arawnsettings.cpp" line="386"/>
         <source>38</source>
         <translation>38</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="162"/>
+        <location filename="../../arawnsettings.cpp" line="388"/>
         <source>42</source>
         <translation>42</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="163"/>
+        <location filename="../../arawnsettings.cpp" line="389"/>
         <source>44</source>
         <translation>44</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="164"/>
+        <location filename="../../arawnsettings.cpp" line="390"/>
         <source>46</source>
         <translation>46</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="165"/>
+        <location filename="../../arawnsettings.cpp" line="391"/>
         <source>48</source>
         <translation>48</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="167"/>
+        <location filename="../../arawnsettings.cpp" line="393"/>
         <source>800x600</source>
         <translation>800x600</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="168"/>
+        <location filename="../../arawnsettings.cpp" line="394"/>
         <source>1024x768</source>
         <translation>1024x768</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="169"/>
+        <location filename="../../arawnsettings.cpp" line="395"/>
         <source>1024x600</source>
         <translation>1024x600</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="170"/>
+        <location filename="../../arawnsettings.cpp" line="396"/>
         <source>1280x720</source>
         <translation>1280x720</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="171"/>
+        <location filename="../../arawnsettings.cpp" line="397"/>
         <source>1280x800</source>
         <translation>1280x800</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="174"/>
+        <location filename="../../arawnsettings.cpp" line="400"/>
         <source>Red</source>
         <translation>Vörös</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="175"/>
+        <location filename="../../arawnsettings.cpp" line="401"/>
         <source>Blue</source>
         <translation>Kék</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="176"/>
+        <location filename="../../arawnsettings.cpp" line="402"/>
         <source>Cyan</source>
         <translation>Cián</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="177"/>
+        <location filename="../../arawnsettings.cpp" line="403"/>
         <source>Green</source>
         <translation>Zöld</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="178"/>
+        <location filename="../../arawnsettings.cpp" line="404"/>
         <source>Purple</source>
         <translation>Rózsaszín</translation>
     </message>
     <message>
-        <location filename="arawnsettings.cpp" line="179"/>
+        <location filename="../../arawnsettings.cpp" line="405"/>
         <source>Yellow</source>
         <translation>Sárga</translation>
     </message>
@@ -396,35 +396,57 @@
 <context>
     <name>GraphicsAbout</name>
     <message>
-        <location filename="GUI/qgraphicsmenu.cpp" line="294"/>
+        <location filename="../qgraphicsmenu.cpp" line="296"/>
         <source>Credits</source>
         <translation>Névjegy</translation>
+    </message>
+    <message>
+        <location filename="../qgraphicsmenu.cpp" line="298"/>
+        <source>This is a bomberman like game inspired by the well known ClanBomber.
+It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</source>
+        <translation>Ez egy bomberman tipusú játék, melyet a Canbomber ihletett. 
+2011-ben írta Moréh Tamas, Klicsu Zsolt és Quintz Gábor QT keretrendszerben.</translation>
+    </message>
+</context>
+<context>
+    <name>GraphicsCup</name>
+    <message>
+        <location filename="../graphicsmap.cpp" line="304"/>
+        <location filename="../graphicsmap.cpp" line="308"/>
+        <source>Survival cup</source>
+        <translation>Túlélő kupa</translation>
+    </message>
+    <message>
+        <location filename="../graphicsmap.cpp" line="304"/>
+        <location filename="../graphicsmap.cpp" line="308"/>
+        <source>Murder cup</source>
+        <translation>Mestergyilkos kupa</translation>
     </message>
 </context>
 <context>
     <name>GraphicsNPSetup</name>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="5"/>
+        <location filename="../graphicsplayersetup.cpp" line="5"/>
         <source>Players setup</source>
         <translation>Játékos beállításai</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="6"/>
+        <location filename="../graphicsplayersetup.cpp" line="6"/>
         <source>Local player</source>
         <translation>Helyi játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="7"/>
+        <location filename="../graphicsplayersetup.cpp" line="7"/>
         <source>#1 Network player</source>
         <translation>#1 Hálózati játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="8"/>
+        <location filename="../graphicsplayersetup.cpp" line="8"/>
         <source>#2 Network player</source>
         <translation>#2 Hálózati játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="9"/>
+        <location filename="../graphicsplayersetup.cpp" line="9"/>
         <source>#3 Network player</source>
         <translation>#3 Hálózati játékos</translation>
     </message>
@@ -432,22 +454,22 @@
 <context>
     <name>GraphicsNetworkRoom</name>
     <message>
-        <location filename="GUI/graphicsnetworkroom.cpp" line="5"/>
+        <location filename="../graphicsnetworkroom.cpp" line="5"/>
         <source>#1 player</source>
         <translation>#1 játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworkroom.cpp" line="6"/>
+        <location filename="../graphicsnetworkroom.cpp" line="6"/>
         <source>#2 player</source>
         <translation>#2 játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworkroom.cpp" line="7"/>
+        <location filename="../graphicsnetworkroom.cpp" line="7"/>
         <source>#3 player</source>
         <translation>#3 játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworkroom.cpp" line="8"/>
+        <location filename="../graphicsnetworkroom.cpp" line="8"/>
         <source>#4 player</source>
         <translation>#4 játékos</translation>
     </message>
@@ -455,28 +477,28 @@
 <context>
     <name>GraphicsNetworkSettings</name>
     <message>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="10"/>
+        <location filename="../graphicsnetworksettings.cpp" line="10"/>
         <source>Connect to network</source>
         <translation>Csatlakozás hálózathoz</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="11"/>
+        <location filename="../graphicsnetworksettings.cpp" line="11"/>
         <source>Enter the IP address or hostname:</source>
         <translation>Kérem az IP címet vagy a Host nevet:</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="12"/>
+        <location filename="../graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
         <translation>Kapcsolódás</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="13"/>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="126"/>
+        <location filename="../graphicsnetworksettings.cpp" line="13"/>
+        <location filename="../graphicsnetworksettings.cpp" line="128"/>
         <source>Connecting...</source>
         <translation>Csatlakozás...</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsnetworksettings.cpp" line="159"/>
+        <location filename="../graphicsnetworksettings.cpp" line="161"/>
         <source>Fail!</source>
         <translation>Sikertelen!</translation>
     </message>
@@ -484,27 +506,27 @@
 <context>
     <name>GraphicsPlayerSetup</name>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="179"/>
+        <location filename="../graphicsplayersetup.cpp" line="179"/>
         <source>Players setup</source>
         <translation>Játékos beállítások</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="180"/>
+        <location filename="../graphicsplayersetup.cpp" line="180"/>
         <source>Human player</source>
         <translation>Emberi játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="181"/>
+        <location filename="../graphicsplayersetup.cpp" line="181"/>
         <source>#1 CPU player</source>
         <translation>#1 gépi játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="182"/>
+        <location filename="../graphicsplayersetup.cpp" line="182"/>
         <source>#2 CPU player</source>
         <translation>#2 gépi játékos</translation>
     </message>
     <message>
-        <location filename="GUI/graphicsplayersetup.cpp" line="183"/>
+        <location filename="../graphicsplayersetup.cpp" line="183"/>
         <source>#3 CPU player</source>
         <translation>#3 gépi játékos</translation>
     </message>
@@ -512,218 +534,218 @@
 <context>
     <name>QArawnWindow</name>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="164"/>
+        <location filename="../qarawnwindow.cpp" line="178"/>
         <source>Main menu</source>
         <translation>Menü</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="166"/>
+        <location filename="../qarawnwindow.cpp" line="180"/>
         <source>Local game</source>
         <translation>Helyi játék</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="167"/>
+        <location filename="../qarawnwindow.cpp" line="181"/>
         <source>Network game</source>
         <translation>Hálózati játék</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="168"/>
+        <location filename="../qarawnwindow.cpp" line="182"/>
         <source>Options</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="169"/>
+        <location filename="../qarawnwindow.cpp" line="183"/>
         <source>Credits</source>
         <translation>Névjegy</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="170"/>
+        <location filename="../qarawnwindow.cpp" line="184"/>
         <source>Quit</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="172"/>
-        <location filename="GUI/qarawnwindow.cpp" line="201"/>
+        <location filename="../qarawnwindow.cpp" line="186"/>
+        <location filename="../qarawnwindow.cpp" line="215"/>
         <source>Player setup</source>
         <translation>Játékos Beállítások</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="173"/>
-        <location filename="GUI/qarawnwindow.cpp" line="202"/>
+        <location filename="../qarawnwindow.cpp" line="187"/>
+        <location filename="../qarawnwindow.cpp" line="216"/>
         <source>Map selection</source>
         <translation>Pálya választó</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="174"/>
-        <location filename="GUI/qarawnwindow.cpp" line="203"/>
+        <location filename="../qarawnwindow.cpp" line="188"/>
+        <location filename="../qarawnwindow.cpp" line="217"/>
         <source>Game settings</source>
         <translation>Játékbeállítások</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="175"/>
-        <location filename="GUI/qarawnwindow.cpp" line="204"/>
+        <location filename="../qarawnwindow.cpp" line="189"/>
+        <location filename="../qarawnwindow.cpp" line="218"/>
         <source>Start survival cup</source>
         <translatorcomment>túlélős</translatorcomment>
         <translation>Túlélő kupa</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="176"/>
-        <location filename="GUI/qarawnwindow.cpp" line="205"/>
+        <location filename="../qarawnwindow.cpp" line="190"/>
+        <location filename="../qarawnwindow.cpp" line="219"/>
         <source>Start murder cup</source>
         <translatorcomment>gyilkolós</translatorcomment>
         <translation>Mestergyilkos kupa</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="178"/>
-        <location filename="GUI/qarawnwindow.cpp" line="207"/>
+        <location filename="../qarawnwindow.cpp" line="192"/>
+        <location filename="../qarawnwindow.cpp" line="221"/>
         <source>Start/max extras</source>
         <translatorcomment>extrák ki be</translatorcomment>
         <translation>Extrák engedélyezése</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="179"/>
-        <location filename="GUI/qarawnwindow.cpp" line="208"/>
+        <location filename="../qarawnwindow.cpp" line="193"/>
+        <location filename="../qarawnwindow.cpp" line="222"/>
         <source>Enable diseases</source>
         <translatorcomment>sziavtások</translatorcomment>
         <translation>Szivatások</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="180"/>
-        <location filename="GUI/qarawnwindow.cpp" line="209"/>
+        <location filename="../qarawnwindow.cpp" line="194"/>
+        <location filename="../qarawnwindow.cpp" line="223"/>
         <source>Round time</source>
         <translation>Köridő</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="181"/>
-        <location filename="GUI/qarawnwindow.cpp" line="210"/>
+        <location filename="../qarawnwindow.cpp" line="195"/>
+        <location filename="../qarawnwindow.cpp" line="224"/>
         <source>Points to win</source>
         <translation>Végcél</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="182"/>
-        <location filename="GUI/qarawnwindow.cpp" line="211"/>
+        <location filename="../qarawnwindow.cpp" line="196"/>
+        <location filename="../qarawnwindow.cpp" line="225"/>
         <source>Bomb timer 1/10 sec</source>
         <translatorcomment>robbanási idő millisec</translatorcomment>
         <translation>Robbanási idő (0,1 s)</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="183"/>
-        <location filename="GUI/qarawnwindow.cpp" line="212"/>
+        <location filename="../qarawnwindow.cpp" line="197"/>
+        <location filename="../qarawnwindow.cpp" line="226"/>
         <source>Bomb speed f/10 sec</source>
         <translatorcomment>bomba sebessége field/sec</translatorcomment>
         <translation>Bomba sebessége (mező/10 s)</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="185"/>
-        <location filename="GUI/qarawnwindow.cpp" line="214"/>
+        <location filename="../qarawnwindow.cpp" line="199"/>
+        <location filename="../qarawnwindow.cpp" line="228"/>
         <source>Start bombs</source>
         <translatorcomment>kezdő érték</translatorcomment>
         <translation>Bombák száma</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="186"/>
-        <location filename="GUI/qarawnwindow.cpp" line="215"/>
+        <location filename="../qarawnwindow.cpp" line="200"/>
+        <location filename="../qarawnwindow.cpp" line="229"/>
         <source>Max bombs</source>
         <translation>max Bombák</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="187"/>
-        <location filename="GUI/qarawnwindow.cpp" line="216"/>
+        <location filename="../qarawnwindow.cpp" line="201"/>
+        <location filename="../qarawnwindow.cpp" line="230"/>
         <source>Start power</source>
         <translatorcomment>tűzerő</translatorcomment>
         <translation>Tűzerő</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="188"/>
-        <location filename="GUI/qarawnwindow.cpp" line="217"/>
+        <location filename="../qarawnwindow.cpp" line="202"/>
+        <location filename="../qarawnwindow.cpp" line="231"/>
         <source>Max power</source>
         <translation>Max tűzerő</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="189"/>
-        <location filename="GUI/qarawnwindow.cpp" line="218"/>
+        <location filename="../qarawnwindow.cpp" line="203"/>
+        <location filename="../qarawnwindow.cpp" line="232"/>
         <source>Start speed</source>
         <translation>Kezdő sebesség</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="190"/>
-        <location filename="GUI/qarawnwindow.cpp" line="219"/>
+        <location filename="../qarawnwindow.cpp" line="204"/>
+        <location filename="../qarawnwindow.cpp" line="233"/>
         <source>Max speed</source>
         <translation>Maximum sebesség</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="191"/>
-        <location filename="GUI/qarawnwindow.cpp" line="220"/>
+        <location filename="../qarawnwindow.cpp" line="205"/>
+        <location filename="../qarawnwindow.cpp" line="234"/>
         <source>Start gloves</source>
         <translatorcomment>dobási lehetőség</translatorcomment>
         <translation>Kesztyű</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="192"/>
-        <location filename="GUI/qarawnwindow.cpp" line="221"/>
+        <location filename="../qarawnwindow.cpp" line="206"/>
+        <location filename="../qarawnwindow.cpp" line="235"/>
         <source>Start boot</source>
         <translatorcomment>bomba rúgása</translatorcomment>
         <translation>Bakancs</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="194"/>
-        <location filename="GUI/qarawnwindow.cpp" line="223"/>
+        <location filename="../qarawnwindow.cpp" line="208"/>
+        <location filename="../qarawnwindow.cpp" line="237"/>
         <source>Failing bombs</source>
         <translatorcomment>besülő bombák</translatorcomment>
         <translation>Besülő bombák</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="195"/>
-        <location filename="GUI/qarawnwindow.cpp" line="224"/>
+        <location filename="../qarawnwindow.cpp" line="209"/>
+        <location filename="../qarawnwindow.cpp" line="238"/>
         <source>Opposite controls</source>
         <translatorcomment>irányok megcserélése</translatorcomment>
         <translation>iránycsere</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="196"/>
-        <location filename="GUI/qarawnwindow.cpp" line="225"/>
+        <location filename="../qarawnwindow.cpp" line="210"/>
+        <location filename="../qarawnwindow.cpp" line="239"/>
         <source>Invisibility</source>
         <translation>Láthatatlanság</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="198"/>
+        <location filename="../qarawnwindow.cpp" line="212"/>
         <source>Create network</source>
         <translation>Új Hálózat</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="199"/>
+        <location filename="../qarawnwindow.cpp" line="213"/>
         <source>Connect</source>
         <translation>Kapcsolódás</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="227"/>
+        <location filename="../qarawnwindow.cpp" line="241"/>
         <source>Corpse parts</source>
         <translatorcomment>fröccsenés/ hulladarabok</translatorcomment>
         <translation>Vér</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="228"/>
+        <location filename="../qarawnwindow.cpp" line="242"/>
         <source>Shaky explosion</source>
         <translatorcomment>rázkódó robbanás</translatorcomment>
         <translation>Rázkódás</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="229"/>
+        <location filename="../qarawnwindow.cpp" line="243"/>
         <source>OpenGL</source>
         <translation>OpenGL</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="230"/>
+        <location filename="../qarawnwindow.cpp" line="244"/>
         <source>Animate backgrund</source>
         <translation>Animált háttér</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="231"/>
+        <location filename="../qarawnwindow.cpp" line="245"/>
         <source>Resolution</source>
         <translation>Felbontás</translation>
     </message>
     <message>
-        <location filename="GUI/qarawnwindow.cpp" line="232"/>
+        <location filename="../qarawnwindow.cpp" line="246"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>

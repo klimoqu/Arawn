@@ -93,7 +93,8 @@ OTHER_FILES += \
     GUI/res/a_cyan.png \
     GUI/res/a_blue.png
 
-TRANSLATIONS += Arawn_hu.ts
+TRANSLATIONS += GUI/res/Arawn_hu.ts \
+				GUI/res/Arawn_en.ts
 
 CODECFORSRC += UTF-8	
 	
