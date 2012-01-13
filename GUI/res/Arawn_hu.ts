@@ -611,7 +611,7 @@
         <location filename="GUI/qarawnwindow.cpp" line="212"/>
         <source>Bomb speed f/10 sec</source>
         <translatorcomment>bomba sebessége field/sec</translatorcomment>
-        <translation>Bomba sebessége (mező/s)</translation>
+        <translation type="unfinished">Bomba sebessége (mező/10 s)</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="185"/>
