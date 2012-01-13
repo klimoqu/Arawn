@@ -23,6 +23,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
     this->bombtimeout=bombtimeout;
     this->playerid=0;
     map=new Map(playersnumber,settings);
+    map->Upload(1);
     clientconnection=0;
     serverconnection=new Servernet();
     serverconnection->SetPlayerNumber(playersnumber);
