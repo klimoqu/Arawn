@@ -40,7 +40,12 @@ public slots:
     void visiblePlayer(uchar playerid);
     void destroyField(uchar x,uchar y);
 
+    void setGrabKeyboard();
+    void setUngrabKeyboard();
+
 private:
+    void keyPressEvent(QKeyEvent *event);
+
     uchar mapIDs[20][13];
     QImage* fPixmaps[10];
 

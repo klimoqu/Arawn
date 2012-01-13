@@ -310,7 +310,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    ArawnSettings::create(); // TODO delete
+    ArawnSettings::create();
 
     ArawnSettings::instance()->loadLists();
 

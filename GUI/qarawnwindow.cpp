@@ -353,6 +353,13 @@ void QArawnWindow::enterGame()
     mapState->addTransition(g, SIGNAL(GameOver()), cupState);
     cupState->addTransition(g, SIGNAL(GameStarted(int)), mapState);
     connect(g, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
+    connect(mapState, SIGNAL(entered()), grMap, SLOT(setGrabKeyboard()));
+    connect(mapState, SIGNAL(exited()), grMap, SLOT(setUngrabKeyboard()));
+
+    connect(grMap, SIGNAL(bombBlasted()), sounds[4], SLOT(play()));
+    connect(grMap, SIGNAL(bombPlanted()), sounds[3], SLOT(play()));
+    connect(grMap, SIGNAL(playerDied()), sounds[6], SLOT(play()));
+    connect(grMap, SIGNAL(playerBlasted()), sounds[9], SLOT(play()));
 
 }
 
