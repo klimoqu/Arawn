@@ -11,7 +11,7 @@
     <message>
         <location filename="arawnsettings.cpp" line="8"/>
         <source>Magyar</source>
-        <translation type="unfinished">Hungarian</translation>
+        <translation>Hungarian</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="9"/>
@@ -26,7 +26,7 @@
         <location filename="arawnsettings.cpp" line="139"/>
         <location filename="arawnsettings.cpp" line="172"/>
         <source>Yes</source>
-        <translation type="unfinished">Yes</translation>
+        <translation>Yes</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="10"/>
@@ -41,7 +41,7 @@
         <location filename="arawnsettings.cpp" line="140"/>
         <location filename="arawnsettings.cpp" line="173"/>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="15"/>
@@ -365,32 +365,32 @@
     <message>
         <location filename="arawnsettings.cpp" line="174"/>
         <source>Red</source>
-        <translation type="unfinished">Red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="175"/>
         <source>Blue</source>
-        <translation type="unfinished">Blue</translation>
+        <translation>Blue</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="176"/>
         <source>Cyan</source>
-        <translation type="unfinished">Cyan</translation>
+        <translation>Cyan</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="177"/>
         <source>Green</source>
-        <translation type="unfinished">Green</translation>
+        <translation>Green</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="178"/>
         <source>Purple</source>
-        <translation type="unfinished">Purple</translation>
+        <translation>Purple</translation>
     </message>
     <message>
         <location filename="arawnsettings.cpp" line="179"/>
         <source>Yellow</source>
-        <translation type="unfinished">Yelllow</translation>
+        <translation>Yelllow</translation>
     </message>
 </context>
 <context>
@@ -398,7 +398,7 @@
     <message>
         <location filename="GUI/qgraphicsmenu.cpp" line="294"/>
         <source>Credits</source>
-        <translation type="unfinished">Credits</translation>
+        <translation>Credits</translation>
     </message>
 </context>
 <context>
@@ -406,27 +406,27 @@
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="5"/>
         <source>Players setup</source>
-        <translation>Játékos beállításai</translation>
+        <translation>Player Setup</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="6"/>
         <source>Local player</source>
-        <translation>Helyi játékos</translation>
+        <translation>Local Player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="7"/>
         <source>#1 Network player</source>
-        <translation>#1 Hálózati játékos</translation>
+        <translation>#1 Network Player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="8"/>
         <source>#2 Network player</source>
-        <translation>#2 Hálózati játékos</translation>
+        <translation>#2 Network Player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="9"/>
         <source>#3 Network player</source>
-        <translation>#3 Hálózati játékos</translation>
+        <translation>#3 Network Player</translation>
     </message>
 </context>
 <context>
@@ -434,22 +434,22 @@
     <message>
         <location filename="GUI/graphicsnetworkroom.cpp" line="5"/>
         <source>#1 player</source>
-        <translation>#1 játékos</translation>
+        <translation>#1 player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworkroom.cpp" line="6"/>
         <source>#2 player</source>
-        <translation>#2 játékos</translation>
+        <translation>#2 player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworkroom.cpp" line="7"/>
         <source>#3 player</source>
-        <translation>#3 játékos</translation>
+        <translation>#3 player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworkroom.cpp" line="8"/>
         <source>#4 player</source>
-        <translation>#4 játékos</translation>
+        <translation>#4 player</translation>
     </message>
 </context>
 <context>
@@ -457,28 +457,28 @@
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="10"/>
         <source>Connect to network</source>
-        <translation>Csatlakozás hálózathoz</translation>
+        <translation>Connect to Network</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="11"/>
         <source>Enter the IP address or hostname:</source>
-        <translation>Kérem az IP címet vagy a Host nevet:</translation>
+        <translation>Enter the IP address or hostname:</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
-        <translation>Kapcsolat</translation>
+        <translation>Connect</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="13"/>
         <location filename="GUI/graphicsnetworksettings.cpp" line="126"/>
         <source>Connecting...</source>
-        <translation>Csatlakozás</translation>
+        <translation>Connecting...</translation>
     </message>
     <message>
         <location filename="GUI/graphicsnetworksettings.cpp" line="159"/>
         <source>Fail!</source>
-        <translation>Sikertelen</translation>
+        <translation>Fail!</translation>
     </message>
 </context>
 <context>
@@ -486,27 +486,27 @@
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="179"/>
         <source>Players setup</source>
-        <translation>Játékos beállítások</translation>
+        <translation>Player Setup</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="180"/>
         <source>Human player</source>
-        <translation>Emberi játékos</translation>
+        <translation>Human Player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="181"/>
         <source>#1 CPU player</source>
-        <translation>#1 gépi játékos</translation>
+        <translation>#1 CPU player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="182"/>
         <source>#2 CPU player</source>
-        <translation>#2 gépi játékos</translation>
+        <translation>#2 CPU player</translation>
     </message>
     <message>
         <location filename="GUI/graphicsplayersetup.cpp" line="183"/>
         <source>#3 CPU player</source>
-        <translation>#3 gépi játékos</translation>
+        <translation>#3 CPU player</translation>
     </message>
 </context>
 <context>
@@ -514,204 +514,204 @@
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="164"/>
         <source>Main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Main Menu</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="166"/>
         <source>Local game</source>
-        <translation type="unfinished">Local Game</translation>
+        <translation>Local Game</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="167"/>
         <source>Network game</source>
-        <translation type="unfinished">Network Game</translation>
+        <translation>Network Game</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="168"/>
         <source>Options</source>
-        <translation type="unfinished">Beállítások</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="169"/>
         <source>Credits</source>
-        <translation>A játékról</translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="170"/>
         <source>Quit</source>
-        <translation>Kilépés</translation>
+        <translation>Quit</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="172"/>
         <location filename="GUI/qarawnwindow.cpp" line="201"/>
         <source>Player setup</source>
-        <translation>Játékos Beállítások</translation>
+        <translation>Player Setup</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="173"/>
         <location filename="GUI/qarawnwindow.cpp" line="202"/>
         <source>Map selection</source>
-        <translation>Pálya választó</translation>
+        <translation>Map Selection</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="174"/>
         <location filename="GUI/qarawnwindow.cpp" line="203"/>
         <source>Game settings</source>
-        <translation>Játékbeállítás</translation>
+        <translation>Game Settings</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="175"/>
         <location filename="GUI/qarawnwindow.cpp" line="204"/>
         <source>Start survival cup</source>
-        <translation type="unfinished"></translation>
+        <translation>Start survival cup</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="176"/>
         <location filename="GUI/qarawnwindow.cpp" line="205"/>
         <source>Start murder cup</source>
-        <translation type="unfinished"></translation>
+        <translation>Start murder cup</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="178"/>
         <location filename="GUI/qarawnwindow.cpp" line="207"/>
         <source>Start/max extras</source>
-        <translation type="unfinished"></translation>
+        <translation>Start/max extras</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="179"/>
         <location filename="GUI/qarawnwindow.cpp" line="208"/>
         <source>Enable diseases</source>
-        <translation type="unfinished"></translation>
+        <translation>Enable diseases</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="180"/>
         <location filename="GUI/qarawnwindow.cpp" line="209"/>
         <source>Round time</source>
-        <translation type="unfinished"></translation>
+        <translation>Round time</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="181"/>
         <location filename="GUI/qarawnwindow.cpp" line="210"/>
         <source>Points to win</source>
-        <translation type="unfinished"></translation>
+        <translation>Points to win</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="182"/>
         <location filename="GUI/qarawnwindow.cpp" line="211"/>
         <source>Bomb timer 1/10 sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Bomb timer 1/10 sec</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="183"/>
         <location filename="GUI/qarawnwindow.cpp" line="212"/>
         <source>Bomb speed f/10 sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Bomb speed f/10 sec</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="185"/>
         <location filename="GUI/qarawnwindow.cpp" line="214"/>
         <source>Start bombs</source>
-        <translation type="unfinished"></translation>
+        <translation>Start bombs</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="186"/>
         <location filename="GUI/qarawnwindow.cpp" line="215"/>
         <source>Max bombs</source>
-        <translation type="unfinished">Bombák maximális száma</translation>
+        <translation>Max bombs</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="187"/>
         <location filename="GUI/qarawnwindow.cpp" line="216"/>
         <source>Start power</source>
-        <translation type="unfinished"></translation>
+        <translation>Start power</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="188"/>
         <location filename="GUI/qarawnwindow.cpp" line="217"/>
         <source>Max power</source>
-        <translation type="unfinished"></translation>
+        <translation>Max power</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="189"/>
         <location filename="GUI/qarawnwindow.cpp" line="218"/>
         <source>Start speed</source>
-        <translation>Kezdő sebesség</translation>
+        <translation>Start Speed</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="190"/>
         <location filename="GUI/qarawnwindow.cpp" line="219"/>
         <source>Max speed</source>
-        <translation>Maximum sebesség</translation>
+        <translation>Max Speed</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="191"/>
         <location filename="GUI/qarawnwindow.cpp" line="220"/>
         <source>Start gloves</source>
-        <translation type="unfinished"></translation>
+        <translation>Start gloves</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="192"/>
         <location filename="GUI/qarawnwindow.cpp" line="221"/>
         <source>Start boot</source>
-        <translation type="unfinished"></translation>
+        <translation>Start boot</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="194"/>
         <location filename="GUI/qarawnwindow.cpp" line="223"/>
         <source>Failing bombs</source>
-        <translation type="unfinished"></translation>
+        <translation>Failing bombs</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="195"/>
         <location filename="GUI/qarawnwindow.cpp" line="224"/>
         <source>Opposite controls</source>
-        <translation type="unfinished"></translation>
+        <translation>Opposite controls</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="196"/>
         <location filename="GUI/qarawnwindow.cpp" line="225"/>
         <source>Invisibility</source>
-        <translation>Láthatatlanság</translation>
+        <translation>Invisibility</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="198"/>
         <source>Create network</source>
-        <translation>Hálózat létrehozása</translation>
+        <translation>Create Network</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="199"/>
         <source>Connect</source>
-        <translation>Kapcsolat</translation>
+        <translation>Connect</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="227"/>
         <source>Corpse parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Corpse parts</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="228"/>
         <source>Shaky explosion</source>
-        <translation type="unfinished"></translation>
+        <translation>Shaky explosions</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="229"/>
         <source>OpenGL</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenGL</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="230"/>
         <source>Animate backgrund</source>
-        <translation>Animált háttér</translation>
+        <translation>Animate background</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="231"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolution</translation>
     </message>
     <message>
         <location filename="GUI/qarawnwindow.cpp" line="232"/>
         <source>Language</source>
-        <translation>Nyelv</translation>
+        <translation>Language</translation>
     </message>
 </context>
 </TS>
