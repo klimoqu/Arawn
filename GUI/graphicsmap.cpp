@@ -156,7 +156,7 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
         players[player]->setX(players[player]->x()+8);
         break;
     }
-    update(x*40-8, y*40-8, 56, 56);
+    update(players[player]->x()*40-8, players[player]->y()*40-8, 56, 56);
 }
 
 void GraphicsMap::diePlayer(uchar player, uchar murderid)
@@ -217,13 +217,13 @@ void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
 void GraphicsMap::invisiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(false);
-    update(players[id]->boundingRect());
+    update(players[playerid]->boundingRect());
 }
 
 void GraphicsMap::visiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(true);
-    update(players[id]->boundingRect());
+    update(players[playerid]->boundingRect());
 }
 
 void GraphicsMap::destroyField(uchar x, uchar y)
@@ -287,7 +287,7 @@ GraphicsCup::GraphicsCup(Game *_g)
 
 QRectF GraphicsCup::boundingRect() const
 {
-    QRectF(-400, -300, 800, 600);
+    return QRectF(-400, -300, 800, 600);
 }
 
 void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
