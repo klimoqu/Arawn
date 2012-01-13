@@ -30,13 +30,17 @@ public:
     Player* GetPlayer(uchar id){return id>=playersnumber ? 0:players[id];}
     Field* GetField(uchar x, uchar y){return Fields[x][y];}
     Bomb* GetBomb(int i){return bombs[i];}
-    void AddBomb(Bomb* b){bombs.push_back(b);}
+    void AddBomb(Bomb* b)
+    {
+        bombs.push_back(b);
+        connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
+    }
     void SetPlayersStartPoints();
 
 signals:
 
     void ServerCommand(Command c);
-    void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
+    void FieldBlasted(uchar x, uchar y, uchar size,uchar id,uchar direction);
     void FieldDestroyed(uchar x, uchar y);
 public slots:
     void DeleteThis(Bomb *b)

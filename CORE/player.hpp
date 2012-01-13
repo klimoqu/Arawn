@@ -58,6 +58,6 @@ private slots:
     void returntonormalcontrol();
     void returntovisible(){emit ChangeVisibility(this->id,true);}
 public slots:
-    void DieAndBlast(uchar id,uchar x, uchar y,uchar dir);
+    void DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir);
     void Die(uchar x, uchar y);
 };
