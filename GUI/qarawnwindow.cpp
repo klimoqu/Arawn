@@ -340,6 +340,11 @@ void QArawnWindow::enterGame()
     mapState->assignProperty(grTimer, "visible", true);
     cupState->assignProperty(grTimer, "visible", false);
     scene->addItem(grTimer);
+    grCup = new GraphicsCup(g);
+    grCup->setPos(0,0);
+    scene->addItem(grCup);
+    mapState->assignProperty(grCup, "visible", false);
+    cupState->assignProperty(grCup, "visible", true);
 
     mapState->addTransition(g, SIGNAL(GameOver()), cupState);
     cupState->addTransition(g, SIGNAL(GameStarted(int)), mapState);

@@ -31,6 +31,7 @@ public:
         for(uchar i=0;i<playersnumber;i++)qsl<<nevek[i];
         return qsl;
     }
+    int GetPointOf(uchar id) {return pontok[id];}
 signals:
     void PlayerWonTheCup(uchar playerid, QString playername);
     void PlayerPointChanged(uchar playerid,int point);

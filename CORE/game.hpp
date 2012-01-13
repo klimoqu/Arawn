@@ -32,6 +32,8 @@ public:
     void MakeCommand(uchar c);
     QStringList GetPlayers();
     uchar GetFields(uchar x, uchar y){return fields[x][y];}
+    bool IsSurvive() const {return survive;}
+    Cup* GetCup() const {return cup;}
 
 signals:
 

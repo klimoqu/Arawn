@@ -262,6 +262,76 @@ void GraphicsTimer::tick()
 
 
 
+GraphicsCup::GraphicsCup(Game *_g)
+{
+    g = _g;
+    c = g->GetCup();
+    bgnd = QImage("res/fire.jpg").scaled(800, 600, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    cupImg = QImage("res/cup.png");
+    font = qApp->font();
+    font.setPixelSize(50);
+    listFont = qApp->font();
+    listFont.setPixelSize(40);
+}
+
+QRectF GraphicsCup::boundingRect() const
+{
+    QRectF(-400, -300, 800, 600);
+}
+
+void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->save();
+
+    painter->drawImage(-400, -300, bgnd);
+    painter->setFont(font);
+    painter->setPen(QColor(100, 10, 10, 200));
+    painter->drawText(QRectF(-300, -300, 600, 66).translated(4,4),
+                      (g->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
+                      QTextOption(Qt::AlignCenter));
+    painter->setPen(QColor(50, 150, 200));
+    painter->drawText(QRectF(-300, -300, 600, 66),
+                      (g->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
+                      QTextOption(Qt::AlignCenter));
+
+
+    painter->setFont(listFont);
+    for(uchar i = 0; i < c->GetPlayersName().length(); i++){
+        painter->setPen(QColor(100, 10, 10, 200));
+        painter->drawText(QRectF(-350, -166+i*50, 250, 50).translated(3,3), c->GetPlayerName(i), QTextOption(Qt::AlignLeading));
+        painter->setPen(QColor(50, 150, 200));
+        painter->drawText(QRectF(-350, -166+i*50, 250, 50), c->GetPlayerName(i), QTextOption(Qt::AlignLeading));
+
+        for(uchar j = 0; j < c->GetPointOf(i); j++){
+            painter->drawImage(-66+j*40, -160+i*50, cupImg);
+        }
+
+
+    }
+
+    painter->restore();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

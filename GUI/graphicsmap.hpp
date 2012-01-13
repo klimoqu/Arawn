@@ -88,6 +88,25 @@ private:
     QFont font;
 };
 
+
+class GraphicsCup : public QGraphicsObject
+{
+    Q_OBJECT
+public:
+    GraphicsCup(Game *_g);
+
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+private:
+    Cup *c;
+    Game *g;
+    QImage bgnd;
+    QImage cupImg;
+    QFont font;
+    QFont listFont;
+};
+
 #endif // GRAPHICSMAP_HPP
 
 
