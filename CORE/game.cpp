@@ -39,7 +39,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 }
 void Game::SetCup(Cup *cup)
 {
-    delete cup;
+    delete this->cup;
     this->cup=cup;
     if(survive)
     {
