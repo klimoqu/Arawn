@@ -312,7 +312,7 @@ int main(int argc, char *argv[])
 
     ArawnSettings::create();
 
-    ArawnSettings::instance()->loadLists();
+
 
     QString str = QDir::currentPath();
     QDir::setCurrent(QDir::currentPath()+"/res/");
@@ -323,14 +323,21 @@ int main(int argc, char *argv[])
     {
         if(translator.load("Arawn_en")){
                 a.installTranslator(&translator);
+                qDebug() << "angol betoltve";
         }
+        else qDebug() << "angol sikertelen";
     }
-    else if(ArawnSettings::instance()->language == 1)
+    else if(ArawnSettings::instance()->language == 1){
         if(translator.load("Arawn_hu")){
                 a.installTranslator(&translator);
+                qDebug() << "magyar betoltve";
         }
+        else qDebug() << "magyar sikertelen";
+}
 
     QDir::setCurrent(str);
+
+    ArawnSettings::instance()->loadLists();
 
     QArawnWindow aWindow;
     aWindow.initWindow();
