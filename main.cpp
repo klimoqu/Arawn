@@ -315,10 +315,16 @@ int main(int argc, char *argv[])
                 a.installTranslator(&translator);
         }
     }
-    else if(ArawnSettings::instance()->language == 1)
+    else if(ArawnSettings::instance()->language == 1){
         if(translator.load("res/Arawn_hu")){
                 a.installTranslator(&translator);
         }
+    }
+    else if(ArawnSettings::instance()->language == 2){
+        if(translator.load("res/Arawn_de")){
+                a.installTranslator(&translator);
+        }
+    }
 
     ArawnSettings::instance()->loadLists();
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="hu_HU">
+<TS version="2.0" language="de_DE">
 <context>
     <name>ArawnSettings</name>
     <message>
@@ -31,7 +31,7 @@
         <location filename="../../arawnsettings.cpp" line="366"/>
         <location filename="../../arawnsettings.cpp" line="399"/>
         <source>Yes</source>
-        <translation>Igen</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="237"/>
@@ -46,7 +46,7 @@
         <location filename="../../arawnsettings.cpp" line="367"/>
         <location filename="../../arawnsettings.cpp" line="400"/>
         <source>No</source>
-        <translation>Nem</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="242"/>
@@ -370,32 +370,32 @@
     <message>
         <location filename="../../arawnsettings.cpp" line="401"/>
         <source>Red</source>
-        <translation>Vörös</translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="402"/>
         <source>Blue</source>
-        <translation>Kék</translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="403"/>
         <source>Cyan</source>
-        <translation>Cián</translation>
+        <translation>Zyan</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="404"/>
         <source>Green</source>
-        <translation>Zöld</translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="405"/>
         <source>Purple</source>
-        <translation>Rózsaszín</translation>
+        <translation>Lila</translation>
     </message>
     <message>
         <location filename="../../arawnsettings.cpp" line="406"/>
         <source>Yellow</source>
-        <translation>Sárga</translation>
+        <translation>Gelb</translation>
     </message>
 </context>
 <context>
@@ -403,14 +403,14 @@
     <message>
         <location filename="../qgraphicsmenu.cpp" line="296"/>
         <source>Credits</source>
-        <translation>Névjegy</translation>
+        <translation>Karte</translation>
     </message>
     <message>
         <location filename="../qgraphicsmenu.cpp" line="298"/>
         <source>This is a bomberman like game inspired by the well known ClanBomber.
 It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</source>
-        <translation type="unfinished">Ez egy bomberman tipusú játék, melyet a Clanbomber ihletett. 
-2011-ben írta Moréh Tamas, Klicsu Zsolt és Quintz Gábor QT keretrendszerben.</translation>
+        <translation>Das ist eine Spiele wie Bomberman, das legt Clanbomber zugrunde.
+Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 geschrieben.</translation>
     </message>
 </context>
 <context>
@@ -419,13 +419,13 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
         <location filename="../graphicsmap.cpp" line="304"/>
         <location filename="../graphicsmap.cpp" line="308"/>
         <source>Survival cup</source>
-        <translation>Túlélő kupa</translation>
+        <translation>Überlebliche Pokal</translation>
     </message>
     <message>
         <location filename="../graphicsmap.cpp" line="304"/>
         <location filename="../graphicsmap.cpp" line="308"/>
         <source>Murder cup</source>
-        <translation>Mestergyilkos kupa</translation>
+        <translation>Mörder Pokal</translation>
     </message>
 </context>
 <context>
@@ -433,27 +433,27 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsplayersetup.cpp" line="5"/>
         <source>Players setup</source>
-        <translation>Játékos beállításai</translation>
+        <translation>die Einstellung der Spielers</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="6"/>
         <source>Local player</source>
-        <translation>Helyi játékos</translation>
+        <translation>lokale Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="7"/>
         <source>#1 Network player</source>
-        <translation>#1 Hálózati játékos</translation>
+        <translation>#1 netzwerke Spiler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="8"/>
         <source>#2 Network player</source>
-        <translation>#2 Hálózati játékos</translation>
+        <translation>#2 netzwerke Spiler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="9"/>
         <source>#3 Network player</source>
-        <translation>#3 Hálózati játékos</translation>
+        <translation>#3 netzwerke Spiler</translation>
     </message>
 </context>
 <context>
@@ -461,22 +461,22 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="5"/>
         <source>#1 player</source>
-        <translation>#1 játékos</translation>
+        <translation>#1 Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="6"/>
         <source>#2 player</source>
-        <translation>#2 játékos</translation>
+        <translation>#2 Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="7"/>
         <source>#3 player</source>
-        <translation>#3 játékos</translation>
+        <translation>#3 Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="8"/>
         <source>#4 player</source>
-        <translation>#4 játékos</translation>
+        <translation>#4 Spieler</translation>
     </message>
 </context>
 <context>
@@ -484,28 +484,28 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="10"/>
         <source>Connect to network</source>
-        <translation>Csatlakozás hálózathoz</translation>
+        <translation>beitreten zum Netzwerk</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="11"/>
         <source>Enter the IP address or hostname:</source>
-        <translation>Kérem az IP címet vagy a Host nevet:</translation>
+        <translation>Bitte das IP Adresse oder hostname:</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
-        <translation>Kapcsolódás</translation>
+        <translation>Beitritt</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="13"/>
         <location filename="../graphicsnetworksettings.cpp" line="128"/>
         <source>Connecting...</source>
-        <translation>Csatlakozás...</translation>
+        <translation>Beitreten…</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="162"/>
         <source>Fail!</source>
-        <translation>Sikertelen!</translation>
+        <translation>Erfolglos!</translation>
     </message>
 </context>
 <context>
@@ -513,27 +513,27 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsplayersetup.cpp" line="179"/>
         <source>Players setup</source>
-        <translation>Játékos beállítások</translation>
+        <translation>die Einstellung der Spielers</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="180"/>
         <source>Human player</source>
-        <translation>Emberi játékos</translation>
+        <translation>männschliche Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="181"/>
         <source>#1 CPU player</source>
-        <translation>#1 gépi játékos</translation>
+        <translation>#1 mechanische Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="182"/>
         <source>#2 CPU player</source>
-        <translation>#2 gépi játékos</translation>
+        <translation>#2 mechanische Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="183"/>
         <source>#3 CPU player</source>
-        <translation>#3 gépi játékos</translation>
+        <translation>#3 mechanische Spieler</translation>
     </message>
 </context>
 <context>
@@ -541,213 +541,199 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../qarawnwindow.cpp" line="181"/>
         <source>Main menu</source>
-        <translation>Menü</translation>
+        <translation>Hauptmenü</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="183"/>
         <source>Local game</source>
-        <translation>Helyi játék</translation>
+        <translation>lokale Spiele</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="184"/>
         <source>Network game</source>
-        <translation>Hálózati játék</translation>
+        <translation>netzwerke Spiele</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="185"/>
         <source>Options</source>
-        <translation>Beállítások</translation>
+        <translation>Einstellung</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="186"/>
         <source>Credits</source>
-        <translation>Névjegy</translation>
+        <translation>Karte</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="187"/>
         <source>Quit</source>
-        <translation>Kilépés</translation>
+        <translation>Austritt</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="189"/>
         <location filename="../qarawnwindow.cpp" line="218"/>
         <source>Player setup</source>
-        <translation>Játékos Beállítások</translation>
+        <translation>die Einstellung der Spielers</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="190"/>
         <location filename="../qarawnwindow.cpp" line="219"/>
         <source>Map selection</source>
-        <translation>Pálya választó</translation>
+        <translation>Karte auswählen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="191"/>
         <location filename="../qarawnwindow.cpp" line="220"/>
         <source>Game settings</source>
-        <translation>Játékbeállítások</translation>
+        <translation>die Einstellung des Spiels</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="192"/>
         <location filename="../qarawnwindow.cpp" line="221"/>
         <source>Start survival cup</source>
-        <translatorcomment>túlélős</translatorcomment>
-        <translation>Túlélő kupa</translation>
+        <translation>Überlebliche Pokal beginnen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="193"/>
         <location filename="../qarawnwindow.cpp" line="222"/>
         <source>Start murder cup</source>
-        <translatorcomment>gyilkolós</translatorcomment>
-        <translation>Mestergyilkos kupa</translation>
+        <translation>Mörder Pokal beginnen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="195"/>
         <location filename="../qarawnwindow.cpp" line="224"/>
         <source>Start/max extras</source>
-        <translatorcomment>extrák ki be</translatorcomment>
-        <translation>Extrák engedélyezése</translation>
+        <translation>Extras genehmigen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="196"/>
         <location filename="../qarawnwindow.cpp" line="225"/>
         <source>Enable diseases</source>
-        <translatorcomment>sziavtások</translatorcomment>
-        <translation>Szivatások</translation>
+        <translation>negative Extra</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="197"/>
         <location filename="../qarawnwindow.cpp" line="226"/>
         <source>Round time</source>
-        <translation>Köridő</translation>
+        <translation>Zeit der Rund</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="198"/>
         <location filename="../qarawnwindow.cpp" line="227"/>
         <source>Points to win</source>
-        <translation>Végcél</translation>
+        <translation>Punkte zu gewinnen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="199"/>
         <location filename="../qarawnwindow.cpp" line="228"/>
         <source>Bomb timer 1/10 sec</source>
-        <translatorcomment>robbanási idő millisec</translatorcomment>
-        <translation>Robbanási idő (0,1 s)</translation>
+        <translation>Zeit der Explosion (0,1 sec)</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="200"/>
         <location filename="../qarawnwindow.cpp" line="229"/>
         <source>Bomb speed f/10 sec</source>
-        <translatorcomment>bomba sebessége field/sec</translatorcomment>
-        <translation>Bomba sebessége (mező/10 s)</translation>
+        <translation>Schnelligkeit der Bombe (f/10 sec)</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="202"/>
         <location filename="../qarawnwindow.cpp" line="231"/>
         <source>Start bombs</source>
-        <translatorcomment>kezdő érték</translatorcomment>
-        <translation>Bombák száma</translation>
+        <translation>Bombe</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="203"/>
         <location filename="../qarawnwindow.cpp" line="232"/>
         <source>Max bombs</source>
-        <translation>max Bombák</translation>
+        <translation>max Bombe</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="204"/>
         <location filename="../qarawnwindow.cpp" line="233"/>
         <source>Start power</source>
-        <translatorcomment>tűzerő</translatorcomment>
-        <translation>Tűzerő</translation>
+        <translation>Kraft</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="205"/>
         <location filename="../qarawnwindow.cpp" line="234"/>
         <source>Max power</source>
-        <translation>Max tűzerő</translation>
+        <translation>max Kraft</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="206"/>
         <location filename="../qarawnwindow.cpp" line="235"/>
         <source>Start speed</source>
-        <translation>Kezdő sebesség</translation>
+        <translation>anfänge Schnelligkeit</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="207"/>
         <location filename="../qarawnwindow.cpp" line="236"/>
         <source>Max speed</source>
-        <translation>Maximum sebesség</translation>
+        <translation>max Schnelligkeit</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="208"/>
         <location filename="../qarawnwindow.cpp" line="237"/>
         <source>Start gloves</source>
-        <translatorcomment>dobási lehetőség</translatorcomment>
-        <translation>Kesztyű</translation>
+        <translation>Handschuhe</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="209"/>
         <location filename="../qarawnwindow.cpp" line="238"/>
         <source>Start boot</source>
-        <translatorcomment>bomba rúgása</translatorcomment>
-        <translation>Bakancs</translation>
+        <translation>stiefel</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="211"/>
         <location filename="../qarawnwindow.cpp" line="240"/>
         <source>Failing bombs</source>
-        <translatorcomment>besülő bombák</translatorcomment>
-        <translation>Besülő bombák</translation>
+        <translation>Erfolglose Bombe</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="212"/>
         <location filename="../qarawnwindow.cpp" line="241"/>
         <source>Opposite controls</source>
-        <translatorcomment>irányok megcserélése</translatorcomment>
-        <translation>iránycsere</translation>
+        <translation>Austauschen der Richtung</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="213"/>
         <location filename="../qarawnwindow.cpp" line="242"/>
         <source>Invisibility</source>
-        <translation>Láthatatlanság</translation>
+        <translation>unsichtbar</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="215"/>
         <source>Create network</source>
-        <translation>Új Hálózat</translation>
+        <translation>netzwerk machen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="216"/>
         <source>Connect</source>
-        <translation>Kapcsolódás</translation>
+        <translation>beitreten</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="244"/>
         <source>Corpse parts</source>
-        <translatorcomment>fröccsenés/ hulladarabok</translatorcomment>
-        <translation>Vér</translation>
+        <translation>Blut</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="245"/>
         <source>Shaky explosion</source>
-        <translatorcomment>rázkódó robbanás</translatorcomment>
-        <translation>Rázkódás</translation>
+        <translation>Schock</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="246"/>
         <source>OpenGL</source>
-        <translation>OpenGL</translation>
+        <translation>öffene GL</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="247"/>
         <source>Animate backgrund</source>
-        <translation>Animált háttér</translation>
+        <translation>animierte Hintergrund</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="248"/>
         <source>Resolution</source>
-        <translation>Felbontás</translation>
+        <translation>zerglegung</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="249"/>

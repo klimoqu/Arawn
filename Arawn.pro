@@ -94,7 +94,8 @@ OTHER_FILES += \
     GUI/res/a_blue.png
 
 TRANSLATIONS += GUI/res/Arawn_hu.ts \
-				GUI/res/Arawn_en.ts
+				GUI/res/Arawn_en.ts \
+				GUI/res/Arawn_de.ts
 
 CODECFORSRC += UTF-8	
 	

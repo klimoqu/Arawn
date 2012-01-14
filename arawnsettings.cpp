@@ -232,6 +232,7 @@ void ArawnSettings::loadLists()
 {
     languageValues.insert(tr("English"), 0);
     languageValues.insert(tr("Magyar"), 1);
+    languageValues.insert(tr("Deutsch"), 2);
     openGlRenderingValues.insert(tr("Yes"), true);
     openGlRenderingValues.insert(tr("No"), false);
     showCorpsePartsValues.insert(tr("Yes"), true);
