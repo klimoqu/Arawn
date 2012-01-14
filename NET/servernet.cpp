@@ -53,6 +53,7 @@ void Servernet::readyRead()
             client->write(auth);
             client->flush();
             sendusernames();
+//            if(players.size()==this->playernumber)emit AllPlayersConnected();  /// ettől még fagy
         }
 }
 void Servernet::disconnected()
