@@ -47,9 +47,9 @@ void Servernet::readyRead()
             players[client]=QString::fromUtf8(message);
             emit NewPlayerConnected();
             QByteArray auth;
-            auth.append((uchar)clients.size());
-            auth.append((uchar)255);
-            auth.append(QByteArray::number(0));
+            auth.append((uchar)clients.size());     /// ezzel gond van mert
+            auth.append((uchar)255);                /// nem 6 bájtként megy át
+            auth.append(QByteArray::number(0));     /// a kliens 3 bájtként olvassa
             client->write(auth);
             client->flush();
             sendusernames();

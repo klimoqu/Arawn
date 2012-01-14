@@ -19,6 +19,7 @@ void Client::connectToServer(QString address)
 void Client::readyRead()
 {
     QByteArray message=socket->readAll();
+    qDebug() << "meret: " << message.count();
         if(message.count()==6)
         {
             uchar id=message.at(0);
@@ -28,6 +29,7 @@ void Client::readyRead()
         }
         else
         {
+            qDebug() << message;
             players = QString(message).split(",");
             emit refreshPlayers();
         }
