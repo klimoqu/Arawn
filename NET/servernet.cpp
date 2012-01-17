@@ -1,4 +1,5 @@
 #include "servernet.hpp"
+#include <iostream>
 #include <QRegExp>
 Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
@@ -53,7 +54,7 @@ void Servernet::readyRead()
             client->write(auth);
             client->flush();
             sendusernames();
-//            if(players.size()==this->playernumber)emit AllPlayersConnected();  /// ettől még fagy
+            if(players.size()==this->playernumber)std::cout<<"all players online"<<std::endl;  /// ettől még fagy
         }
 }
 void Servernet::disconnected()

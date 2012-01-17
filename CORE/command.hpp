@@ -26,4 +26,5 @@ public:
     uchar GetPlayerId();
     uchar GetMessageType();
     int GetMessage();
+	QString ToString();
 };
