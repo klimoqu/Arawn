@@ -2,9 +2,9 @@
 #define QARAWNWINDOW_HPP
 
 #include <QtGui>
-#include "GUI/pixmapobjectitem.hpp"
-#include "GUI/qgraphicsmenu.hpp"
-#include "GUI/graphicsmap.hpp"
+#include "pixmapobjectitem.hpp"
+#include "qgraphicsmenu.hpp"
+#include "graphicsmap.hpp"
 
 class QArawnWindow : public QGraphicsView
 {

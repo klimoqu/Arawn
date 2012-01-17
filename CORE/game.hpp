@@ -1,8 +1,8 @@
 #pragma once
-#include "CORE/map.hpp"
-#include "CORE/cup.hpp"
-#include "NET/servernet.hpp"
-#include "NET/client.hpp"
+#include "map.hpp"
+#include "cup.hpp"
+#include "../NET/servernet.hpp"
+#include "../NET/client.hpp"
 class Game : public QObject
 {
     Q_OBJECT

@@ -2,12 +2,12 @@
 
 #include <fstream>
 #include <string>
-#include "arawnsettings.hpp"
-#include "CORE/field.hpp"
-#include "CORE/bomb.hpp"
-#include "CORE/player.hpp"
-#include "CORE/command.hpp"
-#include "CORE/bonus.hpp"
+#include "../arawnsettings.hpp"
+#include "field.hpp"
+#include "bomb.hpp"
+#include "player.hpp"
+#include "command.hpp"
+#include "bonus.hpp"
 
 class Map : public QObject
 {

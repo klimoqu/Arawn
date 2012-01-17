@@ -1,4 +1,4 @@
-#include "CORE/map.hpp"
+#include "map.hpp"
 #include <sstream>
 
 Map::Map(uchar playersnumber,ArawnSettings *settings)
