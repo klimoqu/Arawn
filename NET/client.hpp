@@ -1,5 +1,5 @@
 #pragma once
-#include "CORE/command.hpp"
+#include "../CORE/command.hpp"
 #include <QtNetwork/QtNetwork>
 /*
 
