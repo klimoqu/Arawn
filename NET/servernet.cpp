@@ -1,5 +1,4 @@
 #include "servernet.hpp"
-#include <iostream>
 #include <QRegExp>
 Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
@@ -44,7 +43,9 @@ void Servernet::readyRead()
 		{
 			QString user = meRegex.cap(1);
 			players.insert(client,user);
-			client->write(Command(clients.size(),255,0).ToString().toUtf8());
+			Command c((uchar)clients.size(),(uchar)255,(int)0);
+			qDebug()<<c.ToString();
+			client->write(c.ToString().toUtf8());
 			client->flush();
 			emit NewPlayerConnected();
 			sendusernames();
@@ -56,8 +57,8 @@ void Servernet::readyRead()
 			int msg;
 			QStringList command = commandRegex.cap(1).split(' ');
 			id=(uchar)command.at(0).toInt();
-			type=(uchar)command.at(0).toInt();
-			msg=command.at(0).toInt();
+			type=(uchar)command.at(1).toInt();
+			msg=command.at(2).toInt();
 			emit CommandReceivedFromClients(Command(id,type,msg));
 		}
 		else																		///egyéb hülyeség jön a klienstől

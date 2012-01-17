@@ -1,5 +1,5 @@
 #include "client.hpp"
-
+#include <QRegExp>
 Client::Client(QString name)
 {
     this->name=name;
@@ -35,27 +35,23 @@ void Client::readyRead()
 			int msg;
 			QStringList command = commandRegex.cap(1).split(' ');
 			id=(uchar)command.at(0).toInt();
-			type=(uchar)command.at(0).toInt();
-			msg=command.at(0).toInt();
+			type=(uchar)command.at(1).toInt();
+			msg=command.at(2).toInt();
 			emit CommandReceivedFromServer(Command(id,type,msg));
 		}
-		else																		///egyéb hülyeség jön a klienstõl
+		else																		///egyéb hülyeség jön a servertõl
 		{
 			qDebug() << "hülyeség jött";
 		}
 	}
 }
 void Client::SendCommandToServer(Command c)
-{
-    QByteArray command;
-    command.append((uchar)c.GetPlayerId());
-    command.append((uchar)c.GetMessageType());
-    command.append(QByteArray::number(c.GetMessage()));
-    socket->write(command);
+{   
+	socket->write(c.ToString().toUtf8());
     socket->flush();
 }
 void Client::SendUsernameToServer()
 {
-	socket->write(QString("/me:"+name+'\n').toUtf8());
+	socket->write(QString("/me:"+name+"\n").toUtf8());
     socket->flush();
 }
