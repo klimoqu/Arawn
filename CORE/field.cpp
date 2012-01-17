@@ -7,7 +7,7 @@
   4 - Űr
   5 - Lyuk
 */
-Field::Field(uchar type, uchar x,uchar y)
+Field::Field(uchar x,uchar y,uchar type)
 {
     this->x=x;
     this->y=y;

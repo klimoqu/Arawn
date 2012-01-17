@@ -18,21 +18,32 @@ void Client::connectToServer(QString address)
 
 void Client::readyRead()
 {
-    QByteArray message=socket->readAll();
-    qDebug() << "meret: " << message.count();
-        if(message.count()==6)
-        {
-            uchar id=message.at(0);
-            uchar type=message.at(1);
-            int msg=message.right(4).toInt();
-            emit CommandReceivedFromServer(Command(id,type,msg));
-        }
-        else
-        {
-            qDebug() << message;
-            players = QString(message).split(",");
-            emit refreshPlayers();
-        }
+    while(socket->canReadLine())
+	{
+		QString line = QString::fromUtf8(socket->readLine()).trimmed();
+		qDebug() << "Read line:" << line;
+		QRegExp usersRegex("^/usernames:(.*)$");
+		QRegExp commandRegex("^/command:(.*)$");
+		if(usersRegex.indexIn(line) != -1)		///az auth rész
+		{
+			players = usersRegex.cap(1).split(",");
+			emit refreshPlayers();
+		}
+		else if(commandRegex.indexIn(line) != -1)									///command jön a servertõl
+		{
+			uchar id,type;
+			int msg;
+			QStringList command = commandRegex.cap(1).split(' ');
+			id=(uchar)command.at(0).toInt();
+			type=(uchar)command.at(0).toInt();
+			msg=command.at(0).toInt();
+			emit CommandReceivedFromServer(Command(id,type,msg));
+		}
+		else																		///egyéb hülyeség jön a klienstõl
+		{
+			qDebug() << "hülyeség jött";
+		}
+	}
 }
 void Client::SendCommandToServer(Command c)
 {
@@ -45,6 +56,6 @@ void Client::SendCommandToServer(Command c)
 }
 void Client::SendUsernameToServer()
 {
-    socket->write(name.toUtf8());
+	socket->write(QString("/me:"+name+'\n').toUtf8());
     socket->flush();
 }

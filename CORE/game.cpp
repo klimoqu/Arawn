@@ -218,7 +218,9 @@ void Game::sendmap()
 {
     for(uchar i=0;i<20;i++)
         for(uchar j=0;j<13;j++)
-            emit ServerExecute(Command(255,250,map->GetField(i,j)->GetType()*256*256+i*256+j));
+		{
+			emit ServerExecute(Command(255,250,map->GetField(i,j)->GetType()*256*256+i*256+j));
+		}
 }
 void Game::PlayerWin(uchar playerid,QString name)
 {
