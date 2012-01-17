@@ -1,4 +1,4 @@
-#include "NET/servernet.hpp"
+#include "servernet.hpp"
 #include <QRegExp>
 Servernet::Servernet(QObject *parent):QTcpServer(parent)
 {
