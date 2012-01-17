@@ -54,7 +54,6 @@ void Game::SetCup(Cup *cup)
         connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
     }
     connect(cup,SIGNAL(PlayerPointChanged(uchar,int)),this,SLOT(ChangePlayerPoint(uchar,int)));
-    qDebug()<<"setcup";
 }
 
 void Game::ConnectToServer(QString str)
