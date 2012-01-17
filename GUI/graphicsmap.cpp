@@ -1,4 +1,4 @@
-#include "GUI/graphicsmap.hpp"
+#include "graphicsmap.hpp"
 
 #define LE 2
 #define FEL 1

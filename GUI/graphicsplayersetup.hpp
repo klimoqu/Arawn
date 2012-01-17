@@ -2,7 +2,7 @@
 #define GRAPHICSPLAYERSETUP_HPP
 
 #include <QtGui>
-#include "arawnsettings.hpp"
+#include "../arawnsettings.hpp"
 
 class GraphicsPlayerSetup : public QGraphicsObject
 {

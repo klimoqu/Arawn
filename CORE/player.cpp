@@ -1,4 +1,4 @@
-#include "CORE/player.hpp"
+#include "player.hpp"
 Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower)
 {
     this->id=id;

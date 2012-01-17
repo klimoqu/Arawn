@@ -1,7 +1,7 @@
 #pragma once
 #include <QtCore>
-#include "CORE/player.hpp"
-#include "arawnsettings.hpp"
+#include "player.hpp"
+#include "../arawnsettings.hpp"
 
 class Cup : public QObject
 {

@@ -1,5 +1,5 @@
-#include "GUI/qgraphicsmenu.hpp"
-#include "GUI/qarawnwindow.hpp"
+#include "qgraphicsmenu.hpp"
+#include "qarawnwindow.hpp"
 
 
 

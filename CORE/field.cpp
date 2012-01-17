@@ -1,4 +1,4 @@
-#include "CORE/field.hpp"
+#include "field.hpp"
 /*
   0 - Fal
   1 - Doboz

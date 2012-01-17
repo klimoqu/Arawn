@@ -1,7 +1,7 @@
 #ifndef GRAPHICSNETWORKROOM_HPP
 #define GRAPHICSNETWORKROOM_HPP
 #include <QtGui>
-#include "CORE/game.hpp"
+#include "../CORE/game.hpp"
 
 class GraphicsNetworkRoom : public QGraphicsObject
 {

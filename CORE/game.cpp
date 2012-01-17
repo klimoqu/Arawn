@@ -1,4 +1,4 @@
-#include "CORE/game.hpp"
+#include "game.hpp"
 #include <QTimer>
 #include <math.h>
 

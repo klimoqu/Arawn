@@ -1,4 +1,4 @@
-#include "GUI/graphicsplayersetup.hpp"
+#include "graphicsplayersetup.hpp"
 
 GraphicsNPSetup::GraphicsNPSetup(QAbstractState *_backState, QState *_ownState)
 {

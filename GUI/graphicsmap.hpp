@@ -2,9 +2,9 @@
 #define GRAPHICSMAP_HPP
 
 #include <QtGui>
-#include "CORE/field.hpp"
-#include "CORE/game.hpp"
-#include "GUI/graphicsplayer.hpp"
+#include "../CORE/field.hpp"
+#include "../CORE/game.hpp"
+#include "graphicsplayer.hpp"
 
 class GraphicsMap : public QGraphicsObject
 {

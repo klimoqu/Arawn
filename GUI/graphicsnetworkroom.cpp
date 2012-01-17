@@ -1,4 +1,4 @@
-#include "GUI/graphicsnetworkroom.hpp"
+#include "graphicsnetworkroom.hpp"
 
 GraphicsNetworkRoom::GraphicsNetworkRoom()
 {

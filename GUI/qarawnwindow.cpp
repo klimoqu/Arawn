@@ -1,9 +1,9 @@
-#include "GUI/qarawnwindow.hpp"
-#include "GUI/graphicsnetworksettings.hpp"
-#include "GUI/graphicsplayersetup.hpp"
-#include "CORE/cup.hpp"
-#include "GUI/graphicsplayer.hpp"
-#include "GUI/graphicsnetworkroom.hpp"
+#include "qarawnwindow.hpp"
+#include "graphicsnetworksettings.hpp"
+#include "graphicsplayersetup.hpp"
+#include "../CORE/cup.hpp"
+#include "graphicsplayer.hpp"
+#include "graphicsnetworkroom.hpp"
 
 
 void QArawnWindow::initWindow()

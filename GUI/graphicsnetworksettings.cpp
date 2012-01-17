@@ -1,6 +1,6 @@
-#include "GUI/graphicsnetworksettings.hpp"
-#include "GUI/graphicsnetworkroom.hpp"
-#include "arawnsettings.hpp"
+#include "graphicsnetworksettings.hpp"
+#include "graphicsnetworkroom.hpp"
+#include "../arawnsettings.hpp"
 
 GraphicsNetworkSettings::GraphicsNetworkSettings(Game *_g, QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
 {

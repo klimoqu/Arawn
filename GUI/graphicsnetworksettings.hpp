@@ -1,7 +1,7 @@
 #ifndef GRAPHICSNETWORKSETTINGS_HPP
 #define GRAPHICSNETWORKSETTINGS_HPP
 #include <QtGui>
-#include "CORE/game.hpp"
+#include "../CORE/game.hpp"
 
 class GraphicsNetworkSettings : public QGraphicsObject
 {
