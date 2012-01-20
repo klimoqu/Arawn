@@ -25,7 +25,7 @@ signals:
     void playerBlasted();
 
 public slots:
-    void setMapIDs();
+    void setMapIDs(int ido);
     void plantBomb(uchar x, uchar y, uchar player);
     void plantBonus(uchar x, uchar y, uchar type);
     void deleteBonus(uchar x, uchar y, uchar type);

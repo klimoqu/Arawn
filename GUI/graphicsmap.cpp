@@ -13,7 +13,7 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     mapState = _mapState;
     cupState = _cupState;
 
-    connect(g, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs()));
+    connect(g, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)));
 
     connect(g, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
     connect(g, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
@@ -202,7 +202,7 @@ void GraphicsMap::blastPlayer(uchar player)
     update(players[player]->boundingRect());
 }
 
-void GraphicsMap::setMapIDs()
+void GraphicsMap::setMapIDs(int ido)
 {
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){

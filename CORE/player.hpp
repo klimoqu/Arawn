@@ -10,9 +10,9 @@ class Player : public QObject
     Q_OBJECT
 protected:
     /// Játékos X koordinátája
-    uchar pXcoord;
+    volatile uchar pXcoord;
     /// Játékos Y koordinátája
-    uchar pYcoord;
+    volatile uchar pYcoord;
     /// Játékos sebessége (1-)
     uchar pSpeed;
     /// Játékos által egyszerre lerakható bombák száma (1-)

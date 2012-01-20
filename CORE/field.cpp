@@ -23,7 +23,7 @@ Field::Field(uchar x,uchar y,uchar type)
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
     if(x!=this->x || this->y!=y)return;
-    emit BonusChanged(this->x,this->y,bonus->GetType(),false);
+    if(bonus)emit BonusChanged(this->x,this->y,bonus->GetType(),false);
     bonus=0;
     StartBurn(size,id,direction);
 }
@@ -57,7 +57,7 @@ void Field::SetBonus(Bonus *bonus)
 {
     if(this->type==0||this->type>3){delete bonus;return;}
     this->bonus=bonus;
-    connect(bonus,SIGNAL(TurnVisible()),this,SLOT(BonusTurnToVisible()));
+    connect(bonus,SIGNAL(TurnedVisible()),this,SLOT(BonusTurnToVisible()));
     connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
 	if(this->type==2){bonus->TurnVisible();}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QtCore>
 #include <QTimer>
 
 class Bomb : public QObject
@@ -20,6 +21,7 @@ public:
         qt.setSingleShot(true);
         qt.start(timeout);
         connect(&qt,SIGNAL(timeout()), this, SLOT(Boom()));
+		qDebug()<<"Bomb has been planted!";
     }
     uchar GetX()
     {
@@ -45,6 +47,7 @@ public slots:
     }
     void Boom(uchar x, uchar y)
     {
+		qDebug()<<"Boom";
         if(this->x==x && this->y==y)Boom();
     }
 };

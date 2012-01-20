@@ -92,6 +92,7 @@ void Game::MakeCommand(uchar c)
 }
 void Game::validate(Command c)
 {
+	qDebug()<<c.ToString();
 	if( c.GetMessageType()!=1 && c.GetMessageType()!=2 )
 	{
 		return;
@@ -139,6 +140,7 @@ void Game::validate(Command c)
 		}
 		if(c.GetMessage()%256==1 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
 		{
+
 			return;
 		}
 		if(c.GetMessage()%256==2 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
@@ -164,7 +166,7 @@ void Game::execute(Command c)
 	if(c.GetMessageType()==1)
 	{
 		map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage()%256);
-		qDebug()<<(int)map->GetPlayer(c.GetPlayerId())->GetX()<<(int)map->GetPlayer(c.GetPlayerId())->GetY();
+		qDebug()<<map->GetPlayer(c.GetPlayerId())->GetX()<<map->GetPlayer(c.GetPlayerId())->GetY();
 		if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsDeadly())
 		{
 			map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
