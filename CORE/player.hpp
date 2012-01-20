@@ -22,7 +22,7 @@ protected:
     /// A játékos él-e,robbantható-e,gebasz van a bombával
     bool live,blastable,fail,isvisible,isoppositecontrol;
     uchar id;
-    QTimer t_visible,t_oppositecontrol;
+    QTimer *t_visible,*t_oppositecontrol;
 
 public:
     Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower);

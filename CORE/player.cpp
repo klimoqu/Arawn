@@ -7,6 +7,8 @@ Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpow
     this->pBombPower=bombpower;
     this->maxbomb=maxbomb;
     this->maxpower=maxpower;
+	t_visible=new QTimer(this);
+	t_oppositecontrol=new QTimer(this);
 }
 void Player::Move(uchar direction)
 {
@@ -67,18 +69,18 @@ void Player::Die(uchar x, uchar y)
 void Player::Invisibility()
 {
     emit ChangeVisibility(this->id,true);
-    t_visible.stop();
-    t_visible.setSingleShot(true);
-    t_visible.start(6000);
-    connect(&t_visible,SIGNAL(timeout()),this,SLOT(returntovisible()()));
+    t_visible->stop();
+    t_visible->setSingleShot(true);
+    t_visible->start(6000);
+    connect(t_visible,SIGNAL(timeout()),this,SLOT(returntovisible()()));
 }
 void Player::InversControl()
 {
     isoppositecontrol=true;
-    t_oppositecontrol.stop();
-    t_oppositecontrol.setSingleShot(true);
-    t_oppositecontrol.start(6000);
-    connect(&t_oppositecontrol,SIGNAL(timeout()),this,SLOT(returntonormalcontrol()));
+    t_oppositecontrol->stop();
+    t_oppositecontrol->setSingleShot(true);
+    t_oppositecontrol->start(6000);
+    connect(t_oppositecontrol,SIGNAL(timeout()),this,SLOT(returntonormalcontrol()));
 }
 void Player::returntonormalcontrol()
 {
