@@ -35,8 +35,6 @@ void Player::SetStartPosition(uchar x, uchar y)
     pYcoord=y;
     live=true;
     blastable=false;
-    pBombsNum=1;
-    pBombPower=1;
 }
 void Player::DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir)
 {
