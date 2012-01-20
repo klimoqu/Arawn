@@ -31,6 +31,7 @@ public:
     void SetGameTime(int time){this->gametime=time;}
     void MakeCommand(uchar c);
     QStringList GetPlayers();
+	uchar GetPlaysersNumber();
     uchar GetFields(uchar x, uchar y){return fields[x][y];}
     bool IsSurvive() const {return survive;}
     Cup* GetCup() const {return cup;}

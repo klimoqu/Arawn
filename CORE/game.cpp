@@ -66,6 +66,10 @@ QStringList Game::GetPlayers()
     if(clientconnection)return clientconnection->GetPlayers();
     else return serverconnection->GetPlayers();
 }
+uchar Game::GetPlaysersNumber()
+{
+	return GetPlayers().size();
+}
 void Game::NewGame(int id)
 {
     destroymap.stop();

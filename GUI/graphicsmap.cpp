@@ -86,8 +86,8 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
     for(uchar i = 0; i < bonuses.length(); i++){
         bonuses[i]->paint(painter, o, w);
     }
-
-
+	playersCount=g->GetPlaysersNumber();
+	qDebug()<<"playersCount:"<<playersCount;
     // Játékosok
     for(uchar i = 0; i < playersCount; i++){
         players[i]->paint(painter, o, w);
