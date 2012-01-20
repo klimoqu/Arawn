@@ -148,6 +148,7 @@ void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 void GraphicsMap::movePlayer(uchar player, uchar dir)
 {
     players[player]->incAState();
+    players[player]->setDir(dir);
     switch(dir){
     case BALRA:
         players[player]->setX(players[player]->x()-40);
