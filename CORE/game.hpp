@@ -14,7 +14,7 @@ class Game : public QObject
     ArawnSettings *settings;
     Servernet *serverconnection;
     Client *clientconnection;
-    QTimer connectwait,gametimer,destroymap;
+    QTimer *connectwait,*gametimer,*destroymap;
     QMap<QTimer*,Command> tempcommands;
     uchar fields[20][13];
 

@@ -23,6 +23,9 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	this->playersnumber=playersnumber;
 	this->bombtimeout=bombtimeout;
 	this->playerid=0;
+	gametimer=new QTimer(this);
+	destroymap=new QTimer(this);
+	connectwait=new QTimer(this);
 	map=new Map(playersnumber,settings);
 	map->Upload(1);
 	clientconnection=0;
@@ -72,8 +75,8 @@ uchar Game::GetPlaysersNumber()
 }
 void Game::NewGame(int id)
 {
-	destroymap.stop();
-	gametimer.stop();
+	destroymap->stop();
+	gametimer->stop();
 	this->map->Upload(id);
 	sendmap();
 }
@@ -165,7 +168,6 @@ void Game::execute(Command c)
 	if(c.GetMessageType()==1)
 	{
 		map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage()%256);
-		qDebug()<<map->GetPlayer(c.GetPlayerId())->GetX()<<map->GetPlayer(c.GetPlayerId())->GetY();
 		if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsDeadly())
 		{
 			map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());
@@ -209,15 +211,16 @@ void Game::AllReady()
 	for(uchar i=0;i<playersnumber-1;i++)cup->AddPlayer(serverconnection->GetPlayers().at(i));
 	sendmap();
 	map->SetPlayersStartPoints();
-	connectwait.setSingleShot(true);
-	connectwait.start(1000);
-	connect(&connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
+	connectwait->setSingleShot(true);
+	connectwait->start(1000);
+	connect(connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
 }
 void Game::StartGame()
 {
 	Command ret=Command(255,251,settings->roundTimeDefault.toInt());
 	emit ServerValidate(ret);
 	emit GameStarted(settings->roundTimeDefault.toInt());
+	qDebug()<<settings->roundTimeDefault.toInt();
 }
 void Game::sendmap()
 {
@@ -235,16 +238,16 @@ void Game::PlayerWin(uchar playerid,QString name)
 void Game::TimeIsOver()
 {
 	act=0;
-	destroymap.setSingleShot(false);
-	destroymap.start(1000);
-	connect(&destroymap,SIGNAL(timeout()), this, SLOT(DestroyField));
+	destroymap->setSingleShot(false);
+	destroymap->start(1000);
+	connect(destroymap,SIGNAL(timeout()), this, SLOT(DestroyField));
 }
 void Game::DestroyField()
 {
 	emit ServerValidate(Command(255,6,256*256*4+256*act/13+act%13));
 	emit FieldDestroyedByMap(act/13,act%13);
 	act++;
-	if (act==260)destroymap.stop();
+	if (act==260)destroymap->stop();
 }
 void Game::GameIsEnd()
 {
