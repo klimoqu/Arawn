@@ -19,7 +19,6 @@ public:
         this->y=y;
         this->size=size;
 		QTimer::singleShot(timeout*1000, this, SLOT(Boom()));
-		qDebug()<<"Bomb has been planted!"<<timeout;
     }
     uchar GetX()
     {
@@ -40,7 +39,6 @@ signals:
 public slots:
     void Boom()
     {
-		qDebug()<<"Boom";
         canfail?emit Boomed(255,255,0,id,255):emit Boomed(this->x,this->y,this->size,id,255);
         emit DeleteThis(this);
     }
