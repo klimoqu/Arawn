@@ -32,6 +32,7 @@ public:
     Bomb* GetBomb(int i){return bombs[i];}
     void AddBomb(Bomb* b)
     {
+		qDebug()<<"mapboom";
         bombs.push_back(b);
         connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
     }
