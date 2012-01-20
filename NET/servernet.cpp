@@ -7,11 +7,9 @@ Servernet::Servernet(QObject *parent):QTcpServer(parent)
 	if(this->listen(QHostAddress::Any,(quint16)28300))
 	{
 		emit ServerIsRunning();
-		qDebug()<<"server okes";
 	}
 	else {
 		emit ServerNetworkError();
-		qDebug()<<"server gond";
 	}
 }
 void Servernet::incomingConnection(int socketfd)
