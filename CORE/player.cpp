@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include <QtCore>
 Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower)
 {
     this->id=id;
@@ -35,6 +36,7 @@ void Player::SetStartPosition(uchar x, uchar y)
     pYcoord=y;
     live=true;
     blastable=false;
+	this->fail=false;
 }
 void Player::DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir)
 {

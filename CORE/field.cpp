@@ -1,4 +1,5 @@
 #include "field.hpp"
+#include <QtCore>
 /*
   0 - Fal
   1 - Doboz
@@ -25,6 +26,7 @@ void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
     if(x!=this->x || this->y!=y)return;
     if(bonus)emit BonusChanged(this->x,this->y,bonus->GetType(),false);
     bonus=0;
+	qDebug()<<x<<y<<"boom";
     StartBurn(size,id,direction);
 }
 void Field::Extinction()
