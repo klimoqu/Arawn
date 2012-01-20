@@ -29,6 +29,8 @@ void Player::Move(uchar direction)
 }
 void Player::SetStartPosition(uchar x, uchar y)
 {
+	this->isoppositecontrol=false;
+	this->pSpeed=1;
     pXcoord=x;
     pYcoord=y;
     live=true;
