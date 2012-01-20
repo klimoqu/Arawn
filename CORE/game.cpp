@@ -164,6 +164,7 @@ void Game::execute(Command c)
     if(c.GetMessageType()==1)
     {
         map->GetPlayer(c.GetPlayerId())->Move(c.GetMessage()%256);
+		qDebug()<<(int)map->GetPlayer(c.GetPlayerId())->GetX()<<(int)map->GetPlayer(c.GetPlayerId())->GetY();
         if(map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->IsDeadly())
         {
             map->PlayerDie(c.GetPlayerId(),map->GetField(map->GetPlayer(c.GetPlayerId())->GetX(),map->GetPlayer(c.GetPlayerId())->GetY())->GetOwner());

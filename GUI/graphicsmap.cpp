@@ -47,6 +47,7 @@ GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphi
     bImages[BALRA+16] = new QImage(expl.copy(0,0,40,40));
     bImages[FEL+16] = new QImage(expl.copy(120,0,40,40));
     bImages[JOBBRA+16] = new QImage(expl.copy(80,0,40,40));
+	//hiányzik az alapállapot a 42-es
 
     // TODO load players
     players[0] = new GraphicsPlayer(0, this);
@@ -86,8 +87,9 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
     for(uchar i = 0; i < bonuses.length(); i++){
         bonuses[i]->paint(painter, o, w);
     }
-	playersCount=g->GetPlaysersNumber();
-	qDebug()<<"playersCount:"<<playersCount;
+
+	playersCount=g->GetPlaysersNumber();//ezt vagy itt, vagy valahol máshol, de le kell kérdezni
+
     // Játékosok
     for(uchar i = 0; i < playersCount; i++){
         players[i]->paint(painter, o, w);
@@ -96,7 +98,7 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
     // Tűz
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            painter->drawImage(i*40, j*40, *(bImages[burning[i][j]]));
+            if(burning[i][j]!=42)painter->drawImage(i*40, j*40, *(bImages[burning[i][j]]));//itt javítottam
         }
     }
     painter->restore();
