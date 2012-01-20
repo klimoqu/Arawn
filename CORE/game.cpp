@@ -92,7 +92,6 @@ void Game::MakeCommand(uchar c)
 }
 void Game::validate(Command c)
 {
-	qDebug()<<c.ToString();
 	if( c.GetMessageType()!=1 && c.GetMessageType()!=2 )
 	{
 		return;
@@ -194,7 +193,7 @@ void Game::execute(Command c)
 	{
 		uchar x=map->GetPlayer(c.GetPlayerId())->GetX();
 		uchar y=map->GetPlayer(c.GetPlayerId())->GetY();
-		map->AddBomb(new Bomb(x,y,c.GetPlayerId(),map->GetPlayer(c.GetPlayerId())->GetBombSize(),bombtimeout,map->GetPlayer(c.GetPlayerId())->CanFail()));
+		map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),c.GetPlayerId(),bombtimeout,map->GetPlayer(c.GetPlayerId())->CanFail()));
 		map->GetPlayer(c.GetPlayerId())->Plant();
 	}
 }

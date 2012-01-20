@@ -98,7 +98,7 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
     // Tűz
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            if(burning[i][j]!=42)painter->drawImage(i*40, j*40, *(bImages[burning[i][j]]));//itt javítottam
+			if(burning[i][j]!=42){qDebug()<<burning[i][j];painter->drawImage(i*40, j*40, *(bImages[burning[i][j]]));}//itt javítottam
         }
     }
     painter->restore();
@@ -135,7 +135,7 @@ void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
 
 void GraphicsMap::blastingOut(uchar x, uchar y)
 {
-    burning[x][y] += 50;
+    burning[x][y] =42;
     update(x*40, y*40, 40, 40);
 }
 
