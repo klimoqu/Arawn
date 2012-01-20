@@ -11,7 +11,11 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setDir(uchar d);
+    inline void setDir(uchar d)
+    {
+        dir = d;
+    }
+
     inline void incAState()
     {
         if(aState == 9) return;
