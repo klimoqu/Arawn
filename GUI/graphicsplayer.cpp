@@ -35,12 +35,6 @@ void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
     painter->drawImage(boundingRect(), *( pix[aState][dir]));
 }
 
-void GraphicsPlayer::setDir(uchar d)
-{
-    dir = d;
-}
-
-
 
 GraphicsBomb::GraphicsBomb(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {

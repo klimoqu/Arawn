@@ -276,9 +276,9 @@ void GraphicsTimer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
     painter->drawImage(0, 0, (secs > 0) ? clock : noclock);
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(font);
-    painter->drawText(QRectF(45, 0, 200, 66).translated(4,4), QString(secs/60 + ":" + secs%60), QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(45, 0, 200, 66).translated(4,4), QString::number(secs/60) + ":" + QString::number(secs%60), QTextOption(Qt::AlignCenter));
     painter->setPen(QColor(50, 150, 200));
-    painter->drawText(QRectF(45, 0, 200, 66), QString(secs/60 + ":" + secs%60), QTextOption(Qt::AlignCenter));
+    painter->drawText(QRectF(45, 0, 200, 66), QString::number(secs/60) + ":" + QString::number(secs%60), QTextOption(Qt::AlignCenter));
 
     painter->restore();
 }
