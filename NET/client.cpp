@@ -21,7 +21,6 @@ void Client::readyRead()
     while(socket->canReadLine())
 	{
 		QString line = QString::fromUtf8(socket->readLine()).trimmed();
-		qDebug() << "Read line:" << line;
 		QRegExp usersRegex("^/usernames:(.*)$");
 		QRegExp commandRegex("^/command:(.*)$");
 		if(usersRegex.indexIn(line) != -1)		///az auth rész

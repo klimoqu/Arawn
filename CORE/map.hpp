@@ -21,10 +21,11 @@ private:
     uchar playersnumber;
     QList<Bomb*> bombs;
     ArawnSettings *settings;
-    void bonusupload();
+    
 
 public:
     void Upload(int id);
+	void bonusupload();
     Map(uchar playersnumber,ArawnSettings *settings);
     uchar GetPlayersNumber(){return playersnumber;}
     Player* GetPlayer(uchar id){return id>=playersnumber ? 0:players[id];}

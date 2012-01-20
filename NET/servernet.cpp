@@ -34,7 +34,6 @@ void Servernet::readyRead()
 	while(client->canReadLine())
 	{
 		QString line = QString::fromUtf8(client->readLine()).trimmed();
-		qDebug() << "Read line:" << line;
 		QRegExp meRegex("^/me:(.*)$");
 		QRegExp commandRegex("^/command:(.*)$");
 		if(meRegex.indexIn(line) != -1 && players.size()<=this->playernumber)		///az auth rész

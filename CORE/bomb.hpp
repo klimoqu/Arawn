@@ -18,7 +18,7 @@ public:
         this->x=x;
         this->y=y;
         this->size=size;
-		QTimer::singleShot(timeout*1000, this, SLOT(Boom()));
+		QTimer::singleShot(timeout*100, this, SLOT(Boom()));
     }
     uchar GetX()
     {

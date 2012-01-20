@@ -211,16 +211,14 @@ void Game::AllReady()
 	for(uchar i=0;i<playersnumber-1;i++)cup->AddPlayer(serverconnection->GetPlayers().at(i));
 	sendmap();
 	map->SetPlayersStartPoints();
-	connectwait->setSingleShot(true);
-	connectwait->start(1000);
-	connect(connectwait,SIGNAL(timeout()), this, SLOT(StartGame()));
+	QTimer::singleShot(1000, this, SLOT(StartGame()));
 }
 void Game::StartGame()
 {
 	Command ret=Command(255,251,settings->roundTimeDefault.toInt());
 	emit ServerValidate(ret);
 	emit GameStarted(settings->roundTimeDefault.toInt());
-	qDebug()<<settings->roundTimeDefault.toInt();
+	QTimer::singleShot(settings->roundTimeDefault.toInt()*1000, this, SLOT(TimeIsOver()));
 }
 void Game::sendmap()
 {
@@ -229,6 +227,7 @@ void Game::sendmap()
 		{
 			emit ServerValidate(Command(255,250,map->GetField(i,j)->GetType()*256*256+i*256+j));
 		}
+		map->bonusupload();
 }
 void Game::PlayerWin(uchar playerid,QString name)
 {
@@ -239,8 +238,8 @@ void Game::TimeIsOver()
 {
 	act=0;
 	destroymap->setSingleShot(false);
-	destroymap->start(1000);
-	connect(destroymap,SIGNAL(timeout()), this, SLOT(DestroyField));
+	destroymap->start(100);
+	connect(destroymap,SIGNAL(timeout()), this, SLOT(DestroyField()));
 }
 void Game::DestroyField()
 {

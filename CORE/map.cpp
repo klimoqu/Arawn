@@ -42,6 +42,7 @@ void Map::Upload(int id)
             connect(Fields[i][j],SIGNAL(Extincted(uchar,uchar)),this,SLOT(FieldExcinguish(uchar,uchar)));
             connect(Fields[i][j],SIGNAL(FieldChanged(uchar,uchar,uchar)),this,SLOT(FieldChange(uchar,uchar,uchar)));
             connect(this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)),Fields[i][j],SLOT(Boom(uchar,uchar,uchar,uchar,uchar)));
+			connect(Fields[i][j],SIGNAL(BonusChanged(uchar,uchar,uchar,uchar)),this,SLOT(ChangeBonus(uchar,uchar,uchar,uchar)));
             for(uchar k=0;k<playersnumber;k++)
             {
                 connect(Fields[i][j],SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),players[k],SLOT(DieAndBlast(uchar,uchar,uchar,uchar,uchar)));
@@ -59,7 +60,6 @@ void Map::Upload(int id)
         }
     }
     input.close();
-    bonusupload();
 }
 void Map::bonusupload()
 {

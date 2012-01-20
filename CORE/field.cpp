@@ -60,7 +60,7 @@ void Field::SetBonus(Bonus *bonus)
     if(this->type==0||this->type>3){delete bonus;return;}
     this->bonus=bonus;
     connect(bonus,SIGNAL(TurnedVisible()),this,SLOT(BonusTurnToVisible()));
-    connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroye()));
+    connect(bonus,SIGNAL(PickUpOrDestroyed()),this,SLOT(BonusPickUpOrDestroyed()));
 	if(this->type==2){bonus->TurnVisible();}
 }
 void Field::Visit(Player* player)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QtCore>
 #include "player.hpp"
 
 class Bonus : public QObject

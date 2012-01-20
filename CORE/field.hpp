@@ -48,5 +48,5 @@ public slots:
     void Boom(uchar x,uchar y,uchar size, uchar id,uchar direction);
     void Extinction();
     void BonusTurnToVisible(){emit BonusChanged(this->x,this->y,bonus->GetType(),1);}
-    void BonusPickUpOrDestroye(){emit BonusChanged(this->x,this->y,bonus->GetType(),2);}
+    void BonusPickUpOrDestroyed(){emit BonusChanged(this->x,this->y,bonus->GetType(),2);}
 };
