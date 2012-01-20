@@ -111,19 +111,19 @@ void Game::validate(Command c)
 	{
 		if(!map->GetPlayer(c.GetPlayerId())->CanControll())
 		{
-			switch(c.GetMessage())
+			switch(c.GetMessage()%256)
 			{
 			case 0:
-				c=Command(c.GetPlayerId(),c.GetMessageType(),3);
+				c=Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()+3);
 				break;
 			case 1:
-				c=Command(c.GetPlayerId(),c.GetMessageType(),2);
+				c=Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()+1);
 				break;
 			case 2:
-				c=Command(c.GetPlayerId(),c.GetMessageType(),1);
+				c=Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-1);
 				break;
 			case 3:
-				c=Command(c.GetPlayerId(),c.GetMessageType(),0);
+				c=Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-3);
 				break;
 			default:
 				break;
@@ -155,7 +155,6 @@ void Game::validate(Command c)
 	{
 		return;
 	}
-
 	emit ServerValidate(c);
 	execute(c);
 }

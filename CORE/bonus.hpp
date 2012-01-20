@@ -10,11 +10,12 @@ class Bonus : public QObject
     bool usable;
 public:
     Bonus(uchar type);
+	void TurnVisible(){emit TurnedVisible();}
     bool IsUsable(){return usable;}
     uchar GetType(){return type;}
     void Pickup(Player *owner);
 signals:
-    void TurnVisible();
+    void TurnedVisible();
     void PickUpOrDestroyed();
 public slots:
 
