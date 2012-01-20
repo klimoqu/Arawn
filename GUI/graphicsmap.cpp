@@ -150,20 +150,42 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
     players[player]->incAState();
     switch(dir){
     case BALRA:
-        players[player]->setX(players[player]->x()-8);
+        players[player]->setX(players[player]->x()-40);
+        update(players[player]->x(), players[player]->y(), 80, 40);
         break;
     case FEL:
-        players[player]->setY(players[player]->y()-8);
+        players[player]->setY(players[player]->y()-40);
+        update(players[player]->x(), players[player]->y(), 40, 80);
         break;
     case LE:
-        players[player]->setY(players[player]->y()+8);
+        players[player]->setY(players[player]->y()+40);
+        update(players[player]->x(), players[player]->y()-40, 40, 80);
         break;
     case JOBBRA:
-        players[player]->setX(players[player]->x()+8);
+        players[player]->setX(players[player]->x()+40);
+        update(players[player]->x()-40, players[player]->y(), 80, 40);
         break;
     }
-    update(players[player]->x()*40-8, players[player]->y()*40-8, 56, 56);
 }
+//void GraphicsMap::movePlayer(uchar player, uchar dir)
+//{
+//    players[player]->incAState();
+//    switch(dir){
+//    case BALRA:
+//        players[player]->setX(players[player]->x()-8);
+//        break;
+//    case FEL:
+//        players[player]->setY(players[player]->y()-8);
+//        break;
+//    case LE:
+//        players[player]->setY(players[player]->y()+8);
+//        break;
+//    case JOBBRA:
+//        players[player]->setX(players[player]->x()+8);
+//        break;
+//    }
+//    update(players[player]->x()*40-8, players[player]->y()*40-8, 56, 56);
+//}
 
 void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {
