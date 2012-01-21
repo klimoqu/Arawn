@@ -41,7 +41,6 @@ void Servernet::readyRead()
 			QString user = meRegex.cap(1);
 			players.insert(client,user);
 			Command c((uchar)clients.size(),(uchar)255,(int)0);
-			qDebug()<<c.ToString();
 			client->write(c.ToString().toUtf8());
 			client->flush();
 			emit NewPlayerConnected();
