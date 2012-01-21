@@ -258,6 +258,38 @@ void GraphicsMap::destroyField(uchar x, uchar y)
     update(x*40, y*40, 40, 40);
 }
 
+void GraphicsMap::setGrabKeyboard()
+{
+    grabKeyboard();
+}
+
+void GraphicsMap::setUngrabKeyboard()
+{
+    ungrabKeyboard();
+}
+
+void GraphicsMap::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key()){
+    case Qt::Key_Up:
+        g->InputCommandFromGui(FEL);
+        break;
+    case Qt::Key_Down:
+        g->InputCommandFromGui(LE);
+        break;
+    case Qt::Key_Left:
+        g->InputCommandFromGui(BALRA);
+        break;
+    case Qt::Key_Right:
+        g->InputCommandFromGui(JOBBRA);
+        break;
+    case Qt::Key_Return:
+    case Qt::Key_Enter:
+        g->InputCommandFromGui(255);
+        break;
+    }
+}
+
 
 
 
@@ -347,38 +379,6 @@ void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     }
 
     painter->restore();
-}
-
-void GraphicsMap::setGrabKeyboard()
-{
-    grabKeyboard();
-}
-
-void GraphicsMap::setUngrabKeyboard()
-{
-    ungrabKeyboard();
-}
-
-void GraphicsMap::keyPressEvent(QKeyEvent *event)
-{
-    switch(event->key()){
-    case Qt::Key_Up:
-        g->InputCommandFromGui(FEL);
-        break;
-    case Qt::Key_Down:
-        g->InputCommandFromGui(LE);
-        break;
-    case Qt::Key_Left:
-        g->InputCommandFromGui(BALRA);
-        break;
-    case Qt::Key_Right:
-        g->InputCommandFromGui(JOBBRA);
-        break;
-    case Qt::Key_Return:
-    case Qt::Key_Enter:
-        g->InputCommandFromGui(255);
-        break;
-    }
 }
 
 

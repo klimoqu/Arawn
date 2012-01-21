@@ -103,6 +103,9 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+public slots:
+
+
 private:
     Cup *c;
     Game *g;

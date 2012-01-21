@@ -2,7 +2,7 @@
 #include "graphicsnetworkroom.hpp"
 #include "../arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(Game *_g, QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
+GraphicsNetworkSettings::GraphicsNetworkSettings(Game* &_g, QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
 {
     g = _g;
     gameState = _gameState;
