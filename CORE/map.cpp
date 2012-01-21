@@ -16,6 +16,7 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
 }
 void Map::Upload(int id)
 {
+	deadplayersnumber=0;
     if(Fields[0][0])
         for(uchar i=0; i<20; i++)
             for(uchar j = 0; j < 13; j++)

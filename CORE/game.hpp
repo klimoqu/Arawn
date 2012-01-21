@@ -36,6 +36,7 @@ public:
     bool IsSurvive() const {return survive;}
     Cup* GetCup() const {return cup;}
     void ConnectToServer(QString);
+	void GameIsEnd();
 
 signals:
 
@@ -66,6 +67,7 @@ signals:
     void PlayerTurnInvisible(uchar playerid);
 
     void PlayerSurvived(uchar id);
+	void PlayerWonTheRound(QString winnername);
     void PlayerWonTheCup(QString winnername);
     void PlayerPointChanged(uchar id, int point);
     void GameOver();
@@ -75,7 +77,6 @@ private slots:
     void WaitingCommandExecute();
     void StartGame();
     void TimeIsOver();
-    void GameIsEnd();
     void DestroyField();
 
 public slots:
@@ -86,7 +87,7 @@ public slots:
     void InputCommandFromMap(Command c){ServerValidate(c);}
 
     void AllReady();
-    void PlayerWin(uchar playerid,QString name);
+    void PlayerWinTheCup(uchar playerid,QString name);
     void ChangePlayerPoint(uchar id, int point){emit ServerValidate(Command(id,0,point));}
 
 };

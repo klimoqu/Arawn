@@ -18,7 +18,7 @@ private:
     std::ifstream input;
     Field* Fields[20][13];
     Player* players[4];
-    uchar playersnumber;
+    uchar playersnumber,deadplayersnumber;
     QList<Bomb*> bombs;
     ArawnSettings *settings;
     
@@ -66,8 +66,13 @@ public slots:
     }
     void PlayerDie(uchar id,uchar murderid)
     {
+		deadplayersnumber++;
         Command ret=Command(id,5,murderid);
         emit ServerCommand(ret);
+		if(deadplayersnumber==playersnumber-1)
+		{
+			for(uchar i=0;i<playersnumber;i++)if(players[i]->IsAlive())emit ServerCommand(Command(i,253,1));
+		}
     }
     void PlayerBlast(uchar id)
     {

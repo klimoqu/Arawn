@@ -57,6 +57,7 @@ void Game::SetCup(Cup *cup)
 		connect(this,SIGNAL(PlayerDied(uchar,uchar)),this->cup,SLOT(PlayerDie(uchar,uchar)));
 	}
 	connect(cup,SIGNAL(PlayerPointChanged(uchar,int)),this,SLOT(ChangePlayerPoint(uchar,int)));
+	connect(cup,SIGNAL(PlayerWonTheCup(uchar,QString)),this,SLOT(PlayerWinTheCup(uchar,QString)));
 }
 
 void Game::ConnectToServer(QString str)
@@ -229,7 +230,7 @@ void Game::sendmap()
 		}
 		map->bonusupload();
 }
-void Game::PlayerWin(uchar playerid,QString name)
+void Game::PlayerWinTheCup(uchar playerid,QString name)
 {
 	emit PlayerWonTheCup(name);
 	emit ServerValidate(Command(playerid,253,0));
@@ -246,11 +247,15 @@ void Game::DestroyField()
 	emit ServerValidate(Command(255,6,256*256*4+256*act/13+act%13));
 	emit FieldDestroyedByMap(act/13,act%13);
 	act++;
-	if (act==260)destroymap->stop();
+	if (act==260)
+	{
+		destroymap->stop();
+		GameIsEnd();
+	}
 }
 void Game::GameIsEnd()
 {
-	emit GameOver();
+	emit ServerValidate(Command(255,252,0));
 	for(uchar i=0;i<playersnumber;i++)
 		if(map->GetPlayer(i)->IsAlive())
 			emit PlayerSurvived(i);
@@ -333,7 +338,16 @@ void Game::clientsync(Command c)
 		}
 	case 253://a győztes
 		{
-			emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+			switch(c.GetMessage())
+			{
+			case 0:
+				emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+				break;
+			case 1:
+				emit PlayerWonTheRound(clientconnection->GetPlayers()[c.GetPlayerId()]);
+				if(map){destroymap->stop();GameIsEnd();}
+				break;
+			}
 			break;
 		}
 	case 254://alaphelyzetbe állítás
