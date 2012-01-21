@@ -1,11 +1,7 @@
 #pragma once
 #include "../CORE/command.hpp"
-#include <QtNetwork/QtNetwork>
-/*
+#include <QtNetwork>
 
-Tesztelésre vár, ne nyúlj hozzá
-
-*/
 class Client:public QObject
 {
     Q_OBJECT

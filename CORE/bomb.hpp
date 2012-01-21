@@ -42,7 +42,7 @@ public slots:
         canfail?emit Boomed(255,255,0,id,255):emit Boomed(this->x,this->y,this->size,id,255);
         emit DeleteThis(this);
     }
-    void Boom(uchar x, uchar y)
+    void Boom(uchar x, uchar y,uchar size,uchar id,uchar direction)
     {
         if(this->x==x && this->y==y)Boom();
     }

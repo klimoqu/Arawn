@@ -25,8 +25,6 @@ Field::Field(uchar x,uchar y,uchar type)
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
     if(x!=this->x || this->y!=y)return;
-    if(bonus)emit BonusChanged(this->x,this->y,bonus->GetType(),false);
-    bonus=0;
     StartBurn(size,id,255);
 }
 void Field::Extinction()
@@ -37,9 +35,27 @@ void Field::Extinction()
 }
 void Field::StartBurn(uchar size, uchar id,uchar direction)
 {
-    if(this->type==2){burning=true;this->id=id;}
-    if(this->type==3){this->type=1;emit FieldChanged(this->x,this->y,this->type);}
-    if(this->type==1){this->type=2;emit FieldChanged(this->x,this->y,this->type);if(bonus)bonus->TurnVisible();}
+	switch(type)
+	{
+	case 2:
+		burning=true;
+		if(bonus)
+		{
+			bonus->Destroy();
+			bonus=0;
+		}
+		this->id=id;
+		break;
+	case 3:
+		this->type=1;
+		emit FieldChanged(this->x,this->y,this->type);
+		break;
+	case 1:
+		this->type=2;
+		emit FieldChanged(this->x,this->y,this->type);
+		if(bonus)bonus->TurnVisible();
+		break;
+	}
     qt->stop();
     qt->setSingleShot(true);
     qt->start(1000);
