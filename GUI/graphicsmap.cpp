@@ -108,10 +108,10 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
     GraphicsBomb *bomb = new GraphicsBomb(player, this);
     bomb->setPos(x*40, y*40);
-    scene()->addItem(bomb);
     emit bombPlanted();
     bombs.append(bomb);
-    update(x*40, y*40, 40, 40);
+    //update(x*40, y*40, 40, 40);
+    update(boundingRect());
 }
 
 void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
@@ -202,7 +202,7 @@ void GraphicsMap::blastPlayer(uchar player)
     update(players[player]->boundingRect());
 }
 
-void GraphicsMap::setMapIDs(int ido)
+void GraphicsMap::setMapIDs(int)
 {
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
