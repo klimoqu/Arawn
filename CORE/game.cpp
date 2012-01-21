@@ -217,9 +217,7 @@ void Game::AllReady()
 }
 void Game::StartGame()
 {
-	Command ret=Command(255,251,settings->roundTimeDefault.toInt());
-	emit ServerValidate(ret);
-	emit GameStarted(settings->roundTimeDefault.toInt());
+	emit ServerValidate(Command(255,251,settings->roundTimeDefault.toInt()));
 	QTimer::singleShot(settings->roundTimeDefault.toInt()*1000, this, SLOT(TimeIsOver()));
 }
 void Game::sendmap()
