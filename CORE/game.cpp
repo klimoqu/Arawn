@@ -176,7 +176,7 @@ void Game::execute(Command c)
 		}
 		if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1 && c.GetMessage()<256)
 		{
-			QTimer *qt;
+			QTimer *qt=new QTimer(this);
 			qt->setSingleShot(true);
 			qt->start(50);
 			QTimer::singleShot(50,this, SLOT(WaitingCommandExecute()));
@@ -184,7 +184,7 @@ void Game::execute(Command c)
 		}
 		if(c.GetMessage()>65536 && (c.GetMessage()/256)%256>0)
 		{
-			QTimer *qt;
+			QTimer *qt=new QTimer(this);
 			qt->setSingleShot(true);
 			qt->start(50);
 			connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
