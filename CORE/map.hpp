@@ -34,7 +34,6 @@ public:
     {
         bombs.push_back(b);
         connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
-		connect(this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)),b,SLOT(Boom(uchar,uchar,uchar,uchar,uchar)));
     }
     void SetPlayersStartPoints();
 

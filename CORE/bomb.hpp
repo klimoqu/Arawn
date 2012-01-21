@@ -9,7 +9,7 @@ class Bomb : public QObject
     uchar x,y;
     uchar size,id;
     QTimer qt;
-    bool canfail;
+    bool canfail,boomed;
 public:
     Bomb(uchar x, uchar y, uchar size, uchar id,int timeout,bool canfail)
     {
@@ -18,6 +18,7 @@ public:
         this->x=x;
         this->y=y;
         this->size=size;
+		boomed=false;
 		QTimer::singleShot(timeout*100, this, SLOT(Boom()));
     }
     uchar GetX()
@@ -40,10 +41,11 @@ public slots:
     void Boom()
     {
         canfail?emit Boomed(255,255,0,id,255):emit Boomed(this->x,this->y,this->size,id,255);
-        emit DeleteThis(this);
+		boomed=true;
     }
     void Boom(uchar x, uchar y,uchar size,uchar id,uchar direction)
     {
-        if(this->x==x && this->y==y)Boom();
+        if(this->x==x && this->y==y && !boomed)Boom();
+		emit DeleteThis(this);
     }
 };
