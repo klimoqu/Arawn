@@ -80,6 +80,8 @@ void Game::NewGame(int id)
 	gametimer->stop();
 	this->map->Upload(id);
 	sendmap();
+	map->SetPlayersStartPoints();
+	QTimer::singleShot(1000, this, SLOT(StartGame()));
 }
 void Game::MakeCommand(uchar c)
 {

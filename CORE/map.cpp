@@ -64,12 +64,13 @@ void Map::Upload(int id)
 }
 void Map::bonusupload()
 {
-    for(unsigned int i=0;i<20;i++)
+    for(unsigned int i=1;i<19;i++)
     {
-        for(unsigned int j=0;j<13;j++)
+        for(unsigned int j=1;j<12;j++)
         {
-            switch(((int)Fields[i][j])%60)
+            switch(((int)Fields[i][j])%50)
             {
+			case 0:
             case 1:
             case 2:
             case 3:
