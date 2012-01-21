@@ -20,7 +20,6 @@ Field::Field(uchar x,uchar y,uchar type)
     this->left=0;
     this->right=0;
     this->bonus=0;
-	qt=new QTimer(this);
 }
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
