@@ -110,8 +110,7 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
     bomb->setPos(x*40, y*40);
     emit bombPlanted();
     bombs.append(bomb);
-    //update(x*40, y*40, 40, 40);
-    update(boundingRect());
+    update(x*40, y*40, 40, 40);
 }
 
 void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
@@ -222,7 +221,6 @@ void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
 {
     GraphicsBonus *bonus = new GraphicsBonus(type, x*40, y*40, this);
-    scene()->addItem(bonus);
     bonuses.append(bonus);
     update(x*40, y*40, 40, 40);
 }
