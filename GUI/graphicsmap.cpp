@@ -166,6 +166,7 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
         break;
     }
 }
+/*
 //void GraphicsMap::movePlayer(uchar player, uchar dir)
 //{
 //    players[player]->incAState();
@@ -185,6 +186,7 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
 //    }
 //    update(players[player]->x()*40-8, players[player]->y()*40-8, 56, 56);
 //}
+*/
 
 void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {

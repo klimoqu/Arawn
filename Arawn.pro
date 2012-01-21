@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     GUI/graphicsplayersetup.cpp \
     GUI/graphicsnetworksettings.cpp \
     NET/client.cpp \
-    GUI/graphicsnetworkroom.cpp
+    GUI/graphicsnetworkroom.cpp \
+    GUI/imagefactory.cpp
 
 HEADERS  += \
     GUI/qarawnwindow.hpp \
@@ -50,7 +51,8 @@ HEADERS  += \
     GUI/graphicsplayersetup.hpp \
     GUI/graphicsnetworksettings.hpp \
     NET/client.hpp \
-    GUI/graphicsnetworkroom.hpp
+    GUI/graphicsnetworkroom.hpp \
+    GUI/imagefactory.hpp
 
 FORMS    +=
 
@@ -100,6 +102,8 @@ TRANSLATIONS += GUI/res/Arawn_hu.ts \
 CODECFORSRC += UTF-8	
 	
 RESOURCES +=
+
+
 
 
 
