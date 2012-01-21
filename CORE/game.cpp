@@ -237,6 +237,7 @@ void Game::PlayerWinTheCup(uchar playerid,QString name)
 }
 void Game::TimeIsOver()
 {
+	if(survive)GameIsEnd();
 	act=0;
 	destroymap->setSingleShot(false);
 	destroymap->start(100);
@@ -256,7 +257,7 @@ void Game::DestroyField()
 void Game::GameIsEnd()
 {
 	emit ServerValidate(Command(255,252,0));
-	for(uchar i=0;i<playersnumber;i++)
+	if(survive)for(uchar i=0;i<playersnumber;i++)
 		if(map->GetPlayer(i)->IsAlive())
 			emit PlayerSurvived(i);
 }
@@ -341,10 +342,10 @@ void Game::clientsync(Command c)
 			switch(c.GetMessage())
 			{
 			case 0:
-				emit PlayerWonTheCup(clientconnection->GetPlayers()[c.GetPlayerId()]);
+				emit PlayerWonTheCup(GetPlayers()[c.GetPlayerId()]);
 				break;
 			case 1:
-				emit PlayerWonTheRound(clientconnection->GetPlayers()[c.GetPlayerId()]);
+				emit PlayerWonTheRound(GetPlayers()[c.GetPlayerId()]);
 				if(map){destroymap->stop();GameIsEnd();}
 				break;
 			}
@@ -353,6 +354,7 @@ void Game::clientsync(Command c)
 	case 254://alaphelyzetbe állítás
 		{
 			emit SetPlayerStartPosition(c.GetPlayerId(),(c.GetMessage()/256)%256,c.GetMessage()%256);
+			qDebug()<<c.ToString();
 			break;
 		}
 	case 255://azonosítás
