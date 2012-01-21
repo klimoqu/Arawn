@@ -25,7 +25,6 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	this->playerid=0;
 	gametimer=new QTimer(this);
 	destroymap=new QTimer(this);
-	connectwait=new QTimer(this);
 	map=new Map(playersnumber,settings);
 	map->Upload(1);
 	clientconnection=0;
@@ -177,10 +176,7 @@ void Game::execute(Command c)
 		}
 		if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1 && c.GetMessage()<256)
 		{
-			QTimer *qt;
-			qt->setSingleShot(true);
-			qt->start(50);
-			connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
+			QTimer::singleShot(50,this, SLOT(WaitingCommandExecute()));
 			tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),65536+256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
 		}
 		if(c.GetMessage()>65536 && (c.GetMessage()/256)%256>0)

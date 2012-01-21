@@ -12,7 +12,6 @@ class Field : public QObject
     Field *top,*right,*left,*bottom;
     uchar x,y;
     uchar id,type;
-    QTimer *qt;
     bool burning;
     Bonus *bonus;
 
