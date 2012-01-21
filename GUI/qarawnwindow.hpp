@@ -47,7 +47,6 @@ private:
     GraphicsMap *grMap;
     GraphicsTimer *grTimer;
     GraphicsCup *grCup;
-    Game* g;
     Cup* c;
 
     QState *stateLogo;

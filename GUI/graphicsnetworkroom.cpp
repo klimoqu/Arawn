@@ -109,25 +109,24 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 void GraphicsNetworkRoom::pushPlayer()
 {
-    playerNums = g->GetPlayers().size();
-    for(uchar i = 0; i < playerNums; i++) playerNames[i]=g->GetPlayers()[i];
+    playerNums = gameGlobal->GetPlayers().size();
+    for(uchar i = 0; i < playerNums; i++) playerNames[i]=gameGlobal->GetPlayers()[i];
     update(boundingRect());
 }
 
-void GraphicsNetworkRoom::setParams(Game *_g, QState *_ownState, QState *_gameState)
+void GraphicsNetworkRoom::setParams(QState *_ownState, QState *_gameState)
 {
-    g = _g;
-    playerNums = g->GetPlayers().size();
+    playerNums = gameGlobal->GetPlayers().size();
     for(uchar i = 0; i < playerNums; i++)
     {
-        playerNames[i]=g->GetPlayers()[i];
+        playerNames[i]=gameGlobal->GetPlayers()[i];
     }
     _ownState->assignProperty(this, "visible", true);
     _gameState->assignProperty(this, "visible", false);
-    _ownState->addTransition(g, SIGNAL(GameStarted(int)), _gameState);
-    connect(g, SIGNAL(GameStarted(int)), this, SLOT(deleteLater()));
-    connect(g, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));
-    connect(g, SIGNAL(RefreshPlayers()), this, SLOT(pushPlayer()));
+    _ownState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), _gameState);
+    connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(deleteLater()));
+    connect(gameGlobal, SIGNAL(NewPlayer()), this, SLOT(pushPlayer()));
+    connect(gameGlobal, SIGNAL(RefreshPlayers()), this, SLOT(pushPlayer()));
 }
 
 

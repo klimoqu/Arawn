@@ -2,9 +2,8 @@
 #include "graphicsnetworkroom.hpp"
 #include "../arawnsettings.hpp"
 
-GraphicsNetworkSettings::GraphicsNetworkSettings(Game*& _g, QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
+GraphicsNetworkSettings::GraphicsNetworkSettings(QAbstractState *backState, QState *ownState, QState *_roomState, QState *_gameState)
 {
-    g = *_g;
     gameState = _gameState;
     roomState = _roomState;
     title = tr("Connect to network");
@@ -129,10 +128,10 @@ void GraphicsNetworkSettings::keyPressEvent(QKeyEvent *event)
             selected = 2;
             update(-150,0,300,55);
             update(-360, 100, 362, 52);
-            g = new Game(ArawnSettings::instance()->defaultIPAddress);
-            connect(g, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
-            connect(g, SIGNAL(Connected()), this, SLOT(connectionOk()));
-            g->ConnectToServer(ArawnSettings::instance()->defaultIPAddress);
+            gameGlobal = new Game(ArawnSettings::instance()->defaultIPAddress);
+            connect(gameGlobal, SIGNAL(ConnectionFailed()), this, SLOT(connectionFail()));
+            connect(gameGlobal, SIGNAL(Connected()), this, SLOT(connectionOk()));
+            gameGlobal->ConnectToServer(aSetInstance->defaultIPAddress);
             return;
         case Qt::Key_Escape:
             emit previousState();
@@ -169,7 +168,7 @@ void GraphicsNetworkSettings::connectionOk()
     room->setPos(0, 0);
     room->setVisible(false);
     scene()->addItem(room);
-    room->setParams(g, roomState, gameState);
+    room->setParams(roomState, gameState);
     emit trNextState();
 }
 

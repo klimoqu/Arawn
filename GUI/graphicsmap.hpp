@@ -10,7 +10,7 @@ class GraphicsMap : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphicsItem *parent = 0);
+    GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *parent = 0);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -58,7 +58,6 @@ private:
     uchar burning[20][13];
     QMap<uchar, QImage*> bImages;
 
-    Game *g;
     QState *mapState;
     QState *cupState;
 };
@@ -98,7 +97,7 @@ class GraphicsCup : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    GraphicsCup(Game *_g);
+    GraphicsCup();
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -108,7 +107,6 @@ public slots:
 
 private:
     Cup *c;
-    Game *g;
     QImage bgnd;
     QImage cupImg;
     QFont font;

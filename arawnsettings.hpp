@@ -3,6 +3,8 @@
 
 #include <QtCore>
 
+class Game;
+
 enum PlayerColors
 {
     RED = 0xfff70f0f,
@@ -42,6 +44,8 @@ public:
     {
         return aSettings;
     }
+
+    Game* game;
 
     QVariantMap languageValues;
     QVariant language;
@@ -137,5 +141,6 @@ public:
 };
 
 #define aSetInstance ArawnSettings::instance()
+#define gameGlobal ArawnSettings::instance()->game
 
 #endif // ARAWNSETTINGS_HPP

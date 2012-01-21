@@ -275,7 +275,7 @@ void QArawnWindow::initializeMenus()
      stateMenu->assignProperty(pSetup, "pos", QPointF(scene->width(),0));
      scene->addItem(pSetup);
 
-     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(g, stateMenuHistory, stateNetSettings, roomState, stateGame);
+     GraphicsNetworkSettings *netSettingsItem = new GraphicsNetworkSettings(stateMenuHistory, stateNetSettings, roomState, stateGame);
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
@@ -340,7 +340,7 @@ void QArawnWindow::enterGame()
     pixFireItem->setVisible(false);
     firAnim->stop();
 
-    grMap = new GraphicsMap(g, mapState, cupState);
+    grMap = new GraphicsMap(mapState, cupState);
     grMap->setPos(-400, -230);
     mapState->assignProperty(grMap, "visible", true);
     cupState->assignProperty(grMap, "visible", false);
@@ -350,15 +350,15 @@ void QArawnWindow::enterGame()
     mapState->assignProperty(grTimer, "visible", true);
     cupState->assignProperty(grTimer, "visible", false);
     scene->addItem(grTimer);
-    grCup = new GraphicsCup(g);
+    grCup = new GraphicsCup();
     grCup->setPos(0,0);
     scene->addItem(grCup);
     mapState->assignProperty(grCup, "visible", false);
     cupState->assignProperty(grCup, "visible", true);
 
-    mapState->addTransition(g, SIGNAL(GameOver()), cupState);
-    cupState->addTransition(g, SIGNAL(GameStarted(int)), mapState);
-    connect(g, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
+    mapState->addTransition(gameGlobal, SIGNAL(GameOver()), cupState);
+    cupState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), mapState);
+    connect(gameGlobal, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
     connect(mapState, SIGNAL(entered()), grMap, SLOT(setGrabKeyboard()));
     connect(mapState, SIGNAL(exited()), grMap, SLOT(setUngrabKeyboard()));
 
@@ -388,29 +388,29 @@ void QArawnWindow::finishGame()
 
 void QArawnWindow::startSurvival()
 {
-    g = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, true);
+    gameGlobal = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, true);
     c = new Cup(aSetInstance);
-    g->SetCup(c);
+    gameGlobal->SetCup(c);
 
     GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
     room->setPos(0, 0);
     room->setVisible(false);
     scene->addItem(room);
-    room->setParams(g, roomState, stateGame);
+    room->setParams(roomState, stateGame);
     emit trRoom();
 }
 
 void QArawnWindow::startMurder()
 {
-    g = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, false);
+    gameGlobal = new Game(aSetInstance->noOfPlayers, aSetInstance->bombTimer.toInt(), aSetInstance, false);
     c = new Cup(aSetInstance);
-    g->SetCup(c);
+    gameGlobal->SetCup(c);
 
     GraphicsNetworkRoom *room = new GraphicsNetworkRoom;
     room->setPos(0, 0);
     room->setVisible(false);
     scene->addItem(room);
-    room->setParams(g, roomState, stateGame);
+    room->setParams(roomState, stateGame);
     emit trRoom();
 }
 

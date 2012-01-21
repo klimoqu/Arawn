@@ -6,28 +6,27 @@
 #define BALRA 0
 #define MINDEN 255
 
-GraphicsMap::GraphicsMap(Game *_g, QState *_mapState, QState *_cupState, QGraphicsItem *parent) :
+GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *parent) :
     QGraphicsObject(parent)
 {
-    g = _g;
     mapState = _mapState;
     cupState = _cupState;
 
-    connect(g, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)));
+    connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)));
 
-    connect(g, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
-    connect(g, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
-    connect(g, SIGNAL(FieldChanged(uchar,uchar,uchar)), this, SLOT(changeField(uchar,uchar,uchar)));
-    connect(g, SIGNAL(FieldExcinted(uchar,uchar)), this, SLOT(blastingOut(uchar,uchar)));
-    connect(g, SIGNAL(PlayerBlasted(uchar)), this, SLOT(blastPlayer(uchar)));
-    connect(g, SIGNAL(PlayerMoved(uchar,uchar)), this, SLOT(movePlayer(uchar,uchar)));
-    connect(g, SIGNAL(PlayerDied(uchar,uchar)), this, SLOT(diePlayer(uchar, uchar)));
-    connect(g, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)));
-    connect(g, SIGNAL(BonusTurnVisible(uchar,uchar,uchar)), this, SLOT(plantBonus(uchar,uchar,uchar)));
-    connect(g, SIGNAL(BonusTurnInvisible(uchar,uchar,uchar)), this, SLOT(deleteBonus(uchar,uchar,uchar)));
-    connect(g, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
-    connect(g, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
-    connect(g, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
+    connect(gameGlobal, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(FieldChanged(uchar,uchar,uchar)), this, SLOT(changeField(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(FieldExcinted(uchar,uchar)), this, SLOT(blastingOut(uchar,uchar)));
+    connect(gameGlobal, SIGNAL(PlayerBlasted(uchar)), this, SLOT(blastPlayer(uchar)));
+    connect(gameGlobal, SIGNAL(PlayerMoved(uchar,uchar)), this, SLOT(movePlayer(uchar,uchar)));
+    connect(gameGlobal, SIGNAL(PlayerDied(uchar,uchar)), this, SLOT(diePlayer(uchar, uchar)));
+    connect(gameGlobal, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(BonusTurnVisible(uchar,uchar,uchar)), this, SLOT(plantBonus(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(BonusTurnInvisible(uchar,uchar,uchar)), this, SLOT(deleteBonus(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
+    connect(gameGlobal, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
+    connect(gameGlobal, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
 
 
     fPixmaps[0] = new QImage("res/field0.png");
@@ -88,7 +87,7 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
         bonuses[i]->paint(painter, o, w);
     }
 
-	playersCount=g->GetPlaysersNumber();//ezt vagy itt, vagy valahol máshol, de le kell kérdezni
+        playersCount=gameGlobal->GetPlaysersNumber();//ezt vagy itt, vagy valahol máshol, de le kell kérdezni
 
     // Játékosok
     for(uchar i = 0; i < playersCount; i++){
@@ -205,7 +204,7 @@ void GraphicsMap::setMapIDs(int)
 {
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            mapIDs[i][j] = g->GetFields(i, j);
+            mapIDs[i][j] = gameGlobal->GetFields(i, j);
         }
     }
     update(boundingRect());
@@ -272,20 +271,20 @@ void GraphicsMap::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key()){
     case Qt::Key_Up:
-        g->InputCommandFromGui(FEL);
+        gameGlobal->InputCommandFromGui(FEL);
         break;
     case Qt::Key_Down:
-        g->InputCommandFromGui(LE);
+        gameGlobal->InputCommandFromGui(LE);
         break;
     case Qt::Key_Left:
-        g->InputCommandFromGui(BALRA);
+        gameGlobal->InputCommandFromGui(BALRA);
         break;
     case Qt::Key_Right:
-        g->InputCommandFromGui(JOBBRA);
+        gameGlobal->InputCommandFromGui(JOBBRA);
         break;
     case Qt::Key_Return:
     case Qt::Key_Enter:
-        g->InputCommandFromGui(255);
+        gameGlobal->InputCommandFromGui(255);
         break;
     }
 }
@@ -331,10 +330,9 @@ void GraphicsTimer::tick()
 
 
 
-GraphicsCup::GraphicsCup(Game *_g)
+GraphicsCup::GraphicsCup()
 {
-    g = _g;
-    c = g->GetCup();
+    c = gameGlobal->GetCup();
     bgnd = QImage("res/fire.jpg").scaled(800, 600, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     cupImg = QImage("res/cup.png");
     font = qApp->font();
@@ -356,11 +354,11 @@ void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setFont(font);
     painter->setPen(QColor(100, 10, 10, 200));
     painter->drawText(QRectF(-300, -300, 600, 66).translated(4,4),
-                      (g->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
+                      (gameGlobal->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
                       QTextOption(Qt::AlignCenter));
     painter->setPen(QColor(50, 150, 200));
     painter->drawText(QRectF(-300, -300, 600, 66),
-                      (g->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
+                      (gameGlobal->IsSurvive())?(tr("Survival cup")):(tr("Murder cup")),
                       QTextOption(Qt::AlignCenter));
 
 
