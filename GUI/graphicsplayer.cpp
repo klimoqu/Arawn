@@ -38,20 +38,24 @@ void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
 
 GraphicsBomb::GraphicsBomb(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-    QImage bombsF("res/bombs.hpp");
+    QImage bombsF("res/bombs.png");
     aState = 0;
     for(uchar i = 0; i < 4; i++){
         if(p == 0){
             pix [i] = new QImage(bombsF.copy(i*40, 0, 40, 40));
+            return;
         }
         if(p == 1){
             pix [i] = new QImage(bombsF.copy(i*40, 40, 40, 40));
+            return;
         }
         if(p == 2){
             pix [i] = new QImage(bombsF.copy(i*40, 80, 40, 40));
+            return;
         }
         if(p == 3){
             pix [i] = new QImage(bombsF.copy(i*40, 120, 40, 40));
+            return;
         }
     }
 
