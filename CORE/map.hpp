@@ -22,7 +22,6 @@ private:
     QList<Bomb*> bombs;
     ArawnSettings *settings;
     
-
 public:
     void Upload(int id);
 	void bonusupload();
