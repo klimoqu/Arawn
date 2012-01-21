@@ -7,7 +7,7 @@ class GraphicsNetworkSettings : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit GraphicsNetworkSettings(Game*& _g, QAbstractState *_backState, QState *_ownState, QState *_roomState, QState *_gameState);
+    explicit GraphicsNetworkSettings(Game *_g, QAbstractState *_backState, QState *_ownState, QState *_roomState, QState *_gameState);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
