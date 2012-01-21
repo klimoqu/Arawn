@@ -176,6 +176,9 @@ void Game::execute(Command c)
 		}
 		if(map->GetPlayer(c.GetPlayerId())->GetSpeed()>1 && c.GetMessage()<256)
 		{
+			QTimer *qt;
+			qt->setSingleShot(true);
+			qt->start(50);
 			QTimer::singleShot(50,this, SLOT(WaitingCommandExecute()));
 			tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),65536+256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
 		}
