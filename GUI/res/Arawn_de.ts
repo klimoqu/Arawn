@@ -733,7 +733,7 @@ Das wird in QT von Móreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ge
     <message>
         <location filename="../qarawnwindow.cpp" line="248"/>
         <source>Resolution</source>
-        <translation type="unfinished">Resolution</translation>
+        <translation>Resolution</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="249"/>

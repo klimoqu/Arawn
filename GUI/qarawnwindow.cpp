@@ -74,6 +74,53 @@ void QArawnWindow::initializeOthers()
     sounds[13] = new QSound("res/13_klatsch.wav", this);
     sounds[14] = new QSound("res/arawn.wav", this);
 
+    audioOut = new Phonon::AudioOutput(Phonon::GameCategory, this);
+    media[0] = new Phonon::MediaObject(this);
+    media[0]->setCurrentSource(Phonon::MediaSource("res/0_tofrommenu.wav"));
+    Phonon::createPath(media[0], audioOut);
+    media[1] = new Phonon::MediaObject(this);
+    media[1]->setCurrentSource(Phonon::MediaSource("res/1_changemenu.wav"));
+    Phonon::createPath(media[1], audioOut);
+    media[2] = new Phonon::MediaObject(this);
+    media[2]->setCurrentSource(Phonon::MediaSource("res/2_step.wav"));
+    Phonon::createPath(media[2], audioOut);
+    media[3] = new Phonon::MediaObject(this);
+    media[3]->setCurrentSource(Phonon::MediaSource("res/3_putbomb.wav"));
+    Phonon::createPath(media[3], audioOut);
+    media[4] = new Phonon::MediaObject(this);
+    media[4]->setCurrentSource(Phonon::MediaSource("res/4_explode.wav"));
+    Phonon::createPath(media[4], audioOut);
+    media[5] = new Phonon::MediaObject(this);
+    media[5]->setCurrentSource(Phonon::MediaSource("res/5_getextra.wav"));
+    Phonon::createPath(media[5], audioOut);
+    media[6] = new Phonon::MediaObject(this);
+    media[6]->setCurrentSource(Phonon::MediaSource("res/6_die.wav"));
+    Phonon::createPath(media[6], audioOut);
+    media[7] = new Phonon::MediaObject(this);
+    media[7]->setCurrentSource(Phonon::MediaSource("res/7_splash1a.wav"));
+    Phonon::createPath(media[7], audioOut);
+    media[8] = new Phonon::MediaObject(this);
+    media[8]->setCurrentSource(Phonon::MediaSource("res/8_splash2a.wav"));
+    Phonon::createPath(media[8], audioOut);
+    media[9] = new Phonon::MediaObject(this);
+    media[9]->setCurrentSource(Phonon::MediaSource("res/9_corpse_explode.wav"));
+    Phonon::createPath(media[9], audioOut);
+    media[10] = new Phonon::MediaObject(this);
+    media[10]->setCurrentSource(Phonon::MediaSource("res/10_deepfall.wav"));
+    Phonon::createPath(media[10], audioOut);
+    media[11] = new Phonon::MediaObject(this);
+    media[11]->setCurrentSource(Phonon::MediaSource("res/11_hurry_up.wav"));
+    Phonon::createPath(media[11], audioOut);
+    media[12] = new Phonon::MediaObject(this);
+    media[12]->setCurrentSource(Phonon::MediaSource("res/12_time_over.wav"));
+    Phonon::createPath(media[12], audioOut);
+    media[13] = new Phonon::MediaObject(this);
+    media[13]->setCurrentSource(Phonon::MediaSource("res/13_klatsch.wav"));
+    Phonon::createPath(media[13], audioOut);
+    media[14] = new Phonon::MediaObject(this);
+    media[14]->setCurrentSource(Phonon::MediaSource("res/arawn.wav"));
+    Phonon::createPath(media[14], audioOut);
+
 
 //! [Arawnscreen részletei]
 
@@ -167,7 +214,7 @@ void QArawnWindow::initializeOthers()
     connect(stateArawn, SIGNAL(entered()), this, SLOT(showArawnScreen()));
     connect(stateArawn, SIGNAL(entered()), timerStArawnToStMM, SLOT(start()));
     connect(stateArawn, SIGNAL(exited()), this, SLOT(enterMenus()));
-    connect(stateArawn, SIGNAL(exited()), sounds[0], SLOT(play()));
+    connect(stateArawn, SIGNAL(exited()), media[0], SLOT(play()));
 
     stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMenu);
 
@@ -292,8 +339,8 @@ void QArawnWindow::showArawnScreen()
     scene->addItem(pixFireItem);
     scene->addItem(pixArawnItem);
     scene->addItem(pixHirItem);
-    playSound(14);
-
+    //playSound(14);
+    media[14]->play();
 }
 
 void QArawnWindow::playSound(uchar n)

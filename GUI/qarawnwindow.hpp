@@ -1,6 +1,7 @@
 #ifndef QARAWNWINDOW_HPP
 #define QARAWNWINDOW_HPP
 
+#include <phonon/phonon>
 #include <QtGui>
 #include "pixmapobjectitem.hpp"
 #include "qgraphicsmenu.hpp"
@@ -36,6 +37,9 @@ private:
 
     QStateMachine *machine;
     QSound* sounds[15];
+
+    Phonon::MediaObject* media[15];
+    Phonon::AudioOutput* audioOut;
 
     PixmapObjectItem *pixWelcomeItem;
     PixmapObjectItem *pixFireItem;
