@@ -1,4 +1,5 @@
 #include "graphicsmap.hpp"
+#include "GUI/imagefactory.hpp"
 
 #define LE 2
 #define FEL 1
@@ -29,12 +30,12 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
 
 
-    fPixmaps[0] = new QImage("res/field0.png");
-    fPixmaps[1] = new QImage("res/field1.png");
-    fPixmaps[2] = new QImage("res/field2.png");
-    fPixmaps[3] = new QImage("res/field3.png");
-    fPixmaps[4] = new QImage(40,40, QImage::Format_Mono);
-    fPixmaps[5] = new QImage("res/field5.png");
+    fPixmaps[0] = imgFact->fieldImages[0];
+    fPixmaps[1] = imgFact->fieldImages[1];
+    fPixmaps[2] = imgFact->fieldImages[2];
+    fPixmaps[3] = imgFact->fieldImages[3];
+    fPixmaps[4] = imgFact->fieldImages[4];
+    fPixmaps[5] = imgFact->fieldImages[5];
 
     QImage expl("res/explosion.png");
     bImages[LE] = new QImage(expl.copy(160, 0, 40, 40));

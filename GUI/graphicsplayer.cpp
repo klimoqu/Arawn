@@ -1,4 +1,5 @@
 #include "graphicsplayer.hpp"
+#include "GUI/imagefactory.hpp"
 
 GraphicsPlayer::GraphicsPlayer(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
@@ -38,25 +39,9 @@ void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
 
 GraphicsBomb::GraphicsBomb(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-    QImage bombsF("res/bombs.png");
     aState = 0;
     for(uchar i = 0; i < 4; i++){
-        if(p == 0){
-            pix [i] = new QImage(bombsF.copy(i*40, 0, 40, 40));
-            return;
-        }
-        if(p == 1){
-            pix [i] = new QImage(bombsF.copy(i*40, 40, 40, 40));
-            return;
-        }
-        if(p == 2){
-            pix [i] = new QImage(bombsF.copy(i*40, 80, 40, 40));
-            return;
-        }
-        if(p == 3){
-            pix [i] = new QImage(bombsF.copy(i*40, 120, 40, 40));
-            return;
-        }
+       pix[i] = imgFact->bombImages[p][i];
     }
 
 }
@@ -80,37 +65,8 @@ void GraphicsBomb::incAState()
 GraphicsBonus::GraphicsBonus(uchar type, int xcoord, int ycoord, QGraphicsItem *parent) :
     QGraphicsItem(parent)
 {
-    QImage extrasF("res/extras.png");
     setPos(xcoord, ycoord);
-    switch(type){
-    case 1:
-        pix = new QImage(extrasF.copy(40, 0, 40, 40));
-        return;
-    case 2:
-        pix = new QImage(extrasF.copy(360, 0, 40, 40));
-        return;
-    case 3:
-        pix = new QImage(extrasF.copy(0, 0, 40, 40));
-        return;
-    case 4:
-        pix = new QImage(extrasF.copy(320, 0, 40, 40));
-        return;
-    case 5:
-        pix = new QImage(extrasF.copy(80, 0, 40, 40));
-        return;
-    case 6:
-        pix = new QImage(extrasF.copy(400, 0, 40, 40));
-        return;
-    case 7:
-        pix = new QImage(extrasF.copy(280, 0, 40, 40));
-        return;
-    case 8:
-        pix = new QImage(extrasF.copy(240, 0, 40, 40));
-        return;
-    case 9:
-        pix = new QImage(extrasF.copy(200, 0, 40, 40));
-        return;
-    }
+    pix = imgFact->bonusImages[type-1];
 }
 
 QRectF GraphicsBonus::boundingRect() const

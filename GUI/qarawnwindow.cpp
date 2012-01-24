@@ -4,6 +4,7 @@
 #include "../CORE/cup.hpp"
 #include "graphicsplayer.hpp"
 #include "graphicsnetworkroom.hpp"
+#include "GUI/imagefactory.hpp"
 
 
 void QArawnWindow::initWindow()
@@ -54,6 +55,8 @@ void QArawnWindow::initializeOthers()
     QFontDatabase fdb;
     //font = fdb.font("Screengem", "Normal", 36);
     qApp->setFont(fdb.font("Screengem", "Normal", 36));
+
+    ImageFactory::build();
 
     sounds[0] = new QSound("res/0_tofrommenu.wav", this);
     sounds[1] = new QSound("res/1_changemenu.wav", this);
@@ -329,6 +332,7 @@ void QArawnWindow::enterMenus()
 
 void QArawnWindow::closeEvent(QCloseEvent *event)
 {
+    ImageFactory::clear();
     ArawnSettings::instance()->save();
     ArawnSettings::deleteInstance();
     event->accept();

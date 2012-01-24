@@ -1,5 +1,3 @@
 #include "imagefactory.hpp"
 
-ImageFactory::ImageFactory()
-{
-}
+ImageFactory* ImageFactory::factory = 0;
