@@ -409,8 +409,8 @@
         <location filename="../qgraphicsmenu.cpp" line="298"/>
         <source>This is a bomberman like game inspired by the well known ClanBomber.
 It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</source>
-        <translation type="unfinished">Ez egy bomberman tipusú játék, melyet a Clanbomber ihletett. 
-2011-ben írta Moréh Tamas, Klicsu Zsolt és Quintz Gábor QT keretrendszerben.</translation>
+        <translation>Ez egy bomberman tipusú játék, melyet a Clanbomber ihletett. 
+2011-ben írta Moréh Tamas, Klicsu Zsolt és Quintz Gábor QT 4.8 keretrendszerben.</translation>
     </message>
 </context>
 <context>
@@ -443,17 +443,17 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsplayersetup.cpp" line="7"/>
         <source>#1 Network player</source>
-        <translation>#1 Hálózati játékos</translation>
+        <translation>1. Hálózati játékos</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="8"/>
         <source>#2 Network player</source>
-        <translation>#2 Hálózati játékos</translation>
+        <translation>2. Hálózati játékos</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="9"/>
         <source>#3 Network player</source>
-        <translation>#3 Hálózati játékos</translation>
+        <translation>3. Hálózati játékos</translation>
     </message>
 </context>
 <context>
@@ -461,22 +461,22 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="5"/>
         <source>#1 player</source>
-        <translation>#1 játékos</translation>
+        <translation>1. játékos</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="6"/>
         <source>#2 player</source>
-        <translation>#2 játékos</translation>
+        <translation>2. játékos</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="7"/>
         <source>#3 player</source>
-        <translation>#3 játékos</translation>
+        <translation>3. játékos</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="8"/>
         <source>#4 player</source>
-        <translation>#4 játékos</translation>
+        <translation>4. játékos</translation>
     </message>
 </context>
 <context>
@@ -494,7 +494,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
-        <translation>Kapcsolódás</translation>
+        <translation>Csatlakozás</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="13"/>
@@ -518,22 +518,22 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../graphicsplayersetup.cpp" line="180"/>
         <source>Human player</source>
-        <translation>Emberi játékos</translation>
+        <translation>Kézi játékos</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="181"/>
         <source>#1 CPU player</source>
-        <translation>#1 gépi játékos</translation>
+        <translation>1. gépi játékos</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="182"/>
         <source>#2 CPU player</source>
-        <translation>#2 gépi játékos</translation>
+        <translation>2. gépi játékos</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="183"/>
         <source>#3 CPU player</source>
-        <translation>#3 gépi játékos</translation>
+        <translation>3. gépi játékos</translation>
     </message>
 </context>
 <context>
@@ -605,14 +605,14 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
         <location filename="../qarawnwindow.cpp" line="224"/>
         <source>Start/max extras</source>
         <translatorcomment>extrák ki be</translatorcomment>
-        <translation>Extrák engedélyezése</translation>
+        <translation>Extrák beállítása</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="196"/>
         <location filename="../qarawnwindow.cpp" line="225"/>
         <source>Enable diseases</source>
         <translatorcomment>sziavtások</translatorcomment>
-        <translation>Szivatások</translation>
+        <translation>Nehezítések beállítása</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="197"/>
@@ -624,7 +624,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
         <location filename="../qarawnwindow.cpp" line="198"/>
         <location filename="../qarawnwindow.cpp" line="227"/>
         <source>Points to win</source>
-        <translation>Végcél</translation>
+        <translation>Győzelmi pontok</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="199"/>
@@ -638,7 +638,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
         <location filename="../qarawnwindow.cpp" line="229"/>
         <source>Bomb speed f/10 sec</source>
         <translatorcomment>bomba sebessége field/sec</translatorcomment>
-        <translation>Bomba sebessége (mező/10 s)</translation>
+        <translation>Bomba sebessége (f/10 s)</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="202"/>
@@ -720,7 +720,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
     <message>
         <location filename="../qarawnwindow.cpp" line="216"/>
         <source>Connect</source>
-        <translation>Kapcsolódás</translation>
+        <translation>Csatlakozás</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="244"/>

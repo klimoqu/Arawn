@@ -410,7 +410,7 @@
         <source>This is a bomberman like game inspired by the well known ClanBomber.
 It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</source>
         <translation>Das ist eine Spiele wie Bomberman, das legt Clanbomber zugrunde.
-Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 geschrieben.</translation>
+Das wird in QT von Móreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 geschrieben.</translation>
     </message>
 </context>
 <context>
@@ -419,7 +419,7 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../graphicsmap.cpp" line="304"/>
         <location filename="../graphicsmap.cpp" line="308"/>
         <source>Survival cup</source>
-        <translation>Überlebliche Pokal</translation>
+        <translation>Längstlebende Pokal</translation>
     </message>
     <message>
         <location filename="../graphicsmap.cpp" line="304"/>
@@ -433,27 +433,27 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../graphicsplayersetup.cpp" line="5"/>
         <source>Players setup</source>
-        <translation>die Einstellung der Spielers</translation>
+        <translation>Spielereinstellungen</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="6"/>
         <source>Local player</source>
-        <translation>lokale Spieler</translation>
+        <translation>Lokale Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="7"/>
         <source>#1 Network player</source>
-        <translation>#1 netzwerke Spiler</translation>
+        <translation>1. Net Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="8"/>
         <source>#2 Network player</source>
-        <translation>#2 netzwerke Spiler</translation>
+        <translation>2. Net Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="9"/>
         <source>#3 Network player</source>
-        <translation>#3 netzwerke Spiler</translation>
+        <translation>3. Net Spieler</translation>
     </message>
 </context>
 <context>
@@ -461,22 +461,22 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="5"/>
         <source>#1 player</source>
-        <translation>#1 Spieler</translation>
+        <translation>1. Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="6"/>
         <source>#2 player</source>
-        <translation>#2 Spieler</translation>
+        <translation>2. Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="7"/>
         <source>#3 player</source>
-        <translation>#3 Spieler</translation>
+        <translation>3. Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsnetworkroom.cpp" line="8"/>
         <source>#4 player</source>
-        <translation>#4 Spieler</translation>
+        <translation>4. Spieler</translation>
     </message>
 </context>
 <context>
@@ -484,7 +484,7 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="10"/>
         <source>Connect to network</source>
-        <translation>beitreten zum Netzwerk</translation>
+        <translation>Anschluss zum Netzwerk</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="11"/>
@@ -494,18 +494,18 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="12"/>
         <source>Connect</source>
-        <translation>Beitritt</translation>
+        <translation>Anschluss</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="13"/>
         <location filename="../graphicsnetworksettings.cpp" line="128"/>
         <source>Connecting...</source>
-        <translation>Beitreten…</translation>
+        <translation>Anschluss…</translation>
     </message>
     <message>
         <location filename="../graphicsnetworksettings.cpp" line="162"/>
         <source>Fail!</source>
-        <translation>Erfolglos!</translation>
+        <translation>Misserfolg!</translation>
     </message>
 </context>
 <context>
@@ -513,27 +513,27 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../graphicsplayersetup.cpp" line="179"/>
         <source>Players setup</source>
-        <translation>die Einstellung der Spielers</translation>
+        <translation>Spielereinstellung</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="180"/>
         <source>Human player</source>
-        <translation>männschliche Spieler</translation>
+        <translation>Tastaturspieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="181"/>
         <source>#1 CPU player</source>
-        <translation>#1 mechanische Spieler</translation>
+        <translation>1. CPU Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="182"/>
         <source>#2 CPU player</source>
-        <translation>#2 mechanische Spieler</translation>
+        <translation>2. CPU Spieler</translation>
     </message>
     <message>
         <location filename="../graphicsplayersetup.cpp" line="183"/>
         <source>#3 CPU player</source>
-        <translation>#3 mechanische Spieler</translation>
+        <translation>3. CPU Spieler</translation>
     </message>
 </context>
 <context>
@@ -556,23 +556,23 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../qarawnwindow.cpp" line="185"/>
         <source>Options</source>
-        <translation>Einstellung</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="186"/>
         <source>Credits</source>
-        <translation>Karte</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="187"/>
         <source>Quit</source>
-        <translation>Austritt</translation>
+        <translation>Zurück zum System</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="189"/>
         <location filename="../qarawnwindow.cpp" line="218"/>
         <source>Player setup</source>
-        <translation>die Einstellung der Spielers</translation>
+        <translation>Spielereinstellungen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="190"/>
@@ -584,37 +584,37 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../qarawnwindow.cpp" line="191"/>
         <location filename="../qarawnwindow.cpp" line="220"/>
         <source>Game settings</source>
-        <translation>die Einstellung des Spiels</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="192"/>
         <location filename="../qarawnwindow.cpp" line="221"/>
         <source>Start survival cup</source>
-        <translation>Überlebliche Pokal beginnen</translation>
+        <translation>Start Längstlebende</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="193"/>
         <location filename="../qarawnwindow.cpp" line="222"/>
         <source>Start murder cup</source>
-        <translation>Mörder Pokal beginnen</translation>
+        <translation>Start Mörder</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="195"/>
         <location filename="../qarawnwindow.cpp" line="224"/>
         <source>Start/max extras</source>
-        <translation>Extras genehmigen</translation>
+        <translation>Extras einstellen</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="196"/>
         <location filename="../qarawnwindow.cpp" line="225"/>
         <source>Enable diseases</source>
-        <translation>negative Extra</translation>
+        <translation>Schwierigkeiten</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="197"/>
         <location filename="../qarawnwindow.cpp" line="226"/>
         <source>Round time</source>
-        <translation>Zeit der Rund</translation>
+        <translation>Rundzeit</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="198"/>
@@ -626,13 +626,13 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../qarawnwindow.cpp" line="199"/>
         <location filename="../qarawnwindow.cpp" line="228"/>
         <source>Bomb timer 1/10 sec</source>
-        <translation>Zeit der Explosion (0,1 sec)</translation>
+        <translation>Zeit zum Explosion (0,1 sec)</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="200"/>
         <location filename="../qarawnwindow.cpp" line="229"/>
         <source>Bomb speed f/10 sec</source>
-        <translation>Schnelligkeit der Bombe (f/10 sec)</translation>
+        <translation>Fahrt der Bombe (f/10 sec)</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="202"/>
@@ -650,25 +650,25 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../qarawnwindow.cpp" line="204"/>
         <location filename="../qarawnwindow.cpp" line="233"/>
         <source>Start power</source>
-        <translation>Kraft</translation>
+        <translation>Feuer Kraft</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="205"/>
         <location filename="../qarawnwindow.cpp" line="234"/>
         <source>Max power</source>
-        <translation>max Kraft</translation>
+        <translation>max Feuer Kraft</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="206"/>
         <location filename="../qarawnwindow.cpp" line="235"/>
         <source>Start speed</source>
-        <translation>anfänge Schnelligkeit</translation>
+        <translation>Geschwindigkeit</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="207"/>
         <location filename="../qarawnwindow.cpp" line="236"/>
         <source>Max speed</source>
-        <translation>max Schnelligkeit</translation>
+        <translation>max Geschwindigkeit</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="208"/>
@@ -680,13 +680,13 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../qarawnwindow.cpp" line="209"/>
         <location filename="../qarawnwindow.cpp" line="238"/>
         <source>Start boot</source>
-        <translation>stiefel</translation>
+        <translation>Stiefel</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="211"/>
         <location filename="../qarawnwindow.cpp" line="240"/>
         <source>Failing bombs</source>
-        <translation>Erfolglose Bombe</translation>
+        <translation>Misswerkende Bombe</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="212"/>
@@ -698,17 +698,17 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
         <location filename="../qarawnwindow.cpp" line="213"/>
         <location filename="../qarawnwindow.cpp" line="242"/>
         <source>Invisibility</source>
-        <translation>unsichtbar</translation>
+        <translation>Unsichtbarmachung</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="215"/>
         <source>Create network</source>
-        <translation>netzwerk machen</translation>
+        <translation>Neue Netzwerk</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="216"/>
         <source>Connect</source>
-        <translation>beitreten</translation>
+        <translation>Anschluss</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="244"/>
@@ -723,7 +723,7 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../qarawnwindow.cpp" line="246"/>
         <source>OpenGL</source>
-        <translation>öffene GL</translation>
+        <translation>OpenGL</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="247"/>
@@ -733,7 +733,7 @@ Das wird in QT von Moreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ges
     <message>
         <location filename="../qarawnwindow.cpp" line="248"/>
         <source>Resolution</source>
-        <translation>zerglegung</translation>
+        <translation type="unfinished">Resolution</translation>
     </message>
     <message>
         <location filename="../qarawnwindow.cpp" line="249"/>
