@@ -14,7 +14,7 @@ ArawnSettings::ArawnSettings()
     openGlRendering = false;
     showCorpseParts = true;
     shakyExplosion = true;
-    roundTimeDefault = 60;
+    roundTimeDefault = 90;
     pointsToWin = 5;
     startBombs = 1;
     maxBombs = 8;
@@ -87,6 +87,8 @@ bool ArawnSettings::load()
         QFile sFile(path+"gamesettings");
         sFile.open(QFile::ReadOnly);
         QDataStream stream(&sFile);
+
+        QString header;
         int _language;
         bool _opengl;
         bool _corpseparts;
@@ -116,6 +118,8 @@ bool ArawnSettings::load()
         uint _color3;
         uint _color4;
 
+        stream >> header;
+        if (header != "Arawn Settings file 1") return false;
         stream >> _language;
         stream >> _opengl;
         stream >> _corpseparts;
@@ -190,6 +194,7 @@ void ArawnSettings::save()
     QFile sFile(path+"gamesettings");
     sFile.open(QFile::WriteOnly);
     QDataStream stream(&sFile);
+    stream << QString("Arawn Settings file 1");
         stream << language.toInt();
         stream << openGlRendering.toBool();
         stream << showCorpseParts.toBool();
@@ -239,8 +244,6 @@ void ArawnSettings::loadLists()
     showCorpsePartsValues.insert(tr("No"), false);
     shakyExplosionValues.insert(tr("Yes"), true);
     shakyExplosionValues.insert(tr("No"), false);
-    roundTimeDefaultValues.insert(tr("30"), 30);
-    roundTimeDefaultValues.insert(tr("45"), 45);
     roundTimeDefaultValues.insert(tr("60"), 60);
     roundTimeDefaultValues.insert(tr("90"), 90);
     roundTimeDefaultValues.insert(tr("120"), 120);
