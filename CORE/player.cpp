@@ -62,7 +62,7 @@ void Player::Die(uchar x, uchar y)
 {
     if( pXcoord==x && pYcoord==y && live)
     {
-        emit Died(this->id,255);
+        emit Died(id,255);
         live=false;
     }
 }
