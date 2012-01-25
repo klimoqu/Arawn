@@ -4,7 +4,11 @@
 
 Game::Game(QString address)
 {
+	this->cup=0;
+	
 	this->settings=aSetInstance;
+	cup=new Cup(settings);
+	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
 	map=0;
 	serverconnection=0;
 	clientconnection=new Client(settings->defaultPlayer1Name);
@@ -342,6 +346,10 @@ void Game::clientsync(Command c)
 	case 251://játék kezdete
 		{
 			emit GameStarted(c.GetMessage());
+			if(clientconnection && cup->GetPlayerName(1)=="")
+			{
+				for(uchar i=0;i<clientconnection->GetPlayers().size();i++)cup->AddPlayer(clientconnection->GetPlayers().at(i));
+			}
 			break;
 		}
 	case 252://játék vége

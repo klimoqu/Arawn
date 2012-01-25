@@ -23,7 +23,7 @@ public:
     }
     QString GetPlayerName(uchar num)
     {
-        return nevek[num];
+        return num<playersnumber?nevek[num]:QString("");
     }
     QStringList GetPlayersName()
     {
@@ -36,6 +36,7 @@ signals:
     void PlayerWonTheCup(uchar playerid, QString playername);
     void PlayerPointChanged(uchar playerid,int point);
 public slots:
+	void ChangePlayerPoint(uchar playerid,int point){pontok[playerid]=point;}
     void PlayerDie(uchar victim, uchar murder);
     void PlayerSurvive(uchar surviver);
 };
