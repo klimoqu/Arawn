@@ -11,8 +11,8 @@ class Client:public QObject
     QString name;
 public:
     Client(QString name);
-    uchar GetPlayerID(){return playerid;}
-    QStringList GetPlayers(){return players;}
+    uchar GetPlayerID()const{return playerid;}
+    QStringList GetPlayers()const {return players;}
 signals:
     void Connected();
     void ConnectionFailed();

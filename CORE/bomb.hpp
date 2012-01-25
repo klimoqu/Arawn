@@ -20,15 +20,15 @@ public:
         this->size=size;
 		QTimer::singleShot(timeout*100, this, SLOT(Boom()));
     }
-    uchar GetX()
+    uchar GetX()const
     {
         return x;
     }
-    uchar GetY()
+    uchar GetY()const
     {
         return y;
     }
-    uchar GetSize()
+    uchar GetSize()const
     {
         return size;
     }

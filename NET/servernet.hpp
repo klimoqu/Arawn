@@ -15,7 +15,7 @@ public:
     Servernet(QObject *parent=0);
     void SetLocalPlayername(QString name){this->name=name;}
     void SetPlayerNumber(uchar num){playernumber=num-1;}
-    uchar GetPlayerNumber(){return playernumber;}
+    uchar GetPlayerNumber()const{return playernumber;}
     QStringList GetPlayers();
 signals:
     void CommandReceivedFromClients(Command c);

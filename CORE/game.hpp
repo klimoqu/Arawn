@@ -34,7 +34,7 @@ public:
 	uchar GetPlaysersNumber();
     uchar GetFields(uchar x, uchar y){return fields[x][y];}
     bool IsSurvive() const {return survive;}
-	bool IsServer(){return map;}
+	bool IsServer()const{return map;}
     Cup* GetCup() const {return cup;}
     void ConnectToServer(QString);
 	void GameIsEnd();

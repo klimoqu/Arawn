@@ -13,9 +13,9 @@ Command::Command(uchar _id, uchar _msgtype, int _msg)
     msg=_msg;
 }
 
-uchar Command::GetPlayerId(){return id;}
-uchar Command::GetMessageType(){return msgtype;}
-int Command::GetMessage(){return msg;}
+uchar Command::GetPlayerId()const{return id;}
+uchar Command::GetMessageType()const{return msgtype;}
+int Command::GetMessage()const{return msg;}
 QString Command::ToString()
 {
 	return QString("/command:") + QString::number(id) + QString(" ")+ QString::number(msgtype) + QString(" ") + QString::number(msg) + QString("\n");
