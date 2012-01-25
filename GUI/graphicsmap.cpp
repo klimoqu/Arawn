@@ -142,8 +142,8 @@ void GraphicsMap::blastingOut(uchar x, uchar y)
 void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 {
     //mapIDs[x][y] = type;
-    //update(x*40, y*40, 40, 40);
-    update(boundingRect());
+    update(x*40, y*40, 40, 40);
+    //update(boundingRect());
 }
 
 void GraphicsMap::movePlayer(uchar player, uchar dir)
@@ -221,7 +221,7 @@ void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 {
     players[id]->setVisible(true);
     players[id]->setPos(x*40, y*40);
-    update(players[id]->boundingRect());
+    update(players[id]->x(), players[id]->y(), 40, 60);
 }
 
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
