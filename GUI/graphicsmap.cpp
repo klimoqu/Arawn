@@ -13,7 +13,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     mapState = _mapState;
     cupState = _cupState;
 
-    connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)));
+    connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)), Qt::DirectConnection);
 
     connect(gameGlobal, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
@@ -22,7 +22,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(PlayerBlasted(uchar)), this, SLOT(blastPlayer(uchar)));
     connect(gameGlobal, SIGNAL(PlayerMoved(uchar,uchar)), this, SLOT(movePlayer(uchar,uchar)));
     connect(gameGlobal, SIGNAL(PlayerDied(uchar,uchar)), this, SLOT(diePlayer(uchar, uchar)));
-    connect(gameGlobal, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)));
+    connect(gameGlobal, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)), Qt::DirectConnection);
     connect(gameGlobal, SIGNAL(BonusTurnVisible(uchar,uchar,uchar)), this, SLOT(plantBonus(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(BonusTurnInvisible(uchar,uchar,uchar)), this, SLOT(deleteBonus(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
@@ -54,6 +54,11 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     players[1] = new GraphicsPlayer(1, this);
     players[2] = new GraphicsPlayer(2, this);
     players[3] = new GraphicsPlayer(3, this);
+
+    players[0]->setVisible(false);
+    players[1]->setVisible(false);
+    players[2]->setVisible(false);
+    players[3]->setVisible(false);
 
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
@@ -214,14 +219,35 @@ void GraphicsMap::setMapIDs(int)
         }
     }
 */
-    update(boundingRect());
+//    update(boundingRect());
+    switch(gameGlobal->GetPlaysersNumber())
+       {
+       case 4:
+                   players[3]->setVisible(true);
+                   players[3]->setPos(19*40,12*40);
+                   update(players[3]->boundingRect());
+       case 3:
+                   players[2]->setVisible(true);
+                   players[2]->setPos(0*40,12*40);
+                   update(players[2]->boundingRect());
+       case 2:
+                   players[1]->setVisible(true);
+                   players[1]->setPos(19*40,0*40);
+                   update(players[1]->boundingRect());
+       default:
+                   players[0]->setVisible(true);
+                   players[0]->setPos(0*40,0*40);
+                   update(players[0]->boundingRect());
+           break;
+       }
 }
 
 void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 {
-    players[id]->setVisible(true);
-    players[id]->setPos(x*40, y*40);
-    update(players[id]->x(), players[id]->y(), 40, 60);
+//    qDebug() << "Player" << id << x << y;
+//    players[id]->setVisible(true);
+//    players[id]->setPos(x*40, y*40);
+//    update(players[id]->x(), players[id]->y(), 40, 60);
 }
 
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
