@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network phonon
+QT       += core gui network
 CONFIG += console
 
 TARGET = Arawn

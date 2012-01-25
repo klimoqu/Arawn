@@ -57,7 +57,7 @@ public:
     GraphicsMenu(const QString &title, QState *parentState, QState *ownState, QSound *menuStep, QSound *stepInto, QArawnWindow *window);
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
 
 
     GraphicsMenu* addSubMenu(const QString &name);
