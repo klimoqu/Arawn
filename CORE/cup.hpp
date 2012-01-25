@@ -10,9 +10,10 @@ class Cup : public QObject
     QString nevek[4];
     int pontok[4];
     uchar playersnumber;
+	bool finish;
 public:
     Cup(ArawnSettings *settings);
-
+	bool Finished(){return finish;}
     void AddPlayer(QString str)
     {
         if(playersnumber<4)
@@ -23,7 +24,7 @@ public:
     }
     QString GetPlayerName(uchar num)
     {
-        return nevek[num];
+        return num<playersnumber?nevek[num]:QString("");
     }
     QStringList GetPlayersName()
     {
@@ -36,6 +37,7 @@ signals:
     void PlayerWonTheCup(uchar playerid, QString playername);
     void PlayerPointChanged(uchar playerid,int point);
 public slots:
+	void ChangePlayerPoint(uchar playerid,int point){pontok[playerid]=point;}
     void PlayerDie(uchar victim, uchar murder);
     void PlayerSurvive(uchar surviver);
 };

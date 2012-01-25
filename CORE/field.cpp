@@ -55,7 +55,7 @@ void Field::StartBurn(uchar size, uchar id,uchar direction)
 		if(bonus)bonus->TurnVisible();
 		break;
 	}
-	QTimer::singleShot(500,this,SLOT(Extinction()));
+	QTimer::singleShot(300,this,SLOT(Extinction()));
 
     emit Boomed(x,y,size,id,size==0 ? direction+16 :direction);
 

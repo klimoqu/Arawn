@@ -70,7 +70,6 @@ void Map::bonusupload()
         {
             switch(((int)Fields[i][j])%50)
             {
-			case 0:
             case 1:
             case 2:
             case 3:
