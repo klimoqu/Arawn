@@ -99,10 +99,18 @@ void Map::SetPlayersStartPoints()
 {
     switch(playersnumber)
     {
-    case 4:players[3]->SetStartPosition(19,12);emit ServerCommand(Command(3,254,19*256+12));
-    case 3:players[2]->SetStartPosition(0,12);emit ServerCommand(Command(2,254,12));
-    case 2:players[1]->SetStartPosition(19,0);emit ServerCommand(Command(1,254,19*256));
-    default:players[0]->SetStartPosition(0,0);emit ServerCommand(Command(0,254,0));
+    case 4:
+		players[3]->SetStartPosition(19,12);
+		emit ServerCommand(Command(3,254,19*256+12));
+    case 3:
+		players[2]->SetStartPosition(0,12);
+		emit ServerCommand(Command(2,254,12));
+    case 2:
+		players[1]->SetStartPosition(19,0);
+		emit ServerCommand(Command(1,254,19*256));
+    default:
+		players[0]->SetStartPosition(0,0);
+		emit ServerCommand(Command(0,254,0));
         break;
     }
 }
