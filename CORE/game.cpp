@@ -371,7 +371,6 @@ void Game::clientsync(Command c)
 	case 255://azonosítás
 		{
 			playerid=c.GetPlayerId();
-			qDebug()<<"auth"<<(int)c.GetPlayerId();
 			break;
 		}
 	default:

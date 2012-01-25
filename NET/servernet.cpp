@@ -41,7 +41,7 @@ void Servernet::readyRead()
 			QString user = meRegex.cap(1);
 			players.insert(client,user);
 			Command c((uchar)clients.size(),(uchar)255,(int)0);
-			client->write(QString(c.ToString()+"\n").toUtf8());
+			client->write(c.ToString().toUtf8());
 			client->flush();
 			emit NewPlayerConnected();
 			sendusernames();
@@ -77,7 +77,7 @@ void Servernet::sendusernames()
 	QStringList playerslist=GetPlayers();
 	foreach(QTcpSocket *client,clients)
 	{
-		client->write(QString("/usernames:"+playerslist.join(",")+'\n').toUtf8());
+		client->write(QString("/usernames:"+playerslist.join(",")+"\n").toUtf8());
 		client->flush();
 	}
 }
