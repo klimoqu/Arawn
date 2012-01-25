@@ -173,6 +173,7 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
         update(players[player]->x()-40, players[player]->y(), 80, 40);
         break;
     }
+    update(boundingRect());
 }
 /*
 //void GraphicsMap::movePlayer(uchar player, uchar dir)
