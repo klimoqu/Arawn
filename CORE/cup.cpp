@@ -8,6 +8,7 @@ Cup::Cup(ArawnSettings *settings)
     pontok[2]=0;
     pontok[3]=0;
     this->settings=settings;
+	finish=false;
 }
 void Cup::PlayerDie(uchar victim, uchar murder)
 {
@@ -17,11 +18,19 @@ void Cup::PlayerDie(uchar victim, uchar murder)
     else
         pontok[victim]--;
     emit PlayerPointChanged(murder,pontok[murder]);
-    if(pontok[murder]==settings->pointsToWin.toInt())emit PlayerWonTheCup(murder,nevek[murder]);
+    if(pontok[murder]==settings->pointsToWin.toInt())
+	{
+		finish=true;
+		emit PlayerWonTheCup(murder,nevek[murder]);
+	}
 }
 void Cup::PlayerSurvive(uchar surviver)
 {
     pontok[surviver]++;
     emit PlayerPointChanged(surviver,pontok[surviver]);
-    if(pontok[surviver]==settings->pointsToWin.toInt())emit PlayerWonTheCup(surviver,nevek[surviver]);
+    if(pontok[surviver]==settings->pointsToWin.toInt())
+	{
+		finish=true;
+		emit PlayerWonTheCup(surviver,nevek[surviver]);
+	}
 }

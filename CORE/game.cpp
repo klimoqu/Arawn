@@ -149,7 +149,6 @@ void Game::validate(Command c)
 		}
 		if(c.GetMessage()%256==1 && (field->GetTopNeighbour()==0 || !field->GetTopNeighbour()->IsPermeable()))
 		{
-
 			return;
 		}
 		if(c.GetMessage()%256==2 && (field->GetBottomNeighbour()==0 || !field->GetBottomNeighbour()->IsPermeable()))
@@ -218,8 +217,11 @@ void Game::WaitingCommandExecute()
 }
 void Game::AllReady()
 {
-	cup->AddPlayer(settings->defaultPlayer1Name);
-	for(uchar i=0;i<playersnumber-1;i++)cup->AddPlayer(serverconnection->GetPlayers().at(i));
+	if(cup->GetPlayerName(1)=="")
+	{
+		cup->AddPlayer(settings->defaultPlayer1Name);
+		for(uchar i=0;i<playersnumber-1;i++)cup->AddPlayer(serverconnection->GetPlayers().at(i));
+	}
 	sendmap();
 	map->SetPlayersStartPoints();
 	QTimer::singleShot(1000, this, SLOT(StartGame()));
@@ -275,6 +277,13 @@ void Game::GameIsEnd()
 	if(survive)for(uchar i=0;i<playersnumber;i++)
 		if(map->GetPlayer(i)->IsAlive())
 			emit PlayerSurvived(i);
+
+	if(!cup->Finished())
+	{
+		tempcommands.clear();
+		map->Upload(1);
+		QTimer::singleShot(7000, this, SLOT(AllReady()));
+	}
 }
 void Game::clientsync(Command c)
 {

@@ -16,7 +16,7 @@ class Field : public QObject
     Bonus *bonus;
 
 public:
-
+	~Field(){delete bonus;}
     Field(uchar x,uchar y,uchar type);
     bool HasBonus(){return bonus!=0;}
     bool IsDeadly(){return burning || type==4;}
