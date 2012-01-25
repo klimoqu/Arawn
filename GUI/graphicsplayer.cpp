@@ -1,5 +1,5 @@
 #include "graphicsplayer.hpp"
-#include "GUI/imagefactory.hpp"
+#include "imagefactory.hpp"
 
 GraphicsPlayer::GraphicsPlayer(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {

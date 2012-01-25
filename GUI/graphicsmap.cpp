@@ -1,5 +1,5 @@
 #include "graphicsmap.hpp"
-#include "GUI/imagefactory.hpp"
+#include "imagefactory.hpp"
 
 #define LE 2
 #define FEL 1

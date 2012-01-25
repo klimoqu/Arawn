@@ -31,7 +31,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	serverconnection=new Servernet();
 	serverconnection->SetPlayerNumber(playersnumber);
 	serverconnection->SetLocalPlayername(settings->defaultPlayer1Name);
-	connect(map,SIGNAL(ServerCommand(Command)),this,SLOT(ServerExecute(Command)));
+	connect(map,SIGNAL(ServerCommand(Command)),this,SIGNAL(ServerValidate(Command)));
 	connect(this,SIGNAL(ClientValidate(Command)),this,SLOT(ClientExecute(Command)));
 	connect(this,SIGNAL(ServerValidate(Command)),serverconnection,SLOT(SendCommandToClients(Command)));
 	connect(this,SIGNAL(ServerValidate(Command)),this,SLOT(ServerExecute(Command)));
@@ -86,7 +86,7 @@ void Game::MakeCommand(uchar c)
 {
 	if(c==255)
 	{
-		Command ret=Command(playerid,2,map->GetPlayer(playerid)->GetX()*256+map->GetPlayer(playerid)->GetY());
+		Command ret=Command(playerid,2,0);
 		emit ClientValidate(ret);
 	}
 	else
@@ -97,6 +97,7 @@ void Game::MakeCommand(uchar c)
 }
 void Game::validate(Command c)
 {
+	
 	if( c.GetMessageType()!=1 && c.GetMessageType()!=2 )
 	{
 		return;
@@ -155,6 +156,10 @@ void Game::validate(Command c)
 		{
 			return;
 		}
+	}
+	if(c.GetMessageType()==2)
+	{
+		c=Command(c.GetPlayerId(),c.GetMessageType(),map->GetPlayer(c.GetPlayerId())->GetX()*256+map->GetPlayer(c.GetPlayerId())->GetY());
 	}
 	//Bomba lerakás:
 	if(c.GetMessageType()==2 && !map->GetPlayer(c.GetPlayerId())->CanDrop())
@@ -304,6 +309,7 @@ void Game::clientsync(Command c)
 		}
 	case 6://mezőváltozás
 		{
+			fields[(c.GetMessage()/256)%256][c.GetMessage()%256]=(c.GetMessage()/(256*256))%256;
 			emit FieldChanged((c.GetMessage()/256)%256,c.GetMessage()%256,(c.GetMessage()/(256*256))%256);
 			break;
 		}
@@ -364,7 +370,8 @@ void Game::clientsync(Command c)
 		}
 	case 255://azonosítás
 		{
-			this->playerid=c.GetPlayerId();
+			playerid=c.GetPlayerId();
+			qDebug()<<"auth"<<(int)c.GetPlayerId();
 			break;
 		}
 	default:
