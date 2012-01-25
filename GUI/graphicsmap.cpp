@@ -116,6 +116,7 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
     bomb->setPos(x*40, y*40);
     emit bombPlanted();
     bombs.append(bomb);
+    update(0,0,40,40);
     update(x*40, y*40, 40, 40);
 }
 
@@ -158,19 +159,19 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
     switch(dir){
     case BALRA:
         players[player]->setX(players[player]->x()-40);
-        update(players[player]->x(), players[player]->y(), 80, 40);
+        //update(players[player]->x(), players[player]->y(), 80, 40);
         break;
     case FEL:
         players[player]->setY(players[player]->y()-40);
-        update(players[player]->x(), players[player]->y(), 40, 80);
+        //update(players[player]->x(), players[player]->y(), 40, 80);
         break;
     case LE:
         players[player]->setY(players[player]->y()+40);
-        update(players[player]->x(), players[player]->y()-40, 40, 80);
+        //update(players[player]->x(), players[player]->y()-40, 40, 80);
         break;
     case JOBBRA:
         players[player]->setX(players[player]->x()+40);
-        update(players[player]->x()-40, players[player]->y(), 80, 40);
+        //update(players[player]->x()-40, players[player]->y(), 80, 40);
         break;
     }
     update(boundingRect());
@@ -201,14 +202,14 @@ void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {
     emit playerDied();
     players[player]->aState = 9;
-    update(players[player]->boundingRect());
+    update(players[player]->x(), players[player]->y(), 40, 60);
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
     emit playerBlasted();
-    update(players[player]->boundingRect());
+    update(players[player]->x(), players[player]->y(), 40, 60);
 }
 
 void GraphicsMap::setMapIDs(int)
@@ -226,19 +227,19 @@ void GraphicsMap::setMapIDs(int)
        case 4:
                    players[3]->setVisible(true);
                    players[3]->setPos(19*40,12*40);
-                   update(players[3]->boundingRect());
+                   update(players[3]->x(), players[3]->y(), 40, 60);
        case 3:
                    players[2]->setVisible(true);
                    players[2]->setPos(0*40,12*40);
-                   update(players[2]->boundingRect());
+                   update(players[2]->x(), players[2]->y(), 40, 60);
        case 2:
                    players[1]->setVisible(true);
                    players[1]->setPos(19*40,0*40);
-                   update(players[1]->boundingRect());
+                   update(players[1]->x(), players[1]->y(), 40, 60);
        default:
                    players[0]->setVisible(true);
                    players[0]->setPos(0*40,0*40);
-                   update(players[0]->boundingRect());
+                   update(players[0]->x(), players[0]->y(), 40, 60);
            break;
        }
 }
@@ -256,6 +257,7 @@ void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
     GraphicsBonus *bonus = new GraphicsBonus(type, x*40, y*40, this);
     bonuses.append(bonus);
     update(x*40, y*40, 40, 40);
+    update(0,0,40,40);
 }
 
 void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
