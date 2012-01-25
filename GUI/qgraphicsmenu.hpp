@@ -3,6 +3,7 @@
 
 #include <QtGui>
 
+
 class QArawnWindow;
 
 /// StatedItemObject: Az (al)menü és menüelem absztrakt osztálya

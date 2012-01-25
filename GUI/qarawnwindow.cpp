@@ -5,6 +5,7 @@
 #include "graphicsplayer.hpp"
 #include "graphicsnetworkroom.hpp"
 #include "GUI/imagefactory.hpp"
+#include <QtMultimedia/QtMultimedia>
 
 
 void QArawnWindow::initWindow()
@@ -58,68 +59,39 @@ void QArawnWindow::initializeOthers()
 
     ImageFactory::build();
 
-    sounds[0] = new QSound("res/0_tofrommenu.wav", this);
-    sounds[1] = new QSound("res/1_changemenu.wav", this);
-    sounds[2] = new QSound("res/2_step.wav", this);
-    sounds[3] = new QSound("res/3_putbomb.wav", this);
-    sounds[4] = new QSound("res/4_explode.wav", this);
-    sounds[5] = new QSound("res/5_getextra.wav", this);
-    sounds[6] = new QSound("res/6_die.wav", this);
-    sounds[7] = new QSound("res/7_splash1a.wav", this);
-    sounds[8] = new QSound("res/8_splash2a.wav", this);
-    sounds[9] = new QSound("res/9_corpse_explode.wav", this);
-    sounds[10] = new QSound("res/10_deepfall.wav", this);
-    sounds[11] = new QSound("res/11_hurry_up.wav", this);
-    sounds[12] = new QSound("res/12_time_over.wav", this);
-    sounds[13] = new QSound("res/13_klatsch.wav", this);
-    sounds[14] = new QSound("res/arawn.wav", this);
+    media[0] = new QSound("res/0_tofrommenu.wav", this);
+    media[1] = new QSound("res/1_changemenu.wav", this);
+    media[2] = new QSound("res/2_step.wav", this);
+    media[3] = new QSound("res/3_putbomb.wav", this);
+    media[4] = new QSound("res/4_explode.wav", this);
+    media[5] = new QSound("res/5_getextra.wav", this);
+    media[6] = new QSound("res/6_die.wav", this);
+    media[7] = new QSound("res/7_splash1a.wav", this);
+    media[8] = new QSound("res/8_splash2a.wav", this);
+    media[9] = new QSound("res/9_corpse_explode.wav", this);
+    media[10] = new QSound("res/10_deepfall.wav", this);
+    media[11] = new QSound("res/11_hurry_up.wav", this);
+    media[12] = new QSound("res/12_time_over.wav", this);
+    media[13] = new QSound("res/13_klatsch.wav", this);
+    media[14] = new QSound("res/arawn.wav", this);
 
-    audioOut = new Phonon::AudioOutput(Phonon::GameCategory, this);
-    media[0] = new Phonon::MediaObject(this);
-    media[0]->setCurrentSource(Phonon::MediaSource("res/0_tofrommenu.wav"));
-    Phonon::createPath(media[0], audioOut);
-    media[1] = new Phonon::MediaObject(this);
-    media[1]->setCurrentSource(Phonon::MediaSource("res/1_changemenu.wav"));
-    Phonon::createPath(media[1], audioOut);
-    media[2] = new Phonon::MediaObject(this);
-    media[2]->setCurrentSource(Phonon::MediaSource("res/2_step.wav"));
-    Phonon::createPath(media[2], audioOut);
-    media[3] = new Phonon::MediaObject(this);
-    media[3]->setCurrentSource(Phonon::MediaSource("res/3_putbomb.wav"));
-    Phonon::createPath(media[3], audioOut);
-    media[4] = new Phonon::MediaObject(this);
-    media[4]->setCurrentSource(Phonon::MediaSource("res/4_explode.wav"));
-    Phonon::createPath(media[4], audioOut);
-    media[5] = new Phonon::MediaObject(this);
-    media[5]->setCurrentSource(Phonon::MediaSource("res/5_getextra.wav"));
-    Phonon::createPath(media[5], audioOut);
-    media[6] = new Phonon::MediaObject(this);
-    media[6]->setCurrentSource(Phonon::MediaSource("res/6_die.wav"));
-    Phonon::createPath(media[6], audioOut);
-    media[7] = new Phonon::MediaObject(this);
-    media[7]->setCurrentSource(Phonon::MediaSource("res/7_splash1a.wav"));
-    Phonon::createPath(media[7], audioOut);
-    media[8] = new Phonon::MediaObject(this);
-    media[8]->setCurrentSource(Phonon::MediaSource("res/8_splash2a.wav"));
-    Phonon::createPath(media[8], audioOut);
-    media[9] = new Phonon::MediaObject(this);
-    media[9]->setCurrentSource(Phonon::MediaSource("res/9_corpse_explode.wav"));
-    Phonon::createPath(media[9], audioOut);
-    media[10] = new Phonon::MediaObject(this);
-    media[10]->setCurrentSource(Phonon::MediaSource("res/10_deepfall.wav"));
-    Phonon::createPath(media[10], audioOut);
-    media[11] = new Phonon::MediaObject(this);
-    media[11]->setCurrentSource(Phonon::MediaSource("res/11_hurry_up.wav"));
-    Phonon::createPath(media[11], audioOut);
-    media[12] = new Phonon::MediaObject(this);
-    media[12]->setCurrentSource(Phonon::MediaSource("res/12_time_over.wav"));
-    Phonon::createPath(media[12], audioOut);
-    media[13] = new Phonon::MediaObject(this);
-    media[13]->setCurrentSource(Phonon::MediaSource("res/13_klatsch.wav"));
-    Phonon::createPath(media[13], audioOut);
-    media[14] = new Phonon::MediaObject(this);
-    media[14]->setCurrentSource(Phonon::MediaSource("res/arawn.wav"));
-    Phonon::createPath(media[14], audioOut);
+//    media[0] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/0_tofrommenu.wav"));
+//    media[1] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/1_changemenu.wav"));
+//    media[2] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/2_step.wav"));
+//    media[3] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/3_putbomb.wav"));
+//    media[4] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/4_explode.wav"));
+//    media[5] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/5_getextra.wav"));
+//    media[6] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/6_die.wav"));
+//    media[7] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/7_splash1a.wav"));
+//    media[8] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/8_splash2a.wav"));
+//    media[9] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/9_corpse_explode.wav"));
+//    media[10] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/10_deepfall.wav"));
+//    media[11] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/11_hurry_up.wav"));
+//    media[12] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/12_time_over.wav"));
+//    media[13] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/13_klatsch.wav"));
+//    media[14] = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource("res/arawn.wav"));
+
+
 
 
 //! [Arawnscreen részletei]
@@ -228,7 +200,7 @@ void QArawnWindow::initializeMenus()
 {
      QState* sMainMenu = new QState(stateMenu);
      stateMenu->setInitialState(sMainMenu);
-     GraphicsMenu *mainMenu = new GraphicsMenu(tr("Main menu"), 0, sMainMenu, sounds[2], sounds[1], this);
+     GraphicsMenu *mainMenu = new GraphicsMenu(tr("Main menu"), 0, sMainMenu, media[2], media[1], this);
 
      GraphicsMenu* localMenu = mainMenu->addSubMenu(tr("Local game"));
      GraphicsMenu* networkMenu = mainMenu->addSubMenu(tr("Network game"));
@@ -308,11 +280,11 @@ void QArawnWindow::initializeMenus()
      QKeyEventTransition *k34 = new QKeyEventTransition(this, QEvent::KeyPress, Qt::Key_Escape);
      k34->setTargetState(stateMenuHistory);
      stateAbout->addTransition(k34);
-     connect(stateMenu, SIGNAL(entered()), sounds[0], SLOT(play()));
-     connect(stateAbout, SIGNAL(entered()), sounds[0], SLOT(play()));
+     connect(stateMenu, SIGNAL(entered()), media[0], SLOT(play()));
+     connect(stateAbout, SIGNAL(entered()), media[0], SLOT(play()));
 
      stateQuit->assignProperty(mainMenu, "pos", QPointF(scene->width()/2 + mainMenu->boundingRect().width()/2,0));
-     connect(stateQuit, SIGNAL(entered()), sounds[0], SLOT(play()));
+     connect(stateQuit, SIGNAL(entered()), media[0], SLOT(play()));
      stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
 
      GraphicsNPSetup *npSetup = new GraphicsNPSetup(stateMenuHistory, stateNetPlayerSetup);
@@ -345,7 +317,7 @@ void QArawnWindow::showArawnScreen()
 
 void QArawnWindow::playSound(uchar n)
 {
-    sounds[n]->play();
+    media[n]->play();
 }
 
 void QArawnWindow::enterMenus()
@@ -413,10 +385,10 @@ void QArawnWindow::enterGame()
     connect(mapState, SIGNAL(entered()), grMap, SLOT(setGrabKeyboard()));
     connect(mapState, SIGNAL(exited()), grMap, SLOT(setUngrabKeyboard()));
 
-    connect(grMap, SIGNAL(bombBlasted()), sounds[4], SLOT(play()));
-    connect(grMap, SIGNAL(bombPlanted()), sounds[3], SLOT(play()));
-    connect(grMap, SIGNAL(playerDied()), sounds[6], SLOT(play()));
-    connect(grMap, SIGNAL(playerBlasted()), sounds[9], SLOT(play()));
+    connect(grMap, SIGNAL(bombBlasted()), media[4], SLOT(play()));
+    connect(grMap, SIGNAL(bombPlanted()), media[3], SLOT(play()));
+    connect(grMap, SIGNAL(playerDied()), media[6], SLOT(play()));
+    connect(grMap, SIGNAL(playerBlasted()), media[9], SLOT(play()));
 
 }
 

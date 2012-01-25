@@ -36,10 +36,9 @@ private:
     void closeEvent(QCloseEvent *);
 
     QStateMachine *machine;
-    QSound* sounds[15];
 
-    Phonon::MediaObject* media[15];
-    Phonon::AudioOutput* audioOut;
+    QSound* media[15];
+    //Phonon::MediaObject* media[15];
 
     PixmapObjectItem *pixWelcomeItem;
     PixmapObjectItem *pixFireItem;
