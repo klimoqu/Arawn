@@ -28,7 +28,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
     connect(gameGlobal, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
     connect(gameGlobal, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
-
+    connect(this, SIGNAL(visibleChanged()), this, SLOT(manageGrabKeyboard()), Qt::DirectConnection);
 
     fPixmaps[0] = imgFact->fieldImages[0];
     fPixmaps[1] = imgFact->fieldImages[1];
@@ -214,6 +214,7 @@ void GraphicsMap::blastPlayer(uchar player)
 
 void GraphicsMap::setMapIDs(int)
 {
+   // grabKeyboard();
 /*
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
@@ -293,14 +294,16 @@ void GraphicsMap::destroyField(uchar x, uchar y)
     update(x*40, y*40, 40, 40);
 }
 
-void GraphicsMap::setGrabKeyboard()
+void GraphicsMap::manageGrabKeyboard()
 {
-    grabKeyboard();
-}
-
-void GraphicsMap::setUngrabKeyboard()
-{
-    ungrabKeyboard();
+    qDebug() << "VisibleChanged to" << isVisible() ;
+    if(isVisible()){
+        grabKeyboard();
+    }else{
+        ungrabKeyboard();
+        bombs.clear();
+        bonuses.clear();
+    }
 }
 
 void GraphicsMap::keyPressEvent(QKeyEvent *event)

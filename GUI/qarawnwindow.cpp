@@ -364,6 +364,7 @@ void QArawnWindow::enterGame()
     firAnim->stop();
 
     grMap = new GraphicsMap(mapState, cupState);
+    grMap->setVisible(false);
     grMap->setPos(-400, -230);
     mapState->assignProperty(grMap, "visible", true);
     cupState->assignProperty(grMap, "visible", false);
@@ -382,8 +383,6 @@ void QArawnWindow::enterGame()
     mapState->addTransition(gameGlobal, SIGNAL(GameOver()), cupState);
     cupState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), mapState);
     connect(gameGlobal, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
-    connect(mapState, SIGNAL(entered()), grMap, SLOT(setGrabKeyboard()));
-    connect(mapState, SIGNAL(exited()), grMap, SLOT(setUngrabKeyboard()));
 
     connect(grMap, SIGNAL(bombBlasted()), media[4], SLOT(play()));
     connect(grMap, SIGNAL(bombPlanted()), media[3], SLOT(play()));

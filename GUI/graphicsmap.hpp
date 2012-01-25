@@ -39,9 +39,7 @@ public slots:
     void invisiblePlayer(uchar playerid);
     void visiblePlayer(uchar playerid);
     void destroyField(uchar x,uchar y);
-
-    void setGrabKeyboard();
-    void setUngrabKeyboard();
+    void manageGrabKeyboard();
 
 private:
     void keyPressEvent(QKeyEvent *event);
