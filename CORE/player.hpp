@@ -26,16 +26,16 @@ protected:
 
 public:
     Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower);
-    bool IsVisible(){return isvisible;}
-    bool IsAlive(){return live;}
+    bool IsVisible()const{return isvisible;}
+    bool IsAlive()const{return live;}
     bool CanFail(){if(fail){fail=false;return true;}else return fail;}
-    bool CanControll(){return !isoppositecontrol;}
-    bool CanDrop(){return pBombsNum>0;}
-    uchar GetId(){return id;}
-    uchar GetX(){return pXcoord;}
-    uchar GetY(){return pYcoord;}
-    uchar GetBombSize(){return pBombPower;}
-    uchar GetSpeed(){return pSpeed;}
+    bool CanControll()const{return !isoppositecontrol;}
+    bool CanDrop()const{return pBombsNum>0;}
+    uchar GetId()const{return id;}
+    uchar GetX()const{return pXcoord;}
+    uchar GetY()const{return pYcoord;}
+    uchar GetBombSize()const{return pBombPower;}
+    uchar GetSpeed()const{return pSpeed;}
     void SetFail(bool fail){this->fail=fail;}
     void SetStartPosition(uchar x, uchar y);
     void Move(uchar direction);

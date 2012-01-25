@@ -13,7 +13,7 @@ class Cup : public QObject
 	bool finish;
 public:
     Cup(ArawnSettings *settings);
-	bool Finished(){return finish;}
+	bool Finished()const{return finish;}
     void AddPlayer(QString str)
     {
         if(playersnumber<4)
@@ -22,7 +22,7 @@ public:
             playersnumber++;
         }
     }
-    QString GetPlayerName(uchar num)
+    QString GetPlayerName(uchar num)const
     {
         return num<playersnumber?nevek[num]:QString("");
     }
@@ -32,7 +32,7 @@ public:
         for(uchar i=0;i<playersnumber;i++)qsl<<nevek[i];
         return qsl;
     }
-    int GetPointOf(uchar id) {return pontok[id];}
+    int GetPointOf(uchar id)const {return pontok[id];}
 signals:
     void PlayerWonTheCup(uchar playerid, QString playername);
     void PlayerPointChanged(uchar playerid,int point);

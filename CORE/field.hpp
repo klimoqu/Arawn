@@ -18,23 +18,23 @@ class Field : public QObject
 public:
 	~Field(){delete bonus;}
     Field(uchar x,uchar y,uchar type);
-    bool HasBonus(){return bonus!=0;}
-    bool IsDeadly(){return burning || type==4;}
-    bool IsPermeable(){return type==2 || type==4;}
-    bool IsBlastable(){return type==1 || type==3;}
-    uchar GetType(){return this->type;}
-    uchar GetOwner(){return id;}
+    bool HasBonus()const{return bonus!=0;}
+    bool IsDeadly()const{return burning || type==4;}
+    bool IsPermeable()const{return type==2 || type==4;}
+    bool IsBlastable()const{return type==1 || type==3;}
+    uchar GetType()const{return this->type;}
+    uchar GetOwner()const{return id;}
     void SetBonus(Bonus *bonus);
     void SetTopNeighbours(Field *top){this->top=top;}
     void SetLeftNeighbours(Field *left){this->left=left;}
     void SetRightNeighbours(Field *right){this->right=right;}
     void SetBottomNeighbours(Field *bottom){this->bottom=bottom;}
     void StartBurn(uchar size,uchar id, uchar direction);
-    Field* GetTopNeighbour(){return top;}
-    Field* GetLeftNeighbour(){return left;}
-    Field* GetRightNeighbour(){return right;}
-    Field* GetBottomNeighbour(){return bottom;}
-    Bonus* GetBonus(){return bonus;}
+    Field* GetTopNeighbour()const{return top;}
+    Field* GetLeftNeighbour()const{return left;}
+    Field* GetRightNeighbour()const{return right;}
+    Field* GetBottomNeighbour()const{return bottom;}
+    Bonus* GetBonus()const{return bonus;}
     void Visit(Player *player);
 
 signals:

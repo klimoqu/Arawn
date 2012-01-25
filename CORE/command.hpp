@@ -23,8 +23,8 @@ class Command
 public:
     Command();
     Command(uchar _id, uchar _msgtype, int _msg);
-    uchar GetPlayerId();
-    uchar GetMessageType();
-    int GetMessage();
+    uchar GetPlayerId()const;
+    uchar GetMessageType()const;
+    int GetMessage()const;
 	QString ToString();
 };
