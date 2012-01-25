@@ -4,7 +4,7 @@
 #include "../CORE/cup.hpp"
 #include "graphicsplayer.hpp"
 #include "graphicsnetworkroom.hpp"
-#include "GUI/imagefactory.hpp"
+#include "imagefactory.hpp"
 #include <QtMultimedia/QtMultimedia>
 
 
