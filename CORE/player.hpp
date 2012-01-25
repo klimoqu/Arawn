@@ -41,7 +41,7 @@ public:
     void Move(uchar direction);
     void Plant(){pBombsNum--;}
     void IncrementBombSize(){pBombPower++;}
-    void DecrementBombSize(){pBombPower--;}
+	void DecrementBombSize(){if(pBombPower>1)pBombPower--;}
     void IncrementBombNumber(){pBombsNum++;}
     void DecrementBombNumber(){if(pBombsNum>1)pBombsNum--;}
     void SpeedUp(){pSpeed++;}
