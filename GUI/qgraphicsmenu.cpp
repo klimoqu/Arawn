@@ -95,7 +95,7 @@ GraphicsMenu::GraphicsMenu(const QString &_title, QState *_parentState, QState *
     connect(kenter, SIGNAL(triggered()), this, SLOT(keyEnter()));
 }
 
-void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GraphicsMenu::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
 

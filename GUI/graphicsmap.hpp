@@ -46,7 +46,7 @@ public slots:
 private:
     void keyPressEvent(QKeyEvent *event);
 
-    uchar mapIDs[20][13];
+    //uchar mapIDs[20][13];
     QImage* fPixmaps[10];
 
     GraphicsPlayer* players[4];
@@ -74,7 +74,7 @@ public:
         clock = (observer.copy(40, 0, 40, 40));
         noclock = (observer.copy(80, 0, 40, 40));
         font = qApp->font();
-        font.setPixelSize(50);
+        font.setPixelSize(40);
     }
 
     QRectF boundingRect() const;
@@ -100,7 +100,7 @@ public:
     GraphicsCup();
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
 
 public slots:
 

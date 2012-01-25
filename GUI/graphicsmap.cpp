@@ -74,7 +74,8 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
     // Pálya
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
-            painter->drawImage(i*40, j*40, *(fPixmaps[mapIDs[i][j]]));
+           // painter->drawImage(i*40, j*40, *(fPixmaps[mapIDs[i][j]]));
+            painter->drawImage(i*40, j*40, *(fPixmaps[gameGlobal->GetFields(i, j)]));
         }
     }
 
@@ -140,8 +141,9 @@ void GraphicsMap::blastingOut(uchar x, uchar y)
 
 void GraphicsMap::changeField(uchar x, uchar y, uchar type)
 {
-    mapIDs[x][y] = type;
-    update(x*40, y*40, 40, 40);
+    //mapIDs[x][y] = type;
+    //update(x*40, y*40, 40, 40);
+    update(boundingRect());
 }
 
 void GraphicsMap::movePlayer(uchar player, uchar dir)
@@ -205,11 +207,13 @@ void GraphicsMap::blastPlayer(uchar player)
 
 void GraphicsMap::setMapIDs(int)
 {
+/*
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
             mapIDs[i][j] = gameGlobal->GetFields(i, j);
         }
     }
+*/
     update(boundingRect());
 }
 
@@ -256,7 +260,7 @@ void GraphicsMap::visiblePlayer(uchar playerid)
 
 void GraphicsMap::destroyField(uchar x, uchar y)
 {
-    mapIDs[x][y] = 4;
+    //mapIDs[x][y] = 4;
     update(x*40, y*40, 40, 40);
 }
 
@@ -349,7 +353,7 @@ QRectF GraphicsCup::boundingRect() const
     return QRectF(-400, -300, 800, 600);
 }
 
-void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
 
