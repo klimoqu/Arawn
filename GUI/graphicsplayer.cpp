@@ -39,7 +39,6 @@ void GraphicsPlayer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
 
 GraphicsBomb::GraphicsBomb(uchar x, uchar y, uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-    setVisible(false);
     setPos(x*40, y*40);
     aState = 0;
     for(uchar i = 0; i < 4; i++){
@@ -67,7 +66,6 @@ void GraphicsBomb::incAState()
 GraphicsBonus::GraphicsBonus(uchar type, uchar x, uchar y, QGraphicsItem *parent) :
     QGraphicsItem(parent)
 {
-    setVisible(false);
     setPos(x*40, y*40);
     pix = imgFact->bonusImages[type-1];
 }

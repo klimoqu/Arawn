@@ -29,27 +29,6 @@ private:
     uchar dir;
 };
 
-//class FactoryOfBombImage
-//{
-//    FactoryOfBombImage()
-//    {
-//        bombs = QImage("res/bombs.png");
-//        extras = QImage("res/extras.png");
-//    }
-//    static FactoryOfBombImage* f;
-//public:
-//    static FactoryOfBombImage* instance()
-//    {
-//        if(!f) f = new FactoryOfBombImage;
-//        return f;
-//    }
-
-//    QImage bombs;
-//    QImage extras;
-//};
-
-//#define bombsF (FactoryOfBombImage::instance()->bombs)
-//#define extrasF (FactoryOfBombImage::instance()->extras)
 
 class GraphicsBomb : public QGraphicsItem
 {
