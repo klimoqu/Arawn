@@ -28,7 +28,7 @@ public:
     Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpower);
     bool IsVisible()const{return isvisible;}
     bool IsAlive()const{return live;}
-    bool CanFail(){if(fail){fail=false;return true;}else return fail;}
+    bool CanFail(){return fail;}
     bool CanControll()const{return !isoppositecontrol;}
     bool CanDrop()const{return pBombsNum>0;}
     uchar GetId()const{return id;}
@@ -39,7 +39,7 @@ public:
     void SetFail(bool fail){this->fail=fail;}
     void SetStartPosition(uchar x, uchar y);
     void Move(uchar direction);
-    void Plant(){pBombsNum--;}
+    void Plant(){pBombsNum--;if(fail)fail=false;}
     void IncrementBombSize(){pBombPower++;}
 	void DecrementBombSize(){if(pBombPower>1)pBombPower--;}
     void IncrementBombNumber(){pBombsNum++;}

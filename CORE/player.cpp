@@ -7,6 +7,7 @@ Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpow
     this->pBombPower=bombpower;
     this->maxbomb=maxbomb;
     this->maxpower=maxpower;
+	this->fail=false;
 	t_visible=new QTimer(this);
 	t_oppositecontrol=new QTimer(this);
 }
