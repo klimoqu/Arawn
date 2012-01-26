@@ -25,22 +25,23 @@ signals:
     void playerBlasted();
 
 public slots:
-    void setMapIDs(int ido);
+//    void setMapIDs(int ido);
     void plantBomb(uchar x, uchar y, uchar player);
     void plantBonus(uchar x, uchar y, uchar type);
     void deleteBonus(uchar x, uchar y, uchar type);
-    void blastField(uchar x, uchar y, uchar player, uchar dir);
+    void blastField(uchar x, uchar y, uchar , uchar dir);
     void blastingOut(uchar x, uchar y);
     void changeField(uchar x, uchar y, uchar type);
     void movePlayer(uchar player, uchar dir);
     void diePlayer(uchar player, uchar murderid);
     void blastPlayer(uchar player);
-    void startPlayerFrom(uchar id, uchar x, uchar y);
+//    void startPlayerFrom(uchar id, uchar x, uchar y);
     void invisiblePlayer(uchar playerid);
     void visiblePlayer(uchar playerid);
     void destroyField(uchar x,uchar y);
     void animateBombs();
     void manageGrabKeyboard();
+    void deleteBomb(uchar x,uchar y);
 
 private:
     void keyPressEvent(QKeyEvent *event);
