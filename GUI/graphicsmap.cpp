@@ -16,7 +16,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     bombAnimator->setSingleShot(false);
     bombAnimator->start(85);
 
-    connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)), Qt::DirectConnection);
+    //connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)), Qt::DirectConnection);
 
     connect(gameGlobal, SIGNAL(BombPlanted(uchar,uchar,uchar)), this, SLOT(plantBomb(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar)), this, SLOT(blastField(uchar,uchar,uchar,uchar)));
@@ -52,9 +52,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     bImages[BALRA+16] = new QImage(expl.copy(0,0,40,40));
     bImages[FEL+16] = new QImage(expl.copy(120,0,40,40));
     bImages[JOBBRA+16] = new QImage(expl.copy(80,0,40,40));
-	//hiányzik az alapállapot a 42-es
 
-    // TODO load players
     players[0] = new GraphicsPlayer(0, this);
     players[1] = new GraphicsPlayer(1, this);
     players[2] = new GraphicsPlayer(2, this);
@@ -111,22 +109,9 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
     bombs.append(bomb);
 }
 
-void GraphicsMap::blastField(uchar x, uchar y, uchar player, uchar dir)
+void GraphicsMap::blastField(uchar x, uchar y, uchar , uchar dir)
 {
     burning[x][y] = dir;
-    /// TODO player
-
-    for(uchar i = 0; i < bombs.length(); i++){
-        if(
-                (bombs[i]->x())/40 == x &&
-                (bombs[i]->y())/40 == y
-        ){
-            delete bombs[i];
-            bombs.removeAt(i);
-            i--;
-            emit bombBlasted();
-        }
-    }
     update(x*40, y*40, 40, 40);
 }
 
@@ -165,21 +150,17 @@ void GraphicsMap::movePlayer(uchar player, uchar dir)
 //void GraphicsMap::movePlayer(uchar player, uchar dir)
 //{
 //    players[player]->incAState();
+//    players[player]->setDir(dir);
 //    switch(dir){
 //    case BALRA:
-//        players[player]->setX(players[player]->x()-8);
 //        break;
 //    case FEL:
-//        players[player]->setY(players[player]->y()-8);
 //        break;
 //    case LE:
-//        players[player]->setY(players[player]->y()+8);
 //        break;
 //    case JOBBRA:
-//        players[player]->setX(players[player]->x()+8);
 //        break;
 //    }
-//    update(players[player]->x()*40-8, players[player]->y()*40-8, 56, 56);
 //}
 */
 
@@ -304,6 +285,21 @@ void GraphicsMap::manageGrabKeyboard()
             }
         }
 
+    }
+}
+
+void GraphicsMap::deleteBomb(uchar x, uchar y)
+{
+    for(uchar i = 0; i < bombs.length(); i++){
+        if(
+                (bombs[i]->x())/40 == x &&
+                (bombs[i]->y())/40 == y
+        ){
+            delete bombs[i];
+            bombs.removeAt(i);
+            emit bombBlasted();
+            return;
+        }
     }
 }
 
