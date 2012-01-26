@@ -8,6 +8,7 @@ Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpow
     this->maxbomb=maxbomb;
     this->maxpower=maxpower;
 	this->fail=false;
+	this->live=true;
 	t_visible=new QTimer(this);
 	t_oppositecontrol=new QTimer(this);
 }
@@ -43,16 +44,16 @@ void Player::SetStartPosition(uchar x, uchar y)
 }
 void Player::DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir)
 {
+	if( pXcoord==x && pYcoord==y && blastable)
+    {
+        emit Blasted(this->id);
+        blastable=false;
+    }
     if( pXcoord==x && pYcoord==y && live)
     {
         emit Died(this->id,id);
         blastable=true;
         live=false;
-    }
-    if( pXcoord==x && pYcoord==y && blastable)
-    {
-        emit Blasted(this->id);
-        blastable=false;
     }
     if(id==this->id && dir==255)
     {
