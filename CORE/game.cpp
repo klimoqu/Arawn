@@ -5,9 +5,7 @@
 Game::Game(QString address)
 {
 	this->cup=0;
-	
 	this->settings=aSetInstance;
-	cup=new Cup(settings);
 	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
 	map=0;
 	serverconnection=0;
@@ -16,7 +14,7 @@ Game::Game(QString address)
 	connect(clientconnection,SIGNAL(CommandReceivedFromServer(Command)),this,SLOT(ServerExecute(Command)));
 	connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
 	connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
-	connect(clientconnection, SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
+	connect(clientconnection,SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -33,6 +31,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	map->Upload(1);
 	clientconnection=0;
 	serverconnection=new Servernet();
+	serverconnection->SetSurviveCup(survive);
 	serverconnection->SetPlayerNumber(playersnumber);
 	serverconnection->SetLocalPlayername(settings->defaultPlayer1Name);
 	connect(map,SIGNAL(ServerCommand(Command)),this,SIGNAL(ServerValidate(Command)));
@@ -388,6 +387,9 @@ void Game::clientsync(Command c)
 	case 255://azonosítás
 		{
 			playerid=c.GetPlayerId();
+			survive=c.GetMessage()==0?true:false;
+			cup=new Cup();
+			connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
 			break;
 		}
 	default:

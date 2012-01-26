@@ -13,6 +13,7 @@ class Cup : public QObject
 	bool finish;
 public:
     Cup(ArawnSettings *settings);
+	Cup();
 	bool Finished()const{return finish;}
     void AddPlayer(QString str)
     {

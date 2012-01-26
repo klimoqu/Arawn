@@ -9,6 +9,7 @@ class Servernet:public QTcpServer
     QSet<QTcpSocket*> clients;
     QMap<QTcpSocket*,QString> players;
     QString name;
+	bool survive;
 protected:
     void incomingConnection(int socketfd);
 public:
@@ -17,6 +18,7 @@ public:
     void SetPlayerNumber(uchar num){playernumber=num-1;}
     uchar GetPlayerNumber()const{return playernumber;}
     QStringList GetPlayers();
+	void SetSurviveCup(bool survive){this->survive=survive;}
 signals:
     void CommandReceivedFromClients(Command c);
     void ServerIsRunning();
