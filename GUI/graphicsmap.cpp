@@ -22,7 +22,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(PlayerBlasted(uchar)), this, SLOT(blastPlayer(uchar)));
     connect(gameGlobal, SIGNAL(PlayerMoved(uchar,uchar)), this, SLOT(movePlayer(uchar,uchar)));
     connect(gameGlobal, SIGNAL(PlayerDied(uchar,uchar)), this, SLOT(diePlayer(uchar, uchar)));
-    connect(gameGlobal, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)), Qt::DirectConnection);
+   // connect(gameGlobal, SIGNAL(SetPlayerStartPosition(uchar,uchar,uchar)), this, SLOT(startPlayerFrom(uchar,uchar,uchar)), Qt::DirectConnection);
     connect(gameGlobal, SIGNAL(BonusTurnVisible(uchar,uchar,uchar)), this, SLOT(plantBonus(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(BonusTurnInvisible(uchar,uchar,uchar)), this, SLOT(deleteBonus(uchar,uchar,uchar)));
     connect(gameGlobal, SIGNAL(PlayerTurnInvisible(uchar)), this, SLOT(invisiblePlayer(uchar)));
@@ -112,8 +112,8 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
 
 void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
-    GraphicsBomb *bomb = new GraphicsBomb(player, this);
-    bomb->setPos(x*40, y*40);
+    GraphicsBomb *bomb = new GraphicsBomb(x, y, player, this);
+    bomb->setVisible(true);
     emit bombPlanted();
     bombs.append(bomb);
     update(0,0,40,40);
@@ -202,14 +202,14 @@ void GraphicsMap::diePlayer(uchar player, uchar murderid)
 {
     emit playerDied();
     players[player]->aState = 9;
-    update(players[player]->x(), players[player]->y(), 40, 60);
+    update(players[player]->x(), players[player]->y()-20, 40, 60);
 }
 
 void GraphicsMap::blastPlayer(uchar player)
 {
     players[player]->setVisible(false);
     emit playerBlasted();
-    update(players[player]->x(), players[player]->y(), 40, 60);
+    update(players[player]->x(), players[player]->y()-20, 40, 60);
 }
 
 void GraphicsMap::setMapIDs(int)
@@ -228,19 +228,19 @@ void GraphicsMap::setMapIDs(int)
        case 4:
                    players[3]->setVisible(true);
                    players[3]->setPos(19*40,12*40);
-                   update(players[3]->x(), players[3]->y(), 40, 60);
+                   update(players[3]->x(), players[3]->y()-20, 40, 60);
        case 3:
                    players[2]->setVisible(true);
                    players[2]->setPos(0*40,12*40);
-                   update(players[2]->x(), players[2]->y(), 40, 60);
+                   update(players[2]->x(), players[2]->y()-20, 40, 60);
        case 2:
                    players[1]->setVisible(true);
                    players[1]->setPos(19*40,0*40);
-                   update(players[1]->x(), players[1]->y(), 40, 60);
+                   update(players[1]->x(), players[1]->y()-20, 40, 60);
        default:
                    players[0]->setVisible(true);
                    players[0]->setPos(0*40,0*40);
-                   update(players[0]->x(), players[0]->y(), 40, 60);
+                   update(players[0]->x(), players[0]->y()-20, 40, 60);
            break;
        }
 }
@@ -255,7 +255,8 @@ void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
 {
-    GraphicsBonus *bonus = new GraphicsBonus(type, x*40, y*40, this);
+    GraphicsBonus *bonus = new GraphicsBonus(type, x, y, this);
+    bonus->setVisible(true);
     bonuses.append(bonus);
     update(x*40, y*40, 40, 40);
     update(0,0,40,40);
@@ -279,13 +280,13 @@ void GraphicsMap::deleteBonus(uchar x, uchar y, uchar)
 void GraphicsMap::invisiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(false);
-    update(players[playerid]->boundingRect());
+    update(players[playerid]->x(), players[playerid]->y()-20, 40, 60);
 }
 
 void GraphicsMap::visiblePlayer(uchar playerid)
 {
     players[playerid]->setVisible(true);
-    update(players[playerid]->boundingRect());
+    update(players[playerid]->x(), players[playerid]->y()-20, 40, 60);
 }
 
 void GraphicsMap::destroyField(uchar x, uchar y)
@@ -299,10 +300,26 @@ void GraphicsMap::manageGrabKeyboard()
     qDebug() << "VisibleChanged to" << isVisible() ;
     if(isVisible()){
         grabKeyboard();
+        players[0]->aState = 0;
+        players[1]->aState = 0;
+        players[2]->aState = 0;
+        players[3]->aState = 0;
     }else{
         ungrabKeyboard();
+        for(uchar i = 0; i < bombs.length(); i++){
+            delete bombs[i];
+        }
         bombs.clear();
+        for(uchar i = 0; i < bonuses.length(); i++){
+            delete bonuses[i];
+        }
         bonuses.clear();
+        for(uchar i = 0; i < 20; i++){
+            for(uchar j = 0; j < 13; j++){
+                burning[i][j] = 42;
+            }
+        }
+
     }
 }
 

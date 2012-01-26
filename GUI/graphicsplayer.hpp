@@ -54,7 +54,7 @@ private:
 class GraphicsBomb : public QGraphicsItem
 {
 public:
-    GraphicsBomb(uchar id, QGraphicsItem *parent);
+    GraphicsBomb(uchar x, uchar y, uchar p, QGraphicsItem *parent);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -69,7 +69,7 @@ private:
 class GraphicsBonus : public QGraphicsItem
 {
 public:
-    GraphicsBonus(uchar type, int xcoord, int ycoord, QGraphicsItem *parent);
+    GraphicsBonus(uchar type, uchar x, uchar y, QGraphicsItem *parent);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
