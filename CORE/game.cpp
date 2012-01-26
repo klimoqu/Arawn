@@ -313,6 +313,7 @@ void Game::clientsync(Command c)
 		}
 	case 3://boom
 		{
+			if((c.GetMessage()/(256*256))%256==255)emit DeleteBomb((c.GetMessage()/256)%256,c.GetMessage()%256);
 			emit FieldBlasted((c.GetMessage()/256)%256,c.GetMessage()%256,c.GetPlayerId(),(c.GetMessage()/(256*256))%256);
 			break;
 		}
@@ -352,6 +353,11 @@ void Game::clientsync(Command c)
 			default:
 				break;
 			}
+			break;
+		}
+	case 249:
+		{
+			emit DeleteBomb((c.GetMessage()/256)%256,c.GetMessage()%256);
 			break;
 		}
 	case 250://pályaszinkron
