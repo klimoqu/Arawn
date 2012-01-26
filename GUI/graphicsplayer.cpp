@@ -1,6 +1,12 @@
 #include "graphicsplayer.hpp"
 #include "imagefactory.hpp"
 
+#define LE 2
+#define FEL 1
+#define JOBBRA 3
+#define BALRA 0
+#define MINDEN 255
+
 GraphicsPlayer::GraphicsPlayer(uchar p, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
     aState = 0;
@@ -19,9 +25,10 @@ GraphicsPlayer::GraphicsPlayer(uchar p, QGraphicsItem *parent) : QGraphicsItem(p
         img = QImage("res/a_yellow.png");
     }
     for(uchar i = 0; i < 10; i++){
-        for(uchar j = 0; j < 4; j++){
-            pix[i][j] = new QImage(img.copy(i*40, j*60, 40, 60));
-        }
+        pix[i][2] = new QImage(img.copy(i*40, 0, 40, 60));
+        pix[i][1] = new QImage(img.copy(i*40, 120, 40, 60));
+        pix[i][3] = new QImage(img.copy(i*40, 180, 40, 60));
+        pix[i][0] = new QImage(img.copy(i*40, 60, 40, 60));
     }
 
 }
