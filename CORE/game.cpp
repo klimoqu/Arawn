@@ -298,7 +298,6 @@ void Game::clientsync(Command c)
 	case 0:
 		{
 			emit PlayerPointChanged(c.GetPlayerId(),c.GetMessage());
-			qDebug()<<c.ToString();
 			break;
 		}
 	case 1://move
