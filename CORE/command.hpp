@@ -9,6 +9,7 @@
   5 halál, test robbanása
   6 mezőváltozás
   7 bonuszok
+  249 bomba eltüntetés
   250 mezők szinkronizálása
   251 játék kezdete
   252 játék vége

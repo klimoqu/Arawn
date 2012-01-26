@@ -54,6 +54,7 @@ signals:
     void SetPlayerStartPosition(uchar id, uchar x, uchar y);
     void GameStarted(int roundtime);
 
+	void DeleteBomb(uchar x, uchar y);
     void BombPlanted(uchar x, uchar y,uchar id);
     void FieldBlasted(uchar x, uchar y, uchar id,uchar direction);
     void PlayerDied(uchar id,uchar murderid);
