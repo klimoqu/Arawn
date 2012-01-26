@@ -93,7 +93,8 @@ OTHER_FILES += \
     GUI/res/a_purple.png \
     GUI/res/a_green.png \
     GUI/res/a_cyan.png \
-    GUI/res/a_blue.png
+    GUI/res/a_blue.png \
+    GUI/res/cup.png
 
 TRANSLATIONS += GUI/res/Arawn_hu.ts \
 				GUI/res/Arawn_en.ts \
