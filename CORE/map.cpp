@@ -3,6 +3,7 @@
 
 Map::Map(uchar playersnumber,ArawnSettings *settings)
 {
+	this->id=1;
     Fields[0][0] = 0;
     this->settings=settings;
     this->playersnumber=playersnumber;
@@ -14,6 +15,10 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
         connect(this,SIGNAL(FieldDestroyed(uchar,uchar)),players[i],SLOT(Die(uchar,uchar)));
     }
 	activegame=false;
+}
+void Map::Upload()
+{
+	Upload(id);
 }
 void Map::Upload(int id)
 {
@@ -116,4 +121,13 @@ void Map::ClearMap()
 	activegame=false;
 	deadplayersnumber=0;
     bombs.clear();
+	id++;
+	std::stringstream ss;
+    ss<<id;
+    std::string stringid;
+    ss>>stringid;
+    std::string filename="maps/"+stringid+".map";
+    input.open(filename.c_str());
+	if(!input)id--;
+	input.close();
 }

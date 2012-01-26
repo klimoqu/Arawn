@@ -288,7 +288,7 @@ void Game::GameIsEnd()
 
 	if(!cup->Finished())
 	{
-		map->Upload(1);
+		map->Upload();
 		QTimer::singleShot(7000, this, SLOT(AllReady()));
 	}
 }

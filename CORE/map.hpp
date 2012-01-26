@@ -25,6 +25,7 @@ private:
     
 public:
     void Upload(int id);
+    void Upload();
 	void bonusupload();
     Map(uchar playersnumber,ArawnSettings *settings);
     uchar GetPlayersNumber()const{return playersnumber;}
@@ -35,7 +36,7 @@ public:
     {
         bombs.push_back(b);
         connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
-		connect(b,SIGNAL(Failed(uchar,uchar)),this,SLOT(BombFail()));
+		connect(b,SIGNAL(Failed(uchar,uchar)),this,SLOT(BombFail(uchar,uchar)));
     }
     void SetPlayersStartPoints();
 	void ClearMap();
