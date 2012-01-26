@@ -15,7 +15,7 @@ Game::Game(QString address)
 	connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
 	connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 	connect(clientconnection,SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
-	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),this->cup,SLOT(ChangePlayerPoint(uchar,int)));
+	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -279,18 +279,17 @@ void Game::GameIsEnd()
 {
 	gametimer->stop();
 	map->ClearMap();
-	activegame=false;
 	tempcommands.clear();
-	emit ServerValidate(Command(255,252,0));
-	if(survive)for(uchar i=0;i<playersnumber;i++)
+	if(survive&&activegame)for(uchar i=0;i<playersnumber;i++)
 		if(map->GetPlayer(i)->IsAlive())
 			emit PlayerSurvived(i);
-
+	activegame=false;
 	if(!cup->Finished())
 	{
 		map->Upload();
 		QTimer::singleShot(7000, this, SLOT(AllReady()));
 	}
+	emit ServerValidate(Command(255,252,0));
 }
 void Game::clientsync(Command c)
 {
@@ -299,6 +298,7 @@ void Game::clientsync(Command c)
 	case 0:
 		{
 			emit PlayerPointChanged(c.GetPlayerId(),c.GetMessage());
+			qDebug()<<c.ToString();
 			break;
 		}
 	case 1://move

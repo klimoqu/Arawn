@@ -25,7 +25,8 @@ void Cup::PlayerDie(uchar victim, uchar murder)
     if(victim!=murder)
         pontok[murder]++;
     else
-        pontok[victim]--;
+        if(pontok[victim]>0)
+			pontok[victim]--;
     emit PlayerPointChanged(murder,pontok[murder]);
     if(settings && pontok[murder]==settings->pointsToWin.toInt())
 	{
