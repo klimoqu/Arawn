@@ -59,6 +59,10 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     players[1]->setVisible(false);
     players[2]->setVisible(false);
     players[3]->setVisible(false);
+    players[0]->setZValue(5);
+    players[1]->setZValue(6);
+    players[2]->setZValue(7);
+    players[3]->setZValue(8);
 
     for(uchar i = 0; i < 20; i++){
         for(uchar j = 0; j < 13; j++){
@@ -84,20 +88,19 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
         }
     }
 
-    // Bombák
-    for(uchar i = 0; i < bombs.length(); i++){
-        bombs[i]->paint(painter, o, w);
-    }
-
     // Bónuszok
     for(uchar i = 0; i < bonuses.length(); i++){
         bonuses[i]->paint(painter, o, w);
     }
 
-        playersCount=gameGlobal->GetPlaysersNumber();//ezt vagy itt, vagy valahol máshol, de le kell kérdezni
+    // Bombák
+    for(uchar i = 0; i < bombs.length(); i++){
+        bombs[i]->paint(painter, o, w);
+    }
+
 
     // Játékosok
-    for(uchar i = 0; i < playersCount; i++){
+    for(uchar i = 0; i < gameGlobal->GetPlaysersNumber(); i++){
         players[i]->paint(painter, o, w);
     }
 
@@ -113,6 +116,7 @@ void GraphicsMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *o, QW
 void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
     GraphicsBomb *bomb = new GraphicsBomb(x, y, player, this);
+    bomb->setZValue(1);
     bomb->setVisible(true);
     emit bombPlanted();
     bombs.append(bomb);
@@ -223,26 +227,7 @@ void GraphicsMap::setMapIDs(int)
     }
 */
 //    update(boundingRect());
-    switch(gameGlobal->GetPlaysersNumber())
-       {
-       case 4:
-                   players[3]->setVisible(true);
-                   players[3]->setPos(19*40,12*40);
-                   update(players[3]->x(), players[3]->y()-20, 40, 60);
-       case 3:
-                   players[2]->setVisible(true);
-                   players[2]->setPos(0*40,12*40);
-                   update(players[2]->x(), players[2]->y()-20, 40, 60);
-       case 2:
-                   players[1]->setVisible(true);
-                   players[1]->setPos(19*40,0*40);
-                   update(players[1]->x(), players[1]->y()-20, 40, 60);
-       default:
-                   players[0]->setVisible(true);
-                   players[0]->setPos(0*40,0*40);
-                   update(players[0]->x(), players[0]->y()-20, 40, 60);
-           break;
-       }
+
 }
 
 void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
@@ -256,6 +241,7 @@ void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
 {
     GraphicsBonus *bonus = new GraphicsBonus(type, x, y, this);
+    bonus->setZValue(0);
     bonus->setVisible(true);
     bonuses.append(bonus);
     update(x*40, y*40, 40, 40);
@@ -304,6 +290,26 @@ void GraphicsMap::manageGrabKeyboard()
         players[1]->aState = 0;
         players[2]->aState = 0;
         players[3]->aState = 0;
+        switch(gameGlobal->GetPlaysersNumber())
+           {
+           case 4:
+                       players[3]->setVisible(true);
+                       players[3]->setPos(19*40,12*40);
+                       update(players[3]->x(), players[3]->y()-20, 40, 60);
+           case 3:
+                       players[2]->setVisible(true);
+                       players[2]->setPos(0*40,12*40);
+                       update(players[2]->x(), players[2]->y()-20, 40, 60);
+           case 2:
+                       players[1]->setVisible(true);
+                       players[1]->setPos(19*40,0*40);
+                       update(players[1]->x(), players[1]->y()-20, 40, 60);
+           default:
+                       players[0]->setVisible(true);
+                       players[0]->setPos(0*40,0*40);
+                       update(players[0]->x(), players[0]->y()-20, 40, 60);
+               break;
+           }
     }else{
         ungrabKeyboard();
         for(uchar i = 0; i < bombs.length(); i++){
