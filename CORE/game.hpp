@@ -79,6 +79,7 @@ private slots:
     void StartGame();
     void TimeIsOver();
     void DestroyField();
+	void StopTheGame(){GameIsEnd();}
 
 public slots:
     void ServerExecute(Command c){clientsync(c);}//ellenörzött parancs

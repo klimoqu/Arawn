@@ -381,7 +381,7 @@ void Game::clientsync(Command c)
 				break;
 			case 1:
 				emit PlayerWonTheRound(GetPlayers()[c.GetPlayerId()]);
-				if(map){destroymap->stop();GameIsEnd();}
+				if(map){destroymap->stop();QTimer::singleShot(2000,this,SLOT(StopTheGame()));}
 				break;
 			}
 			break;
