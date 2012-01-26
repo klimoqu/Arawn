@@ -338,7 +338,7 @@ void GraphicsTimer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
 {
     painter->save();
 
-    painter->drawImage(0, 0, (secs > 0) ? clock : noclock);
+    painter->drawImage(20, 33, (secs > 0) ? clock : noclock);
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(font);
     painter->drawText(QRectF(45, 0, 200, 66).translated(4,4), QString::number(secs/60) + ":" + QString::number(secs%60), QTextOption(Qt::AlignCenter));
@@ -368,7 +368,6 @@ void GraphicsTimer::tick()
 
 GraphicsCup::GraphicsCup()
 {
-    c = gameGlobal->GetCup();
     bgnd = QImage("res/fire.jpg").scaled(800, 600, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     cupImg = QImage("res/cup.png");
     font = qApp->font();
@@ -399,13 +398,13 @@ void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 
 
     painter->setFont(listFont);
-    for(uchar i = 0; i < c->GetPlayersName().length(); i++){
+    for(uchar i = 0; i < gameGlobal->GetPlaysersNumber(); i++){
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(-350, -166+i*50, 250, 50).translated(3,3), c->GetPlayerName(i), QTextOption(Qt::AlignLeading));
+        painter->drawText(QRectF(-350, -166+i*50, 250, 50).translated(3,3), gameGlobal->GetPlayers()[i], QTextOption(Qt::AlignLeading));
         painter->setPen(QColor(50, 150, 200));
-        painter->drawText(QRectF(-350, -166+i*50, 250, 50), c->GetPlayerName(i), QTextOption(Qt::AlignLeading));
+        painter->drawText(QRectF(-350, -166+i*50, 250, 50), gameGlobal->GetPlayers()[i], QTextOption(Qt::AlignLeading));
 
-        for(uchar j = 0; j < c->GetPointOf(i); j++){
+        for(uchar j = 0; j < gameGlobal->GetCup()->GetPointOf(i); j++){
             painter->drawImage(-66+j*40, -160+i*50, cupImg);
         }
 
@@ -413,6 +412,11 @@ void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
     }
 
     painter->restore();
+}
+
+void GraphicsCup::updateList()
+{
+    update(boundingRect());
 }
 
 

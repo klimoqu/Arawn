@@ -104,10 +104,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
 
 public slots:
-
+    void updateList();
 
 private:
-    Cup *c;
     QImage bgnd;
     QImage cupImg;
     QFont font;
