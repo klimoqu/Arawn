@@ -13,17 +13,11 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
         connect(players[i],SIGNAL(Died(uchar,uchar)),this,SLOT(PlayerDie(uchar,uchar)));
         connect(this,SIGNAL(FieldDestroyed(uchar,uchar)),players[i],SLOT(Die(uchar,uchar)));
     }
+	activegame=false;
 }
 void Map::Upload(int id)
 {
-	deadplayersnumber=0;
-    if(Fields[0][0])
-        for(uchar i=0; i<20; i++)
-            for(uchar j = 0; j < 13; j++)
-                    delete Fields[i][j];
-
-
-    bombs.clear();
+	ClearMap();
 
     this->id=id;
     std::stringstream ss;
@@ -93,6 +87,7 @@ void Map::bonusupload()
             }
         }
     }
+	activegame=true;
 }
 void Map::SetPlayersStartPoints()
 {
@@ -112,4 +107,16 @@ void Map::SetPlayersStartPoints()
 		emit ServerCommand(Command(0,254,0));
         break;
     }
+}
+void Map::ClearMap()
+{
+	activegame=false;
+	deadplayersnumber=0;
+    if(Fields[0][0])
+        for(uchar i=0; i<20; i++)
+            for(uchar j = 0; j < 13; j++)
+                    delete Fields[i][j];
+
+	for(int i=bombs.size()-1;i<=0;i--)delete bombs.at(i);
+    bombs.clear();
 }

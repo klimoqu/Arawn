@@ -6,7 +6,7 @@
 class Game : public QObject
 {
     Q_OBJECT
-    bool survive;
+    bool survive,activegame;
     Map *map;
     Cup *cup;
     int gametime,playersnumber,bombtimeout,act;

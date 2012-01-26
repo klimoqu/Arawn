@@ -19,6 +19,7 @@ Game::Game(QString address)
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
 {
+	activegame=false;
 	this->cup=0;
 	this->survive=survive;
 	this->settings=settings;
@@ -186,7 +187,7 @@ void Game::execute(Command c)
 			QTimer *qt=new QTimer(this);
 			qt->setSingleShot(true);
 			qt->start(50);
-			QTimer::singleShot(50,this, SLOT(WaitingCommandExecute()));
+			connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
 			tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),65536+256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
 		}
 		if(c.GetMessage()>65536 && (c.GetMessage()/256)%256>0)
@@ -210,7 +211,7 @@ void Game::execute(Command c)
 }
 void Game::WaitingCommandExecute()
 {
-	validate(tempcommands[(QTimer*)sender()]);
+	if(activegame)validate(tempcommands[(QTimer*)sender()]);
 	tempcommands.remove((QTimer*)sender());
 	delete (QTimer*)sender();
 }
@@ -229,7 +230,10 @@ void Game::StartGame()
 {
 	emit ServerValidate(Command(255,251,settings->roundTimeDefault.toInt()));
 	emit ServerValidate(Command(255,251,settings->roundTimeDefault.toInt()));
-	QTimer::singleShot(settings->roundTimeDefault.toInt()*1000, this, SLOT(TimeIsOver()));
+	gametimer->setSingleShot(true);
+	gametimer->start(settings->roundTimeDefault.toInt()*1000);
+	connect(gametimer,SIGNAL(timeout()),this,SLOT(TimeIsOver()));
+	activegame=true;
 }
 void Game::sendmap()
 {
@@ -272,6 +276,10 @@ void Game::DestroyField()
 }
 void Game::GameIsEnd()
 {
+	gametimer->stop();
+	map->ClearMap();
+	activegame=false;
+	tempcommands.clear();
 	emit ServerValidate(Command(255,252,0));
 	if(survive)for(uchar i=0;i<playersnumber;i++)
 		if(map->GetPlayer(i)->IsAlive())
@@ -279,7 +287,6 @@ void Game::GameIsEnd()
 
 	if(!cup->Finished())
 	{
-		tempcommands.clear();
 		map->Upload(1);
 		QTimer::singleShot(7000, this, SLOT(AllReady()));
 	}

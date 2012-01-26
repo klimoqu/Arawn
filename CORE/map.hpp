@@ -21,6 +21,7 @@ private:
     uchar playersnumber,deadplayersnumber;
     QList<Bomb*> bombs;
     ArawnSettings *settings;
+	bool activegame;
     
 public:
     void Upload(int id);
@@ -36,6 +37,7 @@ public:
         connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
     }
     void SetPlayersStartPoints();
+	void ClearMap();
 
 signals:
 
@@ -51,17 +53,17 @@ public slots:
     void FieldBurning(uchar x, uchar y,uchar size, uchar id,uchar direction)
     {
         Command ret=Command(id,3,256*256*direction+256*x+y);
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
     void FieldExcinguish(uchar x, uchar y)
     {
         Command ret=Command(255,4,256*x+y);
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
     void FieldChange(uchar x, uchar y,uchar newtype)
     {
         Command ret=Command(255,6,256*256*newtype+256*x+y);
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
     void PlayerDie(uchar id,uchar murderid)
     {
@@ -76,16 +78,16 @@ public slots:
     void PlayerBlast(uchar id)
     {
         Command ret=Command(id,5,256);
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
     void ChangeBonus(uchar x, uchar y, uchar type,uchar visibleorstate)
     {
         Command ret=Command(0,7,(visibleorstate*256*256*256)+(256*256*type)+(256*x)+y);
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
     void PlayerInvisibility(uchar playerid,bool visible)
     {
         Command ret=Command(playerid,7,(((visible?3:4))*256*256*256));
-        emit ServerCommand(ret);
+        if(activegame)emit ServerCommand(ret);
     }
 };
