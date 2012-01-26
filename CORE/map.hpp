@@ -35,6 +35,7 @@ public:
     {
         bombs.push_back(b);
         connect(b,SIGNAL(Boomed(uchar,uchar,uchar,uchar,uchar)),this,SIGNAL(FieldBlasted(uchar,uchar,uchar,uchar,uchar)));
+		connect(b,SIGNAL(Failed(uchar,uchar)),this,SLOT(BombFail()));
     }
     void SetPlayersStartPoints();
 	void ClearMap();
@@ -45,6 +46,11 @@ signals:
     void FieldBlasted(uchar x, uchar y, uchar size,uchar id,uchar direction);
     void FieldDestroyed(uchar x, uchar y);
 public slots:
+	void BombFail(uchar x, uchar y)
+	{
+		Command ret=Command(255,249,256*x+y);
+        if(activegame)emit ServerCommand(ret);
+	}
     void DeleteThis(Bomb *b)
     {
         bombs.removeAll(b);

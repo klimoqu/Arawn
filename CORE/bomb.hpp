@@ -35,11 +35,12 @@ public:
 signals:
     void Planted(uchar x, uchar y);
     void Boomed(uchar x, uchar y,uchar size,uchar id,uchar direction);
+	void Failed(uchar x, uchar y);
     void DeleteThis(Bomb* b);
 public slots:
     void Boom()
     {
-        canfail?emit Boomed(255,255,0,id,255):emit Boomed(this->x,this->y,this->size,id,255);
+		canfail?emit Failed(this->x,this->y):emit Boomed(this->x,this->y,this->size,id,255);
 		emit DeleteThis(this);
     }
     void Boom(uchar x, uchar y,uchar size,uchar id,uchar direction)
