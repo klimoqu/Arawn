@@ -4,7 +4,7 @@
 
 Game::Game(QString address)
 {
-	this->cup=0;
+	this->cup=new Cup();
 	this->settings=aSetInstance;
 	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
 	map=0;
@@ -15,6 +15,7 @@ Game::Game(QString address)
 	connect(clientconnection,SIGNAL(Connected()),this,SIGNAL(Connected()));
 	connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 	connect(clientconnection,SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
+	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),this->cup,SLOT(ChangePlayerPoint(uchar,int)));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -395,9 +396,6 @@ void Game::clientsync(Command c)
 		{
 			playerid=c.GetPlayerId();
 			survive=c.GetMessage()==0?true:false;
-			if(this->cup)delete cup;
-			this->cup=new Cup();
-			connect(this,SIGNAL(PlayerPointChanged(uchar,int)),this->cup,SLOT(ChangePlayerPoint(uchar,int)));
 			break;
 		}
 	default:
