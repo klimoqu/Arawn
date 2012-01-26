@@ -395,8 +395,9 @@ void Game::clientsync(Command c)
 		{
 			playerid=c.GetPlayerId();
 			survive=c.GetMessage()==0?true:false;
-			cup=new Cup();
-			connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
+			if(this->cup)delete cup;
+			this->cup=new Cup();
+			connect(this,SIGNAL(PlayerPointChanged(uchar,int)),this->cup,SLOT(ChangePlayerPoint(uchar,int)));
 			break;
 		}
 	default:
