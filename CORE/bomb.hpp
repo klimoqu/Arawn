@@ -40,7 +40,15 @@ signals:
 public slots:
     void Boom()
     {
-		canfail?emit Failed(this->x,this->y):emit Boomed(this->x,this->y,this->size,id,255);
+		if(canfail)
+		{
+			emit Failed(this->x,this->y);
+			emit Boomed(255,255,0,this->id,255);
+		}
+		else
+		{
+			emit Boomed(this->x,this->y,this->size,id,255);
+		}
 		emit DeleteThis(this);
     }
     void Boom(uchar x, uchar y,uchar size,uchar id,uchar direction)
