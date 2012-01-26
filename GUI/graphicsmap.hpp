@@ -98,15 +98,22 @@ class GraphicsCup : public QGraphicsObject
 {
     Q_OBJECT
 public:
-    GraphicsCup();
+    GraphicsCup(QSound *atEnd);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
 
+signals:
+    void backToMenu();
+
 public slots:
     void updateList();
+    void playerWon(QString name);
+    void becameVisible();
 
 private:
+    QSound *sound;
+    QStringList winners;
     QImage bgnd;
     QImage cupImg;
     QFont font;

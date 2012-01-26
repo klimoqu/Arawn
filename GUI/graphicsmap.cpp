@@ -338,7 +338,7 @@ void GraphicsTimer::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
 {
     painter->save();
 
-    painter->drawImage(20, 33, (secs > 0) ? clock : noclock);
+    painter->drawImage(20, 20, (secs > 0) ? clock : noclock);
     painter->setPen(QColor(100, 10, 10, 200));
     painter->setFont(font);
     painter->drawText(QRectF(45, 0, 200, 66).translated(4,4), QString::number(secs/60) + ":" + QString::number(secs%60), QTextOption(Qt::AlignCenter));
@@ -366,14 +366,16 @@ void GraphicsTimer::tick()
 
 
 
-GraphicsCup::GraphicsCup()
+GraphicsCup::GraphicsCup(QSound *atEnd)
 {
+    sound = atEnd;
     bgnd = QImage("res/fire.jpg").scaled(800, 600, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     cupImg = QImage("res/cup.png");
     font = qApp->font();
     font.setPixelSize(50);
     listFont = qApp->font();
     listFont.setPixelSize(40);
+    connect(this, SIGNAL(visibleChanged()), this, SLOT(becameVisible()));
 }
 
 QRectF GraphicsCup::boundingRect() const
@@ -411,6 +413,18 @@ void GraphicsCup::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWi
 
     }
 
+    if(!winners.empty()){
+        painter->setPen(QColor(100, 10, 10, 200));
+        painter->drawText(QRectF(-300, 150, 600, 66).translated(4,4),
+                          winners[0] + tr(" won the cup!"),
+                          QTextOption(Qt::AlignCenter));
+        painter->setPen(QColor(50, 150, 200));
+        painter->drawText(QRectF(-300, 150, 600, 66),
+                          winners[0] + tr(" won the cup!"),
+                          QTextOption(Qt::AlignCenter));
+    }
+
+
     painter->restore();
 }
 
@@ -419,12 +433,18 @@ void GraphicsCup::updateList()
     update(boundingRect());
 }
 
+void GraphicsCup::playerWon(QString name)
+{
+    winners<<name;
+}
 
-
-
-
-
-
+void GraphicsCup::becameVisible()
+{
+    if(winners.empty())return;
+    sound->play();
+    QTimer::singleShot(600, sound, SLOT(play()));
+    QTimer::singleShot(7000, this, SIGNAL(backToMenu()));
+}
 
 
 

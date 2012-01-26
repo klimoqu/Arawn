@@ -71,7 +71,6 @@ private:
     QState *cupState;
     QFinalState *gameFinal;
     QState *stateQuit;
-    QFinalState *finalState;
 };
 
 #endif // QARAWNWINDOW_HPP

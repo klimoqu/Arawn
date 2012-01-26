@@ -160,8 +160,6 @@ void QArawnWindow::initializeOthers()
     stateQuit = new QState;
     machine->addState(stateQuit);
 
-    finalState = new QFinalState;
-    machine->addState(finalState);
 
     mapState = new QState(stateGame);
     cupState = new QState(stateGame);
@@ -190,9 +188,7 @@ void QArawnWindow::initializeOthers()
 
     stateArawn->addTransition(timerStArawnToStMM, SIGNAL(timeout()), stateMenu);
 
-    //Végén
     timerStLogoToStArawn->start(50);
-    connect(machine, SIGNAL(finished()), this, SLOT(close()));
 }
 
 
@@ -285,7 +281,7 @@ void QArawnWindow::initializeMenus()
 
      stateQuit->assignProperty(mainMenu, "pos", QPointF(scene->width()/2 + mainMenu->boundingRect().width()/2,0));
      connect(stateQuit, SIGNAL(entered()), media[0], SLOT(play()));
-     stateQuit->addTransition(stateQuit, SIGNAL(propertiesAssigned()), finalState);
+     connect(stateQuit, SIGNAL(propertiesAssigned()), this, SLOT(close()));
 
      GraphicsNPSetup *npSetup = new GraphicsNPSetup(stateMenuHistory, stateNetPlayerSetup);
      npSetup->setPos(scene->width(),0);
@@ -336,7 +332,7 @@ void QArawnWindow::enterMenus()
         firAnim->start();
     }
 
-    copyright = new QGraphicsTextItem("Arawn 0.9a Copyright KliMoQu @ PPKE ITK");
+    copyright = new QGraphicsTextItem("Arawn 1.0prealpha Copyright KliMoQu @ PPKE ITK");
     QFont fnt = qApp->font();
     fnt.setPixelSize(20);
     copyright->setFont(fnt);
@@ -370,11 +366,12 @@ void QArawnWindow::enterGame()
     cupState->assignProperty(grMap, "visible", false);
     scene->addItem(grMap);
     grTimer = new GraphicsTimer;
+    grTimer->setZValue(-10);
     grTimer->setPos(-400, -300);
     mapState->assignProperty(grTimer, "visible", true);
     cupState->assignProperty(grTimer, "visible", false);
     scene->addItem(grTimer);
-    grCup = new GraphicsCup();
+    grCup = new GraphicsCup(media[13]);
     grCup->setPos(0,0);
     scene->addItem(grCup);
     mapState->assignProperty(grCup, "visible", false);
@@ -382,7 +379,9 @@ void QArawnWindow::enterGame()
 
     mapState->addTransition(gameGlobal, SIGNAL(GameOver()), cupState);
     cupState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), mapState);
+    cupState->addTransition(grCup, SIGNAL(backToMenu()), gameFinal);
     connect(gameGlobal, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
+    connect(gameGlobal, SIGNAL(PlayerWonTheCup(QString)), grCup, SLOT(playerWon(QString)));
     connect(cupState, SIGNAL(entered()), grCup, SLOT(updateList()));
     connect(grMap, SIGNAL(bombBlasted()), media[4], SLOT(play()));
     connect(grMap, SIGNAL(bombPlanted()), media[3], SLOT(play()));
@@ -398,6 +397,7 @@ void QArawnWindow::finishGame()
     grCup->deleteLater();
 
     copyright->setVisible(true);
+    pixFireItem->setVisible(true);
     if(ArawnSettings::instance()->animateFire.toBool()){
         firAnim->setLoopCount(-1);
         firAnim->setEasingCurve(QEasingCurve::OutInBounce);
