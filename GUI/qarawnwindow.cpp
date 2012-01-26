@@ -383,7 +383,7 @@ void QArawnWindow::enterGame()
     mapState->addTransition(gameGlobal, SIGNAL(GameOver()), cupState);
     cupState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), mapState);
     connect(gameGlobal, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
-
+    connect(cupState, SIGNAL(entered()), grCup, SLOT(updateList()));
     connect(grMap, SIGNAL(bombBlasted()), media[4], SLOT(play()));
     connect(grMap, SIGNAL(bombPlanted()), media[3], SLOT(play()));
     connect(grMap, SIGNAL(playerDied()), media[6], SLOT(play()));
