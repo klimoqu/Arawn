@@ -16,9 +16,9 @@ protected:
     /// Játékos sebessége (1-)
     uchar pSpeed;
     /// Játékos által egyszerre lerakható bombák száma (1-)
-    uchar pBombsNum,maxbomb;
+    uchar pBombsNum,maxbomb,defaultbombs;
     /// Játékos által lerakott bombák ereje (1-)
-    uchar pBombPower,maxpower;
+    uchar pBombPower,maxpower,defaultpower;
     /// A játékos él-e,robbantható-e,gebasz van a bombával
     bool live,blastable,fail,isvisible,isoppositecontrol;
     uchar id;

@@ -4,7 +4,9 @@ Player::Player(uchar id,uchar bombnum,uchar bombpower,uchar maxbomb,uchar maxpow
 {
     this->id=id;
     this->pBombsNum=bombnum;
+	this->defaultbombs=bombnum;
     this->pBombPower=bombpower;
+	this->defaultpower=bombpower;
     this->maxbomb=maxbomb;
     this->maxpower=maxpower;
 	this->fail=false;
@@ -36,11 +38,13 @@ void Player::SetStartPosition(uchar x, uchar y)
 {
 	this->isoppositecontrol=false;
 	this->pSpeed=1;
-    pXcoord=x;
-    pYcoord=y;
-    live=true;
-    blastable=false;
+    this->pXcoord=x;
+    this->pYcoord=y;
+    this->live=true;
+    this->blastable=false;
 	this->fail=false;
+	this->pBombPower=defaultpower;
+	this->pBombsNum=defaultbombs;
 }
 void Player::DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir)
 {
