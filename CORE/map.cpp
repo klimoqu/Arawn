@@ -17,8 +17,11 @@ Map::Map(uchar playersnumber,ArawnSettings *settings)
 }
 void Map::Upload(int id)
 {
+	if(Fields[0][0])
+        for(uchar i=0; i<20; i++)
+            for(uchar j = 0; j < 13; j++)
+                    delete Fields[i][j];
 	ClearMap();
-
     this->id=id;
     std::stringstream ss;
     ss<<id;
@@ -112,11 +115,5 @@ void Map::ClearMap()
 {
 	activegame=false;
 	deadplayersnumber=0;
-    if(Fields[0][0])
-        for(uchar i=0; i<20; i++)
-            for(uchar j = 0; j < 13; j++)
-                    delete Fields[i][j];
-
-	for(int i=bombs.size()-1;i<=0;i--)delete bombs.at(i);
     bombs.clear();
 }
