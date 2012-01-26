@@ -32,7 +32,7 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
     connect(gameGlobal, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
     connect(this, SIGNAL(visibleChanged()), this, SLOT(manageGrabKeyboard()), Qt::DirectConnection);
-
+    connect(gameGlobal, SIGNAL(DeleteBomb(uchar,uchar)), this, SLOT(deleteBomb(uchar,uchar)));
     connect(bombAnimator, SIGNAL(timeout()), this, SLOT(animateBombs()));
 
     fPixmaps[0] = imgFact->fieldImages[0];
@@ -176,27 +176,27 @@ void GraphicsMap::blastPlayer(uchar player)
     emit playerBlasted();
 }
 
-void GraphicsMap::setMapIDs(int)
-{
-   // grabKeyboard();
-/*
-    for(uchar i = 0; i < 20; i++){
-        for(uchar j = 0; j < 13; j++){
-            mapIDs[i][j] = gameGlobal->GetFields(i, j);
-        }
-    }
-*/
-//    update(boundingRect());
+//void GraphicsMap::setMapIDs(int)
+//{
+//   // grabKeyboard();
+///*
+//    for(uchar i = 0; i < 20; i++){
+//        for(uchar j = 0; j < 13; j++){
+//            mapIDs[i][j] = gameGlobal->GetFields(i, j);
+//        }
+//    }
+//*/
+////    update(boundingRect());
 
-}
+//}
 
-void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
-{
-//    qDebug() << "Player" << id << x << y;
-//    players[id]->setVisible(true);
-//    players[id]->setPos(x*40, y*40);
-//    update(players[id]->x(), players[id]->y(), 40, 60);
-}
+//void GraphicsMap::startPlayerFrom(uchar id, uchar x, uchar y)
+//{
+////    qDebug() << "Player" << id << x << y;
+////    players[id]->setVisible(true);
+////    players[id]->setPos(x*40, y*40);
+////    update(players[id]->x(), players[id]->y(), 40, 60);
+//}
 
 void GraphicsMap::plantBonus(uchar x, uchar y, uchar type)
 {
