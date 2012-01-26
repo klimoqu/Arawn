@@ -12,6 +12,9 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
 {
     mapState = _mapState;
     cupState = _cupState;
+    bombAnimator = new QTimer(this);
+    bombAnimator->setSingleShot(false);
+    bombAnimator->start(85);
 
     connect(gameGlobal, SIGNAL(GameStarted(int)), this, SLOT(setMapIDs(int)), Qt::DirectConnection);
 
@@ -29,6 +32,8 @@ GraphicsMap::GraphicsMap(QState *_mapState, QState *_cupState, QGraphicsItem *pa
     connect(gameGlobal, SIGNAL(PlayerTurnVisible(uchar)), this, SLOT(visiblePlayer(uchar)));
     connect(gameGlobal, SIGNAL(FieldDestroyedByMap(uchar,uchar)), this, SLOT(destroyField(uchar,uchar)));
     connect(this, SIGNAL(visibleChanged()), this, SLOT(manageGrabKeyboard()), Qt::DirectConnection);
+
+    connect(bombAnimator, SIGNAL(timeout()), this, SLOT(animateBombs()));
 
     fPixmaps[0] = imgFact->fieldImages[0];
     fPixmaps[1] = imgFact->fieldImages[1];
@@ -102,7 +107,7 @@ void GraphicsMap::plantBomb(uchar x, uchar y, uchar player)
 {
     GraphicsBomb *bomb = new GraphicsBomb(x, y, player, this);
     bomb->setZValue(1);
-    emit bombPlanted();
+    emit bombPlanted();    
     bombs.append(bomb);
 }
 
@@ -247,6 +252,15 @@ void GraphicsMap::destroyField(uchar x, uchar y)
 {
     //mapIDs[x][y] = 4;
     update(x*40, y*40, 40, 40);
+}
+
+void GraphicsMap::animateBombs()
+{
+    for(uchar i = 0; i < bombs.length(); i++)
+    {
+        bombs[i]->incAState();
+        bombs[i]->update(bombs[i]->boundingRect());
+    }
 }
 
 void GraphicsMap::manageGrabKeyboard()
