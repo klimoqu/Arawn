@@ -51,7 +51,6 @@ GraphicsBomb::GraphicsBomb(uchar x, uchar y, uchar p, QGraphicsItem *parent) : Q
     for(uchar i = 0; i < 4; i++){
        pix[i] = imgFact->bombImages[p][i];
     }
-
 }
 
 QRectF GraphicsBomb::boundingRect() const
@@ -64,11 +63,6 @@ void GraphicsBomb::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->drawImage(boundingRect(), *(pix[aState]));
 }
 
-void GraphicsBomb::incAState()
-{
-    if(aState < 3) aState++;
-    else aState = 0;
-}
 
 GraphicsBonus::GraphicsBonus(uchar type, uchar x, uchar y, QGraphicsItem *parent) :
     QGraphicsItem(parent)

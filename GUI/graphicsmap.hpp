@@ -39,6 +39,7 @@ public slots:
     void invisiblePlayer(uchar playerid);
     void visiblePlayer(uchar playerid);
     void destroyField(uchar x,uchar y);
+    void animateBombs();
     void manageGrabKeyboard();
 
 private:
@@ -55,6 +56,7 @@ private:
 
     uchar burning[20][13];
     QMap<uchar, QImage*> bImages;
+    QTimer *bombAnimator;
 
     QState *mapState;
     QState *cupState;

@@ -38,7 +38,10 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    inline void incAState();
+    inline void incAState(){
+        if(aState < 3) aState++;
+        else aState = 0;
+    }
 
 private:
     QImage* pix[4];
