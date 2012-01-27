@@ -16,6 +16,7 @@ Game::Game(QString address)
 	connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 	connect(clientconnection,SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
 	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
+	connect(clientconnection,SIGNAL(Disconnected()),this,SIGNAL(Disconnected()));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -46,6 +47,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
 	connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
 	connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
+	connect(serverconnection,SIGNAL(PlayerDisconnected()),this,SIGNAL(Disconnected()));
 }
 
 void Game::SetCup(Cup *cup)
@@ -187,7 +189,7 @@ void Game::execute(Command c)
 		{
 			QTimer *qt=new QTimer(this);
 			qt->setSingleShot(true);
-			qt->start(50);
+			qt->start(100);
 			connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
 			tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),65536+256*map->GetPlayer(c.GetPlayerId())->GetSpeed()+c.GetMessage()));
 		}
@@ -195,7 +197,7 @@ void Game::execute(Command c)
 		{
 			QTimer *qt=new QTimer(this);
 			qt->setSingleShot(true);
-			qt->start(50);
+			qt->start(100);
 			connect(qt,SIGNAL(timeout()), this, SLOT(WaitingCommandExecute()));
 			tempcommands.insert(qt,Command(c.GetPlayerId(),c.GetMessageType(),c.GetMessage()-256));
 		}
@@ -206,6 +208,7 @@ void Game::execute(Command c)
 	{
 		uchar x=map->GetPlayer(c.GetPlayerId())->GetX();
 		uchar y=map->GetPlayer(c.GetPlayerId())->GetY();
+		map->GetField(x,y)->SetBomb();
 		map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),c.GetPlayerId(),bombtimeout,map->GetPlayer(c.GetPlayerId())->CanFail()));
 		map->GetPlayer(c.GetPlayerId())->Plant();
 	}
@@ -353,6 +356,10 @@ void Game::clientsync(Command c)
 				break;
 			}
 			break;
+		}
+	case 248:
+		{
+			emit Disconnected();
 		}
 	case 249:
 		{

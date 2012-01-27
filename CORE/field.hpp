@@ -12,7 +12,7 @@ class Field : public QObject
     Field *top,*right,*left,*bottom;
     uchar x,y;
     uchar id,type;
-    bool burning;
+    bool burning,hasbomb;
     Bonus *bonus;
 
 public:
@@ -20,10 +20,11 @@ public:
     Field(uchar x,uchar y,uchar type);
     bool HasBonus()const{return bonus!=0;}
     bool IsDeadly()const{return burning || type==4;}
-    bool IsPermeable()const{return type==2 || type==4;}
+    bool IsPermeable()const{return (type==2 || type==4)&&!hasbomb;}
     bool IsBlastable()const{return type==1 || type==3;}
     uchar GetType()const{return this->type;}
     uchar GetOwner()const{return id;}
+	void SetBomb(){hasbomb=true;}
     void SetBonus(Bonus *bonus);
     void SetTopNeighbours(Field *top){this->top=top;}
     void SetLeftNeighbours(Field *left){this->left=left;}

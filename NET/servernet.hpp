@@ -25,6 +25,7 @@ signals:
     void ServerNetworkError();
     void NewPlayerConnected();
     void AllPlayersConnected();
+	void PlayerDisconnected();
 private slots:
     void readyRead();
     void disconnected();
