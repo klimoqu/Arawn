@@ -35,7 +35,6 @@ void Map::Upload(int id)
 	if(id<10)stringid="0"+stringid;
 	if(id<100)stringid="0"+stringid;
     std::string filename="maps/"+stringid+".map";
-	qDebug()<<"filename:"<<QString::fromStdString(filename);
     input.open(filename.c_str());
     for(unsigned int i=0;i<20;i++)
     {
