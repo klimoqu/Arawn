@@ -208,7 +208,7 @@ void Game::execute(Command c)
 	{
 		uchar x=map->GetPlayer(c.GetPlayerId())->GetX();
 		uchar y=map->GetPlayer(c.GetPlayerId())->GetY();
-		map->GetField(x,y)->SetBomb();
+		map->GetField(x,y)->SetBomb(true);
 		map->AddBomb(new Bomb(x,y,map->GetPlayer(c.GetPlayerId())->GetBombSize(),c.GetPlayerId(),bombtimeout,map->GetPlayer(c.GetPlayerId())->CanFail()));
 		map->GetPlayer(c.GetPlayerId())->Plant();
 	}

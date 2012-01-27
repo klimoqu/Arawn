@@ -51,6 +51,7 @@ public slots:
 	{
 		Command ret=Command(255,249,256*x+y);
         if(activegame)emit ServerCommand(ret);
+		Fields[x][y]->SetBomb(false);
 	}
     void DeleteThis(Bomb *b)
     {

@@ -24,7 +24,7 @@ public:
     bool IsBlastable()const{return type==1 || type==3;}
     uchar GetType()const{return this->type;}
     uchar GetOwner()const{return id;}
-	void SetBomb(){hasbomb=true;}
+	void SetBomb(bool state){hasbomb=state;}
     void SetBonus(Bonus *bonus);
     void SetTopNeighbours(Field *top){this->top=top;}
     void SetLeftNeighbours(Field *left){this->left=left;}
