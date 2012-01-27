@@ -382,7 +382,10 @@ void QArawnWindow::enterGame()
 
     mapState->addTransition(gameGlobal, SIGNAL(GameOver()), cupState);
     cupState->addTransition(gameGlobal, SIGNAL(GameStarted(int)), mapState);
+    mapState->addTransition(gameGlobal, SIGNAL(Disconnected()), gameFinal);
+    cupState->addTransition(gameGlobal, SIGNAL(Disconnected()), gameFinal);
     cupState->addTransition(grCup, SIGNAL(backToMenu()), gameFinal);
+
     connect(gameGlobal, SIGNAL(GameStarted(int)), grTimer, SLOT(setTimer(int)));
     connect(gameGlobal, SIGNAL(PlayerWonTheCup(QString)), grCup, SLOT(playerWon(QString)));
     connect(cupState, SIGNAL(entered()), grCup, SLOT(updateList()));
