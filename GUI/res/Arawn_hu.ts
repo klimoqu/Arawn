@@ -429,7 +429,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</sour
         <location filename="../graphicsmap.cpp" line="419"/>
         <location filename="../graphicsmap.cpp" line="423"/>
         <source> won the cup!</source>
-        <translation>Nyerte a kupát!</translation>
+        <translation> nyerte a kupát!</translation>
     </message>
 </context>
 <context>

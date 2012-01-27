@@ -429,7 +429,7 @@ Das wird in QT von Móreh Tamás, Klicsu Zsolt und Quintz Gábor im Jahr 2011 ge
         <location filename="../graphicsmap.cpp" line="419"/>
         <location filename="../graphicsmap.cpp" line="423"/>
         <source> won the cup!</source>
-        <translation>Gewinnt!</translation>
+        <translation> Gewinnt!</translation>
     </message>
 </context>
 <context>

@@ -429,7 +429,7 @@ It is written in Qt by Moreh Tamas, Klicsu Zsolt and Quintz Gabor in 2011.</tran
         <location filename="../graphicsmap.cpp" line="419"/>
         <location filename="../graphicsmap.cpp" line="423"/>
         <source> won the cup!</source>
-        <translation>won the cup!</translation>
+        <translation> won the cup!</translation>
     </message>
 </context>
 <context>
