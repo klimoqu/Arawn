@@ -50,14 +50,14 @@ void Player::DieAndBlast(uchar x,uchar y,uchar size, uchar id,uchar dir)
 {
 	if( pXcoord==x && pYcoord==y && blastable)
     {
-        emit Blasted(this->id);
         blastable=false;
+		emit Blasted(this->id);
     }
     if( pXcoord==x && pYcoord==y && live)
     {
-        emit Died(this->id,id);
         blastable=true;
         live=false;
+		emit Died(this->id,id);
     }
     if(id==this->id && dir==255)
     {
