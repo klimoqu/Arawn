@@ -20,6 +20,7 @@ Field::Field(uchar x,uchar y,uchar type)
     this->left=0;
     this->right=0;
     this->bonus=0;
+	this->hasbomb=false;
 }
 void Field::Boom(uchar x, uchar y, uchar size, uchar id,uchar direction)
 {
@@ -34,6 +35,7 @@ void Field::Extinction()
 }
 void Field::StartBurn(uchar size, uchar id,uchar direction)
 {
+	hasbomb=false;
 	switch(type)
 	{
 	case 2:
