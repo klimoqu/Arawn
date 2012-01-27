@@ -1,7 +1,6 @@
 #ifndef QARAWNWINDOW_HPP
 #define QARAWNWINDOW_HPP
 
-#include <phonon/phonon>
 #include <QtGui>
 #include "pixmapobjectitem.hpp"
 #include "qgraphicsmenu.hpp"

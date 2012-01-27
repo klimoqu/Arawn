@@ -72,7 +72,7 @@ void Map::bonusupload()
     {
         for(unsigned int j=1;j<12;j++)
         {
-            switch(((int)Fields[i][j]+QTime::currentTime().msec())%50)
+            switch((((ulong)Fields[i][j])+QTime::currentTime().msec())%50)
             {
             case 1:
             case 2:

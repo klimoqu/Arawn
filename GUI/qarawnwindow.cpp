@@ -5,7 +5,6 @@
 #include "graphicsplayer.hpp"
 #include "graphicsnetworkroom.hpp"
 #include "imagefactory.hpp"
-#include <QtMultimedia/QtMultimedia>
 
 
 void QArawnWindow::initWindow()
