@@ -8,6 +8,7 @@ Client::Client(QString name)
     connect(socket, SIGNAL(connected()), this, SIGNAL(Connected()));
     connect(socket, SIGNAL(connected()), this, SLOT(SendUsernameToServer()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SIGNAL(ConnectionFailed()));
+	connect(socket,SIGNAL(disconnected()),this,SIGNAL(Disconnected()));
 }
 
 void Client::connectToServer(QString address)

@@ -18,6 +18,7 @@ signals:
     void ConnectionFailed();
     void refreshPlayers();
     void CommandReceivedFromServer(Command c);
+	void Disconnected();
 private slots:
     void readyRead();
 public slots:

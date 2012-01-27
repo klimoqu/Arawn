@@ -16,6 +16,7 @@ Game::Game(QString address)
 	connect(clientconnection,SIGNAL(ConnectionFailed()),this,SIGNAL(ConnectionFailed()));
 	connect(clientconnection,SIGNAL(refreshPlayers()), this, SIGNAL(RefreshPlayers()));
 	connect(this,SIGNAL(PlayerPointChanged(uchar,int)),cup,SLOT(ChangePlayerPoint(uchar,int)));
+	connect(clientconnection,SIGNAL(Disconnected()),this,SIGNAL(Disconnected()));
 }
 
 Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool survive)
@@ -46,6 +47,7 @@ Game::Game(uchar playersnumber,int bombtimeout,ArawnSettings *settings,bool surv
 	connect(serverconnection,SIGNAL(ServerNetworkError()),this,SIGNAL(ConnectionFailed()));
 	connect(serverconnection,SIGNAL(AllPlayersConnected()),this,SLOT(AllReady()));
 	connect(this,SIGNAL(FieldDestroyedByMap(uchar,uchar)),map,SIGNAL(FieldDestroyed(uchar,uchar)));
+	connect(serverconnection,SIGNAL(PlayerDisconnected()),this,SIGNAL(Disconnected()));
 }
 
 void Game::SetCup(Cup *cup)
@@ -354,6 +356,10 @@ void Game::clientsync(Command c)
 				break;
 			}
 			break;
+		}
+	case 248:
+		{
+			emit Disconnected();
 		}
 	case 249:
 		{
