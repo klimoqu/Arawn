@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = palyaszerk
+TARGET = mapeditor
 TEMPLATE = app
 
 
