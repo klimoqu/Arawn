@@ -78,7 +78,7 @@ void Player::Invisibility()
     t_visible->stop();
     t_visible->setSingleShot(true);
     t_visible->start(6000);
-    connect(t_visible,SIGNAL(timeout()),this,SLOT(returntovisible()()));
+    connect(t_visible,SIGNAL(timeout()),this,SLOT(returntovisible()));
 }
 void Player::InversControl()
 {
