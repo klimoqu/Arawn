@@ -20,6 +20,7 @@ void Servernet::incomingConnection(int socketfd)
 
 	connect(client,SIGNAL(readyRead()),this,SLOT(readyRead()));
 	connect(client,SIGNAL(disconnected()),this,SLOT(disconnected()));
+	connect(client,SIGNAL(disconnected()),this,SIGNAL(PlayerDisconnected()));
 }
 QStringList Servernet::GetPlayers()
 {
@@ -66,11 +67,13 @@ void Servernet::readyRead()
 }
 void Servernet::disconnected()
 {
-	QTcpSocket *client =(QTcpSocket*)sender();
-	clients.remove(client);
-	QString user=players[client];
-	players.remove(client);
-	sendusernames();
+	Command c((uchar)clients.size(),(uchar)255,(int)survive?0:1);
+	foreach(QTcpSocket *client,clients)
+		{
+			client->write(c.ToString().toUtf8());
+			client->flush();
+	}
+	emit PlayerDisconnected();
 }
 void Servernet::sendusernames()
 {

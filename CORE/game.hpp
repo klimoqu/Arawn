@@ -47,6 +47,7 @@ signals:
     void Connected();//kliens
     void ConnectionFailed();//kliens+szerver
     void RefreshPlayers();
+	void Disconnected();
 
     void ServerIsRunning();//szerver
     void NewPlayer();//szerver
