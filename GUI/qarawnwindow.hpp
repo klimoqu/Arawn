@@ -29,6 +29,7 @@ public slots:
     void playSound(uchar n);
     void startSurvival();
     void startMurder();
+    void openMapEditor();
 
 private:
     inline void initializeMenus();
@@ -55,9 +56,9 @@ private:
     QState *stateArawn;
     QState *stateMenu;
     QHistoryState *stateMenuHistory;
+    QState *stateMapEditor;
     QState *stateNetSettings;
     QState *statePlayerSetup;
-    QState *stateMapSelection;
     QState *stateSurvivalCup;
     QState *stateMurderCup;
     QState *stateNetPlayerSetup;

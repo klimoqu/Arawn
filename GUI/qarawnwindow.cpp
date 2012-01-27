@@ -138,8 +138,8 @@ void QArawnWindow::initializeOthers()
     machine->addState(stateNetSettings);
     statePlayerSetup = new QState;
     machine->addState(statePlayerSetup);
-    stateMapSelection = new QState;
-    machine->addState(stateMapSelection);
+    stateMapEditor = new QState;
+    machine->addState(stateMapEditor);
     stateSurvivalCup = new QState;
     machine->addState(stateSurvivalCup);
     stateMurderCup = new QState;
@@ -200,11 +200,12 @@ void QArawnWindow::initializeMenus()
      GraphicsMenu* localMenu = mainMenu->addSubMenu(tr("Local game"));
      GraphicsMenu* networkMenu = mainMenu->addSubMenu(tr("Network game"));
      GraphicsMenu* optionsMenu = mainMenu->addSubMenu(tr("Options"));
+     mainMenu->addMenuItem(tr("Map editor"), stateMapEditor);
      mainMenu->addMenuItem(tr("Credits"), stateAbout);
      mainMenu->addMenuItem(tr("Quit"), stateQuit);
 
      localMenu->addMenuItem(tr("Player setup"), statePlayerSetup);
-     localMenu->addMenuItem(tr("Map selection"), stateMapSelection);
+//     localMenu->addMenuItem(tr("Map selection"), stateMapSelection);
      GraphicsMenu* gameSettingsMenu = localMenu->addSubMenu(tr("Game settings"));
      localMenu->addMenuItem(tr("Start survival cup"), stateSurvivalCup);
      localMenu->addMenuItem(tr("Start murder cup"), stateMurderCup);
@@ -233,7 +234,7 @@ void QArawnWindow::initializeMenus()
      networkMenu->addMenuItem(tr("Connect"), stateNetSettings);
 
      createNetworkMenu->addMenuItem(tr("Player setup"), stateNetPlayerSetup);
-     createNetworkMenu->addMenuItem(tr("Map selection"), stateMapSelection);
+//     createNetworkMenu->addMenuItem(tr("Map selection"), stateMapSelection);
      GraphicsMenu *netGameSettingsMenu = createNetworkMenu->addSubMenu(tr("Game settings"));
      createNetworkMenu->addMenuItem(tr("Start survival cup"), stateNetSurvivalCup);
      createNetworkMenu->addMenuItem(tr("Start murder cup"), stateNetMurderCup);
@@ -296,6 +297,9 @@ void QArawnWindow::initializeMenus()
      netSettingsItem->setPos(scene->width()/2 + netSettingsItem->boundingRect().width(),0);
      stateMenu->assignProperty(netSettingsItem, "pos", QPointF(scene->width()/2 + netSettingsItem->boundingRect().width(), 0));
      scene->addItem(netSettingsItem);
+
+     stateMapEditor->addTransition(stateMenuHistory);
+     connect(stateMapEditor, SIGNAL(entered()), this, SLOT(openMapEditor()));
 
 }
 
@@ -433,6 +437,15 @@ void QArawnWindow::startMurder()
     scene->addItem(room);
     room->setParams(roomState, stateGame);
     emit trRoom();
+}
+
+void QArawnWindow::openMapEditor()
+{
+#ifdef Q_OS_WIN
+        system("mapeditor");
+#else
+        system("./mapeditor");
+#endif
 }
 
 
