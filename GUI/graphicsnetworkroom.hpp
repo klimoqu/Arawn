@@ -10,7 +10,7 @@ public:
     explicit GraphicsNetworkRoom();
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     void setParams(QState *_ownState, QState *_gameState);
 
 protected slots:

@@ -246,7 +246,6 @@ void GraphicsMap::animateBombs()
 
 void GraphicsMap::manageGrabKeyboard()
 {
-    qDebug() << "VisibleChanged to" << isVisible() ;
     if(isVisible()){
         grabKeyboard();
         players[0]->aState = 0;

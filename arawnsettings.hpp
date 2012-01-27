@@ -127,6 +127,7 @@ public:
     QString defaultPlayer2Name;
     QString defaultPlayer3Name;
     QString defaultPlayer4Name;
+
     QVariantMap colorValues;
     QVariant default1Color;
     QVariant default2Color;

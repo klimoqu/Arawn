@@ -113,10 +113,10 @@ bool ArawnSettings::load()
         int _resx;
         int _resy;
         bool _animfire;
-        uint _color1;
-        uint _color2;
-        uint _color3;
-        uint _color4;
+        int _color1;
+        int _color2;
+        int _color3;
+        int _color4;
 
         stream >> header;
         if (header != "Arawn Settings file 1") return false;
@@ -224,10 +224,10 @@ void ArawnSettings::save()
         stream << defaultPlayer2Name;
         stream << defaultPlayer3Name;
         stream << defaultPlayer4Name;
-        stream << default1Color.toUInt();
-        stream << default2Color.toUInt();
-        stream << default3Color.toUInt();
-        stream << default4Color.toUInt();
+        stream << default1Color.toInt();
+        stream << default2Color.toInt();
+        stream << default3Color.toInt();
+        stream << default4Color.toInt();
         stream << noOfPlayers;
         stream << defaultIPAddress;
         sFile.close();

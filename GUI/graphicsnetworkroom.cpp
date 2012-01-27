@@ -19,7 +19,7 @@ QRectF GraphicsNetworkRoom::boundingRect() const
     return QRectF(-366, -270, 650, 373);
 }
 
-void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
 
@@ -45,7 +45,11 @@ void GraphicsNetworkRoom::paint(QPainter *painter, const QStyleOptionGraphicsIte
         painter->drawText(QRectF(-100, -166, 266, 66), playerNames[0], QTextOption(Qt::AlignLeft | Qt::AlignVCenter));
 
         painter->setPen(QColor(100, 10, 10, 200));
-        painter->drawText(QRectF(200, -166, 133, 66).translated(2,3), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"), QTextOption(Qt::AlignCenter));
+        painter->drawText(QRectF(200, -166, 133, 66).translated(2,3),
+                          (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"),
+                          QTextOption(Qt::AlignCenter));
+
+
         painter->setPen(QRgb(ArawnSettings::instance()->default1Color.toInt()));
         painter->drawText(QRectF(200, -166, 133, 66), (ArawnSettings::instance()->colorValues).key(ArawnSettings::instance()->default1Color, "Blank"), QTextOption(Qt::AlignCenter));
     }
