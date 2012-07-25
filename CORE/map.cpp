@@ -25,7 +25,7 @@ void Map::Upload(int id)
 	if(Fields[0][0])
         for(uchar i=0; i<20; i++)
             for(uchar j = 0; j < 13; j++)
-                    delete Fields[i][j];
+                    {delete Fields[i][j];Fields[i][j]=0;}
 	ClearMap();
     this->id=id;
     std::stringstream ss;
